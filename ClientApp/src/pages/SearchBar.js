@@ -2,9 +2,9 @@ import React from 'react';
 
 const SearchBar = () =>{
     return(
-        <React.Fragment>
-            <div className ="ui container  rounded">
-           <div className="mx-4">
+    <React.Fragment>
+       <div className ="ui segment rounde d-inline-flex p-2  ">
+           <div className="mx-4  ">
                <select className="ui dropdown border border-success rounded">
                    <option value="">Toutes les provinces/Belgique </option>
                    <option value="10">Bruxelles</option>
@@ -20,7 +20,7 @@ const SearchBar = () =>{
                    
                 </select>
            </div>
-           <div className="mx-4">
+           <div className="mx-4 ">
                <select className="ui dropdown border border-success rounded">
                    <option value="">Catégories</option>
                    <option value="10">Vehicules</option>
@@ -35,12 +35,12 @@ const SearchBar = () =>{
                    <option value="1">Aide à la personne</option>
                 </select>
            </div>
-           <div>
-           <button className="ui orange basic button">Search</button>
+        <div>
+           <button className="ui orange basic button flex-row">Search</button>
            </div>
            </div>
 
-        </React.Fragment>
+    </React.Fragment>
     )
 
 };
