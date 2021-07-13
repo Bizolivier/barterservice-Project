@@ -1,6 +1,7 @@
 import React,{useState ,useEffect} from 'react';
 import kristy from '../images/Kristy.jpg';
 import { Link } from 'react-router-dom';
+import AccordionCategories from './AccordionCategories';
 
 
 
@@ -35,11 +36,23 @@ const UserProfil = () => {
        },500) ;*/
       
     return( <React.Fragment>
+
+
+<label >Categories</label>
+    <div >
+        
+            
+           <div className="d-inline-flex">
+                <AccordionCategories/>
+           </div>
        
-       <div className="ui cards h-100 mb-3">
-            <div className="card w-75  flex-row box-shadow"> 
+        
+
+        <div className="d-flex flex-column float-right w-75 ">
+            <div className="ui cards h-100 mb-3  ">
+                <div className="card w-100  flex-row box-shadow px-3 py-3"> 
               
-               <div className="user">
+                  <div className="user">
                             {/*image*/} 
                        <div className="content">
                           <div className = "pull-left" >
@@ -50,21 +63,21 @@ const UserProfil = () => {
      
                            {/*autor */}
                    
-                          <div className="header flex-row ">
+                           <div className="header flex-row ">
                               <i className="user icon"></i>
                               Aela
                               <i className="edit icon flex-row ml-1 w-10"></i>
-                         </div>
+                           </div>
                              {/* adress*/}
 
-                          <div className="meta flex-row">
+                           <div className="meta flex-row">
                              <i className="map marker alternate icon"></i>
                               De vijf eiken 30
-                          </div>
-                     </div>
+                           </div>
+                        </div>
      
                                 {/* line divider */}
-                   <div className="mb-4 text-right">
+                         <div className="mb-4 text-right">
                        <hr className="solid"/>
                    </div>
 
@@ -90,13 +103,15 @@ const UserProfil = () => {
 
                     
         </div>
+    </div>
 
             </div>
                   {/*Button*/}
-                  <div className="extra content">
+                <div className="extra content ">
                     <Link className="ui black basic button" to="/">back</Link>
                         
-                    </div>
+                </div>
+        </div>
        </React.Fragment>
        )
    

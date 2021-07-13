@@ -5,11 +5,13 @@ import { Redirect } from 'react-router';
 
 
 
+
 const Offer = ({offer,onOfferSelected}) =>{
     return(
         <React.Fragment>
-            <div className="ui cards h-100">
-               <div className="card w-75  flex-row box-shadow"> 
+            
+            <div className="ui cards w-50 mx-1 my-2 ">
+               <div className="card w-100   flex-row box-shadow  "> 
         
                       {/*image*/} 
                    <div className="content">
@@ -51,7 +53,7 @@ const Offer = ({offer,onOfferSelected}) =>{
 
                           {/*Button*/}
                     <div className="extra content">
-                    <Link to = '/profilUser'>voir le profil de {offer.author}</Link>
+                    <Link  className="ui black basic button w-10" to = '/profilUser'>Profil de {offer.author}</Link>
                         
                     </div>
                 </div>
