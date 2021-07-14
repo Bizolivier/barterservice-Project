@@ -41,6 +41,9 @@ namespace backend.Models {
         MaxLength(10, ErrorMessage = "Maximum 10 characters")]
         public string Surname { get; set; }
 
+        [Required(ErrorMessage ="Required")]
+        public string Email{get;set;}
+
         public int TimeCredit{get;set;}
 
         [Required, MinLength(3)]
