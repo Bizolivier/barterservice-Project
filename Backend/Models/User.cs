@@ -35,11 +35,7 @@ namespace backend.Models {
         MaxLength(10, ErrorMessage = "Maximum 10 characters")]
         public string Name { get; set; }
 
-            [
-        Required(ErrorMessage = "Required"),
-        MinLength(3, ErrorMessage = "Minimum 3 characters"),
-        MaxLength(10, ErrorMessage = "Maximum 10 characters")]
-        public string Surname { get; set; }
+       
 
         [Required(ErrorMessage ="Required")]
         public string Email{get;set;}
@@ -59,7 +55,7 @@ namespace backend.Models {
 
 
      public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
-            var currContext = validationContext.GetService(typeof(TrocContext)) as TrocContext;
+            var currContext = validationContext.GetService(typeof(BarterContext)) as BarterContext;
             Debug.Assert(currContext != null);
             if (Password == "abc")
                 yield return new ValidationResult("The password may not be equal to 'abc'", new[] { nameof(Password) });

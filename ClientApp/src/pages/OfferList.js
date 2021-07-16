@@ -1,10 +1,11 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import UserProfil from './UserProfil';
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import kristy from '../images/Kristy.jpg';
 import Offer from './Offer.js';
 import Category from './Category';
+import axios  from "axios"
 
 
 
@@ -32,7 +33,21 @@ const categories=[
     
 
  const OfferList =()=>{
-    const[selected, onOfferSelected]= useState(offers[0])
+    const[selected, onOfferSelected]= useState(offers[0]);
+    const [users,setUsers] =useState([]);
+
+    useEffect(()=>{
+      const response = async () => {
+
+      const request  = await axios.get("https://localhost:5001/api/users");
+      setUsers(request.data)
+       
+      };
+      const timeout = setTimeout(() =>{
+        response();
+      },500);
+      
+    },[])
 
  
 
@@ -49,6 +64,20 @@ const categories=[
     
     );
   });
+  const rendedListUsers = users.map((user) =>{
+    return (
+      <React.Fragment  key={user.index} >
+         <div>
+         {user.nickname}
+         </div>
+
+      </React.Fragment>
+
+  
+  );
+});
+  
+
 
   const rendedListCategories = categories.map((category) =>{
     return (
@@ -81,7 +110,10 @@ const categories=[
             </div>
                    <br/>
                    <Link className="ui black basic button" to="/">back</Link>
-        
+             <div>
+               {rendedListUsers}
+            </div>      
+          
   </div>
 
    

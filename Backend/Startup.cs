@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore; 
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using backend.Models;
 
 namespace barterserv
 {
@@ -20,8 +22,14 @@ namespace barterserv
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllersWithViews();
+          // services.AddDbContext<BarterContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("barter-mssql"))
+          
+          //);
+           services.AddDbContext<BarterContext>(opt => opt.UseMySql(
+             Configuration.GetConnectionString("barter-mysql"))
+          ); 
+            services.AddControllersWithViews()
+                    .AddNewtonsoftJson();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -64,6 +72,9 @@ namespace barterserv
                 if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
+
+                    // Utilisez cette ligne si le front-end angular est exécuté en dehors de VS (ou dans une autre instance de VS) 
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200"); 
                 }
             });
         }

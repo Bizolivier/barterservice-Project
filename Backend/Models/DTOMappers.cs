@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
 
-namespace backend.DTO {
+namespace backend.Models {
     public static class DTOMappers {
         public static UserDTO ToDTO(this User user) {
             return new UserDTO {
                 Nickname = user.Nickname,
+                Name = user.Name,
+                Email = user.Email,
                 // we don't put the password in the DTO for security reasons
-                
-                Surname = user.Surname,
-                TimeCredit = user.TimeCredit,
+                 TimeCredit = user.TimeCredit,
                 Sexe = user.Sexe,
                 Role = user.Role
             
