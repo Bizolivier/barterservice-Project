@@ -20,6 +20,9 @@ namespace backend.Models {
         MaxLength(10, ErrorMessage = "Maximum 10 characters")]
         public string Name { get; set; }
 
+         [Required]
+        public virtual IList<Service> CategorysServices {get;set;} = new List <Service>();
+
         
     }
 }

@@ -9,7 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models {
     public class Message {
-          [Key,
+        
+        [Key,
         DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MsgId { get; set; }
 
@@ -17,12 +18,17 @@ namespace backend.Models {
         [
         Required(ErrorMessage = "Required"),
         MinLength(3, ErrorMessage = "Minimum 3 characters"),
-        MaxLength(10, ErrorMessage = "Maximum 10 characters")]
+        MaxLength(140, ErrorMessage = "Maximum 140 characters")]
         public string Content{ get; set; }
-
+        [Required]
         public virtual User Sender {get;set;}
+        [Required]
+        public int SenderId {get;set;}
 
-        public virtual User Receiver {get;set;}
+       [Required]
+        public virtual Offer OfferLinkedTo {get;set;}
+        [Required]
+        public int  OfferLinkedToId {get;set;}
 
         public DateTime Date {get;set;}
 

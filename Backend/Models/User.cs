@@ -15,21 +15,25 @@ namespace backend.Models {
        public enum Role {
          Admin = 1,User =0
        }
+       public enum Province{
+         Bruxelles = 9 ,Hainaut = 8 ,Namur = 7 ,Brabant_flamant = 6,Brabant_wallon = 5,Limbourg = 4,Luxembourg = 3 ,Anvers = 2,Flandre_orientale = 1,Flandre_occidentale =0
+
+
+       }
 
   public class User: IValidatableObject {
-        //   [Key,
-        // DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        // public int Id { get; set; }
+        [Key,
+         DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+         public int UserId { get; set; }
 
 
         [
-          Key,
         Required(ErrorMessage = "Required"),
         MinLength(3, ErrorMessage = "Minimum 3 characters"),
         MaxLength(10, ErrorMessage = "Maximum 10 characters")]
         public string Nickname { get; set; }
 
-          [
+        [
         Required(ErrorMessage = "Required"),
         MinLength(3, ErrorMessage = "Minimum 3 characters"),
         MaxLength(10, ErrorMessage = "Maximum 10 characters")]
@@ -44,13 +48,15 @@ namespace backend.Models {
 
         [Required, MinLength(3)]
         public string Password { get; set; }
+
+        public Province Province {get;set;} = Province.Bruxelles;
         
         public Sexe Sexe { get; set; } = Sexe.Female;
         public Role Role {get;set;} = Role.User;
         
 
-        [NotMapped]
-        public string Token { get; set; }
+       // [NotMapped]
+        //public string Token { get; set; }
 
 
 
