@@ -10,7 +10,7 @@ namespace backend.Models {
        public int ProviderId {get;set;}
       
      
-       public int OfferLinkToId {get;set;}
+       public IEnumerable <OfferDTO> OfferListLinked {get;set;}
        
         public int CategoryLinkToId {get;set;}
        

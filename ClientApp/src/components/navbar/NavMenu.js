@@ -49,6 +49,10 @@ export class NavMenu extends Component {
                  <NavItem>
                   <NavLink tag={Link} className="text-success px-3 " to="/OfferList">Offers</NavLink>
                 </NavItem>
+                
+                <NavItem>
+                  <NavLink tag={Link} className="text-success px-3 " to="/AuthenticationButton">Login</NavLink>
+                </NavItem>
               </ul>
               
             </Collapse>

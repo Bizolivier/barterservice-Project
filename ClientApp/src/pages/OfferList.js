@@ -35,12 +35,26 @@ const categories=[
  const OfferList =()=>{
     const[selected, onOfferSelected]= useState(offers[0]);
     const [users,setUsers] =useState([]);
+    const [offerz,setOfferz]=useState([])
 
     useEffect(()=>{
       const response = async () => {
 
       const request  = await axios.get("https://localhost:5001/api/users");
       setUsers(request.data)
+       
+      };
+      const timeout = setTimeout(() =>{
+        response();
+      },500);
+      
+    },[])
+
+    useEffect(()=>{
+      const response = async () => {
+
+      const request  = await axios.get("https://localhost:5001/api/offers");
+      setOfferz(request.data)
        
       };
       const timeout = setTimeout(() =>{
@@ -75,6 +89,18 @@ const categories=[
 
   
   );
+});
+const rendedOffers = offerz.map((offa) =>{
+  return (
+    <React.Fragment  key={offa.index} >
+       <div>
+       {offa.offerId}
+       </div>
+
+    </React.Fragment>
+
+
+);
 });
   
 
@@ -111,8 +137,11 @@ const categories=[
                    <br/>
                    <Link className="ui black basic button" to="/">back</Link>
              <div>
-               {rendedListUsers}
-            </div>      
+                  {rendedListUsers}
+            </div>  
+            <div>
+              {rendedOffers}
+              </div>    
           
   </div>
 

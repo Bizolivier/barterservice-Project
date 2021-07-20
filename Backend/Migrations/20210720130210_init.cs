@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace barterserv.Migrations
 {
-    public partial class newtablesContext : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,33 @@ namespace barterserv.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Services",
+                columns: table => new
+                {
+                    ServiceId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 10, nullable: false),
+                    ProviderId = table.Column<int>(nullable: false),
+                    CategoryLinkToId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.ServiceId);
+                    table.ForeignKey(
+                        name: "FK_Services_Categories_CategoryLinkToId",
+                        column: x => x.CategoryLinkToId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Services_Users_ProviderId",
+                        column: x => x.ProviderId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Messages",
                 columns: table => new
                 {
@@ -89,38 +116,27 @@ namespace barterserv.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Services",
+                name: "LinkOfferService",
                 columns: table => new
                 {
+                    OfferId = table.Column<int>(nullable: false),
                     ServiceId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 10, nullable: false),
-                    ProviderId = table.Column<int>(nullable: false),
-                    OfferLinkedToOfferId = table.Column<int>(nullable: false),
-                    OfferLinkToId = table.Column<int>(nullable: false),
-                    CategoryLinkToId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Services", x => x.ServiceId);
+                    table.PrimaryKey("PK_LinkOfferService", x => new { x.OfferId, x.ServiceId });
                     table.ForeignKey(
-                        name: "FK_Services_Categories_CategoryLinkToId",
-                        column: x => x.CategoryLinkToId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Services_Offers_OfferLinkedToOfferId",
-                        column: x => x.OfferLinkedToOfferId,
+                        name: "FK_LinkOfferService_Offers_OfferId",
+                        column: x => x.OfferId,
                         principalTable: "Offers",
                         principalColumn: "OfferId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Services_Users_ProviderId",
-                        column: x => x.ProviderId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_LinkOfferService_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "ServiceId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -134,7 +150,7 @@ namespace barterserv.Migrations
                     { 4, "luis@gmail.com", "Lara", "Luis", "luis", 9, 0, 1, 5 },
                     { 5, "amin@gmail.com", "Gandouz", "Amin", "amin", 9, 0, 1, 5 },
                     { 6, "nico@gmail.com", "Krstev", "Nico", "nico", 8, 0, 1, 5 },
-                    { 7, "luis@gmail.com", "AssBai", "Momo", "momo", 9, 0, 1, 5 }
+                    { 7, "momo@gmail.com", "AssBai", "Momo", "momo", 9, 0, 1, 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -150,6 +166,11 @@ namespace barterserv.Migrations
                     { 6, 6 },
                     { 7, 7 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LinkOfferService_ServiceId",
+                table: "LinkOfferService",
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_OfferLinkedToId",
@@ -172,18 +193,28 @@ namespace barterserv.Migrations
                 column: "CategoryLinkToId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Services_OfferLinkedToOfferId",
-                table: "Services",
-                column: "OfferLinkedToOfferId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Services_ProviderId",
                 table: "Services",
                 column: "ProviderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Nickname",
+                table: "Users",
+                column: "Nickname",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "LinkOfferService");
+
             migrationBuilder.DropTable(
                 name: "Messages");
 
@@ -191,10 +222,10 @@ namespace barterserv.Migrations
                 name: "Services");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Offers");
 
             migrationBuilder.DropTable(
-                name: "Offers");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Users");

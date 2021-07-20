@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage.js';
 import OfferList from './pages/OfferList.js';
 import CreateOffer from './pages/CreateOffer.js';
 import UserProfil from './pages/UserProfil';
+import AuthenticationButton from './pages/AuthenticationButton';
 
 
 
@@ -26,6 +27,7 @@ export default class App extends Component {
         <Route exact path='/OfferList' component = {OfferList}/>
         <Route exact path='/CreateOffer' component= {CreateOffer}/>
         <Route path ='/profilUser' component ={UserProfil}/>
+        <Route exact path = '/AuthenticationButton' component = {AuthenticationButton}/>
         
        
 

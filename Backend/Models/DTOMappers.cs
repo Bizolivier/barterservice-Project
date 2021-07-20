@@ -53,7 +53,7 @@ namespace backend.Models {
                 ServiceId = service.ServiceId,
                 Name = service.Name,
                 ProviderId = service.ProviderId,
-                OfferLinkToId =service.OfferLinkToId,
+                OfferListLinked =service.OfferListLinked.ToDTO(),
                 CategoryLinkToId = service.CategoryLinkToId 
           
             };
@@ -79,6 +79,16 @@ namespace backend.Models {
         }
          public static List<MessageDTO > ToDTO(this IEnumerable<Message > messages ) {
             return messages.Select(o => o.ToDTO()).ToList();
+        }
+
+        public static CategoryDTO ToDTO (this Category category){
+            return new CategoryDTO{
+                CategoryId = category.CategoryId,
+                Name = category.Name
+            };
+        }
+         public static List<CategoryDTO > ToDTO(this IEnumerable<Category > categories ) {
+            return categories.Select(c => c.ToDTO()).ToList();
         }
 
         

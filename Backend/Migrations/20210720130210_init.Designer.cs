@@ -9,8 +9,8 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210717172933_newtablesContext")]
-    partial class newtablesContext
+    [Migration("20210720130210_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,21 @@ namespace barterserv.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("backend.Models.LinkOfferService", b =>
+                {
+                    b.Property<int>("OfferId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OfferId", "ServiceId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("LinkOfferService");
                 });
 
             modelBuilder.Entity("backend.Models.Message", b =>
@@ -131,20 +146,12 @@ namespace barterserv.Migrations
                         .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
                         .HasMaxLength(10);
 
-                    b.Property<int>("OfferLinkToId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OfferLinkedToOfferId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProviderId")
                         .HasColumnType("int");
 
                     b.HasKey("ServiceId");
 
                     b.HasIndex("CategoryLinkToId");
-
-                    b.HasIndex("OfferLinkedToOfferId");
 
                     b.HasIndex("ProviderId");
 
@@ -159,7 +166,7 @@ namespace barterserv.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -188,6 +195,12 @@ namespace barterserv.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Nickname")
+                        .IsUnique();
 
                     b.ToTable("Users");
 
@@ -267,7 +280,7 @@ namespace barterserv.Migrations
                         new
                         {
                             UserId = 7,
-                            Email = "luis@gmail.com",
+                            Email = "momo@gmail.com",
                             Name = "AssBai",
                             Nickname = "Momo",
                             Password = "momo",
@@ -276,6 +289,21 @@ namespace barterserv.Migrations
                             Sexe = 1,
                             TimeCredit = 5
                         });
+                });
+
+            modelBuilder.Entity("backend.Models.LinkOfferService", b =>
+                {
+                    b.HasOne("backend.Models.Offer", "OfferLinked")
+                        .WithMany("AllLinkToService")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.Service", "ServiceLinked")
+                        .WithMany("AllLinksToOffer")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("backend.Models.Message", b =>
@@ -307,12 +335,6 @@ namespace barterserv.Migrations
                     b.HasOne("backend.Models.Category", "CategoryLinkTo")
                         .WithMany("CategorysServices")
                         .HasForeignKey("CategoryLinkToId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.Offer", "OfferLinkedTo")
-                        .WithMany("ServiceNeeded")
-                        .HasForeignKey("OfferLinkedToOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

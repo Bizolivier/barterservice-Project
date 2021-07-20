@@ -11,6 +11,7 @@ namespace backend.Models {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet <Offer> Offers {get;set;}
+        public DbSet <LinkOfferService> LinkOfferService {get;set;}
 
         // public DbSet<Comment> Comments { get; set; }
         // // public DbSet<Rating> Ratings { get; set; }
@@ -19,11 +20,48 @@ namespace backend.Models {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
            base.OnModelCreating(modelBuilder);
+           structuralConfiguration(modelBuilder);
            addData(modelBuilder);
            addOffers(modelBuilder);
+           }
+         private void structuralConfiguration(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Nickname)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                 .HasIndex(u => u.Email)
+                 .IsUnique();
+
+            modelBuilder.Entity<LinkOfferService>().HasKey(l => new { l.OfferId, l.ServiceId });
+
+            modelBuilder.Entity<LinkOfferService>()
+                .HasOne<Offer>(l => l.OfferLinked)
+                .WithMany(m => m.AllLinkToService)
+                .HasForeignKey(f => f.OfferId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<LinkOfferService>()
+                .HasOne<Service>(f => f.ServiceLinked)
+                .WithMany(m => m.AllLinksToOffer)
+                .HasForeignKey(f => f.ServiceId)
+                .OnDelete(DeleteBehavior.Restrict);
+         }
+
+
+
+
+
+
+
+
+
+
+
+
 
       
-        }
+        
 
          private void addData(ModelBuilder modelBuilder) {
             addUsers(modelBuilder);
@@ -37,7 +75,7 @@ namespace backend.Models {
                     new User() {  UserId =4, Nickname = "Luis", Password = "luis",Name ="Lara",Email="luis@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
                     new User() {  UserId =5, Nickname = "Amin", Password = "amin",Name ="Gandouz",Email="amin@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles  },
                     new User() {  UserId =6, Nickname = "Nico", Password = "nico",Name ="Krstev",Email="nico@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Hainaut },
-                    new User() {  UserId =7, Nickname = "Momo", Password = "momo",Name ="AssBai",Email="luis@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles }
+                    new User() {  UserId =7, Nickname = "Momo", Password = "momo",Name ="AssBai",Email="momo@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles }
         
    
             );

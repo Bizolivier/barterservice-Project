@@ -19,9 +19,18 @@ namespace backend.Models {
         public  virtual User Author {get;set;}
         [Required]
         public int AuthorId {get;set;}
+        public virtual IList <LinkOfferService> AllLinkToService {get;set;} = new List <LinkOfferService>();
         [NotMapped]
-        public virtual IList<Service> ServiceToProvid  {get;set;} = new List <Service>();
-         public virtual IList<Service> ServiceNeeded  {get;set;} = new List <Service>();
+        public IEnumerable<Service> ServiceToProvid {
+            get => AllLinkToService.Select(sp => sp.ServiceLinked);} 
+
+        [NotMapped]
+        public IEnumerable<Service> ServiceNeeded {
+            get => AllLinkToService.Select(sp => sp.ServiceLinked);} 
+
+       
+
+       
 
         public virtual IList<Message> AllCommunications  {get;set;} = new List <Message>();
 

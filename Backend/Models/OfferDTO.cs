@@ -11,6 +11,8 @@ namespace backend.Models {
       
        public IEnumerable <ServiceDTO> ServiceToProvid  { get; set; }  
        public IEnumerable <ServiceDTO> ServiceNeeded { get; set; } 
+
+      public IEnumerable<LinkOfferServiceDTO> AllLinksOffersServices { get; set; } 
        public IEnumerable<MessageDTO> AllCommunications { get; set; } 
     }
 }

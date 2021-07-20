@@ -30,13 +30,17 @@ namespace backend.Models {
 
 
 
-        [Required]
-        public virtual Offer OfferLinkedTo {get;set;}
+       
 
-        [Required]
+        // Relation many To many Offer_Service
 
-        public int OfferLinkToId {get;set;}
+        public virtual IList <LinkOfferService> AllLinksToOffer {get;set;} = new List <LinkOfferService>();
+        [NotMapped]
+        public IEnumerable<Offer> OfferListLinked {
+            get => AllLinksToOffer.Select(o => o.OfferLinked);} 
 
+      
+       //Relation one to many category_Service
         
 
         [Required]
