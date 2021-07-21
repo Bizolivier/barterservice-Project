@@ -33,21 +33,6 @@ namespace barterserv.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("backend.Models.LinkOfferService", b =>
-                {
-                    b.Property<int>("OfferId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OfferId", "ServiceId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("LinkOfferService");
-                });
-
             modelBuilder.Entity("backend.Models.Message", b =>
                 {
                     b.Property<int>("MsgId")
@@ -88,7 +73,8 @@ namespace barterserv.Migrations
 
                     b.HasKey("OfferId");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("AuthorId")
+                        .IsUnique();
 
                     b.ToTable("Offers");
 
@@ -139,19 +125,19 @@ namespace barterserv.Migrations
                     b.Property<int>("CategoryLinkToId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<int?>("OfferLinkedtoServiceOfferId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
                         .HasMaxLength(10);
-
-                    b.Property<int>("ProviderId")
-                        .HasColumnType("int");
 
                     b.HasKey("ServiceId");
 
                     b.HasIndex("CategoryLinkToId");
 
-                    b.HasIndex("ProviderId");
+                    b.HasIndex("OfferLinkedtoServiceOfferId");
 
                     b.ToTable("Services");
                 });
@@ -166,15 +152,15 @@ namespace barterserv.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Fullname")
                         .IsRequired()
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
-                        .HasMaxLength(10);
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Nickname")
                         .IsRequired()
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
-                        .HasMaxLength(10);
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -207,7 +193,7 @@ namespace barterserv.Migrations
                         {
                             UserId = 1,
                             Email = "ben@gmail.com",
-                            Name = "Penelle",
+                            Fullname = "Penelle",
                             Nickname = "Ben",
                             Password = "ben",
                             Province = 6,
@@ -219,7 +205,7 @@ namespace barterserv.Migrations
                         {
                             UserId = 2,
                             Email = "bruno@gmail.com",
-                            Name = "Lacroix",
+                            Fullname = "Lacroix",
                             Nickname = "Bru",
                             Password = "bruno",
                             Province = 9,
@@ -231,7 +217,7 @@ namespace barterserv.Migrations
                         {
                             UserId = 3,
                             Email = "aela@gmail.com",
-                            Name = "Izere",
+                            Fullname = "Izere",
                             Nickname = "Aela",
                             Password = "aela",
                             Province = 1,
@@ -243,7 +229,7 @@ namespace barterserv.Migrations
                         {
                             UserId = 4,
                             Email = "luis@gmail.com",
-                            Name = "Lara",
+                            Fullname = "Lara",
                             Nickname = "Luis",
                             Password = "luis",
                             Province = 9,
@@ -255,7 +241,7 @@ namespace barterserv.Migrations
                         {
                             UserId = 5,
                             Email = "amin@gmail.com",
-                            Name = "Gandouz",
+                            Fullname = "Gandouz",
                             Nickname = "Amin",
                             Password = "amin",
                             Province = 9,
@@ -267,7 +253,7 @@ namespace barterserv.Migrations
                         {
                             UserId = 6,
                             Email = "nico@gmail.com",
-                            Name = "Krstev",
+                            Fullname = "Krstev",
                             Nickname = "Nico",
                             Password = "nico",
                             Province = 8,
@@ -279,7 +265,7 @@ namespace barterserv.Migrations
                         {
                             UserId = 7,
                             Email = "momo@gmail.com",
-                            Name = "AssBai",
+                            Fullname = "AssBai",
                             Nickname = "Momo",
                             Password = "momo",
                             Province = 9,
@@ -287,21 +273,6 @@ namespace barterserv.Migrations
                             Sexe = 1,
                             TimeCredit = 5
                         });
-                });
-
-            modelBuilder.Entity("backend.Models.LinkOfferService", b =>
-                {
-                    b.HasOne("backend.Models.Offer", "OfferLinked")
-                        .WithMany("AllLinkToService")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.Service", "ServiceLinked")
-                        .WithMany("AllLinksToOffer")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("backend.Models.Message", b =>
@@ -322,8 +293,8 @@ namespace barterserv.Migrations
             modelBuilder.Entity("backend.Models.Offer", b =>
                 {
                     b.HasOne("backend.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
+                        .WithOne("OwnerOffer")
+                        .HasForeignKey("backend.Models.Offer", "AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -336,11 +307,9 @@ namespace barterserv.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("backend.Models.User", "Provider")
-                        .WithMany()
-                        .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("backend.Models.Offer", "OfferLinkedtoService")
+                        .WithMany("ServicesLinkedToOffer")
+                        .HasForeignKey("OfferLinkedtoServiceOfferId");
                 });
 #pragma warning restore 612, 618
         }

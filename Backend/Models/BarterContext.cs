@@ -11,7 +11,7 @@ namespace backend.Models {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet <Offer> Offers {get;set;}
-        public DbSet <LinkOfferService> LinkOfferService {get;set;}
+     
 
         // public DbSet<Comment> Comments { get; set; }
         // // public DbSet<Rating> Ratings { get; set; }
@@ -33,19 +33,7 @@ namespace backend.Models {
                  .HasIndex(u => u.Email)
                  .IsUnique();
 
-            modelBuilder.Entity<LinkOfferService>().HasKey(l => new { l.OfferId, l.ServiceId });
-
-            modelBuilder.Entity<LinkOfferService>()
-                .HasOne<Offer>(l => l.OfferLinked)
-                .WithMany(m => m.AllLinkToService)
-                .HasForeignKey(f => f.OfferId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<LinkOfferService>()
-                .HasOne<Service>(f => f.ServiceLinked)
-                .WithMany(m => m.AllLinksToOffer)
-                .HasForeignKey(f => f.ServiceId)
-                .OnDelete(DeleteBehavior.Restrict);
+            
          }
 
 
@@ -69,13 +57,13 @@ namespace backend.Models {
         }
         private void addUsers(ModelBuilder modelBuilder) {
             modelBuilder.Entity<User>().HasData(
-                    new User() {  UserId =1, Nickname = "Ben", Password = "ben",Name ="Penelle",Email="ben@gmail.com",  TimeCredit = 5 ,Sexe = Sexe.Male, Role = Role.User,Province=Province.Brabant_flamant },
-                    new User() {  UserId =2, Nickname = "Bru", Password = "bruno",Name ="Lacroix",Email="bruno@gmail.com", TimeCredit = 5,  Sexe = Sexe.Male,Role = Role.User,Province=Province.Bruxelles },
-                    new User() {  UserId =3, Nickname = "Aela", Password = "aela",Name ="Izere",Email="aela@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Female,Role =  Role.User,Province=Province.Flandre_orientale },
-                    new User() {  UserId =4, Nickname = "Luis", Password = "luis",Name ="Lara",Email="luis@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
-                    new User() {  UserId =5, Nickname = "Amin", Password = "amin",Name ="Gandouz",Email="amin@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles  },
-                    new User() {  UserId =6, Nickname = "Nico", Password = "nico",Name ="Krstev",Email="nico@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Hainaut },
-                    new User() {  UserId =7, Nickname = "Momo", Password = "momo",Name ="AssBai",Email="momo@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles }
+                    new User() {  UserId =1, Nickname = "Ben", Password = "ben",Fullname ="Penelle",Email="ben@gmail.com",  TimeCredit = 5 ,Sexe = Sexe.Male, Role = Role.User,Province=Province.Brabant_flamant },
+                    new User() {  UserId =2, Nickname = "Bru", Password = "bruno",Fullname ="Lacroix",Email="bruno@gmail.com", TimeCredit = 5,  Sexe = Sexe.Male,Role = Role.User,Province=Province.Bruxelles },
+                    new User() {  UserId =3, Nickname = "Aela", Password = "aela",Fullname ="Izere",Email="aela@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Female,Role =  Role.User,Province=Province.Flandre_orientale },
+                    new User() {  UserId =4, Nickname = "Luis", Password = "luis",Fullname ="Lara",Email="luis@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
+                    new User() {  UserId =5, Nickname = "Amin", Password = "amin",Fullname ="Gandouz",Email="amin@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles  },
+                    new User() {  UserId =6, Nickname = "Nico", Password = "nico",Fullname ="Krstev",Email="nico@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Hainaut },
+                    new User() {  UserId =7, Nickname = "Momo", Password = "momo",Fullname ="AssBai",Email="momo@gmail.com", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles }
         
    
             );

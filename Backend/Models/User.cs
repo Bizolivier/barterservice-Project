@@ -30,14 +30,14 @@ namespace backend.Models {
         [
         Required(ErrorMessage = "Required"),
         MinLength(3, ErrorMessage = "Minimum 3 characters"),
-        MaxLength(10, ErrorMessage = "Maximum 10 characters")]
+        MaxLength(30, ErrorMessage = "Maximum 30 characters")]
         public string Nickname { get; set; }
 
         [
         Required(ErrorMessage = "Required"),
         MinLength(3, ErrorMessage = "Minimum 3 characters"),
-        MaxLength(10, ErrorMessage = "Maximum 10 characters")]
-        public string Name { get; set; }
+        MaxLength(30, ErrorMessage = "Maximum 30 characters")]
+        public string Fullname { get; set; }
 
        
 
@@ -48,6 +48,7 @@ namespace backend.Models {
 
         [Required, MinLength(3)]
         public string Password { get; set; }
+         public virtual Offer OwnerOffer {get; set;}
 
         public Province Province {get;set;} = Province.Bruxelles;
         

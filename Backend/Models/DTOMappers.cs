@@ -10,7 +10,7 @@ namespace backend.Models {
             return new UserDTO {
                 UserId =user.UserId,
                 Nickname = user.Nickname,
-                Name = user.Name,
+                Fullname = user.Fullname,
                 Email = user.Email,
                 // we don't put the password in the DTO for security reasons
                  TimeCredit = user.TimeCredit,
@@ -31,9 +31,7 @@ namespace backend.Models {
         public static OfferDTO ToDTO(this Offer offer){
             return new OfferDTO {
                 OfferId = offer.OfferId,
-                AuthorId = offer.AuthorId,
-                ServiceToProvid =offer.ServiceToProvid.ToDTO(),
-                ServiceNeeded = offer.ServiceNeeded.ToDTO(),
+                ServicesLinkedToOffer =offer.ServicesLinkedToOffer.ToDTO(),
                 AllCommunications = offer.AllCommunications.ToDTO()
                 
 
@@ -51,9 +49,7 @@ namespace backend.Models {
         public static ServiceDTO ToDTO(this Service service){
             return new ServiceDTO {
                 ServiceId = service.ServiceId,
-                Name = service.Name,
-                ProviderId = service.ProviderId,
-                OfferListLinked =service.OfferListLinked.ToDTO(),
+                Title = service.Title,
                 CategoryLinkToId = service.CategoryLinkToId 
           
             };

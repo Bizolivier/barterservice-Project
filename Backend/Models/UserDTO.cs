@@ -5,7 +5,7 @@ namespace backend.Models {
     public class UserDTO {
         public int UserId {get;set;}
        public string Nickname { get; set; }
-       public string Name { get; set; }
+       public string Fullname { get; set; }
        public string Email{get;set;}
       
        public int TimeCredit{get;set;}

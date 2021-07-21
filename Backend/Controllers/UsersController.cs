@@ -37,7 +37,7 @@ namespace backend.Controllers {
     var newUser = new User() {
         Nickname= data.Nickname,
         Password = data.Password,
-        Name = data.Name,
+        Fullname = data.Fullname,
         Email = data.Email,
         TimeCredit = data.TimeCredit,
         Sexe = data.Sexe,
@@ -61,7 +61,7 @@ public async Task<IActionResult> PutUser(string nickname, UserDTO userDTO) {
     if (user == null)
         return NotFound();
 
-    user .Name = userDTO.Name;
+    user .Fullname = userDTO.Fullname;
     user .Email = userDTO.Email;
     user .TimeCredit = userDTO.TimeCredit;
     user .Sexe = userDTO.Sexe;
