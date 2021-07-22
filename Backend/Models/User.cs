@@ -46,8 +46,7 @@ namespace backend.Models {
 
         public int TimeCredit{get;set;}
 
-        [Required, MinLength(3)]
-        public string Password { get; set; }
+       
          public virtual Offer OwnerOffer {get; set;}
 
         public Province Province {get;set;} = Province.Bruxelles;
@@ -64,8 +63,8 @@ namespace backend.Models {
      public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
             var currContext = validationContext.GetService(typeof(BarterContext)) as BarterContext;
             Debug.Assert(currContext != null);
-            if (Password == "abc")
-                yield return new ValidationResult("The password may not be equal to 'abc'", new[] { nameof(Password) });
+            if (Fullname== "abc")
+                yield return new ValidationResult("The fullname may not be equal to 'abc'", new[] { nameof(Fullname) });
             
     }
   }

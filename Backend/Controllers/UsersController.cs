@@ -20,6 +20,37 @@ namespace backend.Controllers {
     public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll() {
               return (await _context.Users.ToListAsync()).ToDTO();
 }
+
+
+
+   [HttpGet("connect/{email}")]
+        public async Task<ActionResult<UserDTO>> connect(string email)
+        {
+            
+             var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+            if(user != null)
+                return  user.ToDTO();
+            else{
+                var userToConnect =  new User() {
+                Nickname = "Nickname",
+                Fullname = "Fullname",
+                Email = email,
+                TimeCredit = 5,
+               
+                };
+                 _context.Users.Add(userToConnect);
+            
+                var res = await _context.SaveChangesAsyncWithValidation();
+            
+                 return (await _context.Users.SingleOrDefaultAsync(u => u.Email == email)).ToDTO();
+            }
+
+
+        }
+
+
+
+
        [HttpGet("{userId}")]
      public async Task<ActionResult<UserDTO>> GetOne(string userId) {
         var user = await _context.Users.FindAsync(userId);
@@ -36,7 +67,6 @@ namespace backend.Controllers {
     }
     var newUser = new User() {
         Nickname= data.Nickname,
-        Password = data.Password,
         Fullname = data.Fullname,
         Email = data.Email,
         TimeCredit = data.TimeCredit,

@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210721171225_init")]
+    [Migration("20210722184823_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,10 +164,6 @@ namespace barterserv.Migrations
                         .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
                         .HasMaxLength(30);
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<int>("Province")
                         .HasColumnType("int");
 
@@ -185,9 +181,6 @@ namespace barterserv.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("Nickname")
-                        .IsUnique();
-
                     b.ToTable("Users");
 
                     b.HasData(
@@ -197,7 +190,6 @@ namespace barterserv.Migrations
                             Email = "ben@gmail.com",
                             Fullname = "Penelle",
                             Nickname = "Ben",
-                            Password = "ben",
                             Province = 6,
                             Role = 0,
                             Sexe = 1,
@@ -209,7 +201,6 @@ namespace barterserv.Migrations
                             Email = "bruno@gmail.com",
                             Fullname = "Lacroix",
                             Nickname = "Bru",
-                            Password = "bruno",
                             Province = 9,
                             Role = 0,
                             Sexe = 1,
@@ -221,7 +212,6 @@ namespace barterserv.Migrations
                             Email = "aela@gmail.com",
                             Fullname = "Izere",
                             Nickname = "Aela",
-                            Password = "aela",
                             Province = 1,
                             Role = 0,
                             Sexe = 0,
@@ -233,7 +223,6 @@ namespace barterserv.Migrations
                             Email = "luis@gmail.com",
                             Fullname = "Lara",
                             Nickname = "Luis",
-                            Password = "luis",
                             Province = 9,
                             Role = 0,
                             Sexe = 1,
@@ -245,7 +234,6 @@ namespace barterserv.Migrations
                             Email = "amin@gmail.com",
                             Fullname = "Gandouz",
                             Nickname = "Amin",
-                            Password = "amin",
                             Province = 9,
                             Role = 0,
                             Sexe = 1,
@@ -257,7 +245,6 @@ namespace barterserv.Migrations
                             Email = "nico@gmail.com",
                             Fullname = "Krstev",
                             Nickname = "Nico",
-                            Password = "nico",
                             Province = 8,
                             Role = 0,
                             Sexe = 1,
@@ -269,7 +256,6 @@ namespace barterserv.Migrations
                             Email = "momo@gmail.com",
                             Fullname = "AssBai",
                             Nickname = "Momo",
-                            Password = "momo",
                             Province = 9,
                             Role = 0,
                             Sexe = 1,

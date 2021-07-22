@@ -31,7 +31,6 @@ namespace barterserv.Migrations
                     Fullname = table.Column<string>(maxLength: 30, nullable: false),
                     Email = table.Column<string>(nullable: false),
                     TimeCredit = table.Column<int>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
                     Province = table.Column<int>(nullable: false),
                     Sexe = table.Column<int>(nullable: false),
                     Role = table.Column<int>(nullable: false)
@@ -117,16 +116,16 @@ namespace barterserv.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Password", "Province", "Role", "Sexe", "TimeCredit" },
+                columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Province", "Role", "Sexe", "TimeCredit" },
                 values: new object[,]
                 {
-                    { 1, "ben@gmail.com", "Penelle", "Ben", "ben", 6, 0, 1, 5 },
-                    { 2, "bruno@gmail.com", "Lacroix", "Bru", "bruno", 9, 0, 1, 5 },
-                    { 3, "aela@gmail.com", "Izere", "Aela", "aela", 1, 0, 0, 5 },
-                    { 4, "luis@gmail.com", "Lara", "Luis", "luis", 9, 0, 1, 5 },
-                    { 5, "amin@gmail.com", "Gandouz", "Amin", "amin", 9, 0, 1, 5 },
-                    { 6, "nico@gmail.com", "Krstev", "Nico", "nico", 8, 0, 1, 5 },
-                    { 7, "momo@gmail.com", "AssBai", "Momo", "momo", 9, 0, 1, 5 }
+                    { 1, "ben@gmail.com", "Penelle", "Ben", 6, 0, 1, 5 },
+                    { 2, "bruno@gmail.com", "Lacroix", "Bru", 9, 0, 1, 5 },
+                    { 3, "aela@gmail.com", "Izere", "Aela", 1, 0, 0, 5 },
+                    { 4, "luis@gmail.com", "Lara", "Luis", 9, 0, 1, 5 },
+                    { 5, "amin@gmail.com", "Gandouz", "Amin", 9, 0, 1, 5 },
+                    { 6, "nico@gmail.com", "Krstev", "Nico", 8, 0, 1, 5 },
+                    { 7, "momo@gmail.com", "AssBai", "Momo", 9, 0, 1, 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -173,12 +172,6 @@ namespace barterserv.Migrations
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_Nickname",
-                table: "Users",
-                column: "Nickname",
                 unique: true);
         }
 

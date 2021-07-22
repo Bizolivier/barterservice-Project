@@ -28,7 +28,14 @@ const AccordionCategories = () =>{
                           <p className="transition hidden">{category.services}</p>
                     </div>
                 </div>
-            </div>     
+            </div>
+
+            
+
+
+
+
+                 
     
           </React.Fragment>
     

@@ -24,9 +24,6 @@ namespace backend.Models {
         public  virtual Offer OfferLinkedtoService {get;set;}
 
       
-       //Relation one to many category_Service
-        
-
         [Required]
         public virtual Category CategoryLinkTo {get;set;}
 
