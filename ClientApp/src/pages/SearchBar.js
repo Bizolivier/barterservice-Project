@@ -10,13 +10,13 @@ const SearchBar = () =>{
                    <option value="10">Bruxelles</option>
                    <option value="9">Hainaut</option>
                    <option value="8">Namur</option>
-                   <option value="7">Brabant flamant</option>
-                   <option value="6">Brabant wallon</option>
+                   <option value="7">Brabant_flamant</option>
+                   <option value="6">Brabant_wallon</option>
                    <option value="5">Limbourg</option>
                    <option value="4">Luxembourg</option>
                    <option value="3">Anvers</option>
-                   <option value="2">Flandre orientale</option>
-                   <option value="1">flandre occidentale</option>
+                   <option value="2">Flandre_orientale</option>
+                   <option value="1">Flandre_occidentale</option>
                    
                 </select>
            </div>

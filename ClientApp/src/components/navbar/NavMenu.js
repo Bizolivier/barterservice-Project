@@ -1,32 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component,useState,useEffect } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import SearchBar from '../../pages/SearchBar';
 import logo from'../../images/logo_barter.PNG';
 import AuthenticationButton from '../login/AuthenticationButton';
+import { useAuth0, } from '@auth0/auth0-react';
 
 import './NavMenu.css';
 
+export default () =>
+ {
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+  
+  const {user,isAuthenticated}=useAuth0();
+ 
+  
 
-  constructor (props) {
-    super(props);
+  
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
-
-  toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
-
-  render () {
+ 
     return (
       <header >
         <Navbar className="navbar-toggleable-sm ng-white border-bottom box-shadow mb-3 bg-secondary " light>
@@ -52,6 +44,11 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="text-white px-3 " to="/OfferList">Offers</NavLink>
                 </NavItem>
                 <NavItem>
+                 {isAuthenticated? <NavLink tag={Link} className="text-white px-3 " to="/EditUser">Profil</NavLink>: <div/>}
+                </NavItem>
+                
+                
+                <NavItem>
                 <AuthenticationButton/>
                 </NavItem>
                 
@@ -76,4 +73,4 @@ export class NavMenu extends Component {
       </header>
     );
   }
-}
+

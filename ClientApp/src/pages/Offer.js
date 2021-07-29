@@ -53,9 +53,10 @@ const Offer = ({offer,onOfferSelected}) =>{
 
                           {/*Button*/}
                     <div className="extra content">
-                    <Link  className="ui black basic button w-10" to = '/profilUser'>Profil de {offer.author}</Link>
+                       <Link  className="ui black basic button w-10" to = '/profilUser'>Profil de {offer.author}</Link>
                         
                     </div>
+                   
                 </div>
 
             </div>

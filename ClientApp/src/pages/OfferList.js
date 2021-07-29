@@ -44,10 +44,10 @@ const categories=[
       setUsers(request.data)
        
       };
-      const timeout = setTimeout(() =>{
+     
+       const timeout = setTimeout(() =>{
         response();
       },500);
-      
     },[])
 
     useEffect(()=>{
@@ -80,7 +80,7 @@ const categories=[
   });
   const rendedListUsers = users.map((user) =>{
     return (
-      <React.Fragment  key={user.index} >
+      <React.Fragment  key={user.userId} >
          <div>
          {user.nickname}
          </div>
@@ -92,7 +92,7 @@ const categories=[
 });
 const rendedOffers = offerz.map((offa) =>{
   return (
-    <React.Fragment  key={offa.index} >
+    <React.Fragment  key={offa.offerId} >
        <div>
        {offa.offerId}
        </div>

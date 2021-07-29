@@ -1,6 +1,7 @@
 import React from 'react';
 import * as userService from "../services/User.service.js"
 import {useAuth0} from "@auth0/auth0-react";
+import { Link } from 'react-router-dom';
 
 
 
@@ -14,6 +15,7 @@ export default () => {
     const { email } = user;
     message = `Bonjour ${email}`;
     userService.connect(email);
+    console.log(userService.connect(email))
     
   }else{
     message ="Bonjour inconnu";
@@ -26,10 +28,12 @@ export default () => {
     <div>
       <img src={user.picture} alt={user.name}/>
          <h1>{message} !!!</h1>
+         
     </div>
     :
     <div>
         <h1>{message} !!!</h1>
+        
     </div>
    
   );

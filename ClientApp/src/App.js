@@ -6,7 +6,9 @@ import HomePage from './pages/HomePage.js';
 import OfferList from './pages/OfferList.js';
 import CreateOffer from './pages/CreateOffer.js';
 import UserProfil from './pages/UserProfil';
+import EditUser from './pages/EditUser';
 import AuthenticationButton from './components/login/AuthenticationButton';
+import ProtectedRoute from './auth/protected-route';
 
 
 
@@ -27,6 +29,7 @@ export default class App extends Component {
         <Route exact path='/OfferList' component = {OfferList}/>
         <Route exact path='/CreateOffer' component= {CreateOffer}/>
         <Route path ='/profilUser' component ={UserProfil}/>
+        <ProtectedRoute exact path = '/EditUser' component ={EditUser}/>
         
        
 
