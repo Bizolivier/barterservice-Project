@@ -25,20 +25,15 @@ const EditUser =()=>{
 
     return(
        
-     <div className =" ui segment bg-primary.bg-gradient">
-        <div className="container">
-            <div className =" d-inline-flex">
-
-                  <Avatar pictureSrc={user.picture}/>
-                <div>
-                  <h1 >Edit Profile</h1>
-                </div>
-            </div>    
+        <div className =" ui segment bg-primary.bg-gradient">
+            <div className="container">
+                <h1>Edit Profile</h1>
              	  <hr/>
 	                <div className="row">
 
                           {/* left column  */} 
-                      
+                          
+                        <Avatar pictureSrc={user.picture}/>
       
                             {/* edit form column */} 
 

@@ -62,7 +62,7 @@ export default () =>
           <hr/> 
 
           <Container className = "pt-4">
-            <SearchBar/>
+            
            
           </Container>
          
