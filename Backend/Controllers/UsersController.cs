@@ -63,6 +63,13 @@ namespace backend.Controllers {
            return user.ToDTO();
         }
 
+         [HttpGet("GetOneByEmail/{email}")]
+        public async Task<ActionResult<UserDTO>> GetOneByEmail(string email) {
+        var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+           if (user == null)
+             return NotFound();
+           return user.ToDTO();
+        }
 
 
 

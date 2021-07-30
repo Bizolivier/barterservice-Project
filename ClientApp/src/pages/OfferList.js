@@ -61,7 +61,7 @@ const categories=[
         response();
       },500);
       
-    },[])
+    })
 
  
 
@@ -138,7 +138,8 @@ const rendedOffers = offerz.map((offa) =>{
                    <Link className="ui black basic button" to="/">back</Link>
              <div>
                   {rendedListUsers}
-            </div>  
+            </div>
+            
             <div>
               {rendedOffers}
               </div>    

@@ -3,12 +3,12 @@ import './Avatar.css';
 
  export default ({pictureSrc}) => {
      return(
-        <div class="personal-image">
-           <label class="label">
+        <div className="personal-image">
+           <label className="label">
              <input type="file" />
-               <figure class="personal-figure">
-                <img src={pictureSrc} class="personal-avatar" alt="avatar"/>
-            <figcaption class="personal-figcaption">
+               <figure className="personal-figure">
+                <img src={pictureSrc} className="personal-avatar" alt="avatar"/>
+            <figcaption className="personal-figcaption">
               <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png"/>
             </figcaption>
           </figure>

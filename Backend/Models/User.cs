@@ -16,7 +16,7 @@ namespace backend.Models {
          Admin = 1,User =0
        }
        public enum Province{
-         Bruxelles = 9 ,Hainaut = 8 ,Namur = 7 ,Brabant_flamant = 6,Brabant_wallon = 5,Limbourg = 4,Luxembourg = 3 ,Anvers = 2,Flandre_orientale = 1,Flandre_occidentale =0
+         Bruxelles = 0 ,Hainaut = 1 ,Namur = 2 ,Brabant_flamant = 3,Brabant_wallon = 4,Limbourg = 5,Luxembourg = 6 ,Anvers = 7,Flandre_orientale = 8,Flandre_occidentale = 9
 
 
        }

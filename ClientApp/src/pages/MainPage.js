@@ -14,8 +14,8 @@ export default () => {
   if (isAuthenticated) {
     const { email } = user;
     message = `Bonjour ${email}`;
-    userService.connect(email);
-    console.log(userService.connect(email))
+    userService.connect(email).then(response =>{console.log(response)});
+    
     
   }else{
     message ="Bonjour inconnu";
