@@ -119,13 +119,13 @@ namespace barterserv.Migrations
                 columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Province", "Role", "Sexe", "TimeCredit" },
                 values: new object[,]
                 {
-                    { 1, "ben@gmail.com", "Penelle", "Ben", 6, 0, 1, 5 },
-                    { 2, "bruno@gmail.com", "Lacroix", "Bru", 9, 0, 1, 5 },
-                    { 3, "aela@gmail.com", "Izere", "Aela", 1, 0, 0, 5 },
-                    { 4, "luis@gmail.com", "Lara", "Luis", 9, 0, 1, 5 },
-                    { 5, "amin@gmail.com", "Gandouz", "Amin", 9, 0, 1, 5 },
-                    { 6, "nico@gmail.com", "Krstev", "Nico", 8, 0, 1, 5 },
-                    { 7, "momo@gmail.com", "AssBai", "Momo", 9, 0, 1, 5 }
+                    { 1, "ben@gmail.com", "Penelle", "Ben", 3, 0, 1, 5 },
+                    { 2, "bruno@gmail.com", "Lacroix", "Bru", 0, 0, 1, 5 },
+                    { 3, "aela@gmail.com", "Izere", "Aela", 8, 0, 0, 5 },
+                    { 4, "luis@gmail.com", "Lara", "Luis", 0, 0, 1, 5 },
+                    { 5, "amin@gmail.com", "Gandouz", "Amin", 0, 0, 1, 5 },
+                    { 6, "nico@gmail.com", "Krstev", "Nico", 1, 0, 1, 5 },
+                    { 7, "momo@gmail.com", "AssBai", "Momo", 0, 0, 1, 5 }
                 });
 
             migrationBuilder.InsertData(

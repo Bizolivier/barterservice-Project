@@ -8,7 +8,13 @@ export async function connect (email){
     
 }
 export async function PutUser (email,userDTO){
-    await axios.put(`${httpBase}/PutUser/${email}`,userDTO)
+    await axios.put(`${httpBase}/PutUser/${email}`,{
+      Nickname:userDTO.nickname,
+      FullName:userDTO.fullname,
+      Email:userDTO.email,
+      Province:userDTO.province,
+      Sexe:userDTO.sexe
+    })
 }
 export async function GetOneByEmail(email){
      const response = await axios.get(`${httpBase}/GetOneByEmail/${email}`);

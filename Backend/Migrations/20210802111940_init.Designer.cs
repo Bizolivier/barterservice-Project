@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210722184823_init")]
+    [Migration("20210802111940_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,7 +190,7 @@ namespace barterserv.Migrations
                             Email = "ben@gmail.com",
                             Fullname = "Penelle",
                             Nickname = "Ben",
-                            Province = 6,
+                            Province = 3,
                             Role = 0,
                             Sexe = 1,
                             TimeCredit = 5
@@ -201,7 +201,7 @@ namespace barterserv.Migrations
                             Email = "bruno@gmail.com",
                             Fullname = "Lacroix",
                             Nickname = "Bru",
-                            Province = 9,
+                            Province = 0,
                             Role = 0,
                             Sexe = 1,
                             TimeCredit = 5
@@ -212,7 +212,7 @@ namespace barterserv.Migrations
                             Email = "aela@gmail.com",
                             Fullname = "Izere",
                             Nickname = "Aela",
-                            Province = 1,
+                            Province = 8,
                             Role = 0,
                             Sexe = 0,
                             TimeCredit = 5
@@ -223,7 +223,7 @@ namespace barterserv.Migrations
                             Email = "luis@gmail.com",
                             Fullname = "Lara",
                             Nickname = "Luis",
-                            Province = 9,
+                            Province = 0,
                             Role = 0,
                             Sexe = 1,
                             TimeCredit = 5
@@ -234,7 +234,7 @@ namespace barterserv.Migrations
                             Email = "amin@gmail.com",
                             Fullname = "Gandouz",
                             Nickname = "Amin",
-                            Province = 9,
+                            Province = 0,
                             Role = 0,
                             Sexe = 1,
                             TimeCredit = 5
@@ -245,7 +245,7 @@ namespace barterserv.Migrations
                             Email = "nico@gmail.com",
                             Fullname = "Krstev",
                             Nickname = "Nico",
-                            Province = 8,
+                            Province = 1,
                             Role = 0,
                             Sexe = 1,
                             TimeCredit = 5
@@ -256,7 +256,7 @@ namespace barterserv.Migrations
                             Email = "momo@gmail.com",
                             Fullname = "AssBai",
                             Nickname = "Momo",
-                            Province = 9,
+                            Province = 0,
                             Role = 0,
                             Sexe = 1,
                             TimeCredit = 5

@@ -99,19 +99,18 @@ namespace backend.Controllers {
         }
 
 
-         [HttpPut("{userId}")]
-         public async Task<IActionResult> PutUser(int userId, UserDTO userDTO) {
-           if (userId != userDTO.UserId)
+         [HttpPut("PutUser/{email}")]
+         public async Task<IActionResult> PutUser(string email , UserDTO userDTO) {
+           if (email != userDTO.Email)
               return BadRequest();
 
-            var user = await _context.Users.FindAsync(userId);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
 
            if (user == null)
               return NotFound();
 
          user.Nickname = userDTO.Nickname;
          user .Fullname = userDTO.Fullname;
-         user .Email = userDTO.Email;
          user .Province = userDTO.Province;
          user .Sexe = userDTO.Sexe;
          
