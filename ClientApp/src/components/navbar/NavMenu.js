@@ -21,7 +21,7 @@ export default () => {
 
   return (
     <header>
-      <Navbar className="  box-shadow  bg-secondary " light>
+      <Navbar className="  box-shadow  bg-dark" light>
         <Container className="flex-row">
           <ul className="navbar-nav flex-row position-relative ">
             <NavItem>
