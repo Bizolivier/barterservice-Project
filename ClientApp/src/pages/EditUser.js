@@ -65,20 +65,6 @@ function changeSexeValue(newValue){
 
  }
   
-
-   
-    
-
-    
-
-
-
-  
-
-    
-
-   
-
     return(
        
         <div className =" ui segment bg-primary.bg-gradient">

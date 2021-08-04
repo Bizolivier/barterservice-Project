@@ -29,6 +29,9 @@ namespace backend.Models {
 
          [Required]
         public int CategoryLinkToId {get;set;}
+        
+
+        public bool IsRecherche {get;set;}
 
 
 

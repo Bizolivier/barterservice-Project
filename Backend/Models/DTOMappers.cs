@@ -31,6 +31,7 @@ namespace backend.Models {
         public static OfferDTO ToDTO(this Offer offer){
             return new OfferDTO {
                 OfferId = offer.OfferId,
+                AuthorId= offer.AuthorId,
                 ServicesLinkedToOffer =offer.ServicesLinkedToOffer.ToDTO(),
                 AllCommunications = offer.AllCommunications.ToDTO()
                 

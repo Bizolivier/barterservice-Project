@@ -67,8 +67,8 @@ namespace backend.Models {
         }
         private void addOffers(ModelBuilder modelBuilder){
             modelBuilder.Entity<Offer>().HasData(
-                new Offer() { OfferId =1,AuthorId =1  },
-                new Offer() { OfferId =2,AuthorId =2  },
+                new Offer() { OfferId =1,AuthorId =1 },
+                new Offer() { OfferId =2,AuthorId =2 },
                 new Offer() { OfferId =3,AuthorId =3  },
                 new Offer() { OfferId =4,AuthorId =4  },
                 new Offer() { OfferId =5,AuthorId =5  },
