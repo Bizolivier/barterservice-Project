@@ -1,6 +1,14 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-const ProvinceConversion = ({ numProvince }) => {
+export default ({ numProvince }) => {
+  const [numProv, setNumProv] = useState(0);
+  const [isBusy, setBusy] = useState(false);
+
+  useEffect(() => {
+    setNumProv(numProvince);
+    numProvince != null ? setBusy(true) : setBusy(false);
+  }, []);
+
   const options = [
     { value: 0, label: "Bruxelles" },
     { value: 1, label: "Hainaut" },
@@ -14,17 +22,11 @@ const ProvinceConversion = ({ numProvince }) => {
     { value: 9, label: "Flandre_occidentale" }
   ];
 
-  const convertirValueProvince = numProvince => {
-    return numProvince == options.value ? (
-      <React.Fragment>
-        <div>{options.label}</div>
-      </React.Fragment>
-    ) : (
-      <div></div>
-    );
-  };
-
-  return <div>{convertirValueProvince}</div>;
+  return isBusy ? (
+    <React.Fragment>
+      <div>{options[numProv].label} </div>
+    </React.Fragment>
+  ) : (
+    <div></div>
+  );
 };
-
-export default ProvinceConversion;

@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210802111940_init")]
+    [Migration("20210809223037_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,58 @@ namespace barterserv.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            Name = "Aide à la personne"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            Name = "Beauté bien être"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            Name = "Bricolage"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            Name = "Cours"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            Name = "Loisirs"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            Name = "Maison"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            Name = "Mode"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            Name = "Travail"
+                        },
+                        new
+                        {
+                            CategoryId = 9,
+                            Name = "Vacances"
+                        },
+                        new
+                        {
+                            CategoryId = 10,
+                            Name = "Vehicule"
+                        });
                 });
 
             modelBuilder.Entity("backend.Models.Message", b =>
@@ -115,6 +167,11 @@ namespace barterserv.Migrations
                         {
                             OfferId = 7,
                             AuthorId = 7
+                        },
+                        new
+                        {
+                            OfferId = 8,
+                            AuthorId = 8
                         });
                 });
 
@@ -127,21 +184,81 @@ namespace barterserv.Migrations
                     b.Property<int>("CategoryLinkToId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OfferLinkedtoServiceOfferId")
+                    b.Property<bool>("IsRecherche")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("OfferLinkedtoServiceId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
-                        .HasMaxLength(10);
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("ServiceId");
 
                     b.HasIndex("CategoryLinkToId");
 
-                    b.HasIndex("OfferLinkedtoServiceOfferId");
+                    b.HasIndex("OfferLinkedtoServiceId");
 
                     b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            ServiceId = 1,
+                            CategoryLinkToId = 2,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "Massage"
+                        },
+                        new
+                        {
+                            ServiceId = 2,
+                            CategoryLinkToId = 3,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "Electricité"
+                        },
+                        new
+                        {
+                            ServiceId = 3,
+                            CategoryLinkToId = 10,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "Entretien"
+                        },
+                        new
+                        {
+                            ServiceId = 4,
+                            CategoryLinkToId = 4,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "cours dotnet"
+                        },
+                        new
+                        {
+                            ServiceId = 5,
+                            CategoryLinkToId = 6,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "Jardinage"
+                        },
+                        new
+                        {
+                            ServiceId = 6,
+                            CategoryLinkToId = 10,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "Co Voiturage"
+                        },
+                        new
+                        {
+                            ServiceId = 7,
+                            CategoryLinkToId = 9,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "Hébergement"
+                        });
                 });
 
             modelBuilder.Entity("backend.Models.User", b =>
@@ -221,7 +338,7 @@ namespace barterserv.Migrations
                         {
                             UserId = 4,
                             Email = "luis@gmail.com",
-                            Fullname = "Lara",
+                            Fullname = "Save Lara",
                             Nickname = "Luis",
                             Province = 0,
                             Role = 0,
@@ -254,8 +371,30 @@ namespace barterserv.Migrations
                         {
                             UserId = 7,
                             Email = "momo@gmail.com",
-                            Fullname = "AssBai",
+                            Fullname = "Mohammed Assbai",
                             Nickname = "Momo",
+                            Province = 0,
+                            Role = 0,
+                            Sexe = 1,
+                            TimeCredit = 5
+                        },
+                        new
+                        {
+                            UserId = 8,
+                            Email = "bizidudu@gmail.com",
+                            Fullname = "Olivier Bizimungu",
+                            Nickname = "L'Olive",
+                            Province = 8,
+                            Role = 0,
+                            Sexe = 1,
+                            TimeCredit = 50
+                        },
+                        new
+                        {
+                            UserId = 9,
+                            Email = "alain@gmail.com",
+                            Fullname = "Alain Silovy",
+                            Nickname = "Timon",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -297,7 +436,9 @@ namespace barterserv.Migrations
 
                     b.HasOne("backend.Models.Offer", "OfferLinkedtoService")
                         .WithMany("ServicesLinkedToOffer")
-                        .HasForeignKey("OfferLinkedtoServiceOfferId");
+                        .HasForeignKey("OfferLinkedtoServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

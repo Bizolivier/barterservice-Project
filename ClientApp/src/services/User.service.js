@@ -33,6 +33,7 @@ export async function GetOneByEmail(email){
      const response = await axios.get(`${httpBase}/GetOneByEmail/${email}`);
        return response.data;
 }
+
 export async function GetOneById(authorId){
   const response = await axios.get(`${httpBase}/${authorId}`);
     return response.data;

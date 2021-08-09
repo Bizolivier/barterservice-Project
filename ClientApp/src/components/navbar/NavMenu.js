@@ -30,9 +30,13 @@ export default () => {
               </NavLink>
             </NavItem>
             <NavItem>
+            {isAuthenticated ? (
               <NavLink tag={Link} className="text-white px-3 " to="/Dashboard">
                 Dashboard
               </NavLink>
+              ) : (
+                <div />
+              )}
             </NavItem>
             <NavItem>
               <NavLink tag={Link} className="text-white px-3" to="/MyRequest">

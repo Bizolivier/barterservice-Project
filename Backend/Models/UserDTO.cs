@@ -7,7 +7,7 @@ namespace backend.Models {
        public string Nickname { get; set; }
        public string Fullname { get; set; }
        public string Email{get;set;}
-      
+       
        public int TimeCredit{get;set;}
    
        public Sexe Sexe { get; set; } = Sexe.Female;

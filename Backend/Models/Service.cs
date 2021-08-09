@@ -16,15 +16,18 @@ namespace backend.Models {
 
         [
         Required(ErrorMessage = "Required"),
-        MinLength(3, ErrorMessage = "Minimum 3 characters"),
-        MaxLength(10, ErrorMessage = "Maximum 10 characters")]
+       ]
         
         public string Title { get; set; }
 
+      
         public  virtual Offer OfferLinkedtoService {get;set;}
 
-      
         [Required]
+        public int OfferLinkedtoServiceId {get;set;}
+
+    
+        
         public virtual Category CategoryLinkTo {get;set;}
 
          [Required]

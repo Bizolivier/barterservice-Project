@@ -93,9 +93,10 @@ namespace barterserv.Migrations
                 {
                     ServiceId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(maxLength: 10, nullable: false),
-                    OfferLinkedtoServiceOfferId = table.Column<int>(nullable: true),
-                    CategoryLinkToId = table.Column<int>(nullable: false)
+                    Title = table.Column<string>(nullable: false),
+                    OfferLinkedtoServiceId = table.Column<int>(nullable: false),
+                    CategoryLinkToId = table.Column<int>(nullable: false),
+                    IsRecherche = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,11 +108,28 @@ namespace barterserv.Migrations
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Services_Offers_OfferLinkedtoServiceOfferId",
-                        column: x => x.OfferLinkedtoServiceOfferId,
+                        name: "FK_Services_Offers_OfferLinkedtoServiceId",
+                        column: x => x.OfferLinkedtoServiceId,
                         principalTable: "Offers",
                         principalColumn: "OfferId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Aide à la personne" },
+                    { 9, "Vacances" },
+                    { 8, "Travail" },
+                    { 7, "Mode" },
+                    { 6, "Maison" },
+                    { 10, "Vehicule" },
+                    { 4, "Cours" },
+                    { 3, "Bricolage" },
+                    { 2, "Beauté bien être" },
+                    { 5, "Loisirs" }
                 });
 
             migrationBuilder.InsertData(
@@ -119,13 +137,15 @@ namespace barterserv.Migrations
                 columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Province", "Role", "Sexe", "TimeCredit" },
                 values: new object[,]
                 {
+                    { 8, "bizidudu@gmail.com", "Olivier Bizimungu", "L'Olive", 8, 0, 1, 50 },
                     { 1, "ben@gmail.com", "Penelle", "Ben", 3, 0, 1, 5 },
                     { 2, "bruno@gmail.com", "Lacroix", "Bru", 0, 0, 1, 5 },
                     { 3, "aela@gmail.com", "Izere", "Aela", 8, 0, 0, 5 },
-                    { 4, "luis@gmail.com", "Lara", "Luis", 0, 0, 1, 5 },
+                    { 4, "luis@gmail.com", "Save Lara", "Luis", 0, 0, 1, 5 },
                     { 5, "amin@gmail.com", "Gandouz", "Amin", 0, 0, 1, 5 },
                     { 6, "nico@gmail.com", "Krstev", "Nico", 1, 0, 1, 5 },
-                    { 7, "momo@gmail.com", "AssBai", "Momo", 0, 0, 1, 5 }
+                    { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", 0, 0, 1, 5 },
+                    { 9, "alain@gmail.com", "Alain Silovy", "Timon", 0, 0, 1, 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -139,7 +159,22 @@ namespace barterserv.Migrations
                     { 4, 4 },
                     { 5, 5 },
                     { 6, 6 },
-                    { 7, 7 }
+                    { 7, 7 },
+                    { 8, 8 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Services",
+                columns: new[] { "ServiceId", "CategoryLinkToId", "IsRecherche", "OfferLinkedtoServiceId", "Title" },
+                values: new object[,]
+                {
+                    { 1, 2, true, 8, "Massage" },
+                    { 2, 3, true, 8, "Electricité" },
+                    { 3, 10, true, 8, "Entretien" },
+                    { 4, 4, true, 8, "cours dotnet" },
+                    { 5, 6, false, 8, "Jardinage" },
+                    { 6, 10, false, 8, "Co Voiturage" },
+                    { 7, 9, false, 8, "Hébergement" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -164,9 +199,9 @@ namespace barterserv.Migrations
                 column: "CategoryLinkToId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Services_OfferLinkedtoServiceOfferId",
+                name: "IX_Services_OfferLinkedtoServiceId",
                 table: "Services",
-                column: "OfferLinkedtoServiceOfferId");
+                column: "OfferLinkedtoServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",

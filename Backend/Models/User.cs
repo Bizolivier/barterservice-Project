@@ -49,6 +49,8 @@ namespace backend.Models {
        
          public virtual Offer OwnerOffer {get; set;}
 
+         
+
         public Province Province {get;set;} = Province.Bruxelles;
         
         public Sexe Sexe { get; set; } = Sexe.Female;

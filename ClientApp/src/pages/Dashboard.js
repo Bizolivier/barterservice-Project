@@ -1,91 +1,74 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import * as userService from "../services/User.service.js";
+import * as serviceService from "../services/Services.Service.js";
+import "./Dashboard.css";
 
-export default class Dashboard extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}></View>
-        <Image
-          style={styles.avatar}
-          source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
-        />
-        <View style={styles.body}>
-          <View style={styles.bodyContent}>
-            <Text style={styles.name}>John Doe</Text>
-            <Text style={styles.info}>UX Designer / Mobile developer</Text>
-            <Text style={styles.description}>
-              Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
-              electram expetendis, omittam deseruisse consequuntur ius an,
-            </Text>
+import { useAuth0, User } from "@auth0/auth0-react";
+import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
 
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Opcion 1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Opcion 2</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    );
-  }
-}
+export default () => {
+  const { user, isAuthenticated } = useAuth0();
+  const [userDataProvince, setUserDataProvince] = useState(0);
+  const [isBusy, setBusy] = useState(true);
+  const [resquested, setRequested] = useState([]);
+  const [offered, setOffered] = useState([]);
 
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#54c6cf",
-    height: 120
-  },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 50
-  },
-  name: {
-    fontSize: 22,
-    color: "#FFFFFF",
-    fontWeight: "600"
-  },
-  body: {
-    marginTop: 40
-  },
-  bodyContent: {
-    flex: 1,
-    alignItems: "center",
-    padding: 30
-  },
-  name: {
-    fontSize: 28,
-    color: "#696969",
-    fontWeight: "600"
-  },
-  info: {
-    fontSize: 16,
-    color: "#00BFFF",
-    marginTop: 10
-  },
-  description: {
-    fontSize: 16,
-    color: "#696969",
-    marginTop: 10,
-    textAlign: "center"
-  },
-  buttonContainer: {
-    marginTop: 10,
-    height: 45,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 30,
-    backgroundColor: "#00BFFF"
-  }
-});
+  useEffect(() => {
+    userService.GetOneByEmail(user.email).then(loggedUser => {
+      setUserDataProvince(loggedUser.province);
+      serviceService
+        .getRequestedSevices(user.email)
+        .then(listServicesRequest => {
+          setRequested(listServicesRequest);
+        });
+      serviceService.getOfferedSevices(user.email).then(listServicesOffered => {
+        setOffered(listServicesOffered);
+      });
+
+      setBusy(false);
+    });
+  }, []);
+
+  return (
+    <div className=" bloc ui segment w-100  bg-white ">
+      {isBusy ? (
+        <div> </div>
+      ) : (
+        <div className="upper-container ">
+          <div className="image-container text-left pb-5 ">
+            <img
+              className="border border-secondary"
+              src={user.picture}
+              alt="name"
+            />
+          </div>
+          <div className="row d-inline-flex my-5">
+            <div className="col-md-4 personal-info ">
+              <h3 className="text-left px-2">{user.name}</h3>
+              <div className=" d-inline-flex">
+                <i className="map marker alternate icon"></i>
+                <ProvinceConversion numProvince={userDataProvince} />
+              </div>
+            </div>
+            <div className="col-md-4 recherche  ">
+              <h4 className="fst-italic">Services recherchés</h4>
+              <ul>
+                {resquested.map(item => (
+                  <li>{item.title}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="col-md-4 propose  px-2">
+              <h4 className="fst-italic">Services proposé</h4>
+              <ul>
+                {offered.map(item => (
+                  <li>{item.title}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

@@ -21,7 +21,7 @@ export default class App extends Component {
       <React.Fragment>
         <Layout>
           <Route exact path="/" component={MainPage} />
-          <Route exact path="/Dashboard" component={Dashboard} />
+          <ProtectedRoute exact path="/Dashboard" component={Dashboard} />
           <Route exact path="/MyRequest" component={MyRequest} />
           <Route exact path="/OfferList" component={OfferList} />
           <Route exact path="/MyServices" component={MyServices} />
