@@ -43,10 +43,15 @@ namespace backend.Controllers {
                
                 };
                  _context.Users.Add(userToConnect);
-            
-                var res = await _context.SaveChangesAsyncWithValidation();
-            
-                 return (await _context.Users.SingleOrDefaultAsync(u => u.Email == email)).ToDTO();
+                 await _context.SaveChangesAsyncWithValidation();
+
+                user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+                var offer = new Offer(){AuthorId = user.UserId};
+
+               _context.Offers.Add(offer);
+               _context.SaveChangesAsyncWithValidation();
+               
+                 return user.ToDTO();
             }
 
 

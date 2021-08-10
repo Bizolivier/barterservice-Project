@@ -5,6 +5,7 @@ import "./Dashboard.css";
 
 import { useAuth0, User } from "@auth0/auth0-react";
 import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
+import CreateServiceDialog from "../components/createServiceDialog/CreateServiceDialog.js";
 
 export default () => {
   const { user, isAuthenticated } = useAuth0();
@@ -52,6 +53,7 @@ export default () => {
             </div>
             <div className="col-md-4 recherche  ">
               <h4 className="fst-italic">Services recherchés</h4>
+              <CreateServiceDialog isRequest={true} />
               <ul>
                 {resquested.map(item => (
                   <li>{item.title}</li>
@@ -60,6 +62,7 @@ export default () => {
             </div>
             <div className="col-md-4 propose  px-2">
               <h4 className="fst-italic">Services proposé</h4>
+              <CreateServiceDialog isRequest={false} />
               <ul>
                 {offered.map(item => (
                   <li>{item.title}</li>

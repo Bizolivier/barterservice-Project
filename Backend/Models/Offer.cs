@@ -17,14 +17,12 @@ namespace backend.Models {
         
         [Required]
         public  virtual User Author {get;set;}
+        
         [Required]
         public int AuthorId {get;set;}
        
         public  virtual IList <Service> ServicesLinkedToOffer {get;set;} = new List<Service>();
-       
-
-       
-
+        
         public virtual IList<Message> AllCommunications  {get;set;} = new List <Message>();
 
 

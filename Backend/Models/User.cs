@@ -26,12 +26,12 @@ namespace backend.Models {
          DatabaseGenerated(DatabaseGeneratedOption.Identity)]
          public int UserId { get; set; }
 
-
         [
         Required(ErrorMessage = "Required"),
         MinLength(3, ErrorMessage = "Minimum 3 characters"),
         MaxLength(30, ErrorMessage = "Maximum 30 characters")]
         public string Nickname { get; set; }
+
 
         [
         Required(ErrorMessage = "Required"),
@@ -46,19 +46,15 @@ namespace backend.Models {
 
         public int TimeCredit{get;set;}
 
-       
-         public virtual Offer OwnerOffer {get; set;}
-
-         
+        public virtual Offer OwnerOffer {get; set;}
 
         public Province Province {get;set;} = Province.Bruxelles;
         
         public Sexe Sexe { get; set; } = Sexe.Female;
+
         public Role Role {get;set;} = Role.User;
         
 
-       // [NotMapped]
-        //public string Token { get; set; }
 
 
 

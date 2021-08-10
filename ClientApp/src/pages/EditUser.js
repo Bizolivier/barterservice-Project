@@ -16,6 +16,7 @@ export default () => {
   const [selectedProvinceValue, setSelectedProvinceValue] = useState(0);
   const [selectedSexeValue, setSelectedSexeValue] = useState(0);
 
+  
   useEffect(() => {
     userService.GetOneByEmail(user.email).then(loggedUser => {
       setUserNickname(loggedUser.nickname);

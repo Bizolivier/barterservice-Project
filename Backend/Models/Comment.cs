@@ -8,12 +8,12 @@ using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models {
+
     public class Comment {
           [Key,
         DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CmntId { get; set; }
-
-
+        
         [
         Required(ErrorMessage = "Required"),
         MinLength(3, ErrorMessage = "Minimum 3 characters"),

@@ -43,7 +43,10 @@ namespace backend.Controllers {
             if (user == null)
               return NotFound(); 
             Offer offer = await _context.Offers.SingleOrDefaultAsync(o => o.AuthorId == user.UserId); 
-             return( await _context.Services.Where(s => s.IsRecherche == false && s.OfferLinkedtoServiceId == offer.OfferId).ToListAsync()).ToDTO();
+            var offerList = await _context.Services.Where(s => s.IsRecherche == false && s.OfferLinkedtoServiceId == offer.OfferId).ToListAsync();
+
+            return ( offerList == null ) ?  NotFound() :  offerList.ToDTO();
+            
 
        
         }

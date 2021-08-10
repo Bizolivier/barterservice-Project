@@ -8,16 +8,14 @@ using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models {
+
     public class Service  {
           [Key,
         DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ServiceId { get; set; }
 
 
-        [
-        Required(ErrorMessage = "Required"),
-       ]
-        
+        [Required(ErrorMessage = "Required")]
         public string Title { get; set; }
 
       
@@ -27,7 +25,6 @@ namespace backend.Models {
         public int OfferLinkedtoServiceId {get;set;}
 
     
-        
         public virtual Category CategoryLinkTo {get;set;}
 
          [Required]
@@ -35,10 +32,6 @@ namespace backend.Models {
         
 
         public bool IsRecherche {get;set;}
-
-
-
-
-        
+    
     }
 }

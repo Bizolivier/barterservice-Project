@@ -8,12 +8,12 @@ namespace backend.Models {
     public static class DTOMappers {
         public static UserDTO ToDTO(this User user) {
             return new UserDTO {
+
                 UserId =user.UserId,
                 Nickname = user.Nickname,
                 Fullname = user.Fullname,
                 Email = user.Email,
-                // we don't put the password in the DTO for security reasons
-                 TimeCredit = user.TimeCredit,
+                TimeCredit = user.TimeCredit,
                 Sexe = user.Sexe,
                 Role = user.Role,
                 Province = user.Province
