@@ -21,7 +21,7 @@ namespace backend.Controllers {
               return (await _context.Categories.ToListAsync()).ToDTO();
         } 
            [HttpGet("{categoryId}")]
-     public async Task<ActionResult<CategoryDTO>> GetOne(string categoryId) {
+        public async Task<ActionResult<CategoryDTO>> GetOne(string categoryId) {
         var category = await _context.Categories.FindAsync(categoryId);
            if (category == null)
              return NotFound();

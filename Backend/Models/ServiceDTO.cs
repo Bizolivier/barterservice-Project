@@ -7,6 +7,7 @@ namespace backend.Models {
         
        public int ServiceId { get;set;}
        public string Title{ get; set; }
+       public int OfferLinkedtoServiceId {get;set;}
        public int CategoryLinkToId { get;set; }
        public bool IsRecherche { get;set; }
        
