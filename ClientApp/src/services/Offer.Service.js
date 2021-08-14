@@ -10,3 +10,8 @@ export async function getAll(){
     
    
 };
+
+export async function GetOfferByEmail(email){
+        const response = await axios.get(`${httpBase}/GetOfferByEmail/${email}`);
+          return response.data;
+   }

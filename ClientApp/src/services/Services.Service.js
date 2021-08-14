@@ -12,11 +12,12 @@ export async function getOfferedSevices(email) {
   return response.data;
 }
 
-export async function addService(serviceDTO) {
+export async function addService(titleService, catsel, offerId, isRequest) {
   await axios.post(`${httpBase}`, {
-    Title: serviceDTO.title,
-    OfferLinkedtoServiceId: serviceDTO.offerLinkedtoServiceId,
-    CategoryLinkToId: serviceDTO.categoryLinkToId,
-    IsRecherche: serviceDTO.isRecherche
+    
+    Title: titleService,
+    OfferLinkedtoServiceId:offerId,
+    CategoryLinkToId: catsel,
+    IsRecherche: isRequest
   });
 }

@@ -21,12 +21,30 @@ namespace backend.Controllers {
               return (await _context.Offers.ToListAsync()).ToDTO();
         } 
            [HttpGet("{offerId}")]
-     public async Task<ActionResult<OfferDTO>> GetOne(string offerId) {
+       public async Task<ActionResult<OfferDTO>> GetOne(string offerId) {
         var offer = await _context.Offers.FindAsync(offerId);
            if (offer == null)
              return NotFound();
            return offer.ToDTO(); 
-        }   
+        } 
+        
+
+          [HttpGet("GetOfferByEmail/{email}")]
+        public async Task<ActionResult<OfferDTO>> GetOfferByEmail(string email) {
+        var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+
+           if (user == null)
+             return NotFound();
+           
+        Offer offer = await _context.Offers.SingleOrDefaultAsync(o => o.AuthorId == user.UserId);
+
+             if (offer == null)
+             return NotFound();
+
+         return offer.ToDTO();
+
+        }
+
 
     }
 }

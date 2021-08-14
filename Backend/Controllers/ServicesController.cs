@@ -27,11 +27,7 @@ namespace backend.Controllers {
           [HttpPost]        
          public async Task<ActionResult<ServiceDTO>> PostService(ServiceDTO data) {
 
-
-           var offer = await _context.Offers.FindAsync(data.OfferLinkedtoServiceId);
-           var category = await _context.Categories.FindAsync(data.CategoryLinkToId);
-       
-            var newService = new Service() {
+        var newService = new Service() {
             Title= data.Title,
             OfferLinkedtoServiceId = data.OfferLinkedtoServiceId,
             CategoryLinkToId = data.CategoryLinkToId,
@@ -40,8 +36,7 @@ namespace backend.Controllers {
            };
 
            _context.Services.Add(newService);
-           offer.ServicesLinkedToOffer.Add(newService);
-           category.CategorysServices.Add(newService);
+           
 
            var res = await _context.SaveChangesAsyncWithValidation();
              if (!res.IsEmpty) 

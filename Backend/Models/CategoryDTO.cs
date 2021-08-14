@@ -6,9 +6,9 @@ namespace backend.Models {
     
     public class CategoryDTO {
 
-        public int CategoryId {get;set;}
+       public int CategoryId {get;set;}
         public string Name { get; set; }
-        public IEnumerable <ServiceDTO> CategorysServices  { get; set; }  
+       
       
     }
 }

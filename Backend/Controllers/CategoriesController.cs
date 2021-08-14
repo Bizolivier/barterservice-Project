@@ -16,10 +16,15 @@ namespace backend.Controllers {
         public CategoriesController(BarterContext context) {
             _context = context;
         }
+        
+
         [HttpGet]
        public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetAll() {
               return (await _context.Categories.ToListAsync()).ToDTO();
         } 
+
+
+
            [HttpGet("{categoryId}")]
         public async Task<ActionResult<CategoryDTO>> GetOne(string categoryId) {
         var category = await _context.Categories.FindAsync(categoryId);

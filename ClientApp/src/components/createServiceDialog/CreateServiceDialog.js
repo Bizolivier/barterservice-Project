@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -11,25 +11,42 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-
+import * as CategoryService from "../../services/Category.Service.js";
 import InputLabel from "@material-ui/core/InputLabel";
+import { makeStyles } from "@material-ui/core/styles";
+import * as servicesService from "../../services/Services.Service.js";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateServiceDialog({ isRequest }) {
-  const [categories, setCategories] = useState("");
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200
+  }
+}));
 
-
-
-
-  
-  const handleChange = event => {
-    setCategories(event.target.value);
-  };
-
+export default function CreateServiceDialog({
+  isRequest,
+  email,
+  offerId,
+  refreshOffer,
+  refreshRequest
+}) {
+  const classes = useStyles();
+  const [categories, setCategories] = useState([]);
+  const [catsel, setCatsel] = useState("");
+  const [titleService, setTitleService] = useState("");
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    CategoryService.getAllCategories().then(res => setCategories(res));
+  }, []);
+
+  const handleChange = event => {
+    setCatsel(event.target.value);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -37,6 +54,20 @@ export default function CreateServiceDialog({ isRequest }) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleAdd = () => {
+    servicesService.addService(titleService, catsel, offerId, isRequest);
+    console.log(titleService, catsel, offerId);
+    setOpen(false);
+    if (isRequest) {
+      servicesService.getRequestedSevices(email).then(listServicesRequest => {
+        refreshRequest(listServicesRequest);
+      });
+    } else {
+      servicesService.getOfferedSevices(email).then(listServicesOffered => {
+        refreshOffer(listServicesOffered);
+      });
+    }
   };
 
   return (
@@ -65,6 +96,10 @@ export default function CreateServiceDialog({ isRequest }) {
 
         <DialogContent>
           <TextField
+            value={titleService}
+            onChange={e => {
+              setTitleService(e.target.value);
+            }}
             autoFocus
             margin="dense"
             id="name"
@@ -73,32 +108,32 @@ export default function CreateServiceDialog({ isRequest }) {
             fullWidth
           />
 
-          <FormControl variant="outlined">
+          <FormControl className={classes.formControl} variant="outlined">
             <InputLabel id="demo-simple-select-outlined-label">
               Categories
             </InputLabel>
             <Select
-              labelId="demo-simple-select-outlined-label w-50"
+              labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={categories}
+              value={catsel}
               onChange={handleChange}
               label="Age"
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value=""></MenuItem>
+              {categories.map(cat => (
+                <MenuItem key={cat.categoryId} value={cat.categoryId}>
+                  {cat.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            Annuler
           </Button>
-          <Button onClick={handleClose} color="primary">
-            Agree
+          <Button onClick={handleAdd} color="primary">
+            Ajouter
           </Button>
         </DialogActions>
       </Dialog>

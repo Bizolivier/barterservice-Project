@@ -49,7 +49,7 @@ namespace backend.Controllers {
                 var offer = new Offer(){AuthorId = user.UserId};
 
                _context.Offers.Add(offer);
-               _context.SaveChangesAsyncWithValidation();
+               await _context.SaveChangesAsyncWithValidation();
                
                  return user.ToDTO();
             }
@@ -103,6 +103,9 @@ namespace backend.Controllers {
 
            return CreatedAtAction(nameof(GetOne), new { nickname = newUser.Nickname }, newUser.ToDTO());
         }
+
+
+
 
 
          [HttpPut("PutUser/{email}")]

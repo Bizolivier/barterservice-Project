@@ -80,7 +80,7 @@ namespace backend.Models {
 
         public static CategoryDTO ToDTO (this Category category){
             return new CategoryDTO{
-                CategoryId = category.CategoryId,
+               CategoryId = category.CategoryId,
                 Name = category.Name
             };
         }
