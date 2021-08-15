@@ -31,22 +31,25 @@ namespace backend.Controllers {
         public async Task<ActionResult<UserDTO>> connect(string email)
         {
             
-             var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
-            if(user != null)
-                return  user.ToDTO();
-            else{
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+
+              if(user != null)
+                   return  user.ToDTO();
+              else{
                 var userToConnect =  new User() {
                 Nickname = "Nickname",
                 Fullname = "Fullname",
                 Email = email,
                 TimeCredit = 5,
-               
-                };
-                 _context.Users.Add(userToConnect);
-                 await _context.SaveChangesAsyncWithValidation();
+               };
+
+               _context.Users.Add(userToConnect);
+                await _context.SaveChangesAsyncWithValidation();
+
 
                 user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
                 var offer = new Offer(){AuthorId = user.UserId};
+
 
                _context.Offers.Add(offer);
                await _context.SaveChangesAsyncWithValidation();
@@ -60,9 +63,9 @@ namespace backend.Controllers {
 
 
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<UserDTO>> GetOne(int userId) {
-        var user = await _context.Users.FindAsync(userId);
+          [HttpGet("{userId}")]
+          public async Task<ActionResult<UserDTO>> GetOne(int userId) {
+              var user = await _context.Users.FindAsync(userId);
            if (user == null)
              return NotFound();
            return user.ToDTO();
@@ -78,9 +81,7 @@ namespace backend.Controllers {
         }
 
 
-
-
-        [HttpPost]        
+         [HttpPost]        
          public async Task<ActionResult<UserDTO>> PostUser(UserDTO data) {
               var user = await _context.Users.FindAsync(data.Nickname);
              if (user != null) {
@@ -103,9 +104,6 @@ namespace backend.Controllers {
 
            return CreatedAtAction(nameof(GetOne), new { nickname = newUser.Nickname }, newUser.ToDTO());
         }
-
-
-
 
 
          [HttpPut("PutUser/{email}")]

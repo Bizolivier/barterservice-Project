@@ -17,14 +17,8 @@ export default () => {
   const [offer, setOffer] = useState([]);
 
   useEffect(() => {
-    userService.GetOneByEmail(user.email).then(loggedUser => {
-      setUserDataProvince(loggedUser.province);
-
-      serviceService
-        .getRequestedSevices(user.email)
-        .then(listServicesRequest => {
-          setRequested(listServicesRequest);
-        });
+    serviceService.getRequestedSevices(user.email).then(listServicesRequest => {
+      setRequested(listServicesRequest);
     });
     serviceService.getOfferedSevices(user.email).then(listServicesOffered => {
       setOffered(listServicesOffered);
@@ -37,14 +31,20 @@ export default () => {
     setBusy(false);
   }, []);
 
-  function refreshOffer (newValue)  {
+  useEffect(() => {
+    userService.GetOneByEmail(user.email).then(loggedUser => {
+      setUserDataProvince(loggedUser.province);
+    });
+    setBusy(false);
+  }, []);
+
+  function refreshOffer(newValue) {
     setOffered(newValue);
-  };
+  }
 
   function refreshRequest(newValue) {
     setRequested(newValue);
-
-  };
+  }
 
   return (
     <div className=" bloc ui segment w-100  bg-white ">
@@ -54,7 +54,7 @@ export default () => {
         <div className="upper-container ">
           <div className="image-container text-left pb-5 ">
             <img
-              className="border border-secondary"
+              className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               src={user.picture}
               alt="name"
             />
@@ -65,6 +65,8 @@ export default () => {
               <div className=" d-inline-flex">
                 <i className="map marker alternate icon"></i>
                 <ProvinceConversion numProvince={userDataProvince} />
+                
+                {userDataProvince}
               </div>
             </div>
             <div className="col-md-4 recherche  ">
@@ -73,8 +75,8 @@ export default () => {
                 isRequest={true}
                 email={user.email}
                 offerId={offer.offerId}
-                refreshOffer ={refreshOffer}
-                refreshRequest ={refreshRequest}
+                refreshOffer={refreshOffer}
+                refreshRequest={refreshRequest}
               />
               <ul>
                 {resquested.map(item => (

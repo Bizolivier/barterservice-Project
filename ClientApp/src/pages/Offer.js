@@ -6,66 +6,70 @@ import * as userService from "../services/User.service.js";
 import ProvinceConversion from "../components/conversion/ProvinceConversion";
 
 const Offer = ({ offer, onOfferSelected }) => {
-  const [author, setAuthor] = useState([]);
+  const [authorNickname, setAuthorNickname] = useState("");
+  const [authorProvince, setAuthorProvince] = useState("");
+  const [isBusy, setBusy] = useState(true);
 
   useEffect(() => {
     userService.GetOneById(offer.authorId).then(res => {
-      setAuthor(res);
+      setAuthorNickname(res.nickname);
+      setAuthorProvince(res.province);
+      setBusy(false);
+      console.log(authorNickname);
     });
   }, []);
 
   return (
     <React.Fragment>
-      <div className="ui cards w-35 mx-1 my-2 ">
-        <div className="card w-100   flex-row box-shadow  ">
-          {/*image*/}
-          <div className="content">
-            <div className="pull-left">
-              <div className="left floated mini ui image">
-                <img src={kristy} alt={offer.author} />
-              </div>
-            </div>
-
-            {/*autor & adress*/}
-            <div>
-              <div className="header flex-row ">
-                <i className="user icon"></i>
-                {author.nickname}
-              </div>
-
-              <div className="meta flex-row">
-                <i className="map marker alternate icon"></i>
-
-                <ProvinceConversion numProvince={author.province} />
-              </div>
-            </div>
-
-            {/* line divider */}
-            <div className="mb-4 text-right">
-              <hr className="solid" />
-            </div>
-
-            {/*Array service*/}
-            <div className="service">
-              <label className="text-success fst fst-italic">Je propose:</label>
-              {offer.offerId}
-            </div>
-
-            <div className="service">
-              <label className="text-success fst fst-italic">
-                Je recherche:
-              </label>
-              {offer.serviceNeeded}
+      <div className="">
+        {isBusy ? (
+          <div> </div>
+        ) : (
+          <div className="bg-white rounded shadow-sm py-5 px-4">
+            <img
+              src="https://d19m59y37dris4.cloudfront.net/university/1-1-1/img/teacher-4.jpg"
+              alt=""
+              width="100"
+              className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
+            />
+            <h5 className="mb-0">{authorNickname}</h5>
+            <span className="small text-uppercase text-muted">
+              {" "}
+              <i className="map marker alternate icon"></i>
+              <ProvinceConversion numProvince={authorProvince} />
+            </span>
+            <ul className="social mb-0 list-inline mt-3">
+              <li className="list-inline-item">
+                <a href="#" className="social-link">
+                  <i className="fa fa-facebook-f"></i>
+                </a>
+              </li>
+              <li className="list-inline-item">
+                <a href="#" className="social-link">
+                  <i className="fa fa-twitter"></i>
+                </a>
+              </li>
+              <li className="list-inline-item">
+                <a href="#" className="social-link">
+                  <i className="fa fa-instagram"></i>
+                </a>
+              </li>
+              <li className="list-inline-item">
+                <a href="#" className="social-link">
+                  <i className="fa fa-linkedin"></i>
+                </a>
+              </li>
+            </ul>
+            <div className="extra content">
+              <Link
+                className="btn btn-link text-decoration-none "
+                to="/profilUser"
+              >
+                Profil de {authorNickname}
+              </Link>
             </div>
           </div>
-
-          {/*Button*/}
-          <div className="extra content">
-            <Link className="ui black basic button w-10" to="/profilUser">
-              Profil de {author.nickname}
-            </Link>
-          </div>
-        </div>
+        )}
       </div>
     </React.Fragment>
   );

@@ -68,10 +68,11 @@ namespace backend.Controllers {
             var offerList = await _context.Services.Where(s => s.IsRecherche == false && s.OfferLinkedtoServiceId == offer.OfferId).ToListAsync();
 
             return ( offerList == null ) ?  NotFound() :  offerList.ToDTO();
+        }
             
 
        
-        }
+      
          
     }
 }
