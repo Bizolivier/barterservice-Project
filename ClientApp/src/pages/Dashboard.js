@@ -11,6 +11,7 @@ import * as offerService from "../services/Offer.Service.js";
 export default () => {
   const { user, isAuthenticated } = useAuth0();
   const [userDataProvince, setUserDataProvince] = useState(0);
+  const [userNickname, setUserNickname] = useState("");
   const [isBusy, setBusy] = useState(true);
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
@@ -34,6 +35,7 @@ export default () => {
   useEffect(() => {
     userService.GetOneByEmail(user.email).then(loggedUser => {
       setUserDataProvince(loggedUser.province);
+      setUserNickname(loggedUser.nickname);
     });
     setBusy(false);
   }, []);
@@ -51,7 +53,7 @@ export default () => {
       {isBusy ? (
         <div> </div>
       ) : (
-        <div className="upper-container ">
+        <div className="upper-container bg-success ">
           <div className="image-container text-left pb-5 ">
             <img
               className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
@@ -61,11 +63,11 @@ export default () => {
           </div>
           <div className="row d-inline-flex my-5">
             <div className="col-md-4 personal-info ">
-              <h3 className="text-left px-2">{user.name}</h3>
+              <h3 className="text-left px-2">{userNickname}</h3>
               <div className=" d-inline-flex">
                 <i className="map marker alternate icon"></i>
                 <ProvinceConversion numProvince={userDataProvince} />
-                
+
                 {userDataProvince}
               </div>
             </div>
