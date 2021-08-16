@@ -2,6 +2,7 @@ import React from "react";
 import * as userService from "../services/User.service.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
+import SidebarCategories from "../components/sidebar/SidebarCategories.js";
 
 export default () => {
   var message = "";
@@ -20,11 +21,17 @@ export default () => {
 
   return isAuthenticated ? (
     <div>
+      <div className="text-left w-15">
+        <SidebarCategories />
+      </div>
       <img src={user.picture} alt={user.name} />
       <h1>{message} !!!</h1>
     </div>
   ) : (
     <div>
+      <div>
+        <SidebarCategories />
+      </div>
       <h1>{message} !!!</h1>
     </div>
   );

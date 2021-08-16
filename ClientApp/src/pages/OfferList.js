@@ -33,12 +33,8 @@ const OfferList = () => {
   const rendedListOffers = offerz.map(offer => {
     return (
       <React.Fragment key={offer.offerId}>
-        <div className="container">
-          <div className="row text-center">
-            <div className="col-xl-3 col-sm-6 mb-5">
-              <Offer key={offer.id} offer={offer} />
-            </div>
-          </div>
+        <div className="d-inline-flex">
+          <Offer key={offer.id} offer={offer} />
         </div>
       </React.Fragment>
     );

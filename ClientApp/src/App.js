@@ -25,7 +25,7 @@ export default class App extends Component {
           <Route exact path="/MyRequest" component={MyRequest} />
           <Route exact path="/OfferList" component={OfferList} />
           <Route exact path="/MyServices" component={MyServices} />
-          <Route exact path="/profilUser" component={UserProfil} />
+          <Route  path="/profilUser/:email" component={UserProfil} />
           <ProtectedRoute exact path="/EditUser" component={EditUser} />
         </Layout>
       </React.Fragment>
