@@ -5,11 +5,16 @@ import AccordionCategories from "./AccordionCategories";
 import { useHistory, useParams } from "react-router-dom";
 import * as offerService from "../services/Offer.Service.js";
 import * as userService from "../services/User.service.js";
+import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
+import * as serviceService from "../services/Services.Service.js";
+import unknown from "../images/unknown.jpg";
 
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
-
+  const [isBusy, setBusy] = useState(true);
   const [user, setUser] = useState([]);
+  const [resquested, setRequested] = useState([]);
+  const [offered, setOffered] = useState([]);
 
   let { email } = useParams();
   console.log(email);
@@ -21,81 +26,104 @@ const UserProfil = () => {
       userService.GetOneByEmail(email).then(loggedUser => {
         setUser(loggedUser);
       });
+      serviceService.getRequestedSevices(email).then(listServicesRequest => {
+        setRequested(listServicesRequest);
+      });
+      serviceService.getOfferedSevices(email).then(listServicesOffered => {
+        setOffered(listServicesOffered);
+      });
 
       console.log(user.nickname);
       console.log(offer.authorId);
     });
+    setBusy(false);
   }, []);
 
   return (
     <React.Fragment>
-      <label>Categories</label>
       <div>
-        <div className="d-inline-flex">
-          <AccordionCategories />
-        </div>
+        <div className=" w-75  mx-5 my-3 ">
+          {isBusy ? (
+            <div> </div>
+          ) : (
+            <div className="ui cards h-100 mb-3  ">
+              <div className="card w-100  flex-row  px-3 py-3">
+                <div className="user mx-5">
+                  {/*image*/}
+                  <div className="content">
+                    <div className="pull-left">
+                      <div className="d-inline-flex">
+                        <div className="left floated mini ui image">
+                          <img
+                            src={unknown}
+                            alt="{offer.author}"
+                            width="100"
+                            className=" rounded-circle border border-primary"
+                          />
+                        </div>
+                      </div>
 
-        <div className="d-flex flex-column float-right w-75 ">
-          <div className="ui cards h-100 mb-3  ">
-            <div className="card w-100  flex-row box-shadow px-3 py-3">
-              <div className="user">
-                {/*image*/}
-                <div className="content">
-                  <div className="pull-left">
-                    <div className="left floated mini ui image">
-                      <img src={kristy} alt="{offer.author}" />
+                      {/*autor */}
+
+                      <div className="header flex-row ">{user.nickname}</div>
+                    </div>
+                    {/* adress*/}
+
+                    <div className="meta flex-row">
+                      <span className="small text-uppercase text-muted d-inline-flex">
+                        <i className="map marker alternate icon"></i>
+                        <ProvinceConversion numProvince={user.province} />
+                        {user.province}
+                      </span>
                     </div>
                   </div>
 
-                  {/*autor */}
-
-                  <div className="header flex-row ">
-                    <i className="user icon"></i>
-                    Aela
-                    <i className="edit icon flex-row ml-1 w-10"></i>
+                  {/* line divider */}
+                  <div className="mb-4 text-right">
+                    <hr className="solid" />
                   </div>
-                  {/* adress*/}
-
-                  <div className="meta flex-row">
-                    <i className="map marker alternate icon"></i>
-                    De vijf eiken 30
+                  <div className="d-inline-flex">
+                    {/*Array service proposés*/}
+                    <div className="serviceP mx-5">
+                      <h6 className="fst-italic text-primary">Je propose : </h6>
+                      <ul>
+                        {offered.map(item => (
+                          <li className="fs-6" key={item.serviceId}>
+                            {item.title}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    {/*Array service recherchés*/}
+                    <div className="serviceR ">
+                      <h6 className="fst-italic text-primary">
+                        Je recherche :{" "}
+                      </h6>
+                      <ul>
+                        {resquested.map(item => (
+                          <li className="fs-6" key={item.serviceId}>
+                            {item.title}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
-                {/* line divider */}
-                <div className="mb-4 text-right">
-                  <hr className="solid" />
+                <div className="extra content float-right ">
+                  <Link
+                    className="btn btn-link text-decoration-none fs-6 "
+                    to="/"
+                  >
+                    Me contacter
+                  </Link>
                 </div>
-
-                {/*Array service proposés*/}
-                <div className="service">
-                  <label className="text-success fst fst-italic">
-                    Je propose :{" "}
-                  </label>
-                  Cour de math, Anglais, informatique
-                  <i className="edit icon flex-row ml-1 w-10"></i>
-                </div>
-                {/*Array service recherchés*/}
-                <div className="service">
-                  <label className="text-success fst fst-italic">
-                    Je recherche :{" "}
-                  </label>
-                  yoga ,zumba, cours de maquillage pro
-                  <i className="edit icon flex-row ml-1 w-10"></i>
-                </div>
-              </div>
-
-              {/*Button*/}
-              <div className="extra content">
-                <Link className="ui black basic button w-100" to="/">
-                  Me contacter
-                </Link>
               </div>
             </div>
-          </div>
+          )}
         </div>
         {/*Button*/}
-        <div className="extra content ">
+        <div className="extra content px-3">
           <Link className="ui black basic button" to="/">
             back
           </Link>

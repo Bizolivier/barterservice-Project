@@ -3,7 +3,7 @@ import React from "react";
 const Category = ({ category }) => {
   return (
     <div>
-      <div className="ui card ui four column grid ">
+      <div className="ui card ui four column grid my-3">
         <div className="image w-100 p-3 ">
           <i className={`${category.icon}`}></i>
         </div>

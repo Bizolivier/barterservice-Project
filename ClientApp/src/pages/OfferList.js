@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import UserProfil from "./UserProfil";
 import { Route } from "react-router";
 import { Link } from "react-router-dom";
-import kristy from "../images/Kristy.jpg";
+import unknown from "../images/unknown.jpg";
 import Offer from "./Offer.js";
 import Category from "./Category";
 import axios from "axios";
@@ -67,15 +67,13 @@ const OfferList = () => {
     <div>
       <div className="">{rendedListOffers}</div>
 
-      <div className="ui segment max-vw-100 ">
+      <div className="">
         <div className="ui five column grid">{rendedListCategories}</div>
       </div>
 
-      <Link className="ui black basic button" to="/">
+      <Link className="ui black basic button float-right" to="/">
         back
       </Link>
-
-      <div>{rendedOffers}</div>
     </div>
   );
 };

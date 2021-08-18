@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import * as userService from "../services/User.service.js";
 import * as serviceService from "../services/Services.Service.js";
-import "./Dashboard.css";
-
 import { useAuth0, User } from "@auth0/auth0-react";
 import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
 import CreateServiceDialog from "../components/createServiceDialog/CreateServiceDialog.js";
 import * as offerService from "../services/Offer.Service.js";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import "./Dashboard.css";
+import DeleteServiceDialog from "../components/createServiceDialog/DeleteServiceDialog.js";
 
 export default () => {
   const { user, isAuthenticated } = useAuth0();
@@ -16,6 +17,7 @@ export default () => {
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
   const [offer, setOffer] = useState([]);
+  const [timeC, setTimeC] = useState();
 
   useEffect(() => {
     serviceService.getRequestedSevices(user.email).then(listServicesRequest => {
@@ -36,6 +38,7 @@ export default () => {
     userService.GetOneByEmail(user.email).then(loggedUser => {
       setUserDataProvince(loggedUser.province);
       setUserNickname(loggedUser.nickname);
+      setTimeC(loggedUser.timeCredit);
     });
     setBusy(false);
   }, []);
@@ -49,7 +52,7 @@ export default () => {
   }
 
   return (
-    <div className=" bloc ui segment w-100  bg-white ">
+    <div className=" bloc ui segment w-75  bg-white position-relative ">
       {isBusy ? (
         <div> </div>
       ) : (
@@ -64,11 +67,15 @@ export default () => {
           <div className="row d-inline-flex my-5">
             <div className="col-md-4 personal-info ">
               <h3 className="text-left px-2">{userNickname}</h3>
+
               <div className=" d-inline-flex">
                 <i className="map marker alternate icon"></i>
                 <ProvinceConversion numProvince={userDataProvince} />
-
-                {userDataProvince}
+              </div>
+              <div className="score rounded-circle bg-light py-5 text-center vw-10 vh-10">
+                <p className="fst-italic">Vous disposez de </p>
+                <h2 className="text-success">{timeC} </h2>
+                <p className="fst-italic">time-credits </p>
               </div>
             </div>
             <div className="col-md-4 recherche  ">
@@ -80,9 +87,16 @@ export default () => {
                 refreshOffer={refreshOffer}
                 refreshRequest={refreshRequest}
               />
+
               <ul>
                 {resquested.map(item => (
-                  <li key={item.serviceId}>{item.title}</li>
+                  <li className="d-inline-flex" key={item.serviceId}>
+                    {item.title}{" "}
+                    <DeleteServiceDialog
+                      serviceId={item.serviceId}
+                      title={item.title}
+                    />
+                  </li>
                 ))}
               </ul>
             </div>
@@ -97,7 +111,13 @@ export default () => {
               />
               <ul>
                 {offered.map(item => (
-                  <li key={item.serviceId}>{item.title}</li>
+                  <li className="d-inline-flex" key={item.serviceId}>
+                    {item.title}{" "}
+                    <DeleteServiceDialog
+                      serviceId={item.serviceId}
+                      title={item.title}
+                    />
+                  </li>
                 ))}
               </ul>
             </div>

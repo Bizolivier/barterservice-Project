@@ -8,8 +8,8 @@ namespace backend.Models {
 
         public int OfferId {get;set;}
         public int AuthorId {get;set;}
-        public IList <ServiceDTO> ServicesLinkedToOffer { get; set; }  
-        public IList<MessageDTO> AllCommunications { get; set; } 
+        public IEnumerable <ServiceDTO> ServicesLinkedToOffer { get; set; }  
+        public IEnumerable<MessageDTO> AllCommunications { get; set; } 
 
     }
 }

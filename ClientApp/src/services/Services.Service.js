@@ -21,3 +21,7 @@ export async function addService(titleService, catsel, offerId, isRequest) {
     IsRecherche: isRequest
   });
 }
+
+export async function  deleteService(serviceId){
+  await axios.delete(` ${httpBase}/deleteService/${serviceId}`)
+}

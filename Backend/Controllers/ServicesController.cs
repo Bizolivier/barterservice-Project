@@ -26,7 +26,7 @@ namespace backend.Controllers {
 
           [HttpPost]        
          public async Task<ActionResult<ServiceDTO>> PostService(ServiceDTO data) {
-
+       Offer offer = await _context.Offers.FindAsync(data.OfferLinkedtoServiceId);
         var newService = new Service() {
             Title= data.Title,
             OfferLinkedtoServiceId = data.OfferLinkedtoServiceId,
@@ -34,9 +34,10 @@ namespace backend.Controllers {
             IsRecherche = data.IsRecherche
            
            };
-
+          
            _context.Services.Add(newService);
-           
+            offer.ServicesLinkedToOffer.Add(newService);
+         
 
            var res = await _context.SaveChangesAsyncWithValidation();
              if (!res.IsEmpty) 
@@ -69,10 +70,42 @@ namespace backend.Controllers {
 
             return ( offerList == null ) ?  NotFound() :  offerList.ToDTO();
         }
+
+
+
+
+         [HttpDelete("deleteService/{serviceId}")]
+        public async Task<IActionResult> deleteService(int serviceId) {
+          var service = await _context.Services.FindAsync(serviceId);
+           if (service == null)
+              return NotFound(); 
+          var offer = await _context.Offers.FindAsync(service.OfferLinkedtoServiceId);
+           if (offer == null)
+              return NotFound(); 
+          var category =await _context.Categories.FindAsync(service.CategoryLinkToId); 
+           if (category == null)
+              return NotFound(); 
+
+          category.CategorysServices.Remove(service);
+          offer.ServicesLinkedToOffer.Remove(service);
+          _context.Services.Remove(service);
+          
+          
+             await _context.SaveChangesAsync();
+
+             _context.Offers.Update(offer);
+
+                var res = await _context.SaveChangesAsyncWithValidation();
+                if (!res.IsEmpty)
+                    return BadRequest(res);
+
+                return NoContent();    
+            }
+
+      }
             
 
        
       
          
     }
-}

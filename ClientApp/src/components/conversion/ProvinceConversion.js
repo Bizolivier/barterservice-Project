@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 export default ({ numProvince }) => {
-  const [numProv, setNumProv] = useState(0);
   const [isBusy, setBusy] = useState(false);
 
   useEffect(() => {
-    setNumProv(numProvince);
     numProvince != null ? setBusy(true) : setBusy(false);
   }, []);
 
@@ -23,9 +21,9 @@ export default ({ numProvince }) => {
   ];
 
   return isBusy ? (
-    <React.Fragment>
-      <div>{options[numProv].label} </div>
-    </React.Fragment>
+    <div>
+      <div>{options[numProvince].label} </div>
+    </div>
   ) : (
     <div></div>
   );

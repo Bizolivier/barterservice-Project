@@ -2,6 +2,9 @@
   height: 100px;
   background: linear-gradient(to left, #696969, #d3d3d3);
 }
+.score {
+  background: linear-gradient(to left, #696969, #d3d3d3);
+}
 .bloc {
   height: 1000px;
   border-radius: 10px;
