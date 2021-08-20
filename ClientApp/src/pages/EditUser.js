@@ -30,7 +30,7 @@ export default () => {
   }, []);
 
   function changeProvinceValue(newValue) {
-    setSelectedProvinceValue(newValue);
+    setSelectedProvinceValue(newValue.value);
   }
   function changeSexeValue(newValue) {
     setSelectedSexeValue(newValue);

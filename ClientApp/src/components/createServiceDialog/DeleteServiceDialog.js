@@ -14,18 +14,22 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DeleteServiceDialog({ serviceId, title }) {
+export default function DeleteServiceDialog({
+  serviceId,
+  title,
+  setOffered,
+  setRequested
+}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
-  }; 
-  
-  const handleDelete = ()=>{
-      servicesService.deleteService(serviceId);
-      setOpen(false);
+  };
 
-  }
+  const handleDelete = () => {
+    servicesService.deleteService(serviceId);
+    setOpen(false);
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -48,9 +52,7 @@ export default function DeleteServiceDialog({ serviceId, title }) {
           {"Etes vous sûre de vouloir supprimer le  service suivant ?"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            <div className="text-center">{title}</div>
-          </DialogContentText>
+          <p className="text-center">{title}</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

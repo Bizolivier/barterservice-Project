@@ -113,7 +113,7 @@ const UserProfil = () => {
                 <div className="extra content float-right ">
                   <Link
                     className="btn btn-link text-decoration-none fs-6 "
-                    to="/"
+                    to="/Chatbox"
                   >
                     Me contacter
                   </Link>

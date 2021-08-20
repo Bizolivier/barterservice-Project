@@ -9,6 +9,7 @@ import axios from "axios";
 import * as offerService from "../services/Offer.Service.js";
 import * as userService from "../services/User.service.js";
 import * as categoryService from "../services/Category.Service.js";
+import SearchBar from "../components/searchbar/SearchBar.js";
 import "./OfferList.css";
 
 const OfferList = () => {
@@ -65,6 +66,10 @@ const OfferList = () => {
 
   return (
     <div>
+      <SearchBar />
+      <h2 className="text-center text-white fw-bolder fst-italic my-5 shadow-lg">
+        Offres services disponibles
+      </h2>
       <div className="">{rendedListOffers}</div>
 
       <div className="">

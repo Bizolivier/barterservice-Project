@@ -43,21 +43,13 @@ export default () => {
     setBusy(false);
   }, []);
 
-  function refreshOffer(newValue) {
-    setOffered(newValue);
-  }
-
-  function refreshRequest(newValue) {
-    setRequested(newValue);
-  }
-
   return (
     <div className=" bloc ui segment w-75  bg-white position-relative ">
       {isBusy ? (
         <div> </div>
       ) : (
         <div className="upper-container bg-success ">
-          <div className="image-container text-left pb-5 ">
+          <div className="image-container text-left w-20 ">
             <img
               className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               src={user.picture}
@@ -69,13 +61,13 @@ export default () => {
               <h3 className="text-left px-2">{userNickname}</h3>
 
               <div className=" d-inline-flex">
-                <i className="map marker alternate icon"></i>
+                <i className="map marker alternate icon text-primary"></i>
                 <ProvinceConversion numProvince={userDataProvince} />
               </div>
-              <div className="score rounded-circle bg-light py-5 text-center vw-10 vh-10">
+              <div className="score ui segment bg-dark py-5 text-center text-white  my-5">
                 <p className="fst-italic">Vous disposez de </p>
-                <h2 className="text-success">{timeC} </h2>
-                <p className="fst-italic">time-credits </p>
+                <h2 className="text-success fw-bolder">{timeC} </h2>
+                <p className="fst-italic">Time-credits </p>
               </div>
             </div>
             <div className="col-md-4 recherche  ">
@@ -84,17 +76,22 @@ export default () => {
                 isRequest={true}
                 email={user.email}
                 offerId={offer.offerId}
-                refreshOffer={refreshOffer}
-                refreshRequest={refreshRequest}
+                setOffered={setOffered}
+                setRequested={setRequested}
               />
 
               <ul>
                 {resquested.map(item => (
-                  <li className="d-inline-flex" key={item.serviceId}>
+                  <li
+                    className="d-inline-flex text-capitalize"
+                    key={item.serviceId}
+                  >
                     {item.title}{" "}
                     <DeleteServiceDialog
                       serviceId={item.serviceId}
                       title={item.title}
+                      setOffered={setOffered}
+                      setRequested={setRequested}
                     />
                   </li>
                 ))}
@@ -106,16 +103,21 @@ export default () => {
                 isRequest={false}
                 email={user.email}
                 offerId={offer.offerId}
-                refreshOffer={refreshOffer}
-                refreshRequest={refreshRequest}
+                setOffered={setOffered}
+                setRequested={setRequested}
               />
               <ul>
                 {offered.map(item => (
-                  <li className="d-inline-flex" key={item.serviceId}>
+                  <li
+                    className="d-inline-flex text-capitalize"
+                    key={item.serviceId}
+                  >
                     {item.title}{" "}
                     <DeleteServiceDialog
                       serviceId={item.serviceId}
                       title={item.title}
+                      setOffered={setOffered}
+                      setRequested={setRequested}
                     />
                   </li>
                 ))}

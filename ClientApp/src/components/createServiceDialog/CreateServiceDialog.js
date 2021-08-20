@@ -31,8 +31,8 @@ export default function CreateServiceDialog({
   isRequest,
   email,
   offerId,
-  refreshOffer,
-  refreshRequest
+  setOffered,
+  setRequested
 }) {
   const classes = useStyles();
   const [categories, setCategories] = useState([]);
@@ -55,17 +55,17 @@ export default function CreateServiceDialog({
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleAdd = () => {
     servicesService.addService(titleService, catsel, offerId, isRequest);
-    console.log(titleService, catsel, offerId);
     setOpen(false);
     if (isRequest) {
       servicesService.getRequestedSevices(email).then(listServicesRequest => {
-        refreshRequest(listServicesRequest);
+        setRequested(listServicesRequest);
       });
     } else {
       servicesService.getOfferedSevices(email).then(listServicesOffered => {
-        refreshOffer(listServicesOffered);
+        setOffered(listServicesOffered);
       });
     }
   };

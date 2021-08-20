@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import unknown from "../images/unknown.jpg";
 import * as userService from "../services/User.service.js";
 import * as serviceService from "../services/Services.Service.js";
+import { useAuth0 } from "@auth0/auth0-react";
 import ProvinceConversion from "../components/conversion/ProvinceConversion";
 
 const Offer = ({ offer }) => {
+  const { user, isAuthenticated } = useAuth0();
   const [authorNickname, setAuthorNickname] = useState();
   const [authorProvince, setAuthorProvince] = useState();
   const [authorEmail, setAuthorEmail] = useState();
@@ -61,7 +63,11 @@ const Offer = ({ offer }) => {
               <div className="col-xxl-2  mb-5 mt-5 mx-2 w-99">
                 <div className="bg-white rounded shadow-sm py-5 px-4  ">
                   <img
-                    src={unknown}
+                    src={
+                      isAuthenticated && authorEmail === user.email
+                        ? user.picture
+                        : unknown
+                    }
                     alt=""
                     width="100"
                     className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
@@ -69,10 +75,10 @@ const Offer = ({ offer }) => {
                   <h5 className="mb-1">{authorNickname}</h5>
 
                   <span className="small text-uppercase text-muted d-inline-flex">
-                    <i className="map marker alternate icon"></i>
+                    <i className="map marker alternate icon "></i>
                     <ProvinceConversion numProvince={authorProvince} />
                   </span>
-                  <h6 className=" fst-italic my-3">je propose :</h6>
+                  <h6 className=" fst-italic my-3 ">je propose :</h6>
                   <ul>
                     {offered.map(item => (
                       <li className="fs-6" key={item.serviceId}>

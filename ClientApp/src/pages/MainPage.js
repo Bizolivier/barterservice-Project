@@ -17,21 +17,18 @@ export default () => {
       console.log(response);
     });
   } else {
-    message = "Bonjour et Bienvenu en Enfer !!!";
+    message = `Welcome on BarterSer the place to be. 
+              `;
   }
 
   return isAuthenticated ? (
     <div>
-     
-      <img src={user.picture} alt={user.name} />
-      <h1>{message} !!!</h1>
+      <img className="my-5 rounded-circle" src={user.picture} alt={user.name} />
+      <h1 className=" text-white text-center my-5 shadow-lg ">{message} !!!</h1>
     </div>
   ) : (
     <div>
-    
-       
-       
-      <h1>{message} !!!</h1>
+      <h1 className=" text-white text-center my-5 shadow-lg">{message} !!!</h1>
     </div>
   );
 };

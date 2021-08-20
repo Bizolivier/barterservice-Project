@@ -25,20 +25,21 @@ namespace backend.Controllers {
         }
 
           [HttpPost]        
-         public async Task<ActionResult<ServiceDTO>> PostService(ServiceDTO data) {
+      public async Task<ActionResult<ServiceDTO>> PostService(ServiceDTO data) {
        Offer offer = await _context.Offers.FindAsync(data.OfferLinkedtoServiceId);
-        var newService = new Service() {
-            Title= data.Title,
-            OfferLinkedtoServiceId = data.OfferLinkedtoServiceId,
-            CategoryLinkToId = data.CategoryLinkToId,
-            IsRecherche = data.IsRecherche
-           
-           };
+       Category category =await _context.Categories.FindAsync(data.CategoryLinkToId); 
+
+              var newService = new Service() {
+                Title= data.Title,
+                OfferLinkedtoServiceId = data.OfferLinkedtoServiceId,
+                CategoryLinkToId = data.CategoryLinkToId,
+                IsRecherche = data.IsRecherche
+              
+              };
           
            _context.Services.Add(newService);
-            offer.ServicesLinkedToOffer.Add(newService);
-         
-
+          offer.ServicesLinkedToOffer.Add(newService);
+          category.CategorysServices.Add(newService);
            var res = await _context.SaveChangesAsyncWithValidation();
              if (!res.IsEmpty) 
              return BadRequest(res);
@@ -79,22 +80,22 @@ namespace backend.Controllers {
           var service = await _context.Services.FindAsync(serviceId);
            if (service == null)
               return NotFound(); 
+
           var offer = await _context.Offers.FindAsync(service.OfferLinkedtoServiceId);
            if (offer == null)
-              return NotFound(); 
+              return NotFound();
+
           var category =await _context.Categories.FindAsync(service.CategoryLinkToId); 
            if (category == null)
               return NotFound(); 
 
-          category.CategorysServices.Remove(service);
+          category.CategorysServices.Remove(service);           
+
           offer.ServicesLinkedToOffer.Remove(service);
+
           _context.Services.Remove(service);
           
           
-             await _context.SaveChangesAsync();
-
-             _context.Offers.Update(offer);
-
                 var res = await _context.SaveChangesAsyncWithValidation();
                 if (!res.IsEmpty)
                     return BadRequest(res);

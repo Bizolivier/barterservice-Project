@@ -18,14 +18,12 @@ export default({selectedOption,selectedProvinceValue,changeProvinceValue})=>{
   ];
 
 
-  const handleChange = e => {changeProvinceValue(e.value);}
+  const handleChange = e => {changeProvinceValue(e);}
 
  
    
    return( 
  
-
-
   <Select
          
       value={options.find(obj => obj.value === selectedProvinceValue)}
