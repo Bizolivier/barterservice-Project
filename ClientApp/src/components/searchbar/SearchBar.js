@@ -14,7 +14,7 @@ const SearchBar = () => {
 
   return (
     <React.Fragment>
-      <div className="d-inline-flex my-5 w-100">
+      <div className=" d-inline-flex  text-center my-5 h-20 w-100 shadow-lg rounded">
         <div className="w-25">
           <ProvinceSelection
             selectedOption={userProvince}

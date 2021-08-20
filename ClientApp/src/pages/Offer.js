@@ -61,7 +61,7 @@ const Offer = ({ offer }) => {
           <div className="container">
             <div className="row text-center">
               <div className="col-xxl-2  mb-5 mt-5 mx-2 w-99">
-                <div className="bg-white rounded shadow-sm py-5 px-4  ">
+                <div className=" bg-white rounded shadow-sm py-5 px-4  ">
                   <img
                     src={
                       isAuthenticated && authorEmail === user.email

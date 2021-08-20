@@ -17,8 +17,7 @@ export default () => {
       console.log(response);
     });
   } else {
-    message = `Welcome on BarterSer the place to be. 
-              `;
+    message = `Welcome on BarterSer the place to be`;
   }
 
   return isAuthenticated ? (
