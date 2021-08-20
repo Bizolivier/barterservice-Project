@@ -81,7 +81,7 @@ const Offer = ({ offer }) => {
                   <h6 className=" fst-italic my-3 ">je propose :</h6>
                   <ul>
                     {offered.map(item => (
-                      <li className="fs-6" key={item.serviceId}>
+                      <li className="fs-6 text-capitalize" key={item.serviceId}>
                         {item.title}
                       </li>
                     ))}
@@ -89,7 +89,7 @@ const Offer = ({ offer }) => {
                   <h6 className=" fst-italic my-3">je recherche :</h6>
                   <ul>
                     {resquested.map(item => (
-                      <li className="fs-6" key={item.serviceId}>
+                      <li className="fs-6 text-capitalize" key={item.serviceId}>
                         {item.title}
                       </li>
                     ))}

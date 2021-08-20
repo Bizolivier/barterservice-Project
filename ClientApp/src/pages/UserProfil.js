@@ -12,7 +12,8 @@ import unknown from "../images/unknown.jpg";
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
   const [isBusy, setBusy] = useState(true);
-  const [user, setUser] = useState([]);
+  const [userNickname, setUserNickname] = useState("");
+  const [userProvince, setUserProvince] = useState(0);
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
 
@@ -23,8 +24,9 @@ const UserProfil = () => {
     offerService.GetOfferByEmail(email).then(offer => {
       setOffer(offer);
 
-      userService.GetOneByEmail(email).then(loggedUser => {
-        setUser(loggedUser);
+      userService.GetOneByEmail(email).then(res => {
+        setUserNickname(res.nickname);
+        setUserProvince(res.province);
       });
       serviceService.getRequestedSevices(email).then(listServicesRequest => {
         setRequested(listServicesRequest);
@@ -33,7 +35,7 @@ const UserProfil = () => {
         setOffered(listServicesOffered);
       });
 
-      console.log(user.nickname);
+      console.log(userProvince);
       console.log(offer.authorId);
     });
     setBusy(false);
@@ -65,15 +67,14 @@ const UserProfil = () => {
 
                       {/*autor */}
 
-                      <div className="header flex-row ">{user.nickname}</div>
+                      <div className="header flex-row ">{userNickname}</div>
                     </div>
                     {/* adress*/}
 
                     <div className="meta flex-row">
                       <span className="small text-uppercase text-muted d-inline-flex">
                         <i className="map marker alternate icon"></i>
-                        <ProvinceConversion numProvince={user.province} />
-                        {user.province}
+                        <ProvinceConversion numProvince={userProvince} />
                       </span>
                     </div>
                   </div>
@@ -88,7 +89,10 @@ const UserProfil = () => {
                       <h6 className="fst-italic text-primary">Je propose : </h6>
                       <ul>
                         {offered.map(item => (
-                          <li className="fs-6" key={item.serviceId}>
+                          <li
+                            className="fs-6 text-capitalize"
+                            key={item.serviceId}
+                          >
                             {item.title}
                           </li>
                         ))}
@@ -101,7 +105,10 @@ const UserProfil = () => {
                       </h6>
                       <ul>
                         {resquested.map(item => (
-                          <li className="fs-6" key={item.serviceId}>
+                          <li
+                            className="fs-6 text-capitalize"
+                            key={item.serviceId}
+                          >
                             {item.title}
                           </li>
                         ))}
