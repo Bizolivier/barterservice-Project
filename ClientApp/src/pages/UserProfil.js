@@ -7,11 +7,15 @@ import * as offerService from "../services/Offer.Service.js";
 import * as userService from "../services/User.service.js";
 import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
 import * as serviceService from "../services/Services.Service.js";
+import { useAuth0, User } from "@auth0/auth0-react";
 import unknown from "../images/unknown.jpg";
+import "./UserProfil.css";
 
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
+  const { user, isAuthenticated } = useAuth0();
   const [isBusy, setBusy] = useState(true);
+  const [authorEmail, setAuthorEmail] = useState();
   const [userNickname, setUserNickname] = useState("");
   const [userProvince, setUserProvince] = useState(0);
   const [resquested, setRequested] = useState([]);
@@ -27,6 +31,7 @@ const UserProfil = () => {
       userService.GetOneByEmail(email).then(res => {
         setUserNickname(res.nickname);
         setUserProvince(res.province);
+        setAuthorEmail(res.email);
       });
       serviceService.getRequestedSevices(email).then(listServicesRequest => {
         setRequested(listServicesRequest);
@@ -48,8 +53,8 @@ const UserProfil = () => {
           {isBusy ? (
             <div> </div>
           ) : (
-            <div className="ui cards h-100 mb-3  ">
-              <div className="card w-100  flex-row  px-3 py-3">
+            <div className=" ui cards h-100 mb-3   ">
+              <div className=" card w-100  flex-row  px-3 py-3 ">
                 <div className="user mx-5">
                   {/*image*/}
                   <div className="content">
@@ -57,7 +62,11 @@ const UserProfil = () => {
                       <div className="d-inline-flex">
                         <div className="left floated mini ui image">
                           <img
-                            src={unknown}
+                            src={
+                              isAuthenticated && authorEmail === user.email
+                                ? user.picture
+                                : unknown
+                            }
                             alt="{offer.author}"
                             width="100"
                             className=" rounded-circle border border-primary"

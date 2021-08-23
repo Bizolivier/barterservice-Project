@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace backend.Models {
     public class BarterContext : DbContext {
@@ -62,7 +63,8 @@ namespace backend.Models {
                 new Offer() { OfferId =5,AuthorId =5  },
                 new Offer() { OfferId =6,AuthorId =6  },
                 new Offer() { OfferId =7,AuthorId =7  },
-                new Offer() { OfferId =8,AuthorId =8  }
+                new Offer() { OfferId =8,AuthorId =8  },
+                new Offer() { OfferId =9,AuthorId =9  }
 
             );
         }

@@ -169,6 +169,11 @@ namespace barterserv.Migrations
                         {
                             OfferId = 8,
                             AuthorId = 8
+                        },
+                        new
+                        {
+                            OfferId = 9,
+                            AuthorId = 9
                         });
                 });
 

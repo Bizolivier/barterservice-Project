@@ -20,7 +20,7 @@ export default ({
   }, []);
 
   const handleChange = e => {
-    changeCategoryValue(e);
+    changeCategoryValue(e.value);
   };
 
   return (

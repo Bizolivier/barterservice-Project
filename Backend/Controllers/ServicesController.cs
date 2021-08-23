@@ -36,7 +36,9 @@ namespace backend.Controllers {
                 IsRecherche = data.IsRecherche
               
               };
-          
+          Console.WriteLine(offer);
+          Console.WriteLine(offer.ServicesLinkedToOffer);
+
            _context.Services.Add(newService);
           offer.ServicesLinkedToOffer.Add(newService);
           category.CategorysServices.Add(newService);
