@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
 import ProvinceSelection from "../selection/ProvinceSelection";
 import CategorySelection from "../selection/CategorySelection";
+import Offer from "../../pages/Offer.js";
 import * as offerService from "../../services/Offer.Service.js";
 
-const SearchBar = () => {
-  const [selectedProvinceValue, setSelectedProvinceValue] = useState(0);
+const SearchBar = ({ setSearchList }) => {
+  const [selectedProvinceValue, setSelectedProvinceValue] = useState(-1);
   const [userProvince, setUserProvince] = useState(0);
   const [selectedCategoryValue, setSelectedCategoryValue] = useState(0);
   const [userCategory, setUserCategory] = useState(0);
-  const [searchList, setSearchList] = useState([]);
 
-  const search = () => {
-    console.log(selectedProvinceValue, selectedCategoryValue);
-    offerService
-      .GetOffersBySearch(selectedProvinceValue, selectedCategoryValue)
-      .then(listOffers => {
-        setSearchList(listOffers);
-      });
+  useEffect(() => {
+    offerService.getAll().then(response => {
+      setSearchList(response);
+    });
+  }, []);
+
+  const search = async () => {
+    const listOffers = await offerService.GetOffersBySearch(
+      selectedProvinceValue,
+      selectedCategoryValue
+    );
+    setSearchList(listOffers);
   };
 
   return (
@@ -27,6 +32,7 @@ const SearchBar = () => {
             selectedOption={userProvince}
             selectedProvinceValue={selectedProvinceValue}
             changeProvinceValue={e => setSelectedProvinceValue(e.value)}
+            allProvinces={true}
           />
         </div>
         <div className="mx-4 w-25 ">

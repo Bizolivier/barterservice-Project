@@ -102,6 +102,7 @@ export default () => {
                       selectedOption={userProvince}
                       selectedProvinceValue={selectedProvinceValue}
                       changeProvinceValue={changeProvinceValue}
+                      allProvinces={false}
                     />
                   </div>
                 </div>

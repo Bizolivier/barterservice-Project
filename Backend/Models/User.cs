@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace backend.Models {
 
         public enum Sexe {
-        Male = 1, Female = 0
+         Female = 0, Male = 1, Autre=2
        }
        public enum Role {
          Admin = 1,User =0

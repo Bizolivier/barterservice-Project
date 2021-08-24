@@ -16,13 +16,15 @@ const OfferList = () => {
   const [selected, onOfferSelected] = useState([]);
   const [offerz, setOfferz] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [busy, setBusy] = useState(false);
+  const [searchList, setSearchList] = useState([]);
 
-  useEffect(() => {
-    offerService.getAll().then(response => {
-      setOfferz(response);
-      console.log(response);
-    });
-  }, []);
+  // useEffect(() => {
+  //   offerService.getAll().then(response => {
+  //     setOfferz(response);
+
+  //   });
+  // }, []);
 
   useEffect(() => {
     categoryService.getAllCategories().then(response => {
@@ -31,7 +33,7 @@ const OfferList = () => {
     });
   }, []);
 
-  const rendedListOffers = offerz.map(offer => {
+  const rendedListOffers = searchList.map(offer => {
     return (
       <React.Fragment key={offer.offerId}>
         <div className="d-inline-flex">
@@ -41,7 +43,7 @@ const OfferList = () => {
     );
   });
 
-  const rendedOffers = offerz.map(offa => {
+  const rendedOffers = searchList.map(offa => {
     return (
       <React.Fragment key={offa.offerId}>
         <div>
@@ -66,12 +68,17 @@ const OfferList = () => {
 
   return (
     <div>
-      <SearchBar />
-      <h2 className="text-center text-white fw-bolder fst-italic my-5 shadow-lg">
-        Offres services disponibles
-      </h2>
-      <div className="">{rendedListOffers}</div>
-
+      <SearchBar setSearchList={setSearchList} />
+      {busy ? (
+        <div> </div>
+      ) : (
+        <div>
+          <h2 className="text-center text-white fw-bolder fst-italic my-5 shadow-lg">
+            Offres services disponibles
+          </h2>
+          <div className="">{rendedListOffers}</div>
+        </div>
+      )}
       <div className="">
         <div className="ui five column grid">{rendedListCategories}</div>
       </div>

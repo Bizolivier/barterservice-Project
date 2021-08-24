@@ -16,4 +16,5 @@ export async function GetOffersBySearch(provinceNum, categoryId) {
   const response = await axios.get(
     `${httpBase}/GetOffersBySearch/${provinceNum}/${categoryId}`
   );
+  return response.data;
 }
