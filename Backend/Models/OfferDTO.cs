@@ -9,7 +9,6 @@ namespace backend.Models {
         public int OfferId {get;set;}
         public int AuthorId {get;set;}
         public IEnumerable <ServiceDTO> ServicesLinkedToOffer { get; set; }  
-        public IEnumerable<MessageDTO> AllCommunications { get; set; } 
 
     }
 }

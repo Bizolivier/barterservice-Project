@@ -54,8 +54,9 @@ namespace backend.Models {
 
         public Role Role {get;set;} = Role.User;
         
+        public  virtual IList <Chat> ChatLinkedToUser1 {get;set;} = new List<Chat>();
 
-
+        public  virtual IList <Chat> ChatLinkedToUser2 {get;set;} = new List<Chat>();
 
 
      public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {

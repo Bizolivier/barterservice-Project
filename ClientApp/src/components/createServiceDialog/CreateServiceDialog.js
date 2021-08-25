@@ -56,17 +56,19 @@ export default function CreateServiceDialog({
     setOpen(false);
   };
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     servicesService.addService(titleService, catsel, offerId, isRequest);
     setOpen(false);
     if (isRequest) {
-      servicesService.getRequestedSevices(email).then(listServicesRequest => {
-        setRequested(listServicesRequest);
-      });
+      const listServicesRequest = await servicesService.getRequestedSevices(
+        email
+      );
+      setRequested(listServicesRequest);
     } else {
-      servicesService.getOfferedSevices(email).then(listServicesOffered => {
-        setOffered(listServicesOffered);
-      });
+      const listServicesOffered = await servicesService.getOfferedSevices(
+        email
+      );
+      setOffered(listServicesOffered);
     }
   };
 

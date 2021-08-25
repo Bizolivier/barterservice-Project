@@ -84,10 +84,34 @@ namespace barterserv.Migrations
                         });
                 });
 
+            modelBuilder.Entity("backend.Models.Chat", b =>
+                {
+                    b.Property<int>("ChatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId2")
+                        .HasColumnType("int");
+
+                    b.HasKey("ChatId");
+
+                    b.HasIndex("UserId1");
+
+                    b.HasIndex("UserId2");
+
+                    b.ToTable("Chats");
+                });
+
             modelBuilder.Entity("backend.Models.Message", b =>
                 {
                     b.Property<int>("MsgId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChatId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -98,17 +122,9 @@ namespace barterserv.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("OfferLinkedToId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
-
                     b.HasKey("MsgId");
 
-                    b.HasIndex("OfferLinkedToId");
-
-                    b.HasIndex("SenderId");
+                    b.HasIndex("ChatId");
 
                     b.ToTable("Messages");
                 });
@@ -404,17 +420,26 @@ namespace barterserv.Migrations
                         });
                 });
 
-            modelBuilder.Entity("backend.Models.Message", b =>
+            modelBuilder.Entity("backend.Models.Chat", b =>
                 {
-                    b.HasOne("backend.Models.Offer", "OfferLinkedTo")
-                        .WithMany("AllCommunications")
-                        .HasForeignKey("OfferLinkedToId")
+                    b.HasOne("backend.Models.User", "user1")
+                        .WithMany("ChatLinkedToUser1")
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("backend.Models.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
+                    b.HasOne("backend.Models.User", "user2")
+                        .WithMany("ChatLinkedToUser2")
+                        .HasForeignKey("UserId2")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("backend.Models.Message", b =>
+                {
+                    b.HasOne("backend.Models.Chat", "chat")
+                        .WithMany("MessageLinkedToChat")
+                        .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

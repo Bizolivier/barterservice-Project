@@ -41,6 +41,32 @@ namespace barterserv.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Chats",
+                columns: table => new
+                {
+                    ChatId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId1 = table.Column<int>(nullable: false),
+                    UserId2 = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chats", x => x.ChatId);
+                    table.ForeignKey(
+                        name: "FK_Chats_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Chats_Users_UserId2",
+                        column: x => x.UserId2,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Offers",
                 columns: table => new
                 {
@@ -66,24 +92,17 @@ namespace barterserv.Migrations
                     MsgId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(maxLength: 140, nullable: false),
-                    SenderId = table.Column<int>(nullable: false),
-                    OfferLinkedToId = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false),
+                    ChatId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Messages", x => x.MsgId);
                     table.ForeignKey(
-                        name: "FK_Messages_Offers_OfferLinkedToId",
-                        column: x => x.OfferLinkedToId,
-                        principalTable: "Offers",
-                        principalColumn: "OfferId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Messages_Users_SenderId",
-                        column: x => x.SenderId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        name: "FK_Messages_Chats_ChatId",
+                        column: x => x.ChatId,
+                        principalTable: "Chats",
+                        principalColumn: "ChatId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -179,14 +198,19 @@ namespace barterserv.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_OfferLinkedToId",
-                table: "Messages",
-                column: "OfferLinkedToId");
+                name: "IX_Chats_UserId1",
+                table: "Chats",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_SenderId",
+                name: "IX_Chats_UserId2",
+                table: "Chats",
+                column: "UserId2");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_ChatId",
                 table: "Messages",
-                column: "SenderId");
+                column: "ChatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Offers_AuthorId",
@@ -218,6 +242,9 @@ namespace barterserv.Migrations
 
             migrationBuilder.DropTable(
                 name: "Services");
+
+            migrationBuilder.DropTable(
+                name: "Chats");
 
             migrationBuilder.DropTable(
                 name: "Categories");

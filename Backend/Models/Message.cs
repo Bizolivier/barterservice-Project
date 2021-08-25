@@ -14,27 +14,16 @@ namespace backend.Models {
         DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MsgId { get; set; }
 
-
-        [
-        Required(ErrorMessage = "Required"),
+        [Required(ErrorMessage = "Required"),
         MinLength(3, ErrorMessage = "Minimum 3 characters"),
         MaxLength(140, ErrorMessage = "Maximum 140 characters")]
         public string Content{ get; set; }
 
-        [Required]
-        public virtual User Sender {get;set;}
-
-        [Required]
-        public int SenderId {get;set;}
-
-        [Required]
-        public virtual Offer OfferLinkedTo {get;set;}
-        
-        [Required]
-        public int  OfferLinkedToId {get;set;}
-
         public DateTime Date {get;set;}
 
-        
+        public virtual Chat chat {get;set;}
+
+        public int ChatId { get; set; }
+      
     }
 }

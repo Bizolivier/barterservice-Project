@@ -21,15 +21,12 @@ const Offer = ({ offer }) => {
       setAuthorNickname(res.nickname);
       setAuthorProvince(res.province);
       setAuthorEmail(res.email);
-      console.log(authorNickname);
-      console.log(authorEmail);
 
       setBusy(false);
     });
   }, []);
 
   useEffect(() => {
-    console.log(authorEmail);
     const allServ = () => {
       serviceService
         .getRequestedSevices(authorEmail)

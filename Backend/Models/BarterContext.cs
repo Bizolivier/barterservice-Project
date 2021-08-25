@@ -12,6 +12,7 @@ namespace backend.Models {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet <Offer> Offers {get;set;}
+        public DbSet <Chat> Chats {get;set;}
      
 
         // public DbSet<Comment> Comments { get; set; }
@@ -33,6 +34,26 @@ namespace backend.Models {
                  .HasIndex(u => u.Email)
                  .IsUnique();
 
+            modelBuilder.Entity<Chat>(entity =>{
+                     entity.HasOne(chat => chat.user1)
+                           .WithMany(user => user.ChatLinkedToUser1)
+                           .HasForeignKey(chat => chat.UserId1);
+
+                    entity.HasOne(chat => chat.user2)
+                           .WithMany(user => user.ChatLinkedToUser2)
+                           .HasForeignKey(chat => chat.UserId2);
+            });
+
+            modelBuilder.Entity<User>(entity =>{
+                     entity.HasMany(user => user.ChatLinkedToUser1)
+                           .WithOne(chat => chat.user1)
+                           .HasForeignKey(chat => chat.UserId1);
+
+                     entity.HasMany(user => user.ChatLinkedToUser2)
+                           .WithOne(chat => chat.user2)
+                           .HasForeignKey(chat => chat.UserId2);
+            });
+            
             
          }
 

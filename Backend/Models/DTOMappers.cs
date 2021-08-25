@@ -32,10 +32,8 @@ namespace backend.Models {
             return new OfferDTO {
                 OfferId = offer.OfferId,
                 AuthorId= offer.AuthorId,
-                ServicesLinkedToOffer =offer.ServicesLinkedToOffer.ToDTO(),
-                AllCommunications = offer.AllCommunications.ToDTO()
+                ServicesLinkedToOffer =offer.ServicesLinkedToOffer.ToDTO()
                 
-
             };
 
         }
@@ -60,16 +58,12 @@ namespace backend.Models {
             return services.Select(o => o.ToDTO()).ToList();
         }
 
-
-
         public static MessageDTO ToDTO(this Message message){
             return new MessageDTO  {
                 MsgId = message.MsgId,
                 Content = message.Content,
-                SenderId = message.SenderId,
-                OfferLinkedToId = message.OfferLinkedToId,
-                Date = message.Date
-            
+                ChatId = message.ChatId,
+                Date = message.Date           
           
             };
 
@@ -86,6 +80,17 @@ namespace backend.Models {
         }
          public static List<CategoryDTO > ToDTO(this IEnumerable<Category > categories ) {
             return categories.Select(c => c.ToDTO()).ToList();
+        }
+
+         public static ChatDTO ToDTO(this Chat chat){
+             return new ChatDTO{
+                ChatId = chat.ChatId,
+                UserId1 = chat.UserId1,
+                UserId2 = chat.UserId2,
+                MessageLinkedToChat = chat.MessageLinkedToChat.ToDTO()};
+        }
+         public static List<ChatDTO > ToDTO(this IEnumerable<Chat > chats ) {
+            return chats.Select(o => o.ToDTO()).ToList();
         }
 
         

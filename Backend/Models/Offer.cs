@@ -23,7 +23,6 @@ namespace backend.Models {
        
         public  virtual IList <Service> ServicesLinkedToOffer {get;set;} = new List<Service>();
         
-        public virtual IList<Message> AllCommunications  {get;set;} = new List <Message>();
 
 
     }
