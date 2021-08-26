@@ -26,7 +26,7 @@ const SearchBar = ({ setSearchList }) => {
 
   return (
     <React.Fragment>
-      <div className=" d-inline-flex  text-center my-5 h-20 w-100 shadow-lg rounded">
+      <div className=" d-inline-flex  text-center my-2 h-20 w-100 shadow-lg rounded">
         <div className="w-25">
           <ProvinceSelection
             selectedOption={userProvince}

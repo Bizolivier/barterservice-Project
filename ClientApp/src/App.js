@@ -9,7 +9,6 @@ import MyServices from "./pages/MyServices.js";
 import UserProfil from "./pages/UserProfil";
 import EditUser from "./pages/EditUser";
 import Chatbox from "./pages/Chatbox";
-import AuthenticationButton from "./components/login/AuthenticationButton";
 import ProtectedRoute from "./auth/protected-route";
 
 import "./custom.css";

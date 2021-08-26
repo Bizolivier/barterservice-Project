@@ -2,6 +2,7 @@ import React from "react";
 import * as userService from "../services/User.service.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
+import Chat from "../components/chat/Chat.js";
 
 import "./MainPage.css";
 

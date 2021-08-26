@@ -30,10 +30,14 @@ export default () => {
               </NavLink>
             </NavItem>
             <NavItem>
-            {isAuthenticated ? (
-              <NavLink tag={Link} className="text-white px-3 " to="/Dashboard">
-                Dashboard
-              </NavLink>
+              {isAuthenticated ? (
+                <NavLink
+                  tag={Link}
+                  className="text-white px-3 "
+                  to="/Dashboard"
+                >
+                  Dashboard
+                </NavLink>
               ) : (
                 <div />
               )}
@@ -57,6 +61,15 @@ export default () => {
               {isAuthenticated ? (
                 <NavLink tag={Link} className="text-white px-3 " to="/EditUser">
                   Profil
+                </NavLink>
+              ) : (
+                <div />
+              )}
+            </NavItem>
+            <NavItem>
+              {isAuthenticated ? (
+                <NavLink tag={Link} className="text-white px-3 " to="/Chatbox">
+                  Chatbox
                 </NavLink>
               ) : (
                 <div />

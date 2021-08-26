@@ -1,9 +1,9 @@
-.socle {
+/*socle {
   background: #e8cbc0;
   background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
   background: linear-gradient(to right, #e8cbc0, #636fa4);
   min-height: 100vh;
-}
+}*/
 /*
 *
 * ==========================================
@@ -11,15 +11,14 @@
 * ==========================================
 *
 */
-body {
+/* body {
   background: #e8cbc0;
- /* background-image: url("../images/bkg-image.jpg");*/
-  background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
+  /* background-image: url("../images/bkg-image.jpg");*/
+/* background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
   background: linear-gradient(to right, #e8cbc0, #636fa4);
   min-height: 100vh;
-}
-
-.social-link {
+} */
+* .social-link {
   width: 30px;
   height: 30px;
   border: 1px solid #ddd;

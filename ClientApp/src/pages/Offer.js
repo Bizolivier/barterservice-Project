@@ -5,6 +5,8 @@ import * as userService from "../services/User.service.js";
 import * as serviceService from "../services/Services.Service.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProvinceConversion from "../components/conversion/ProvinceConversion";
+import AddIcon from "@material-ui/icons/Add";
+import { IconButton } from "@material-ui/core";
 
 const Offer = ({ offer }) => {
   const { user, isAuthenticated } = useAuth0();
@@ -13,7 +15,8 @@ const Offer = ({ offer }) => {
   const [authorEmail, setAuthorEmail] = useState();
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
-
+  const [openPropose, setOpenPropose] = useState(false);
+  const [openRecherche, setOpenRecherche] = useState(false);
   const [isBusy, setBusy] = useState(true);
 
   useEffect(() => {
@@ -49,6 +52,12 @@ const Offer = ({ offer }) => {
     };
   }, [authorEmail]);
 
+  const handleClickOpenPropose = () => {
+    setOpenPropose(!openPropose);
+  };
+  const handleClickOpenRecherche = () => {
+    setOpenRecherche(!openRecherche);
+  };
   return (
     <React.Fragment>
       <div className="">
@@ -75,22 +84,52 @@ const Offer = ({ offer }) => {
                     <i className="map marker alternate icon "></i>
                     <ProvinceConversion numProvince={authorProvince} />
                   </span>
-                  <h6 className=" fst-italic my-3 ">je propose :</h6>
-                  <ul>
-                    {offered.map(item => (
-                      <li className="fs-6 text-capitalize" key={item.serviceId}>
-                        {item.title}
-                      </li>
-                    ))}
-                  </ul>
-                  <h6 className=" fst-italic my-3">je recherche :</h6>
-                  <ul>
-                    {resquested.map(item => (
-                      <li className="fs-6 text-capitalize" key={item.serviceId}>
-                        {item.title}
-                      </li>
-                    ))}
-                  </ul>
+
+                  <h6 className=" fst-italic my-3 ">
+                    je propose :
+                    <IconButton
+                      variant="outlined"
+                      color="primary"
+                      onClick={handleClickOpenPropose}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </h6>
+                  {openPropose && (
+                    <ul>
+                      {offered.map(item => (
+                        <li
+                          className="fs-6 text-capitalize"
+                          key={item.serviceId}
+                        >
+                          {item.title}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  <h6 className=" fst-italic my-3">
+                    je recherche :
+                    <IconButton
+                      variant="outlined"
+                      color="primary"
+                      onClick={handleClickOpenRecherche}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </h6>
+                  {openRecherche && (
+                    <ul>
+                      {resquested.map(item => (
+                        <li
+                          className="fs-6 text-capitalize"
+                          key={item.serviceId}
+                        >
+                          {item.title}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                   <div className="extra content">
                     <Link
                       className="btn btn-link text-decoration-none "

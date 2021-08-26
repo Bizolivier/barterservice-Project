@@ -3,11 +3,11 @@ import * as userService from "../services/User.service.js";
 import * as serviceService from "../services/Services.Service.js";
 import { useAuth0, User } from "@auth0/auth0-react";
 import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
-import CreateServiceDialog from "../components/createServiceDialog/CreateServiceDialog.js";
+import CreateServiceDialog from "../components/Dialogs/CreateServiceDialog.js";
 import * as offerService from "../services/Offer.Service.js";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import "./Dashboard.css";
-import DeleteServiceDialog from "../components/createServiceDialog/DeleteServiceDialog.js";
+import DeleteServiceDialog from "../components/Dialogs/DeleteServiceDialog.js";
 
 export default () => {
   const { user, isAuthenticated } = useAuth0();

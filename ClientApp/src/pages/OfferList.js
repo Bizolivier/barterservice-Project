@@ -43,29 +43,6 @@ const OfferList = () => {
     );
   });
 
-  const rendedOffers = searchList.map(offa => {
-    return (
-      <React.Fragment key={offa.offerId}>
-        <div>
-          {offa.offerId}
-          {offa.ServicesLinkedToOffer}
-        </div>
-      </React.Fragment>
-    );
-  });
-
-  const rendedListCategories = categories.map(category => {
-    return (
-      <React.Fragment key={category.categoryId}>
-        <div>
-          <div className=" column w-35 mx-1 my-2 shadow p-1">
-            <Category key={category.id} category={category} />
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  });
-
   return (
     <div>
       <SearchBar setSearchList={setSearchList} />
@@ -73,19 +50,12 @@ const OfferList = () => {
         <div> </div>
       ) : (
         <div>
-          <h2 className="text-center text-white fw-bolder fst-italic my-5 shadow-lg">
+          <h2 className="text-center text-white fw-bolder fst-italic my-2 shadow-lg">
             Offres services disponibles
           </h2>
           <div className="">{rendedListOffers}</div>
         </div>
       )}
-      <div className="">
-        <div className="ui five column grid">{rendedListCategories}</div>
-      </div>
-
-      <Link className="ui black basic button float-right" to="/">
-        back
-      </Link>
     </div>
   );
 };

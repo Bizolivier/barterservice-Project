@@ -9,7 +9,6 @@ import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
 import * as serviceService from "../services/Services.Service.js";
 import { useAuth0, User } from "@auth0/auth0-react";
 import unknown from "../images/unknown.jpg";
-import "./UserProfil.css";
 
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
