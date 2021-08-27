@@ -67,13 +67,13 @@ export default () => {
               )}
             </NavItem>
             <NavItem>
-              {isAuthenticated ? (
-                <NavLink tag={Link} className="text-white px-3 " to="/Chatbox">
-                  Chatbox
-                </NavLink>
-              ) : (
+              {/* {isAuthenticated ? ( */}
+              <NavLink tag={Link} className="text-white px-3 " to="/Chatbox">
+                Chatbox
+              </NavLink>
+              {/* ) : (
                 <div />
-              )}
+              )} */}
             </NavItem>
 
             <NavItem>

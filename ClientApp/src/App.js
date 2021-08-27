@@ -27,7 +27,7 @@ export default class App extends Component {
           <Route exact path="/MyServices" component={MyServices} />
           <Route path="/profilUser/:email" component={UserProfil} />
           <ProtectedRoute exact path="/EditUser" component={EditUser} />
-          <ProtectedRoute exact path="/Chatbox" component={Chatbox} />
+          <Route exact path="/Chatbox" component={Chatbox} />
         </Layout>
       </React.Fragment>
     );

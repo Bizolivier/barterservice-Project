@@ -12,10 +12,22 @@ export default () => {
   const { user, isAuthenticated } = useAuth0();
 
   if (isAuthenticated) {
-    const { email } = user;
-    message = `Bonjour ${user.name}`;
-    userService.connect(email).then(response => {
-      console.log(response);
+    const { name,email, picture } = user;
+    const newUser = {
+      nickname: name,
+      fullname: name,
+      email: email,
+      picture:picture,
+      province: 0,
+      sexe: 0
+    };
+
+
+    message = `Bonjour ${name}`;
+    userService.connect(newUser).then(response => {
+
+
+
     });
   } else {
     message = `Welcome on BarterSer the place to be`;

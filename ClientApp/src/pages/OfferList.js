@@ -19,17 +19,9 @@ const OfferList = () => {
   const [busy, setBusy] = useState(false);
   const [searchList, setSearchList] = useState([]);
 
-  // useEffect(() => {
-  //   offerService.getAll().then(response => {
-  //     setOfferz(response);
-
-  //   });
-  // }, []);
-
   useEffect(() => {
     categoryService.getAllCategories().then(response => {
       setCategories(response);
-      console.log(response);
     });
   }, []);
 
@@ -45,7 +37,6 @@ const OfferList = () => {
 
   return (
     <div>
-      <SearchBar setSearchList={setSearchList} />
       {busy ? (
         <div> </div>
       ) : (
@@ -53,6 +44,7 @@ const OfferList = () => {
           <h2 className="text-center text-white fw-bolder fst-italic my-2 shadow-lg">
             Offres services disponibles
           </h2>
+          <SearchBar setSearchList={setSearchList} />
           <div className="">{rendedListOffers}</div>
         </div>
       )}

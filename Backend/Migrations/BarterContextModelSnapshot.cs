@@ -299,6 +299,9 @@ namespace barterserv.Migrations
                         .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
                         .HasMaxLength(30);
 
+                    b.Property<string>("Picture")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("Province")
                         .HasColumnType("int");
 
@@ -325,6 +328,7 @@ namespace barterserv.Migrations
                             Email = "ben@gmail.com",
                             Fullname = "Penelle",
                             Nickname = "Ben",
+                            Picture = "vide.png",
                             Province = 3,
                             Role = 0,
                             Sexe = 1,
@@ -336,6 +340,7 @@ namespace barterserv.Migrations
                             Email = "bruno@gmail.com",
                             Fullname = "Lacroix",
                             Nickname = "Bru",
+                            Picture = "vide.png",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -347,6 +352,7 @@ namespace barterserv.Migrations
                             Email = "aela@gmail.com",
                             Fullname = "Izere",
                             Nickname = "Aela",
+                            Picture = "vide.png",
                             Province = 8,
                             Role = 0,
                             Sexe = 0,
@@ -358,6 +364,7 @@ namespace barterserv.Migrations
                             Email = "luis@gmail.com",
                             Fullname = "Save Lara",
                             Nickname = "Luis",
+                            Picture = "vide.png",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -369,6 +376,7 @@ namespace barterserv.Migrations
                             Email = "amin@gmail.com",
                             Fullname = "Gandouz",
                             Nickname = "Amin",
+                            Picture = "vide.png",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -380,6 +388,7 @@ namespace barterserv.Migrations
                             Email = "nico@gmail.com",
                             Fullname = "Krstev",
                             Nickname = "Nico",
+                            Picture = "vide.png",
                             Province = 1,
                             Role = 0,
                             Sexe = 1,
@@ -391,6 +400,7 @@ namespace barterserv.Migrations
                             Email = "momo@gmail.com",
                             Fullname = "Mohammed Assbai",
                             Nickname = "Momo",
+                            Picture = "vide.png",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -402,6 +412,7 @@ namespace barterserv.Migrations
                             Email = "bizidudu@gmail.com",
                             Fullname = "Olivier Bizimungu",
                             Nickname = "L'Olive",
+                            Picture = "vide.png",
                             Province = 8,
                             Role = 0,
                             Sexe = 1,
@@ -413,6 +424,7 @@ namespace barterserv.Migrations
                             Email = "alain@gmail.com",
                             Fullname = "Alain Silovy",
                             Nickname = "Timon",
+                            Picture = "vide.png",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,

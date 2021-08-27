@@ -10,9 +10,7 @@ import { IconButton } from "@material-ui/core";
 
 const Offer = ({ offer }) => {
   const { user, isAuthenticated } = useAuth0();
-  const [authorNickname, setAuthorNickname] = useState();
-  const [authorProvince, setAuthorProvince] = useState();
-  const [authorEmail, setAuthorEmail] = useState();
+  const [author, setAuthor] = useState();
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
   const [openPropose, setOpenPropose] = useState(false);
@@ -20,37 +18,25 @@ const Offer = ({ offer }) => {
   const [isBusy, setBusy] = useState(true);
 
   useEffect(() => {
-    userService.GetOneById(offer.authorId).then(res => {
-      setAuthorNickname(res.nickname);
-      setAuthorProvince(res.province);
-      setAuthorEmail(res.email);
+    // async functions
+    async function fetchData() {
+      const authorRes = await userService.GetOneById(offer.authorId);
+      setAuthor(authorRes);
 
+      const listServicesRequest = await serviceService.getRequestedSevices(
+        authorRes.email
+      );
+      setRequested(listServicesRequest);
+
+      const listServicesOffered = await serviceService.getOfferedSevices(
+        authorRes.email
+      );
+      setOffered(listServicesOffered);
+    }
+    fetchData().then(res => {
       setBusy(false);
     });
   }, []);
-
-  useEffect(() => {
-    const allServ = () => {
-      serviceService
-        .getRequestedSevices(authorEmail)
-        .then(listServicesRequest => {
-          setRequested(listServicesRequest);
-        });
-      serviceService
-        .getOfferedSevices(authorEmail)
-        .then(listServicesOffered => {
-          setOffered(listServicesOffered);
-        });
-    };
-    const timeoutId = setTimeout(() => {
-      if (authorEmail) {
-        allServ();
-      }
-    }, 500);
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [authorEmail]);
 
   const handleClickOpenPropose = () => {
     setOpenPropose(!openPropose);
@@ -70,19 +56,17 @@ const Offer = ({ offer }) => {
                 <div className=" bg-white rounded shadow-sm py-5 px-4  ">
                   <img
                     src={
-                      isAuthenticated && authorEmail === user.email
-                        ? user.picture
-                        : unknown
+                      author.picture != "vide.png" ? author.picture : unknown
                     }
                     alt=""
                     width="100"
                     className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
                   />
-                  <h5 className="mb-1">{authorNickname}</h5>
+                  <h5 className="mb-1">{author.nickname}</h5>
 
                   <span className="small text-uppercase text-muted d-inline-flex">
                     <i className="map marker alternate icon "></i>
-                    <ProvinceConversion numProvince={authorProvince} />
+                    <ProvinceConversion numProvince={author.province} />
                   </span>
 
                   <h6 className=" fst-italic my-3 ">
@@ -133,9 +117,9 @@ const Offer = ({ offer }) => {
                   <div className="extra content">
                     <Link
                       className="btn btn-link text-decoration-none "
-                      to={`/profilUser/${authorEmail}`}
+                      to={`/profilUser/${author.email}`}
                     >
-                      Profil de {authorNickname}
+                      Profil de {author.nickname}
                     </Link>
                   </div>
                 </div>

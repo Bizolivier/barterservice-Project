@@ -39,7 +39,7 @@ namespace backend.Models {
         MaxLength(30, ErrorMessage = "Maximum 30 characters")]
         public string Fullname { get; set; }
 
-       
+       public string Picture{get;set;}
 
         [Required(ErrorMessage ="Required")]
         public string Email{get;set;}

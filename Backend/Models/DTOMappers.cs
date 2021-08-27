@@ -14,6 +14,7 @@ namespace backend.Models {
                 Fullname = user.Fullname,
                 Email = user.Email,
                 TimeCredit = user.TimeCredit,
+                Picture=user.Picture,
                 Sexe = user.Sexe,
                 Role = user.Role,
                 Province = user.Province

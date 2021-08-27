@@ -29,6 +29,7 @@ namespace barterserv.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nickname = table.Column<string>(maxLength: 30, nullable: false),
                     Fullname = table.Column<string>(maxLength: 30, nullable: false),
+                    Picture = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     TimeCredit = table.Column<int>(nullable: false),
                     Province = table.Column<int>(nullable: false),
@@ -153,18 +154,18 @@ namespace barterserv.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Province", "Role", "Sexe", "TimeCredit" },
+                columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Picture", "Province", "Role", "Sexe", "TimeCredit" },
                 values: new object[,]
                 {
-                    { 8, "bizidudu@gmail.com", "Olivier Bizimungu", "L'Olive", 8, 0, 1, 50 },
-                    { 1, "ben@gmail.com", "Penelle", "Ben", 3, 0, 1, 5 },
-                    { 2, "bruno@gmail.com", "Lacroix", "Bru", 0, 0, 1, 5 },
-                    { 3, "aela@gmail.com", "Izere", "Aela", 8, 0, 0, 5 },
-                    { 4, "luis@gmail.com", "Save Lara", "Luis", 0, 0, 1, 5 },
-                    { 5, "amin@gmail.com", "Gandouz", "Amin", 0, 0, 1, 5 },
-                    { 6, "nico@gmail.com", "Krstev", "Nico", 1, 0, 1, 5 },
-                    { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", 0, 0, 1, 5 },
-                    { 9, "alain@gmail.com", "Alain Silovy", "Timon", 0, 0, 1, 5 }
+                    { 8, "bizidudu@gmail.com", "Olivier Bizimungu", "L'Olive", "vide.png", 8, 0, 1, 50 },
+                    { 1, "ben@gmail.com", "Penelle", "Ben", "vide.png", 3, 0, 1, 5 },
+                    { 2, "bruno@gmail.com", "Lacroix", "Bru", "vide.png", 0, 0, 1, 5 },
+                    { 3, "aela@gmail.com", "Izere", "Aela", "vide.png", 8, 0, 0, 5 },
+                    { 4, "luis@gmail.com", "Save Lara", "Luis", "vide.png", 0, 0, 1, 5 },
+                    { 5, "amin@gmail.com", "Gandouz", "Amin", "vide.png", 0, 0, 1, 5 },
+                    { 6, "nico@gmail.com", "Krstev", "Nico", "vide.png", 1, 0, 1, 5 },
+                    { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", "vide.png", 0, 0, 1, 5 },
+                    { 9, "alain@gmail.com", "Alain Silovy", "Timon", "vide.png", 0, 0, 1, 5 }
                 });
 
             migrationBuilder.InsertData(

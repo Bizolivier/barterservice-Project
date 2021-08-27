@@ -43,6 +43,7 @@ export default () => {
       nickname: userNickname,
       fullname: userFullname,
       email: user.email,
+      picture:user.picture,
       province: selectedProvinceValue,
       sexe: selectedSexeValue
     };

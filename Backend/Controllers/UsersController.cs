@@ -27,34 +27,35 @@ namespace backend.Controllers {
 
 
 
-        [HttpGet("connect/{email}")]
-        public async Task<ActionResult<UserDTO>> connect(string email)
+         [HttpPut("connect")]
+        public async Task<ActionResult<UserDTO>> connect(UserDTO user)
         {
             
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+            var user2 = await _context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
 
-              if(user != null)
-                   return  user.ToDTO();
+              if(user2 != null)
+                   return  user2.ToDTO();
               else{
                 var userToConnect =  new User() {
-                Nickname = "Nickname",
-                Fullname = "Fullname",
-                Email = email,
+                Nickname = user.Nickname,
+                Fullname = user.Fullname,
+                Email = user.Email,
                 TimeCredit = 5,
+                Picture=user.Picture
                };
 
                _context.Users.Add(userToConnect);
                 await _context.SaveChangesAsyncWithValidation();
 
 
-                user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
-                var offer = new Offer(){AuthorId = user.UserId};
+                user2 = await _context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
+                var offer = new Offer(){AuthorId = user2.UserId};
 
 
                _context.Offers.Add(offer);
                await _context.SaveChangesAsyncWithValidation();
                
-                 return user.ToDTO();
+                 return user2.ToDTO();
             }
 
 
