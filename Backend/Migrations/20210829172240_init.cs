@@ -34,11 +34,18 @@ namespace barterserv.Migrations
                     TimeCredit = table.Column<int>(nullable: false),
                     Province = table.Column<int>(nullable: false),
                     Sexe = table.Column<int>(nullable: false),
-                    Role = table.Column<int>(nullable: false)
+                    Role = table.Column<int>(nullable: false),
+                    UserId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,6 +101,7 @@ namespace barterserv.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(maxLength: 140, nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
+                    SenderUserId = table.Column<int>(nullable: true),
                     ChatId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -105,6 +113,12 @@ namespace barterserv.Migrations
                         principalTable: "Chats",
                         principalColumn: "ChatId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Messages_Users_SenderUserId",
+                        column: x => x.SenderUserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,18 +168,18 @@ namespace barterserv.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Picture", "Province", "Role", "Sexe", "TimeCredit" },
+                columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Picture", "Province", "Role", "Sexe", "TimeCredit", "UserId1" },
                 values: new object[,]
                 {
-                    { 8, "bizidudu@gmail.com", "Olivier Bizimungu", "L'Olive", "vide.png", 8, 0, 1, 50 },
-                    { 1, "ben@gmail.com", "Penelle", "Ben", "vide.png", 3, 0, 1, 5 },
-                    { 2, "bruno@gmail.com", "Lacroix", "Bru", "vide.png", 0, 0, 1, 5 },
-                    { 3, "aela@gmail.com", "Izere", "Aela", "vide.png", 8, 0, 0, 5 },
-                    { 4, "luis@gmail.com", "Save Lara", "Luis", "vide.png", 0, 0, 1, 5 },
-                    { 5, "amin@gmail.com", "Gandouz", "Amin", "vide.png", 0, 0, 1, 5 },
-                    { 6, "nico@gmail.com", "Krstev", "Nico", "vide.png", 1, 0, 1, 5 },
-                    { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", "vide.png", 0, 0, 1, 5 },
-                    { 9, "alain@gmail.com", "Alain Silovy", "Timon", "vide.png", 0, 0, 1, 5 }
+                    { 8, "bizidu@gmail.com", "Olivier Bizimungu", "L'Olive", "scar.jpg", 8, 0, 1, 50, null },
+                    { 1, "ben@gmail.com", "Penelle", "Ben", "mufassa.jpg", 3, 0, 1, 5, null },
+                    { 2, "bruno@gmail.com", "Lacroix", "Bru", "pumba.jpg", 0, 0, 1, 5, null },
+                    { 3, "aela@gmail.com", "Izere", "Aela", "nala.jpg", 8, 0, 0, 5, null },
+                    { 4, "luis@gmail.com", "Save Lara", "Luis", "unknown.jpg", 0, 0, 1, 5, null },
+                    { 5, "amin@gmail.com", "Gandouz", "Amin", "simba.jpg", 0, 0, 1, 5, null },
+                    { 6, "nico@gmail.com", "Krstev", "Nico", "rafiki.jpg", 1, 0, 1, 5, null },
+                    { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", "zazu.jpg", 0, 0, 1, 5, null },
+                    { 9, "alain@gmail.com", "Alain Silovy", "Timon", "timon.png", 0, 0, 1, 5, null }
                 });
 
             migrationBuilder.InsertData(
@@ -214,6 +228,11 @@ namespace barterserv.Migrations
                 column: "ChatId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Messages_SenderUserId",
+                table: "Messages",
+                column: "SenderUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Offers_AuthorId",
                 table: "Offers",
                 column: "AuthorId",
@@ -234,6 +253,11 @@ namespace barterserv.Migrations
                 table: "Users",
                 column: "Email",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserId1",
+                table: "Users",
+                column: "UserId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

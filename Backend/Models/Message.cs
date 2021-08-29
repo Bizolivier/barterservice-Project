@@ -22,6 +22,8 @@ namespace backend.Models {
         public DateTime Date {get;set;}
 
         public virtual Chat chat {get;set;}
+        
+        public virtual User Sender {get;set;}
 
         public int ChatId { get; set; }
       

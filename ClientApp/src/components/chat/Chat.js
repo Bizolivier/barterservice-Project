@@ -7,15 +7,23 @@ import "jquery/dist/jquery.min.js";
 import $ from "jquery";
 import * as userService from "../../services/User.service";
 import ChatMessageContainer from "./ChatMessageContainer";
+import * as framework from "../../Framework";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default () => {
   const [allUsers, setAllUsers] = useState([]);
+  const { user, isAuthenticated } = useAuth0();
   const [selectedInterlocutor, setSelectedInterlocutor] = useState();
   const [containerVisible, setContainerVisible] = useState(false);
+
   useEffect(() => {
-    userService.getAll().then(res => {
-      setAllUsers(res);
-    });
+    if (isAuthenticated) {
+      const { email } = user;
+
+      userService.usersToChat(email).then(res => {
+        setAllUsers(res);
+      });
+    }
   }, []);
 
   const setInterlocutor = user => {
@@ -42,16 +50,12 @@ export default () => {
               <div className="card-body contacts_body">
                 <ul className="contacts">
                   {allUsers.map(user => (
-                    <li onClick={() => setInterlocutor(user)}>
-                      <div class="d-flex bd-highlight">
-                        <div class="img_cont">
+                    <li key={user.userId} onClick={() => setInterlocutor(user)}>
+                      <div className="d-flex bd-highlight">
+                        <div className="img_cont">
                           <img
-                            src={
-                              user.picture != "vide.png"
-                                ? user.picture
-                                : "https://therichpost.com/wp-content/uploads/2020/06/avatar2.png"
-                            }
-                            class="rounded-circle user_img"
+                            src={framework.IMG(user.picture)}
+                            className="rounded-circle user_img"
                           />
                         </div>
                         <div className="user_info">
@@ -68,7 +72,7 @@ export default () => {
           <div className="col-md-8 col-xl-6 chat">
             {/* ici on affiche un chat qui correspond a l'interlocuteur selectionné */}
             {containerVisible && (
-              <ChatMessageContainer interlocutor={selectedInterlocutor} />
+              <ChatMessageContainer interlocutor={selectedInterlocutor} locutor={user} />
             )}
           </div>
         </div>

@@ -58,6 +58,8 @@ namespace backend.Models {
 
         public  virtual IList <Chat> ChatLinkedToUser2 {get;set;} = new List<Chat>();
 
+        public  virtual IList <User> MessagesSended {get;set;} = new List<User>();
+
 
      public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
             var currContext = validationContext.GetService(typeof(BarterContext)) as BarterContext;

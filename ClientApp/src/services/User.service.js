@@ -7,6 +7,11 @@ export async function getAll() {
   return response.data;
 }
 
+export async function usersToChat(email) {
+  const response = await axios.get(`${httpBase}/usersToChat/${email}`);
+  return response.data;
+}
+
 export async function connect(userDTO) {
   const response = await axios.put(`${httpBase}/connect`, {
     Nickname: userDTO.nickname,

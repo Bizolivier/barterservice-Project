@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import unknown from "../images/unknown.jpg";
+import * as framework from "../Framework";
 import * as userService from "../services/User.service.js";
 import * as serviceService from "../services/Services.Service.js";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -9,7 +9,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { IconButton } from "@material-ui/core";
 
 const Offer = ({ offer }) => {
-  const { user, isAuthenticated } = useAuth0();
+ 
   const [author, setAuthor] = useState();
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
@@ -55,9 +55,7 @@ const Offer = ({ offer }) => {
               <div className="col-xxl-2  mb-5 mt-5 mx-2 w-99">
                 <div className=" bg-white rounded shadow-sm py-5 px-4  ">
                   <img
-                    src={
-                      author.picture != "vide.png" ? author.picture : unknown
-                    }
+                    src={framework.IMG(author.picture)}
                     alt=""
                     width="100"
                     className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"

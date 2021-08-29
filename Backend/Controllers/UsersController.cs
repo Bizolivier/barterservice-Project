@@ -23,7 +23,15 @@ namespace backend.Controllers {
     
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll() {
              return (await _context.Users.ToListAsync()).ToDTO();
-}
+        }
+
+
+        [HttpGet("usersToChat/{email}")]
+    
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllusersToChat(string email) {
+          return (await _context.Users.Where(u=>u.Email!= email).ToListAsync()).ToDTO();
+        }
+
 
 
 

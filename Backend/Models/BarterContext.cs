@@ -64,15 +64,15 @@ namespace backend.Models {
         }
         private void addUsers(ModelBuilder modelBuilder) {
             modelBuilder.Entity<User>().HasData(
-                    new User() {  UserId =1, Nickname = "Ben", Fullname ="Penelle",Email="ben@gmail.com", Picture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4bxhnd6kVOSazM4XZWjZ1cdgjx25wewGa6PMJDzLGyS3vV_gKb1cEFXGv0ev5oa6kTpU&usqp=CAU", TimeCredit = 5 ,Sexe = Sexe.Male, Role = Role.User,Province=Province.Brabant_flamant },
-                    new User() {  UserId =2, Nickname = "Bru",Fullname ="Lacroix",Email="bruno@gmail.com", Picture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4bxhnd6kVOSazM4XZWjZ1cdgjx25wewGa6PMJDzLGyS3vV_gKb1cEFXGv0ev5oa6kTpU&usqp=CAU", TimeCredit = 5,  Sexe = Sexe.Male,Role = Role.User,Province=Province.Bruxelles },
-                    new User() {  UserId =3, Nickname = "Aela",Fullname ="Izere",Email="aela@gmail.com", Picture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4bxhnd6kVOSazM4XZWjZ1cdgjx25wewGa6PMJDzLGyS3vV_gKb1cEFXGv0ev5oa6kTpU&usqp=CAU", TimeCredit = 5 ,Sexe = Sexe.Female,Role =  Role.User,Province=Province.Flandre_orientale },
-                    new User() {  UserId =4, Nickname = "Luis",Fullname ="Save Lara",Email="luis@gmail.com", Picture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4bxhnd6kVOSazM4XZWjZ1cdgjx25wewGa6PMJDzLGyS3vV_gKb1cEFXGv0ev5oa6kTpU&usqp=CAU", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
-                    new User() {  UserId =5, Nickname = "Amin",Fullname ="Gandouz",Email="amin@gmail.com", Picture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4bxhnd6kVOSazM4XZWjZ1cdgjx25wewGa6PMJDzLGyS3vV_gKb1cEFXGv0ev5oa6kTpU&usqp=CAU", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles  },
-                    new User() {  UserId =6, Nickname = "Nico",Fullname ="Krstev",Email="nico@gmail.com", Picture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4bxhnd6kVOSazM4XZWjZ1cdgjx25wewGa6PMJDzLGyS3vV_gKb1cEFXGv0ev5oa6kTpU&usqp=CAU", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Hainaut },
-                    new User() {  UserId =7, Nickname = "Momo",Fullname ="Mohammed Assbai",Email="momo@gmail.com", Picture="../images/unknown.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
-                    new User() {  UserId =8, Nickname = "L'Olive",Fullname ="Olivier Bizimungu",Email="bizidudu@gmail.com", Picture="../images/unknown.jpg", TimeCredit = 50 ,Sexe = Sexe.Male,Role = Role.User,Province=Province.Flandre_orientale },
-                    new User() {  UserId =9, Nickname = "Timon",Fullname ="Alain Silovy",Email="alain@gmail.com", Picture="../images/unknown.jpg", TimeCredit = 5 , Sexe = Sexe.Male, Role =  Role.User, Province=Province.Bruxelles }
+                    new User() {  UserId =1, Nickname = "Ben", Fullname ="Penelle",Email="ben@gmail.com", Picture="mufassa.jpg", TimeCredit = 5 ,Sexe = Sexe.Male, Role = Role.User,Province=Province.Brabant_flamant },
+                    new User() {  UserId =2, Nickname = "Bru",Fullname ="Lacroix",Email="bruno@gmail.com", Picture="pumba.jpg", TimeCredit = 5,  Sexe = Sexe.Male,Role = Role.User,Province=Province.Bruxelles },
+                    new User() {  UserId =3, Nickname = "Aela",Fullname ="Izere",Email="aela@gmail.com", Picture="nala.jpg", TimeCredit = 5 ,Sexe = Sexe.Female,Role =  Role.User,Province=Province.Flandre_orientale },
+                    new User() {  UserId =4, Nickname = "Luis",Fullname ="Save Lara",Email="luis@gmail.com", Picture="scar.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
+                    new User() {  UserId =5, Nickname = "Amin",Fullname ="Gandouz",Email="amin@gmail.com", Picture="simba.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles  },
+                    new User() {  UserId =6, Nickname = "Nico",Fullname ="Krstev",Email="nico@gmail.com", Picture="rafiki.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Hainaut },
+                    new User() {  UserId =7, Nickname = "Momo",Fullname ="Mohammed Assbai",Email="momo@gmail.com", Picture="zazu.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
+                    new User() {  UserId =8, Nickname = "L'Olive",Fullname ="Olivier Bizimungu",Email="bizidu@gmail.com", Picture="scar.jpg", TimeCredit = 50 ,Sexe = Sexe.Male,Role = Role.User,Province=Province.Flandre_orientale },
+                    new User() {  UserId =9, Nickname = "Timon",Fullname ="Alain Silovy",Email="alain@gmail.com", Picture="timon.png", TimeCredit = 5 , Sexe = Sexe.Male, Role =  Role.User, Province=Province.Bruxelles }
             );
         }
         private void addOffers(ModelBuilder modelBuilder){

@@ -8,7 +8,7 @@ import * as userService from "../services/User.service.js";
 import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
 import * as serviceService from "../services/Services.Service.js";
 import { useAuth0, User } from "@auth0/auth0-react";
-import unknown from "../images/unknown.jpg";
+import * as framework from "../Framework";
 
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
@@ -16,33 +16,36 @@ const UserProfil = () => {
   const [isBusy, setBusy] = useState(true);
   const [authorEmail, setAuthorEmail] = useState();
   const [userNickname, setUserNickname] = useState("");
+  const [userPicture, setUserPicture] = useState("");
   const [userProvince, setUserProvince] = useState(0);
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
 
   let { email } = useParams();
-  console.log(email);
 
   useEffect(() => {
-    offerService.GetOfferByEmail(email).then(offer => {
+    async function fetchData() {
+      const offer = await offerService.GetOfferByEmail(email);
       setOffer(offer);
 
-      userService.GetOneByEmail(email).then(res => {
-        setUserNickname(res.nickname);
-        setUserProvince(res.province);
-        setAuthorEmail(res.email);
-      });
-      serviceService.getRequestedSevices(email).then(listServicesRequest => {
-        setRequested(listServicesRequest);
-      });
-      serviceService.getOfferedSevices(email).then(listServicesOffered => {
-        setOffered(listServicesOffered);
-      });
+      const res = await userService.GetOneByEmail(email);
+      setUserNickname(res.nickname);
+      setUserProvince(res.province);
+      setAuthorEmail(res.email);
+      setUserPicture(res.picture);
 
-      console.log(userProvince);
-      console.log(offer.authorId);
+      const listServicesRequest = await serviceService.getRequestedSevices(
+        email
+      );
+      setRequested(listServicesRequest);
+
+      const listServicesOffered = await serviceService.getOfferedSevices(email);
+      setOffered(listServicesOffered);
+    }
+
+    fetchData().then(res => {
+      setBusy(false);
     });
-    setBusy(false);
   }, []);
 
   return (
@@ -53,7 +56,7 @@ const UserProfil = () => {
             <div> </div>
           ) : (
             <div className=" ui cards h-100 mb-3   ">
-              <div className=" card w-100  flex-row  px-3 py-3 ">
+              <div className=" bg-white card w-100 h-75 flex-row  px-3 py-3 ">
                 <div className="user mx-5">
                   {/*image*/}
                   <div className="content">
@@ -61,11 +64,7 @@ const UserProfil = () => {
                       <div className="d-inline-flex">
                         <div className="left floated mini ui image">
                           <img
-                            src={
-                              isAuthenticated && authorEmail === user.email
-                                ? user.picture
-                                : unknown
-                            }
+                            src={framework.IMG(userPicture)}
                             alt="{offer.author}"
                             width="100"
                             className=" rounded-circle border border-primary"

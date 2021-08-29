@@ -122,9 +122,14 @@ namespace barterserv.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int?>("SenderUserId")
+                        .HasColumnType("int");
+
                     b.HasKey("MsgId");
 
                     b.HasIndex("ChatId");
+
+                    b.HasIndex("SenderUserId");
 
                     b.ToTable("Messages");
                 });
@@ -314,10 +319,15 @@ namespace barterserv.Migrations
                     b.Property<int>("TimeCredit")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId");
 
                     b.HasIndex("Email")
                         .IsUnique();
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Users");
 
@@ -328,7 +338,7 @@ namespace barterserv.Migrations
                             Email = "ben@gmail.com",
                             Fullname = "Penelle",
                             Nickname = "Ben",
-                            Picture = "vide.png",
+                            Picture = "mufassa.jpg",
                             Province = 3,
                             Role = 0,
                             Sexe = 1,
@@ -340,7 +350,7 @@ namespace barterserv.Migrations
                             Email = "bruno@gmail.com",
                             Fullname = "Lacroix",
                             Nickname = "Bru",
-                            Picture = "vide.png",
+                            Picture = "pumba.jpg",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -352,7 +362,7 @@ namespace barterserv.Migrations
                             Email = "aela@gmail.com",
                             Fullname = "Izere",
                             Nickname = "Aela",
-                            Picture = "vide.png",
+                            Picture = "nala.jpg",
                             Province = 8,
                             Role = 0,
                             Sexe = 0,
@@ -364,7 +374,7 @@ namespace barterserv.Migrations
                             Email = "luis@gmail.com",
                             Fullname = "Save Lara",
                             Nickname = "Luis",
-                            Picture = "vide.png",
+                            Picture = "unknown.jpg",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -376,7 +386,7 @@ namespace barterserv.Migrations
                             Email = "amin@gmail.com",
                             Fullname = "Gandouz",
                             Nickname = "Amin",
-                            Picture = "vide.png",
+                            Picture = "simba.jpg",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -388,7 +398,7 @@ namespace barterserv.Migrations
                             Email = "nico@gmail.com",
                             Fullname = "Krstev",
                             Nickname = "Nico",
-                            Picture = "vide.png",
+                            Picture = "rafiki.jpg",
                             Province = 1,
                             Role = 0,
                             Sexe = 1,
@@ -400,7 +410,7 @@ namespace barterserv.Migrations
                             Email = "momo@gmail.com",
                             Fullname = "Mohammed Assbai",
                             Nickname = "Momo",
-                            Picture = "vide.png",
+                            Picture = "zazu.jpg",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -409,10 +419,10 @@ namespace barterserv.Migrations
                         new
                         {
                             UserId = 8,
-                            Email = "bizidudu@gmail.com",
+                            Email = "bizidu@gmail.com",
                             Fullname = "Olivier Bizimungu",
                             Nickname = "L'Olive",
-                            Picture = "vide.png",
+                            Picture = "scar.jpg",
                             Province = 8,
                             Role = 0,
                             Sexe = 1,
@@ -424,7 +434,7 @@ namespace barterserv.Migrations
                             Email = "alain@gmail.com",
                             Fullname = "Alain Silovy",
                             Nickname = "Timon",
-                            Picture = "vide.png",
+                            Picture = "timon.png",
                             Province = 0,
                             Role = 0,
                             Sexe = 1,
@@ -454,6 +464,10 @@ namespace barterserv.Migrations
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("backend.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderUserId");
                 });
 
             modelBuilder.Entity("backend.Models.Offer", b =>
@@ -478,6 +492,13 @@ namespace barterserv.Migrations
                         .HasForeignKey("OfferLinkedtoServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("backend.Models.User", b =>
+                {
+                    b.HasOne("backend.Models.User", null)
+                        .WithMany("MessagesSended")
+                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }
