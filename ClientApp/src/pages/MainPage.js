@@ -26,19 +26,23 @@ export default () => {
     message = `Bonjour ${name}`;
     userService.connect(newUser).then(response => {});
   } else {
-    message = `Welcome on BarterSer the place to be`;
+    message = `Welcome on BarterSerV the place to be
+     Plateforme qui met en relation des particuliers de votre region ou même de plus loin pour échanger des services `;
   }
 
   return isAuthenticated ? (
     <div>
       <img className="my-5 rounded-circle" src={user.picture} alt={user.name} />
-     
-      <h1 className=" text-white text-center my-5 shadow-lg ">{message} !!!</h1>
+
+      <h6 className=" text-muted  fw-bold  fst-italic text-center fw-bold my-5 shadow-lg ">
+        {message} !!!
+      </h6>
     </div>
   ) : (
     <div>
-     
-      <h1 className=" text-white text-center my-5 shadow-lg">{message} !!!</h1>
+      <h5 className=" text-muted  fw-bold  fst-italic text-center my-5 shadow-lg">
+        {message} !!!
+      </h5>
     </div>
   );
 };

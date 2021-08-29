@@ -28,7 +28,7 @@ const OfferList = () => {
   const rendedListOffers = searchList.map(offer => {
     return (
       <React.Fragment key={offer.offerId}>
-        <div className="d-inline-flex">
+        <div className="d-inline-flex text-center">
           <Offer key={offer.id} offer={offer} />
         </div>
       </React.Fragment>

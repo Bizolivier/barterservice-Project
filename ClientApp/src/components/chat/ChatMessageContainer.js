@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Chat.css";
 import * as framework from "../../Framework";
 import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
 
 export default ({ interlocutor, locutor }) => {
-  const handleClickSendMessage = () => {
+  const [msg, setMsg] = useState("");
+
+  const handleClickSendMessage = e => {
+    setMsg(e.target.value);
     console.log("un message est envoyé");
+  };
+  const handleKeyUp = e => {
+    if (e.key === "Enter") {
+      setMsg(e.target.value);
+    }
   };
 
   return (
@@ -58,7 +66,7 @@ export default ({ interlocutor, locutor }) => {
             />
           </div>
           <div className="msg_cotainer">
-            I am good too, thank you for your chat template
+            {msg}
             <span className="msg_time">9:00 AM, Today</span>
           </div>
         </div>
@@ -69,14 +77,12 @@ export default ({ interlocutor, locutor }) => {
             name=""
             className="form-control type_msg"
             placeholder="Type your message..."
+            onChange={handleClickSendMessage}
+            onKeyUp={handleKeyUp}
           ></textarea>
           <div className="input-group-append ">
             <span className="input-group-append">
-              <IconButton
-                variant="rounded"
-                color="primary"
-                onClick={handleClickSendMessage}
-              >
+              <IconButton variant="rounded" color="primary" type="submit">
                 <SendIcon />
               </IconButton>
             </span>
