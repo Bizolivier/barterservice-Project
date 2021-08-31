@@ -64,7 +64,8 @@ namespace backend.Models {
                 MsgId = message.MsgId,
                 Content = message.Content,
                 ChatId = message.ChatId,
-                Date = message.Date           
+                Date = message.Date,
+                SenderId=message.SenderId         
           
             };
 

@@ -125,8 +125,8 @@ namespace backend.Models {
  
          private void addMessages(ModelBuilder modelBuilder){
             modelBuilder.Entity<Message>().HasData(
-               new Message() { MsgId =1, Content ="salut Mo ", SenderId =7, ChatId=1},
-               new Message() { MsgId =2, Content ="Alors l'Olive çà? ", SenderId = 8 ,ChatId=1}
+               new Message() { MsgId =1, Content ="salut Mo ", SenderId =8, ChatId=1},
+               new Message() { MsgId =2, Content ="Alors l'Olive çà? ", SenderId = 7 ,ChatId=1}
              
             );
         }
