@@ -27,6 +27,9 @@ namespace backend.Models {
            addOffers(modelBuilder);
            addCategories(modelBuilder);
            addServices(modelBuilder);
+           addChats(modelBuilder);
+           addMessages(modelBuilder);
+           
            }
          private void structuralConfiguration(ModelBuilder modelBuilder) {
             
@@ -35,22 +38,22 @@ namespace backend.Models {
                  .IsUnique();
 
             modelBuilder.Entity<Chat>(entity =>{
-                     entity.HasOne(chat => chat.user1)
+                     entity.HasOne(chat => chat.User1)
                            .WithMany(user => user.ChatLinkedToUser1)
                            .HasForeignKey(chat => chat.UserId1);
 
-                    entity.HasOne(chat => chat.user2)
+                    entity.HasOne(chat => chat.User2)
                            .WithMany(user => user.ChatLinkedToUser2)
                            .HasForeignKey(chat => chat.UserId2);
             });
 
             modelBuilder.Entity<User>(entity =>{
                      entity.HasMany(user => user.ChatLinkedToUser1)
-                           .WithOne(chat => chat.user1)
+                           .WithOne(chat => chat.User1)
                            .HasForeignKey(chat => chat.UserId1);
 
                      entity.HasMany(user => user.ChatLinkedToUser2)
-                           .WithOne(chat => chat.user2)
+                           .WithOne(chat => chat.User2)
                            .HasForeignKey(chat => chat.UserId2);
             });
             
@@ -71,7 +74,7 @@ namespace backend.Models {
                     new User() {  UserId =5, Nickname = "Amin",Fullname ="Gandouz",Email="amin@gmail.com", Picture="simba.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles  },
                     new User() {  UserId =6, Nickname = "Nico",Fullname ="Krstev",Email="nico@gmail.com", Picture="rafiki.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Hainaut },
                     new User() {  UserId =7, Nickname = "Momo",Fullname ="Mohammed Assbai",Email="momo@gmail.com", Picture="zazu.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
-                    new User() {  UserId =8, Nickname = "L'Olive",Fullname ="Olivier Bizimungu",Email="bizidu@gmail.com", Picture="scar.jpg", TimeCredit = 50 ,Sexe = Sexe.Male,Role = Role.User,Province=Province.Flandre_orientale },
+                    new User() {  UserId =8, Nickname = "L'Olive",Fullname ="Olivier Bizimungu",Email="bizidu@gmail.com", Picture="vautour.jpg", TimeCredit = 50 ,Sexe = Sexe.Male,Role = Role.User,Province=Province.Flandre_orientale },
                     new User() {  UserId =9, Nickname = "Timon",Fullname ="Alain Silovy",Email="alain@gmail.com", Picture="timon.png", TimeCredit = 5 , Sexe = Sexe.Male, Role =  Role.User, Province=Province.Bruxelles }
             );
         }
@@ -115,6 +118,23 @@ namespace backend.Models {
                 new Service() { ServiceId =6, Title ="Co Voiturage", CategoryLinkToId=10, OfferLinkedtoServiceId =8 ,IsRecherche = false },
                 new Service() { ServiceId =7, Title ="Hébergement", CategoryLinkToId=9, OfferLinkedtoServiceId = 8,IsRecherche = false }
              
+            );
+        }
+
+
+ 
+         private void addMessages(ModelBuilder modelBuilder){
+            modelBuilder.Entity<Message>().HasData(
+               new Message() { MsgId =1, Content ="salut Mo ", SenderId =7, ChatId=1},
+               new Message() { MsgId =2, Content ="Alors l'Olive çà? ", SenderId = 8 ,ChatId=1}
+             
+            );
+        }
+
+
+         private void addChats(ModelBuilder modelBuilder){
+            modelBuilder.Entity<Chat>().HasData(
+                new Chat(){ ChatId =1, UserId1 =7, UserId2 =8}
             );
         }
     }

@@ -25,6 +25,8 @@ namespace backend.Models {
         
         public virtual User Sender {get;set;}
 
+        public int SenderId {get;set;}
+
         public int ChatId { get; set; }
       
     }

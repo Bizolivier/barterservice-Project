@@ -44,7 +44,7 @@ export default () => {
   }, []);
 
   return (
-    <div className=" bloc ui segment w-75  bg-white position-relative ">
+    <div className=" bloc  w-100  position-relative ">
       {isBusy ? (
         <div> </div>
       ) : (
@@ -57,7 +57,7 @@ export default () => {
             />
           </div>
           <div className="row d-inline-flex my-5">
-            <div className="col-md-4 personal-info ">
+            <div className="col-md-4 personal-info px-2 ">
               <h3 className="text-left px-2">{userNickname}</h3>
 
               <div className=" d-inline-flex">

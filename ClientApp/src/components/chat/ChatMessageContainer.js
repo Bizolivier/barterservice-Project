@@ -3,13 +3,25 @@ import "./Chat.css";
 import * as framework from "../../Framework";
 import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
+import Message from "./Message";
+import * as chatService from "../../services/ChatService";
+
+import { getDynamicStyles } from "jss";
 
 export default ({ interlocutor, locutor }) => {
-  const [msg, setMsg] = useState("");
+  const [chat, setChat] = useState();
+  const [msg, setMsg] = useState();
+
+  useEffect(() => {
+    chatService
+      .getChatByUsers(interlocutor.userId, locutor.userId)
+      .then(res => {
+        setChat(res);
+      });
+  }, []);
 
   const handleClickSendMessage = e => {
     setMsg(e.target.value);
-    console.log("un message est envoyé");
   };
   const handleKeyUp = e => {
     if (e.key === "Enter") {
@@ -34,42 +46,22 @@ export default ({ interlocutor, locutor }) => {
         </div>
       </div>
       <div className="card-body msg_card_body">
-        <div className="d-flex justify-content-start mb-4">
-          <div className="img_cont_msg">
-            <img
-              src={framework.IMG(locutor.picture)}
-              className="rounded-circle user_img_msg"
-            />
-          </div>
-          <div className="msg_cotainer">
-            Hi, how are you samim?
-            <span className="msg_time">8:40 AM, Today</span>
-          </div>
-        </div>
-        <div className="d-flex justify-content-end mb-4">
-          <div className="msg_cotainer_send">
-            Hi jassa i am good tnx how about you?
-            <span className="msg_time_send">8:55 AM, Today</span>
-          </div>
-          <div className="img_cont_msg">
-            <img
-              src={framework.IMG(interlocutor.picture)}
-              className="rounded-circle user_img_msg"
-            />
-          </div>
-        </div>
-        <div className="d-flex justify-content-start mb-4">
-          <div className="img_cont_msg">
-            <img
-              src={framework.IMG(locutor.picture)}
-              className="rounded-circle user_img_msg"
-            />
-          </div>
-          <div className="msg_cotainer">
-            {msg}
-            <span className="msg_time">9:00 AM, Today</span>
-          </div>
-        </div>
+        {}
+        <Message
+          picture={locutor.picture}
+          msg={`bonjour ${interlocutor.nickname} tu vas bien ?`}
+          date={new Date()}
+        />
+        <Message
+          picture={interlocutor.picture}
+          msg={"oui biensur et toi ?"}
+          date={new Date()}
+        />
+        <Message
+          picture={locutor.picture}
+          msg={"très trèb bien moyave"}
+          date={new Date()}
+        />
       </div>
       <div className="card-footer">
         <div className="input-group">

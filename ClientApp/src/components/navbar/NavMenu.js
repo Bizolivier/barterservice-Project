@@ -1,16 +1,7 @@
-import React, { Component, useState, useEffect } from "react";
-import {
-  Collapse,
-  Container,
-  Navbar,
-  NavbarBrand,
-  NavbarToggler,
-  NavItem,
-  NavLink
-} from "reactstrap";
+import React from "react";
+import { Container, Navbar, NavItem, NavLink } from "reactstrap";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
-import SearchBar from "../searchbar/SearchBar";
 
 import AuthenticationButton from "../login/AuthenticationButton";
 import { useAuth0 } from "@auth0/auth0-react";

@@ -2,11 +2,11 @@
   height: 100px;
   background: linear-gradient(to left, #696969, #d3d3d3);
 }
-.score {
-  background: linear-gradient(to left, #696969, #d3d3d3);
-}
+
 .bloc {
-  height: 1000px;
+  background-image: url("../images/bric.jpg");
+  margin-top: 30px;
+  height: 580px;
   border-radius: 10px;
   box-shadow: 0px 1px 10px 1px;
 }

@@ -4,7 +4,6 @@ import { Route } from "react-router";
 import { Link } from "react-router-dom";
 import unknown from "../images/unknown.jpg";
 import Offer from "./Offer.js";
-import Category from "./Category";
 import axios from "axios";
 import * as offerService from "../services/Offer.Service.js";
 import * as userService from "../services/User.service.js";
