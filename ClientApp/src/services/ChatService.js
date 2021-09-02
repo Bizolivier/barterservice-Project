@@ -13,3 +13,11 @@ export async function getChatByUsers(userId1, userId2) {
   );
   return response.data;
 }
+
+export async function addMessage(messageDTO, userId2) {
+  await axios.post(`${httpBase}/addMessage/${userId2}`, {
+    Content: messageDTO.Content,
+    Date: messageDTO.Date,
+    SenderId: messageDTO.SenderId
+  });
+}

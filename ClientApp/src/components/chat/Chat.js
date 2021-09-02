@@ -13,7 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default () => {
   const [allUsers, setAllUsers] = useState([]);
   const { user, isAuthenticated } = useAuth0();
-  const [selectedInterlocutor, setSelectedInterlocutor] = useState();  
+  const [selectedInterlocutor, setSelectedInterlocutor] = useState();
   const [selectedLocutor, setSelectedLocutor] = useState();
   const [containerVisible, setContainerVisible] = useState(false);
 
@@ -27,7 +27,6 @@ export default () => {
       userService.GetOneByEmail(email).then(res => {
         setSelectedLocutor(res);
       });
-
     }
   }, []);
 
@@ -77,7 +76,10 @@ export default () => {
           <div className="col-md-8 col-xl-6 chat">
             {/* ici on affiche un chat qui correspond a l'interlocuteur selectionné */}
             {containerVisible && (
-              <ChatMessageContainer interlocutor={selectedInterlocutor} locutor={selectedLocutor} />
+              <ChatMessageContainer
+                interlocutor={selectedInterlocutor}
+                locutor={selectedLocutor}
+              />
             )}
           </div>
         </div>
