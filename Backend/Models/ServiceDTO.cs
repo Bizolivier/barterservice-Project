@@ -10,6 +10,7 @@ namespace backend.Models {
        public int OfferLinkedtoServiceId {get;set;}
        public int CategoryLinkToId { get;set; }
        public bool IsRecherche { get;set; }
+       public IEnumerable <Comment> CommentLinkedToService { get; set; } 
        
     }
 }

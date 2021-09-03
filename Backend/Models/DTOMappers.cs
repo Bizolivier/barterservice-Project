@@ -95,6 +95,21 @@ namespace backend.Models {
             return chats.Select(o => o.ToDTO()).ToList();
         }
 
+          public static CommentDTO ToDTO(this Comment comment){
+            return new CommentDTO {
+                CmntId = comment.CmntId,
+                Description = comment.Description,
+                AuthorId = comment.AuthorId,
+                ServiceLinkedToId =comment.ServiceLinkedToId,
+                Date = comment.Date,
+                Rating = comment.Rating
+            };
+
+        }
+         public static List<CommentDTO> ToDTO(this IEnumerable<Comment> comments) {
+            return comments.Select(o => o.ToDTO()).ToList();
+        }
+
         
     }
 }

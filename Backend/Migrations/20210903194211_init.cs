@@ -149,6 +149,42 @@ namespace barterserv.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CmntId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(maxLength: 10, nullable: false),
+                    AuthorId = table.Column<int>(nullable: false),
+                    ServiceLinkedToId = table.Column<int>(nullable: false),
+                    ReceiverId = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Rating = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CmntId);
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_Services_ServiceLinkedToId",
+                        column: x => x.ServiceLinkedToId,
+                        principalTable: "Services",
+                        principalColumn: "ServiceId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "CategoryId", "Name" },
@@ -208,8 +244,8 @@ namespace barterserv.Migrations
                 columns: new[] { "MsgId", "ChatId", "Content", "Date", "SenderId" },
                 values: new object[,]
                 {
-                    { 1, 1, "salut Mo ", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 7 },
-                    { 2, 1, "Alors l'Olive çà? ", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 8 }
+                    { 1, 1, "salut Mo ", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 8 },
+                    { 2, 1, "Alors l'Olive çà? ", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 7 }
                 });
 
             migrationBuilder.InsertData(
@@ -226,6 +262,16 @@ namespace barterserv.Migrations
                     { 7, 9, false, 8, "Hébergement" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Comments",
+                columns: new[] { "CmntId", "AuthorId", "Date", "Description", "Rating", "ReceiverId", "ServiceLinkedToId" },
+                values: new object[] { 1, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très satisfait du service rendu,je recommande", 4, 8, 3 });
+
+            migrationBuilder.InsertData(
+                table: "Comments",
+                columns: new[] { "CmntId", "AuthorId", "Date", "Description", "Rating", "ReceiverId", "ServiceLinkedToId" },
+                values: new object[] { 2, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation excellente ,vraiment au dessus de nos attente.Je recommande à 100%", 5, 8, 3 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Chats_UserId1",
                 table: "Chats",
@@ -235,6 +281,21 @@ namespace barterserv.Migrations
                 name: "IX_Chats_UserId2",
                 table: "Chats",
                 column: "UserId2");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_AuthorId",
+                table: "Comments",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ReceiverId",
+                table: "Comments",
+                column: "ReceiverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ServiceLinkedToId",
+                table: "Comments",
+                column: "ServiceLinkedToId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_ChatId",
@@ -276,6 +337,9 @@ namespace barterserv.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Comments");
+
             migrationBuilder.DropTable(
                 name: "Messages");
 

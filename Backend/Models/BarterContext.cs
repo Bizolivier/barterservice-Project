@@ -13,10 +13,8 @@ namespace backend.Models {
         public DbSet<Message> Messages { get; set; }
         public DbSet <Offer> Offers {get;set;}
         public DbSet <Chat> Chats {get;set;}
-     
-
-        // public DbSet<Comment> Comments { get; set; }
-        // // public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        
       
 
 
@@ -29,6 +27,7 @@ namespace backend.Models {
            addServices(modelBuilder);
            addChats(modelBuilder);
            addMessages(modelBuilder);
+           addComments(modelBuilder);
            
            }
          private void structuralConfiguration(ModelBuilder modelBuilder) {
@@ -55,6 +54,24 @@ namespace backend.Models {
                      entity.HasMany(user => user.ChatLinkedToUser2)
                            .WithOne(chat => chat.User2)
                            .HasForeignKey(chat => chat.UserId2);
+            });
+            modelBuilder.Entity<Comment>(entity =>{
+                     entity.HasOne(comment => comment.Author)
+                           .WithMany(user => user.CommentsOwned)
+                           .HasForeignKey(comment => comment.AuthorId);
+
+                    entity.HasOne(comment => comment.Receiver)
+                           .WithMany(user => user.CommentReceived)
+                           .HasForeignKey(comment =>comment.ReceiverId);
+            });
+             modelBuilder.Entity<User>(entity =>{
+                     entity.HasMany(user =>  user.CommentsOwned)
+                           .WithOne(comment => comment.Author)
+                           .HasForeignKey(comment => comment.AuthorId);
+
+                     entity.HasMany(user => user.CommentReceived)
+                           .WithOne(comment => comment.Receiver)
+                           .HasForeignKey(comment =>comment.ReceiverId );
             });
             
             
@@ -136,6 +153,13 @@ namespace backend.Models {
             modelBuilder.Entity<Chat>().HasData(
                 new Chat(){ ChatId =1, UserId1 =7, UserId2 =8}
             );
+        }
+
+        private void addComments(ModelBuilder modelBuilder){
+           modelBuilder.Entity<Comment>().HasData(
+               new Comment (){ CmntId = 1, Description="Très satisfait du service rendu,je recommande", AuthorId = 7, ServiceLinkedToId= 3,ReceiverId = 8,Rating=4  },
+               new Comment (){ CmntId = 2, Description="Prestation excellente ,vraiment au dessus de nos attente.Je recommande à 100%", AuthorId = 7,ServiceLinkedToId= 3 , ReceiverId = 8,Rating=5  }
+           );
         }
     }
 

@@ -60,6 +60,11 @@ namespace backend.Models {
 
         public  virtual IList <User> MessagesSended {get;set;} = new List<User>();
 
+        public virtual IList <Comment> CommentsOwned {get;set;}= new List<Comment>();
+
+        public virtual IList <Comment> CommentReceived {get;set;} = new List <Comment>();
+
+
 
      public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
             var currContext = validationContext.GetService(typeof(BarterContext)) as BarterContext;

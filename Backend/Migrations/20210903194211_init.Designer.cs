@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210831115820_init")]
+    [Migration("20210903194211_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,65 @@ namespace barterserv.Migrations
                         });
                 });
 
+            modelBuilder.Entity("backend.Models.Comment", b =>
+                {
+                    b.Property<int>("CmntId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
+                        .HasMaxLength(10);
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceLinkedToId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CmntId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("ServiceLinkedToId");
+
+                    b.ToTable("Comments");
+
+                    b.HasData(
+                        new
+                        {
+                            CmntId = 1,
+                            AuthorId = 7,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Très satisfait du service rendu,je recommande",
+                            Rating = 4,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 3
+                        },
+                        new
+                        {
+                            CmntId = 2,
+                            AuthorId = 7,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Prestation excellente ,vraiment au dessus de nos attente.Je recommande à 100%",
+                            Rating = 5,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 3
+                        });
+                });
+
             modelBuilder.Entity("backend.Models.Message", b =>
                 {
                     b.Property<int>("MsgId")
@@ -150,7 +209,7 @@ namespace barterserv.Migrations
                             ChatId = 1,
                             Content = "salut Mo ",
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SenderId = 7
+                            SenderId = 8
                         },
                         new
                         {
@@ -158,7 +217,7 @@ namespace barterserv.Migrations
                             ChatId = 1,
                             Content = "Alors l'Olive çà? ",
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SenderId = 8
+                            SenderId = 7
                         });
                 });
 
@@ -481,6 +540,27 @@ namespace barterserv.Migrations
                     b.HasOne("backend.Models.User", "User2")
                         .WithMany("ChatLinkedToUser2")
                         .HasForeignKey("UserId2")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("backend.Models.Comment", b =>
+                {
+                    b.HasOne("backend.Models.User", "Author")
+                        .WithMany("CommentsOwned")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.User", "Receiver")
+                        .WithMany("CommentReceived")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.Service", "ServiceLinkedTo")
+                        .WithMany("CommentLinkedToService")
+                        .HasForeignKey("ServiceLinkedToId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

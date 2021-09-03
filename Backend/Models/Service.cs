@@ -32,6 +32,8 @@ namespace backend.Models {
         
 
         public bool IsRecherche {get;set;}
+
+        public  virtual IList <Comment> CommentLinkedToService {get;set;} = new List<Comment>();
     
     }
 }
