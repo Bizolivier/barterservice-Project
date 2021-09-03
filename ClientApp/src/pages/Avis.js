@@ -30,7 +30,7 @@ const Avis = () => {
             <ul>
               {offeredServ.map(item => (
                 <li
-                  className=" text-capitalize my-5 text-dark"
+                  className=" text-capitalize my-5 text-light fst-italic"
                   key={item.serviceId}
                 >
                   <h2>{item.title} </h2>

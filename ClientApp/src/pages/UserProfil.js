@@ -54,7 +54,7 @@ const UserProfil = () => {
             <div> </div>
           ) : (
             <div className=" ui cards h-100 mb-3   ">
-              <div className=" bg-white card w-100 h-75 flex-row  px-3 py-3 ">
+              <div className=" bg-white card w-75 h-75 flex-row  px-3 py-3 ">
                 <div className="user mx-5">
                   {/*image*/}
                   <div className="content">
@@ -121,23 +121,25 @@ const UserProfil = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="extra content float-right ">
-                  <Link
-                    className="btn btn-link text-decoration-none fs-6 "
-                    to="/Chatbox"
-                  >
-                    Me contacter
-                  </Link>
-                </div>
-                <div>
-                  <Link
-                    className="btn btn-link text-decoration-none "
-                    to={`/Avis/${authorEmail}`}
-                   
-                  >
-                    Voir les avis
-                  </Link>
+                <div className="">
+                  <div className="extra content float-right ">
+                    <i className="info circle icon my-4" />
+                    <Link
+                      className="btn btn-link text-decoration-none fs-6  text-success fw-bold my-3 "
+                      to="/Chatbox"
+                    >
+                      Me contacter
+                    </Link>
+                  </div>
+                  <div className="d-inline-flex">
+                    <i className="info circle icon my-4" />
+                    <Link
+                      className="btn btn-link text-decoration-none text-success fw-bold my-3  "
+                      to={`/Avis/${authorEmail}`}
+                    >
+                      Voir les avis
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
