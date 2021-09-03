@@ -1,74 +1,52 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import * as serviceService from "../services/Services.Service.js";
+import { useAuth0, User } from "@auth0/auth0-react";
+import CommentList from "../components/comments/CommentList";
 
 const CreateOffer = () => {
-    return (
-        <React.Fragment>
-            <div className =" ui segment w-75 ">
-            <h4> Votre Annonce</h4>
-               <form className="ui form">
-                
-                    <div className="two fields">
-                    
-                        <div className="field">
-                            
-                                <select className="ui fluid dropdown w-26  my-2">
-                                    <option value="propose">Je propose</option>
-                                    <option value="recherche">je recherche</option>
-                                </select>
-                        </div>
-                        <div className="field">
-                            
-                                <select className="ui fluid dropdown w-26 mx-1 my-2">
-                               
-                                    <option value="service">un service</option>
-                                    <option value="Object">un objet</option>
-                                </select>
-                        </div>
-                    </div>
-                    <div className="field w-50">
-                             <label>Nom du service ou du bien</label>
-                             <input type="text" name="first-name"/>
-                        </div>
-                        <div className="field w-50">
-                             <label>Description</label>
-                             <textarea type="text" name="last-name" />
-                         </div>
-                         <div className="w-50">
-                             <label>Choisissez une image</label>
-                                <input type="file"/>
-                             
-                        </div>
-              </form>
-           </div>
-           <div className =" ui segment w-75   ">
-               <label className="m-2">Zone géographique</label>
-               <select className="ui dropdown  align-bottom rounded">
-                   <option value="">Choisissez votre province </option>
-                   <option value="10">Bruxelles</option>
-                   <option value="9">Hainaut</option>
-                   <option value="8">Namur</option>
-                   <option value="7">Brabant flamant</option>
-                   <option value="6">Brabant wallon</option>
-                   <option value="5">Limbourg</option>
-                   <option value="4">Luxembourg</option>
-                   <option value="3">Anvers</option>
-                   <option value="2">Flandre orientale</option>
-                   <option value="1">flandre occidentale</option>
-                   
-                </select>
+  const [offeredServ, setOfferedServ] = useState([]);
+  const [openPropose, setOpenPropose] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
+  const { email } = user;
 
-           </div>
-           <div>
-           <button className="ui green button align-center"> Publier</button>
-           </div>
+  useEffect(() => {
+    async function fetchData() {
+      const listServicesOffered = await serviceService.getOfferedSevices(email);
+      setOfferedServ(listServicesOffered);
+    }
 
-           <div>
-             <Link className="ui black basic button float-right" to="/">back</Link>
-          </div>  
-        </React.Fragment>
-    )
+    fetchData().then(res => {});
+  }, []);
 
+  const handleClickOpenPropose = () => {
+    setOpenPropose(!openPropose);
+  };
 
-}
+  return (
+    <React.Fragment>
+      <div className="border-0">
+        <ul>
+          {offeredServ.map(item => (
+            <li
+              className=" text-capitalize my-5 text-dark"
+              key={item.serviceId}
+            >
+              <h2>{item.title} </h2>
+              <i className="list icon" onClick={handleClickOpenPropose}></i>
+
+              {openPropose && <CommentList />}
+            </li>
+          ))}
+        </ul>
+
+        <div>
+          <Link className="ui black basic button float-right" to="/">
+            back
+          </Link>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
 export default CreateOffer;

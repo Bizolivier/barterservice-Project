@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as offerService from "../services/Offer.Service.js";
 import * as userService from "../services/User.service.js";
 import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
@@ -128,6 +128,15 @@ const UserProfil = () => {
                     to="/Chatbox"
                   >
                     Me contacter
+                  </Link>
+                </div>
+                <div>
+                  <Link
+                    className="btn btn-link text-decoration-none "
+                    to={`/Avis/${authorEmail}`}
+                   
+                  >
+                    Voir les avis
                   </Link>
                 </div>
               </div>

@@ -55,13 +55,17 @@ export default () => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
-                tag={Link}
-                className="text-dark px-4 my-3 fw-bolder"
-                to="/MyServices"
-              >
-                Mes Services
-              </NavLink>
+              {isAuthenticated ? (
+                <NavLink
+                  tag={Link}
+                  className="text-dark px-4 my-3 fw-bolder"
+                  to="/MyServices"
+                >
+                  Mes Services
+                </NavLink>
+              ) : (
+                <div />
+              )}
             </NavItem>
             <NavItem>
               <NavLink
