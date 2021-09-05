@@ -16,8 +16,8 @@ namespace backend.Models {
         
         [
         Required(ErrorMessage = "Required"),
-        MinLength(3, ErrorMessage = "Minimum 3 characters"),
-        MaxLength(10, ErrorMessage = "Maximum 10 characters")]
+        MinLength(3, ErrorMessage = "Minimum 3 characters")
+       ]
         public string Description { get; set; }
 
         public virtual User Author { get; set; }

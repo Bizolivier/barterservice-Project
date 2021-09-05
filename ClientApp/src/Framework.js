@@ -4,6 +4,7 @@ export const IMG = imageName => {
     : require(`./images/${imageName}`);
 };
 
+
 export const formatDate = formattedDate => {
   const newFormattedDate = new Date(formattedDate);
   const year = newFormattedDate.getFullYear();

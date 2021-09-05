@@ -72,7 +72,7 @@ namespace backend.Controllers {
 
 
 
-          [HttpGet("{userId}")]
+          [HttpGet("GetOne/{userId}")]
           public async Task<ActionResult<UserDTO>> GetOne(int userId) {
               var user = await _context.Users.FindAsync(userId);
            if (user == null)

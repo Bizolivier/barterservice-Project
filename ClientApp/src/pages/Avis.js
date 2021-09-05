@@ -34,7 +34,11 @@ const Avis = () => {
                   key={item.serviceId}
                 >
                   <h2>{item.title} </h2>
-                  <CommentList />
+                  
+                  <CommentList
+                    serviceId={item.serviceId}
+                  
+                  />
                 </li>
               ))}
             </ul>

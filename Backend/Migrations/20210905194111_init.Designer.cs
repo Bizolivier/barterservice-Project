@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210903194211_init")]
+    [Migration("20210905194111_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,8 +129,7 @@ namespace barterserv.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
-                        .HasMaxLength(10);
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -167,10 +166,250 @@ namespace barterserv.Migrations
                             CmntId = 2,
                             AuthorId = 7,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Prestation excellente ,vraiment au dessus de nos attente.Je recommande à 100%",
+                            Description = "Prestation excellente ,vraiment au dessus de nos attentes.Je recommande à 100%",
                             Rating = 5,
                             ReceiverId = 8,
                             ServiceLinkedToId = 3
+                        },
+                        new
+                        {
+                            CmntId = 3,
+                            AuthorId = 3,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Médiocre",
+                            Rating = 1,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 1
+                        },
+                        new
+                        {
+                            CmntId = 4,
+                            AuthorId = 2,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "peu recommandable",
+                            Rating = 1,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 1
+                        },
+                        new
+                        {
+                            CmntId = 5,
+                            AuthorId = 4,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Reussit",
+                            Rating = 3,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 2
+                        },
+                        new
+                        {
+                            CmntId = 6,
+                            AuthorId = 4,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "peu mieux faire",
+                            Rating = 3,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 4
+                        },
+                        new
+                        {
+                            CmntId = 7,
+                            AuthorId = 5,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Recomandable",
+                            Rating = 4,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 5
+                        },
+                        new
+                        {
+                            CmntId = 8,
+                            AuthorId = 6,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Prestation excellente ",
+                            Rating = 5,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 6
+                        },
+                        new
+                        {
+                            CmntId = 9,
+                            AuthorId = 7,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "je recommande",
+                            Rating = 4,
+                            ReceiverId = 8,
+                            ServiceLinkedToId = 7
+                        },
+                        new
+                        {
+                            CmntId = 10,
+                            AuthorId = 9,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "vraiment au dessus de nos attentes",
+                            Rating = 5,
+                            ReceiverId = 1,
+                            ServiceLinkedToId = 8
+                        },
+                        new
+                        {
+                            CmntId = 11,
+                            AuthorId = 9,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Très satisfait",
+                            Rating = 5,
+                            ReceiverId = 1,
+                            ServiceLinkedToId = 9
+                        },
+                        new
+                        {
+                            CmntId = 12,
+                            AuthorId = 1,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Je recommande à 100%",
+                            Rating = 5,
+                            ReceiverId = 2,
+                            ServiceLinkedToId = 10
+                        },
+                        new
+                        {
+                            CmntId = 13,
+                            AuthorId = 3,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "service rendu excellent",
+                            Rating = 4,
+                            ReceiverId = 2,
+                            ServiceLinkedToId = 11
+                        },
+                        new
+                        {
+                            CmntId = 14,
+                            AuthorId = 4,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Prestation à recommande à 100%",
+                            Rating = 5,
+                            ReceiverId = 2,
+                            ServiceLinkedToId = 12
+                        },
+                        new
+                        {
+                            CmntId = 15,
+                            AuthorId = 5,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Très bien fait",
+                            Rating = 4,
+                            ReceiverId = 3,
+                            ServiceLinkedToId = 13
+                        },
+                        new
+                        {
+                            CmntId = 16,
+                            AuthorId = 6,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = " Nos attente non pas étaient déçues",
+                            Rating = 5,
+                            ReceiverId = 3,
+                            ServiceLinkedToId = 14
+                        },
+                        new
+                        {
+                            CmntId = 17,
+                            AuthorId = 7,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A recommande",
+                            Rating = 4,
+                            ReceiverId = 3,
+                            ServiceLinkedToId = 15
+                        },
+                        new
+                        {
+                            CmntId = 18,
+                            AuthorId = 8,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Prestation moyenne",
+                            Rating = 3,
+                            ReceiverId = 4,
+                            ServiceLinkedToId = 16
+                        },
+                        new
+                        {
+                            CmntId = 19,
+                            AuthorId = 9,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Très mitigé",
+                            Rating = 2,
+                            ReceiverId = 4,
+                            ServiceLinkedToId = 17
+                        },
+                        new
+                        {
+                            CmntId = 20,
+                            AuthorId = 2,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Trés amateur hélas!!",
+                            Rating = 1,
+                            ReceiverId = 4,
+                            ServiceLinkedToId = 18
+                        },
+                        new
+                        {
+                            CmntId = 21,
+                            AuthorId = 6,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Prester apres 2 rdv ,mais bien executé",
+                            Rating = 3,
+                            ReceiverId = 5,
+                            ServiceLinkedToId = 19
+                        },
+                        new
+                        {
+                            CmntId = 22,
+                            AuthorId = 7,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "probleme de retard à l heure convenue ,mais prestation super",
+                            Rating = 4,
+                            ReceiverId = 5,
+                            ServiceLinkedToId = 20
+                        },
+                        new
+                        {
+                            CmntId = 23,
+                            AuthorId = 1,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = " Satisfait ",
+                            Rating = 3,
+                            ReceiverId = 5,
+                            ServiceLinkedToId = 21
+                        },
+                        new
+                        {
+                            CmntId = 24,
+                            AuthorId = 8,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Rien de pas ordinnaire",
+                            Rating = 3,
+                            ReceiverId = 6,
+                            ServiceLinkedToId = 22
+                        },
+                        new
+                        {
+                            CmntId = 25,
+                            AuthorId = 9,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Service minimum",
+                            Rating = 2,
+                            ReceiverId = 6,
+                            ServiceLinkedToId = 23
+                        },
+                        new
+                        {
+                            CmntId = 26,
+                            AuthorId = 5,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Passable",
+                            Rating = 3,
+                            ReceiverId = 6,
+                            ServiceLinkedToId = 24
                         });
                 });
 
@@ -368,6 +607,246 @@ namespace barterserv.Migrations
                             IsRecherche = false,
                             OfferLinkedtoServiceId = 8,
                             Title = "Hébergement"
+                        },
+                        new
+                        {
+                            ServiceId = 8,
+                            CategoryLinkToId = 8,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 1,
+                            Title = "archivage"
+                        },
+                        new
+                        {
+                            ServiceId = 9,
+                            CategoryLinkToId = 9,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 1,
+                            Title = "camping"
+                        },
+                        new
+                        {
+                            ServiceId = 10,
+                            CategoryLinkToId = 3,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 2,
+                            Title = "maçonerie"
+                        },
+                        new
+                        {
+                            ServiceId = 11,
+                            CategoryLinkToId = 1,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 2,
+                            Title = "Repassage"
+                        },
+                        new
+                        {
+                            ServiceId = 12,
+                            CategoryLinkToId = 8,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 2,
+                            Title = "traduction"
+                        },
+                        new
+                        {
+                            ServiceId = 13,
+                            CategoryLinkToId = 6,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 3,
+                            Title = "colocation"
+                        },
+                        new
+                        {
+                            ServiceId = 14,
+                            CategoryLinkToId = 6,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 3,
+                            Title = "Decoration"
+                        },
+                        new
+                        {
+                            ServiceId = 15,
+                            CategoryLinkToId = 6,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 3,
+                            Title = "gardiennage"
+                        },
+                        new
+                        {
+                            ServiceId = 16,
+                            CategoryLinkToId = 3,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 4,
+                            Title = "plomberie"
+                        },
+                        new
+                        {
+                            ServiceId = 17,
+                            CategoryLinkToId = 3,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 4,
+                            Title = "tapisserie"
+                        },
+                        new
+                        {
+                            ServiceId = 18,
+                            CategoryLinkToId = 3,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 4,
+                            Title = "outillage"
+                        },
+                        new
+                        {
+                            ServiceId = 19,
+                            CategoryLinkToId = 1,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 5,
+                            Title = "promenade animaux"
+                        },
+                        new
+                        {
+                            ServiceId = 20,
+                            CategoryLinkToId = 1,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 5,
+                            Title = "ménage"
+                        },
+                        new
+                        {
+                            ServiceId = 21,
+                            CategoryLinkToId = 1,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 5,
+                            Title = "lecture"
+                        },
+                        new
+                        {
+                            ServiceId = 22,
+                            CategoryLinkToId = 3,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 6,
+                            Title = "maçonerie"
+                        },
+                        new
+                        {
+                            ServiceId = 23,
+                            CategoryLinkToId = 1,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 6,
+                            Title = "Repassage"
+                        },
+                        new
+                        {
+                            ServiceId = 24,
+                            CategoryLinkToId = 8,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 6,
+                            Title = "traduction"
+                        },
+                        new
+                        {
+                            ServiceId = 25,
+                            CategoryLinkToId = 6,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 7,
+                            Title = "colocation"
+                        },
+                        new
+                        {
+                            ServiceId = 26,
+                            CategoryLinkToId = 6,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 7,
+                            Title = "Decoration"
+                        },
+                        new
+                        {
+                            ServiceId = 27,
+                            CategoryLinkToId = 6,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 7,
+                            Title = "gardiennage"
+                        },
+                        new
+                        {
+                            ServiceId = 28,
+                            CategoryLinkToId = 3,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "plomberie"
+                        },
+                        new
+                        {
+                            ServiceId = 29,
+                            CategoryLinkToId = 3,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "tapisserie"
+                        },
+                        new
+                        {
+                            ServiceId = 30,
+                            CategoryLinkToId = 3,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 8,
+                            Title = "outillage"
+                        },
+                        new
+                        {
+                            ServiceId = 31,
+                            CategoryLinkToId = 1,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 1,
+                            Title = "promenade animaux"
+                        },
+                        new
+                        {
+                            ServiceId = 32,
+                            CategoryLinkToId = 1,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 3,
+                            Title = "ménage"
+                        },
+                        new
+                        {
+                            ServiceId = 33,
+                            CategoryLinkToId = 1,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 4,
+                            Title = "lecture"
+                        },
+                        new
+                        {
+                            ServiceId = 34,
+                            CategoryLinkToId = 6,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 9,
+                            Title = "Jardinage"
+                        },
+                        new
+                        {
+                            ServiceId = 35,
+                            CategoryLinkToId = 10,
+                            IsRecherche = false,
+                            OfferLinkedtoServiceId = 9,
+                            Title = "Co Voiturage"
+                        },
+                        new
+                        {
+                            ServiceId = 36,
+                            CategoryLinkToId = 3,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 9,
+                            Title = "Electricité"
+                        },
+                        new
+                        {
+                            ServiceId = 37,
+                            CategoryLinkToId = 10,
+                            IsRecherche = true,
+                            OfferLinkedtoServiceId = 9,
+                            Title = "Entretien"
                         });
                 });
 
@@ -518,9 +997,9 @@ namespace barterserv.Migrations
                         new
                         {
                             UserId = 9,
-                            Email = "alain@gmail.com",
-                            Fullname = "Alain Silovy",
-                            Nickname = "Timon",
+                            Email = "Ombi@gmail.com",
+                            Fullname = "Bizi Ombi",
+                            Nickname = "Ombeline",
                             Picture = "timon.png",
                             Province = 0,
                             Role = 0,

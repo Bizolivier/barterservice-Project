@@ -155,7 +155,7 @@ namespace barterserv.Migrations
                 {
                     CmntId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(maxLength: 10, nullable: false),
+                    Description = table.Column<string>(nullable: false),
                     AuthorId = table.Column<int>(nullable: false),
                     ServiceLinkedToId = table.Column<int>(nullable: false),
                     ReceiverId = table.Column<int>(nullable: false),
@@ -215,7 +215,7 @@ namespace barterserv.Migrations
                     { 5, "amin@gmail.com", "Gandouz", "Amin", "simba.jpg", 0, 0, 1, 5, null },
                     { 6, "nico@gmail.com", "Krstev", "Nico", "rafiki.jpg", 1, 0, 1, 5, null },
                     { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", "zazu.jpg", 0, 0, 1, 5, null },
-                    { 9, "alain@gmail.com", "Alain Silovy", "Timon", "timon.png", 0, 0, 1, 5, null }
+                    { 9, "Ombi@gmail.com", "Bizi Ombi", "Ombeline", "timon.png", 0, 0, 1, 5, null }
                 });
 
             migrationBuilder.InsertData(
@@ -253,24 +253,77 @@ namespace barterserv.Migrations
                 columns: new[] { "ServiceId", "CategoryLinkToId", "IsRecherche", "OfferLinkedtoServiceId", "Title" },
                 values: new object[,]
                 {
+                    { 8, 8, false, 1, "archivage" },
+                    { 26, 6, true, 7, "Decoration" },
+                    { 27, 6, false, 7, "gardiennage" },
                     { 1, 2, true, 8, "Massage" },
                     { 2, 3, true, 8, "Electricité" },
                     { 3, 10, true, 8, "Entretien" },
+                    { 25, 6, false, 7, "colocation" },
                     { 4, 4, true, 8, "cours dotnet" },
-                    { 5, 6, false, 8, "Jardinage" },
                     { 6, 10, false, 8, "Co Voiturage" },
-                    { 7, 9, false, 8, "Hébergement" }
+                    { 7, 9, false, 8, "Hébergement" },
+                    { 28, 3, false, 8, "plomberie" },
+                    { 29, 3, true, 8, "tapisserie" },
+                    { 30, 3, false, 8, "outillage" },
+                    { 34, 6, false, 9, "Jardinage" },
+                    { 35, 10, false, 9, "Co Voiturage" },
+                    { 5, 6, false, 8, "Jardinage" },
+                    { 36, 3, true, 9, "Electricité" },
+                    { 24, 8, false, 6, "traduction" },
+                    { 22, 3, false, 6, "maçonerie" },
+                    { 9, 9, true, 1, "camping" },
+                    { 31, 1, false, 1, "promenade animaux" },
+                    { 10, 3, false, 2, "maçonerie" },
+                    { 11, 1, true, 2, "Repassage" },
+                    { 12, 8, false, 2, "traduction" },
+                    { 13, 6, false, 3, "colocation" },
+                    { 14, 6, true, 3, "Decoration" },
+                    { 23, 1, true, 6, "Repassage" },
+                    { 15, 6, false, 3, "gardiennage" },
+                    { 16, 3, false, 4, "plomberie" },
+                    { 17, 3, true, 4, "tapisserie" },
+                    { 18, 3, false, 4, "outillage" },
+                    { 33, 1, false, 4, "lecture" },
+                    { 19, 1, false, 5, "promenade animaux" },
+                    { 20, 1, true, 5, "ménage" },
+                    { 21, 1, false, 5, "lecture" },
+                    { 32, 1, true, 3, "ménage" },
+                    { 37, 10, true, 9, "Entretien" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "CmntId", "AuthorId", "Date", "Description", "Rating", "ReceiverId", "ServiceLinkedToId" },
-                values: new object[] { 1, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très satisfait du service rendu,je recommande", 4, 8, 3 });
-
-            migrationBuilder.InsertData(
-                table: "Comments",
-                columns: new[] { "CmntId", "AuthorId", "Date", "Description", "Rating", "ReceiverId", "ServiceLinkedToId" },
-                values: new object[] { 2, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation excellente ,vraiment au dessus de nos attente.Je recommande à 100%", 5, 8, 3 });
+                values: new object[,]
+                {
+                    { 10, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vraiment au dessus de nos attentes", 5, 1, 8 },
+                    { 7, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Recomandable", 4, 8, 5 },
+                    { 6, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "peu mieux faire", 3, 8, 4 },
+                    { 2, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation excellente ,vraiment au dessus de nos attentes.Je recommande à 100%", 5, 8, 3 },
+                    { 1, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très satisfait du service rendu,je recommande", 4, 8, 3 },
+                    { 5, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Reussit", 3, 8, 2 },
+                    { 4, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "peu recommandable", 1, 8, 1 },
+                    { 3, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Médiocre", 1, 8, 1 },
+                    { 26, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Passable", 3, 6, 24 },
+                    { 25, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Service minimum", 2, 6, 23 },
+                    { 24, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rien de pas ordinnaire", 3, 6, 22 },
+                    { 23, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), " Satisfait ", 3, 5, 21 },
+                    { 22, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "probleme de retard à l heure convenue ,mais prestation super", 4, 5, 20 },
+                    { 21, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prester apres 2 rdv ,mais bien executé", 3, 5, 19 },
+                    { 20, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trés amateur hélas!!", 1, 4, 18 },
+                    { 19, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très mitigé", 2, 4, 17 },
+                    { 18, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation moyenne", 3, 4, 16 },
+                    { 17, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A recommande", 4, 3, 15 },
+                    { 16, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), " Nos attente non pas étaient déçues", 5, 3, 14 },
+                    { 15, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très bien fait", 4, 3, 13 },
+                    { 14, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation à recommande à 100%", 5, 2, 12 },
+                    { 13, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "service rendu excellent", 4, 2, 11 },
+                    { 12, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Je recommande à 100%", 5, 2, 10 },
+                    { 11, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très satisfait", 5, 1, 9 },
+                    { 8, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation excellente ", 5, 8, 6 },
+                    { 9, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "je recommande", 4, 8, 7 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chats_UserId1",
