@@ -1,9 +1,9 @@
 export const IMG = imageName => {
+  console.log(imageName);
   return imageName.startsWith("https")
     ? imageName
     : require(`./images/${imageName}`);
 };
-
 
 export const formatDate = formattedDate => {
   const newFormattedDate = new Date(formattedDate);

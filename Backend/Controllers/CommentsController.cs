@@ -32,6 +32,42 @@ namespace backend.Controllers {
                    return comments; 
            }
 
+            [HttpPost("addComment")]        
+            public async Task<ActionResult<CommentDTO>> PostComment(CommentDTO data) {
+              var service = await _context.Services.FindAsync(data.ServiceLinkedToId);
+                 if (service == null)
+                 return NotFound(); 
+      
+
+              var newComment = new Comment(){
+                Description= data.Description,
+                AuthorId= data.AuthorId,
+                ServiceLinkedToId= data.ServiceLinkedToId,
+                ReceiverId=data.ReceiverId,
+                Date=data.Date,
+                Rating= data.Rating
+              };
+
+          Console.WriteLine(newComment.Description);
+          Console.WriteLine(newComment.Date);
+          Console.WriteLine(newComment.ServiceLinkedToId);
+          Console.WriteLine(newComment.ReceiverId);
+          Console.WriteLine(newComment.AuthorId);
+          Console.WriteLine(newComment.Rating);
+
+           _context.Comments.Add(newComment);
+        await _context.SaveChangesAsyncWithValidation();
+        
+          service.CommentLinkedToService.Add(newComment);
+          
+           var res = await _context.SaveChangesAsyncWithValidation();
+             if (!res.IsEmpty) 
+             return BadRequest(res);
+
+           return NoContent();
+        }
+
+
 
         }
 }    

@@ -13,3 +13,13 @@ export async function GetCommentsByServiceId(serviceId) {
   );
   return response.data;
 }
+export async function addComment(commentDTO) {
+  await axios.post(`${httpBase}/addComment`, {
+    Description: commentDTO.Description,
+    AuthorId: commentDTO.AuthorId,
+    ServiceLinkedToId: commentDTO.ServiceLinkedToId,
+    ReceiverId: commentDTO.ReceiverId,
+    Date: commentDTO.Date,
+    Rating: commentDTO.Rating
+  });
+}

@@ -34,7 +34,6 @@ namespace backend.Controllers {
                 OfferLinkedtoServiceId = data.OfferLinkedtoServiceId,
                 CategoryLinkToId = data.CategoryLinkToId,
                 IsRecherche = data.IsRecherche
-              
               };
           Console.WriteLine(offer);
           Console.WriteLine(offer.ServicesLinkedToOffer);
@@ -42,6 +41,7 @@ namespace backend.Controllers {
            _context.Services.Add(newService);
           offer.ServicesLinkedToOffer.Add(newService);
           category.CategorysServices.Add(newService);
+
            var res = await _context.SaveChangesAsyncWithValidation();
              if (!res.IsEmpty) 
              return BadRequest(res);
