@@ -18,7 +18,7 @@ export default () => {
   const [offered, setOffered] = useState([]);
   const [offer, setOffer] = useState([]);
   const [timeC, setTimeC] = useState();
-
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     serviceService.getRequestedSevices(user.email).then(listServicesRequest => {
       setRequested(listServicesRequest);
@@ -32,7 +32,7 @@ export default () => {
     });
 
     setBusy(false);
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     userService.GetOneByEmail(user.email).then(loggedUser => {
@@ -42,6 +42,10 @@ export default () => {
     });
     setBusy(false);
   }, []);
+
+  const refreshComponent = () => {
+    setRefresh(!refresh);
+  };
 
   return (
     <div className=" bloc  w-100  position-relative ">
@@ -78,6 +82,7 @@ export default () => {
                 offerId={offer.offerId}
                 setOffered={setOffered}
                 setRequested={setRequested}
+                refreshComponent={refreshComponent}
               />
 
               <ul>
@@ -92,6 +97,7 @@ export default () => {
                       title={item.title}
                       setOffered={setOffered}
                       setRequested={setRequested}
+                      refreshComponent={refreshComponent}
                     />
                   </li>
                 ))}
@@ -105,6 +111,7 @@ export default () => {
                 offerId={offer.offerId}
                 setOffered={setOffered}
                 setRequested={setRequested}
+                refreshComponent={refreshComponent}
               />
               <ul>
                 {offered.map(item => (
@@ -118,6 +125,7 @@ export default () => {
                       title={item.title}
                       setOffered={setOffered}
                       setRequested={setRequested}
+                      refreshComponent={refreshComponent}
                     />
                   </li>
                 ))}

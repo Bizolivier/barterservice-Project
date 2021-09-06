@@ -11,7 +11,11 @@ const CommentList = ({ serviceId, authorServId }) => {
   const [comt, setComt] = useState([]);
   const { user, isAuthenticated } = useAuth0();
   const [visible, setVisible] = useState(false);
+  const [refresh, setRefresh] = useState(true);
 
+  const refreshComponent = () => {
+    setRefresh(!refresh);
+  };
   useEffect(() => {
     async function fechData() {
       const listComments = await commentServ.GetCommentsByServiceId(serviceId);
@@ -19,7 +23,7 @@ const CommentList = ({ serviceId, authorServId }) => {
       console.log(serviceId);
     }
     fechData();
-  }, []);
+  }, [refresh]);
   const handleClickCreateComment = () => {
     setVisible(true);
   };
@@ -44,6 +48,7 @@ const CommentList = ({ serviceId, authorServId }) => {
             <FormComment
               serviceIdToComment={serviceId}
               authorServId={authorServId}
+              refreshComponent={refreshComponent}
             />
           ) : (
             <div />

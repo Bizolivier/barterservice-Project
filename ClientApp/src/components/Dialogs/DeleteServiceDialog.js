@@ -18,7 +18,8 @@ export default function DeleteServiceDialog({
   serviceId,
   title,
   setOffered,
-  setRequested
+  setRequested,
+  refreshComponent
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -26,9 +27,10 @@ export default function DeleteServiceDialog({
     setOpen(true);
   };
 
-  const handleDelete = () => {
-    servicesService.deleteService(serviceId);
+  const handleDelete = async () => {
+    await servicesService.deleteService(serviceId);
     setOpen(false);
+    refreshComponent();
   };
 
   const handleClose = () => {

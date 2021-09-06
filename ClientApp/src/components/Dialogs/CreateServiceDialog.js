@@ -32,7 +32,8 @@ export default function CreateServiceDialog({
   email,
   offerId,
   setOffered,
-  setRequested
+  setRequested,
+  refreshComponent
 }) {
   const classes = useStyles();
   const [categories, setCategories] = useState([]);
@@ -70,6 +71,7 @@ export default function CreateServiceDialog({
       );
       setOffered(listServicesOffered);
     }
+    refreshComponent();
   };
 
   return (

@@ -4,7 +4,11 @@ import * as framework from "../../Framework.js";
 import * as userService from "../../services/User.service";
 import * as commentService from "../../services/CommentService";
 
-const FormComment = ({ serviceIdToComment, authorServId }) => {
+const FormComment = ({
+  serviceIdToComment,
+  authorServId,
+  refreshComponent
+}) => {
   const { user, isAuthenticated } = useAuth0();
   const { email } = user;
   const [userNickname, setUserNickname] = useState("");
@@ -28,21 +32,31 @@ const FormComment = ({ serviceIdToComment, authorServId }) => {
     e.preventDefault();
     setComnt(e.target.value);
   };
-  const createComment = () => {
-    const newComment = {
-      Description: comnt,
-      AuthorId: userId,
-      ServiceLinkedToId: serviceIdToComment,
-      ReceiverId: authorServId,
-      Date: new Date(),
-      Rating: 0
-    };
-    commentService.addComment(newComment);
+  const handleSubmit = async event => {
+    event.preventDefault();
+    await createComment();
+    setComnt("");
+    refreshComponent();
+  };
+  const createComment = async () => {
+    async function ajoutComment() {
+      const newComment = {
+        Description: comnt,
+        AuthorId: userId,
+        ServiceLinkedToId: serviceIdToComment,
+        ReceiverId: authorServId,
+        Date: new Date(),
+        Rating: 0
+      };
+      await commentService.addComment(newComment);
+    }
+    ajoutComment();
   };
   const handleKeyUp = e => {
     e.preventDefault();
     if (e.key === "Enter") {
       createComment();
+      setComnt("");
     }
   };
 
@@ -74,7 +88,11 @@ const FormComment = ({ serviceIdToComment, authorServId }) => {
             </div>
           </div>
           <div className="float-end mt-2 pt-1">
-            <button type="button" className="btn btn-primary btn-sm">
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              onClick={handleSubmit}
+            >
               Post comment
             </button>
             <button type="button" className="btn btn-outline-primary btn-sm">
