@@ -10,13 +10,17 @@ export default ({ interlocutor, locutor, msg }) => {
           : "d-flex justify-content-end mb-4 "
       }
     >
-      <div className="msg_cotainer_send min-vw-50 ">
+      <div
+        className={
+          msg.senderId == locutor.userId
+            ? "msg_cotainer_send min-vw-50 text-dark bg-light d-inline-flex"
+            : "msg_cotainer_send min-vw-50 bg-success d-inline-flex"
+        }
+      >
         {msg.content}
-        <span className="msg_time_send d-inline-flex">
-          {framework.formatDate(msg.date)}
-        </span>
+        <span className="msg_time_send ">{framework.formatDate(msg.date)}</span>
       </div>
-      <div className="img_cont_msg">
+      <div className="img_cont_msg justify-content-start">
         <img
           src={
             msg.senderId == locutor.userId

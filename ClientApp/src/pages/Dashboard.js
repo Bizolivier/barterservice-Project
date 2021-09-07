@@ -6,7 +6,8 @@ import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
 import CreateServiceDialog from "../components/Dialogs/CreateServiceDialog.js";
 import * as offerService from "../services/Offer.Service.js";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import "./Dashboard.css";
+import barter from "../images/imageBarter.png";
+import recherche from "../images/recherche.jpg";
 import DeleteServiceDialog from "../components/Dialogs/DeleteServiceDialog.js";
 
 export default () => {
@@ -48,20 +49,20 @@ export default () => {
   };
 
   return (
-    <div className=" bloc  w-100  position-relative ">
+    <div className=" bloc  w-75 h-75  position-relative border-rounded mt-5 ">
       {isBusy ? (
         <div> </div>
       ) : (
-        <div className="upper-container bg-success ">
-          <div className="image-container text-left w-20 ">
+        <div className="ui segment   ">
+          <div className="image-container text-left w-20 px-2 mt-5">
             <img
               className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               src={user.picture}
               alt="name"
             />
           </div>
-          <div className="row d-inline-flex my-5">
-            <div className="col-md-4 personal-info px-2 ">
+          <div className="row d-inline-flex my-5 px-2 justify-content-start">
+            <div className="col-md-4 personal-info mx-2 ">
               <h3 className="text-left px-2">{userNickname}</h3>
 
               <div className=" d-inline-flex">
@@ -74,62 +75,82 @@ export default () => {
                 <p className="fst-italic">Time-credits </p>
               </div>
             </div>
-            <div className="col-md-4 recherche  ">
-              <h4 className="fst-italic">Services recherchés</h4>
-              <CreateServiceDialog
-                isRequest={true}
-                email={user.email}
-                offerId={offer.offerId}
-                setOffered={setOffered}
-                setRequested={setRequested}
-                refreshComponent={refreshComponent}
-              />
 
-              <ul>
-                {resquested.map(item => (
-                  <li
-                    className="d-inline-flex text-capitalize"
-                    key={item.serviceId}
-                  >
-                    {item.title}{" "}
-                    <DeleteServiceDialog
-                      serviceId={item.serviceId}
-                      title={item.title}
-                      setOffered={setOffered}
-                      setRequested={setRequested}
-                      refreshComponent={refreshComponent}
-                    />
-                  </li>
-                ))}
-              </ul>
+            <div className="w-25 h-100 shadow-lg">
+              <div className="card card-custom bg-white border-white border-0">
+                <div className="card-custom-img"></div>
+                <div className="card-custom-avatar">
+                  <img className="img-fluid" src={barter} alt="Avatar" />
+                </div>
+                <div className="card-body">
+                  <h4 className="card-title">Services recherchés</h4>
+                  <CreateServiceDialog
+                    isRequest={true}
+                    email={user.email}
+                    offerId={offer.offerId}
+                    setOffered={setOffered}
+                    setRequested={setRequested}
+                    refreshComponent={refreshComponent}
+                  />
+
+                  <ul>
+                    {resquested.map(item => (
+                      <li
+                        className="d-inline-flex text-capitalize"
+                        key={item.serviceId}
+                      >
+                        {item.title}
+                        <DeleteServiceDialog
+                          serviceId={item.serviceId}
+                          title={item.title}
+                          setOffered={setOffered}
+                          setRequested={setRequested}
+                          refreshComponent={refreshComponent}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div className="col-md-4 propose  px-2">
-              <h4 className="fst-italic">Services proposé</h4>
-              <CreateServiceDialog
-                isRequest={false}
-                email={user.email}
-                offerId={offer.offerId}
-                setOffered={setOffered}
-                setRequested={setRequested}
-                refreshComponent={refreshComponent}
-              />
-              <ul>
-                {offered.map(item => (
-                  <li
-                    className="d-inline-flex text-capitalize"
-                    key={item.serviceId}
-                  >
-                    {item.title}{" "}
-                    <DeleteServiceDialog
-                      serviceId={item.serviceId}
-                      title={item.title}
-                      setOffered={setOffered}
-                      setRequested={setRequested}
-                      refreshComponent={refreshComponent}
-                    />
-                  </li>
-                ))}
-              </ul>
+
+            <div className="w-25 h-100 shadow-lg">
+              <div className="card card-custom bg-white border-white border-0">
+                <div className="card-custom-img"></div>
+                <div class="card-custom-avatar">
+                  <img className="img-fluid" src={recherche} alt="Avatar" />
+                </div>
+                <div className="card-body my-4">
+                  <h4 className="card-title">Services proposés</h4>
+                  <CreateServiceDialog
+                    isRequest={false}
+                    email={user.email}
+                    offerId={offer.offerId}
+                    setOffered={setOffered}
+                    setRequested={setRequested}
+                    refreshComponent={refreshComponent}
+                  />
+                  <ul>
+                    {offered.map(item => (
+                      <div className="d-inline-flex">
+                        <li
+                          className="d-inline-flex text-capitalize"
+                          key={item.serviceId}
+                        >
+                          {item.title}{" "}
+                          <DeleteServiceDialog
+                            serviceId={item.serviceId}
+                            title={item.title}
+                            setOffered={setOffered}
+                            setRequested={setRequested}
+                            refreshComponent={refreshComponent}
+                          />
+                        </li>
+                      </div>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

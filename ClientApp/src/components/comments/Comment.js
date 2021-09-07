@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
 import * as userService from "../../services/User.service.js";
 import * as framework from "../../Framework.js";
+import { IconButton } from "@material-ui/core";
+import CancelIcon from "@material-ui/icons/Cancel";
+import * as commentServ from "../../services/CommentService";
+import Rating from "@material-ui/lab/Rating";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
-const Comment = ({ authorId, description, date }) => {
+const Comment = ({
+  authorId,
+  description,
+  date,
+  commentId,
+  refreshComponent,
+  ratingCmt
+}) => {
   const [userNickname, setUserNickname] = useState("");
   const [userPicture, setUserPicture] = useState("");
   const [isBusy, setBusy] = useState(true);
@@ -16,6 +29,11 @@ const Comment = ({ authorId, description, date }) => {
     }
     fetchData();
   }, []);
+
+  const handleDelete = async () => {
+    await commentServ.deleteComment(commentId);
+    refreshComponent();
+  };
 
   return (
     <div>
@@ -41,20 +59,24 @@ const Comment = ({ authorId, description, date }) => {
           <p className="mt-3 mb-4 pb-2 text-dark">{description}</p>
 
           <div className="ui rating" data-max-rating="1"></div>
-
           <div className="small d-flex justify-content-start">
-            <a href="#!" className="d-flex align-items-center me-3">
-              <i className="far fa-thumbs-up me-2"></i>
-              <p className="mb-0">Like</p>
-            </a>
-            <a href="#!" className="d-flex align-items-center me-3">
-              <i className="far fa-comment-dots me-2"></i>
-              <p className="mb-0">Comment</p>
-            </a>
-            <a href="#!" className="d-flex align-items-center me-3">
-              <i className="fas fa-share me-2"></i>
-              <p className="mb-0">Share</p>
-            </a>
+            <Rating
+              name="simple-controlled"
+              defaultValue={ratingCmt}
+              precision={0.5}
+              readOnly
+              emptyIcon={<StarBorderIcon fontSize="inherit" />}
+            />
+          </div>
+
+          <div className="small d-flex justify-content-end">
+            <IconButton
+              variant="outlined"
+              color="primary"
+              onClick={handleDelete}
+            >
+              <DeleteForeverIcon />
+            </IconButton>
           </div>
         </div>
       )}

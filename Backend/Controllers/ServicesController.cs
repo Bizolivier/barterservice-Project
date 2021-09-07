@@ -95,6 +95,8 @@ namespace backend.Controllers {
 
           offer.ServicesLinkedToOffer.Remove(service);
 
+           service.CommentLinkedToService.Clear();
+
           _context.Services.Remove(service);
           
           

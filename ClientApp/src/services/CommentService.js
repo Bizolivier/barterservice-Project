@@ -23,3 +23,6 @@ export async function addComment(commentDTO) {
     Rating: commentDTO.Rating
   });
 }
+export async function deleteComment(commentId){
+  await axios.delete(`${httpBase}/deleteComment/${commentId}`)
+}

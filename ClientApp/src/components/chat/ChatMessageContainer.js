@@ -57,6 +57,7 @@ export default ({ interlocutor, locutor }) => {
     e.preventDefault();
     if (e.key === "Enter") {
       createMessage();
+      setMsg("");
     }
   };
 

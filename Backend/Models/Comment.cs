@@ -34,7 +34,7 @@ namespace backend.Models {
 
         public DateTime Date {get;set;}
 
-        public int Rating {get;set;}
+        public float Rating {get;set;}
 
         
     }

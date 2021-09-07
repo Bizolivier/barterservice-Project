@@ -59,7 +59,7 @@ export default () => {
                 <NavLink
                   tag={Link}
                   className="text-dark px-4 my-3 fw-bolder"
-                  to="/MyServices"
+                  to={`/Avis/${user.email}`}
                 >
                   Mes Services
                 </NavLink>

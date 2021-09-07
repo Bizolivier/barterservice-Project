@@ -34,7 +34,7 @@ const Avis = () => {
           <div className="border-0">
             <div>
               <h3 className="text-dark text-center my-5 ">
-                Avis sur prestations rendues
+                Avis sur prestations rendues par {userSer.nickname}
               </h3>
             </div>
             <ul>

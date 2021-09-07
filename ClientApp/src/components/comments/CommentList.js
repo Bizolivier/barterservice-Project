@@ -38,6 +38,9 @@ const CommentList = ({ serviceId, authorServId }) => {
                 authorId={comment.authorId}
                 description={comment.description}
                 date={comment.date}
+                commentId={comment.cmntId}
+                refreshComponent={refreshComponent}
+                ratingCmt={comment.rating}
               />
             </div>
           );

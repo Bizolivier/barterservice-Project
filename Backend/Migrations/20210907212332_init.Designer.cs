@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210905194111_init")]
+    [Migration("20210907212332_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,8 +131,8 @@ namespace barterserv.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
+                    b.Property<float>("Rating")
+                        .HasColumnType("float");
 
                     b.Property<int>("ReceiverId")
                         .HasColumnType("int");
@@ -157,7 +157,7 @@ namespace barterserv.Migrations
                             AuthorId = 7,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Très satisfait du service rendu,je recommande",
-                            Rating = 4,
+                            Rating = 4f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 3
                         },
@@ -167,7 +167,7 @@ namespace barterserv.Migrations
                             AuthorId = 7,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Prestation excellente ,vraiment au dessus de nos attentes.Je recommande à 100%",
-                            Rating = 5,
+                            Rating = 5f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 3
                         },
@@ -177,7 +177,7 @@ namespace barterserv.Migrations
                             AuthorId = 3,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Médiocre",
-                            Rating = 1,
+                            Rating = 1f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 1
                         },
@@ -187,7 +187,7 @@ namespace barterserv.Migrations
                             AuthorId = 2,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "peu recommandable",
-                            Rating = 1,
+                            Rating = 1f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 1
                         },
@@ -197,7 +197,7 @@ namespace barterserv.Migrations
                             AuthorId = 4,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Reussit",
-                            Rating = 3,
+                            Rating = 3f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 2
                         },
@@ -207,7 +207,7 @@ namespace barterserv.Migrations
                             AuthorId = 4,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "peu mieux faire",
-                            Rating = 3,
+                            Rating = 3f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 4
                         },
@@ -217,7 +217,7 @@ namespace barterserv.Migrations
                             AuthorId = 5,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Recomandable",
-                            Rating = 4,
+                            Rating = 4f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 5
                         },
@@ -227,7 +227,7 @@ namespace barterserv.Migrations
                             AuthorId = 6,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Prestation excellente ",
-                            Rating = 5,
+                            Rating = 5f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 6
                         },
@@ -237,7 +237,7 @@ namespace barterserv.Migrations
                             AuthorId = 7,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "je recommande",
-                            Rating = 4,
+                            Rating = 4f,
                             ReceiverId = 8,
                             ServiceLinkedToId = 7
                         },
@@ -247,7 +247,7 @@ namespace barterserv.Migrations
                             AuthorId = 9,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "vraiment au dessus de nos attentes",
-                            Rating = 5,
+                            Rating = 5f,
                             ReceiverId = 1,
                             ServiceLinkedToId = 8
                         },
@@ -257,7 +257,7 @@ namespace barterserv.Migrations
                             AuthorId = 9,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Très satisfait",
-                            Rating = 5,
+                            Rating = 5f,
                             ReceiverId = 1,
                             ServiceLinkedToId = 9
                         },
@@ -267,7 +267,7 @@ namespace barterserv.Migrations
                             AuthorId = 1,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Je recommande à 100%",
-                            Rating = 5,
+                            Rating = 5f,
                             ReceiverId = 2,
                             ServiceLinkedToId = 10
                         },
@@ -277,7 +277,7 @@ namespace barterserv.Migrations
                             AuthorId = 3,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "service rendu excellent",
-                            Rating = 4,
+                            Rating = 4f,
                             ReceiverId = 2,
                             ServiceLinkedToId = 11
                         },
@@ -287,7 +287,7 @@ namespace barterserv.Migrations
                             AuthorId = 4,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Prestation à recommande à 100%",
-                            Rating = 5,
+                            Rating = 5f,
                             ReceiverId = 2,
                             ServiceLinkedToId = 12
                         },
@@ -297,7 +297,7 @@ namespace barterserv.Migrations
                             AuthorId = 5,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Très bien fait",
-                            Rating = 4,
+                            Rating = 4f,
                             ReceiverId = 3,
                             ServiceLinkedToId = 13
                         },
@@ -307,7 +307,7 @@ namespace barterserv.Migrations
                             AuthorId = 6,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = " Nos attente non pas étaient déçues",
-                            Rating = 5,
+                            Rating = 5f,
                             ReceiverId = 3,
                             ServiceLinkedToId = 14
                         },
@@ -317,7 +317,7 @@ namespace barterserv.Migrations
                             AuthorId = 7,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A recommande",
-                            Rating = 4,
+                            Rating = 4f,
                             ReceiverId = 3,
                             ServiceLinkedToId = 15
                         },
@@ -327,7 +327,7 @@ namespace barterserv.Migrations
                             AuthorId = 8,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Prestation moyenne",
-                            Rating = 3,
+                            Rating = 3f,
                             ReceiverId = 4,
                             ServiceLinkedToId = 16
                         },
@@ -337,7 +337,7 @@ namespace barterserv.Migrations
                             AuthorId = 9,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Très mitigé",
-                            Rating = 2,
+                            Rating = 2f,
                             ReceiverId = 4,
                             ServiceLinkedToId = 17
                         },
@@ -347,7 +347,7 @@ namespace barterserv.Migrations
                             AuthorId = 2,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Trés amateur hélas!!",
-                            Rating = 1,
+                            Rating = 1f,
                             ReceiverId = 4,
                             ServiceLinkedToId = 18
                         },
@@ -357,7 +357,7 @@ namespace barterserv.Migrations
                             AuthorId = 6,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Prester apres 2 rdv ,mais bien executé",
-                            Rating = 3,
+                            Rating = 3f,
                             ReceiverId = 5,
                             ServiceLinkedToId = 19
                         },
@@ -367,7 +367,7 @@ namespace barterserv.Migrations
                             AuthorId = 7,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "probleme de retard à l heure convenue ,mais prestation super",
-                            Rating = 4,
+                            Rating = 4f,
                             ReceiverId = 5,
                             ServiceLinkedToId = 20
                         },
@@ -377,7 +377,7 @@ namespace barterserv.Migrations
                             AuthorId = 1,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = " Satisfait ",
-                            Rating = 3,
+                            Rating = 3f,
                             ReceiverId = 5,
                             ServiceLinkedToId = 21
                         },
@@ -387,7 +387,7 @@ namespace barterserv.Migrations
                             AuthorId = 8,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Rien de pas ordinnaire",
-                            Rating = 3,
+                            Rating = 3f,
                             ReceiverId = 6,
                             ServiceLinkedToId = 22
                         },
@@ -397,7 +397,7 @@ namespace barterserv.Migrations
                             AuthorId = 9,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Service minimum",
-                            Rating = 2,
+                            Rating = 2f,
                             ReceiverId = 6,
                             ServiceLinkedToId = 23
                         },
@@ -407,7 +407,7 @@ namespace barterserv.Migrations
                             AuthorId = 5,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Passable",
-                            Rating = 3,
+                            Rating = 3f,
                             ReceiverId = 6,
                             ServiceLinkedToId = 24
                         });

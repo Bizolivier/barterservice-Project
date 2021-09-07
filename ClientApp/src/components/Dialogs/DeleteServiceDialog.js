@@ -9,6 +9,7 @@ import Slide from "@material-ui/core/Slide";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { IconButton, TextField } from "@material-ui/core";
 import * as servicesService from "../../services/Services.Service.js";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -40,7 +41,7 @@ export default function DeleteServiceDialog({
   return (
     <div>
       <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
-        <CancelIcon />
+        <DeleteForeverIcon />
       </IconButton>
       <Dialog
         open={open}

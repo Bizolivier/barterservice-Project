@@ -4,6 +4,9 @@ import * as framework from "../../Framework.js";
 import * as userService from "../../services/User.service";
 import * as commentService from "../../services/CommentService";
 
+import Rating from "@material-ui/lab/Rating";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+
 const FormComment = ({
   serviceIdToComment,
   authorServId,
@@ -16,6 +19,7 @@ const FormComment = ({
   const [isBusy, setBusy] = useState(true);
   const [comnt, setComnt] = useState("");
   const [userId, setUserId] = useState();
+  const [value, setValue] = useState(3);
 
   useEffect(() => {
     async function fetchData() {
@@ -46,7 +50,7 @@ const FormComment = ({
         ServiceLinkedToId: serviceIdToComment,
         ReceiverId: authorServId,
         Date: new Date(),
-        Rating: 0
+        Rating: value
       };
       await commentService.addComment(newComment);
     }
@@ -58,6 +62,9 @@ const FormComment = ({
       createComment();
       setComnt("");
     }
+  };
+  const handleClickRating = e => {
+    console.log(e);
   };
 
   return (
@@ -85,6 +92,16 @@ const FormComment = ({
               <label className="form-label" htmlFor="textAreaExample">
                 Commentaire
               </label>
+              <Rating
+                name="customized-empty"
+                value={value}
+                precision={0.5}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                  console.log(newValue);
+                }}
+                emptyIcon={<StarBorderIcon fontSize="inherit" />}
+              />
             </div>
           </div>
           <div className="float-end mt-2 pt-1">

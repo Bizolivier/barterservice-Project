@@ -64,7 +64,7 @@ const UserProfil = () => {
                           <img
                             src={framework.IMG(userPicture)}
                             alt="{offer.author}"
-                            width="100"
+                            width="200"
                             className=" rounded-circle border border-primary"
                           />
                         </div>

@@ -67,7 +67,26 @@ namespace backend.Controllers {
            return NoContent();
         }
 
+         [HttpDelete("deleteComment/{commentId}")]
+        public async Task<IActionResult> deleteComment(int commentId) {
+          var comment = await _context.Comments.FindAsync(commentId);
+           if (comment == null)
+              return NotFound(); 
 
+        C onsole.WriteLine(commentId);
 
-        }
+          var service = await _context.Services.FindAsync(comment.ServiceLinkedToId);
+              if (service == null)
+              return NotFound();   
+
+              service.CommentLinkedToService.Remove(comment);
+             _context.Comments.Remove(comment);
+          
+          var res = await _context.SaveChangesAsyncWithValidation();
+              if (!res.IsEmpty)
+               return BadRequest(res);
+
+                return NoContent();    
+            }
+      }
 }    

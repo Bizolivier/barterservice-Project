@@ -11,7 +11,7 @@ namespace backend.Models {
         public int ServiceLinkedToId {get;set;}
         public int ReceiverId {get;set;}
         public DateTime Date {get;set;}
-        public int Rating {get;set;}
+        public float Rating {get;set;}
        
     }
 }
