@@ -117,7 +117,7 @@ export default () => {
             <div className="w-25 h-100 shadow-lg">
               <div className="card card-custom bg-white border-white border-0">
                 <div className="card-custom-img"></div>
-                <div class="card-custom-avatar">
+                <div className="card-custom-avatar">
                   <img className="img-fluid" src={recherche} alt="Avatar" />
                 </div>
                 <div className="card-body my-4">

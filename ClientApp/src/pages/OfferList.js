@@ -9,6 +9,7 @@ import * as offerService from "../services/Offer.Service.js";
 import * as userService from "../services/User.service.js";
 import * as categoryService from "../services/Category.Service.js";
 import SearchBar from "../components/searchbar/SearchBar.js";
+import Grid from "@material-ui/core/Grid";
 import "./OfferList.css";
 
 const OfferList = () => {
@@ -24,15 +25,26 @@ const OfferList = () => {
     });
   }, []);
 
-  const rendedListOffers = searchList.map(offer => {
-    return (
-      <React.Fragment key={offer.offerId}>
-        <div className="d-inline-flex text-center">
-          <Offer key={offer.id} offer={offer} />
-        </div>
-      </React.Fragment>
-    );
-  });
+  const rendedListOffers = (
+    <div>
+      <Grid container>
+        {searchList.map(offer => (
+          <Grid
+            container
+            item
+            xs={12}
+            sm={6}
+            md={6}
+            lg={4}
+            spacing={5}
+            style={{ margin: "10px 0px 10px 0px" }}
+          >
+            <Offer key={offer.id} offer={offer} />
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  );
 
   return (
     <div>
@@ -44,7 +56,7 @@ const OfferList = () => {
             Offres services disponibles
           </h2>
           <SearchBar setSearchList={setSearchList} />
-          <div className="">{rendedListOffers}</div>
+          <div style={{ "padding-top": "20px" }}>{rendedListOffers}</div>
         </div>
       )}
     </div>

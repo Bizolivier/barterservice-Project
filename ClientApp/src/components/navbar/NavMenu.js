@@ -102,7 +102,20 @@ export default () => {
                 <div />
               )}
             </NavItem>
-
+            <div>
+              {isAuthenticated ? (
+                <div className="left floated  ui image my-3">
+                  <img
+                    src={user.picture}
+                    alt="user"
+                    width="50px"
+                    className=" rounded-circle border border-primary"
+                  />
+                </div>
+              ) : (
+                <div />
+              )}
+            </div>
             <NavItem className=" px-4 my-3">
               <AuthenticationButton />
             </NavItem>
