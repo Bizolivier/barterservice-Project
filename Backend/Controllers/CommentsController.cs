@@ -73,7 +73,7 @@ namespace backend.Controllers {
            if (comment == null)
               return NotFound(); 
 
-        C onsole.WriteLine(commentId);
+       
 
           var service = await _context.Services.FindAsync(comment.ServiceLinkedToId);
               if (service == null)
