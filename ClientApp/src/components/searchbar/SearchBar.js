@@ -4,24 +4,22 @@ import CategorySelection from "../selection/CategorySelection";
 import Offer from "../../pages/Offer.js";
 import * as offerService from "../../services/Offer.Service.js";
 
-const SearchBar = ({ setSearchList }) => {
-  const [selectedProvinceValue, setSelectedProvinceValue] = useState(-1);
-  const [userProvince, setUserProvince] = useState(0);
-  const [selectedCategoryValue, setSelectedCategoryValue] = useState(0);
-  const [userCategory, setUserCategory] = useState(0);
+const SearchBar = ({
+  provinceOL,
+  categorieOL,
+  setProvinceOL,
+  setCategorieOL
+}) => {
+  const [selectedProvinceValue, setSelectedProvinceValue] = useState(
+    provinceOL
+  );
+  const [selectedCategoryValue, setSelectedCategoryValue] = useState(
+    categorieOL
+  );
 
-  useEffect(() => {
-    offerService.getAll().then(response => {
-      setSearchList(response);
-    });
-  }, []);
-
-  const search = async () => {
-    const listOffers = await offerService.GetOffersBySearch(
-      selectedProvinceValue,
-      selectedCategoryValue
-    );
-    setSearchList(listOffers);
+  const search = () => {
+    setProvinceOL(selectedProvinceValue);
+    setCategorieOL(selectedCategoryValue);
   };
 
   return (
@@ -29,7 +27,7 @@ const SearchBar = ({ setSearchList }) => {
       <div className=" d-inline-flex  text-center my-2 h-20 w-100 shadow-lg rounded ">
         <div className="w-25">
           <ProvinceSelection
-            selectedOption={userProvince}
+            selectedOption={0}
             selectedProvinceValue={selectedProvinceValue}
             changeProvinceValue={e => setSelectedProvinceValue(e.value)}
             allProvinces={true}
@@ -37,7 +35,7 @@ const SearchBar = ({ setSearchList }) => {
         </div>
         <div className="mx-4 w-25 ">
           <CategorySelection
-            selectedOption={userCategory}
+            selectedOption={0}
             selectedCategoryValue={selectedCategoryValue}
             changeCategoryValue={e => setSelectedCategoryValue(e)}
           />

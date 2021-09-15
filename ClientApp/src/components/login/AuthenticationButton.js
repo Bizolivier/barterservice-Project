@@ -11,16 +11,14 @@ const AuthenticationButton = () => {
       className="logout px-2 bg-danger"
       onClick={() => logout({ returnTo: window.location.origin })}
     >
-      {" "}
-      Log Out{" "}
+      Log Out
     </NavLink>
   ) : (
     <NavLink
       className="login px-2 bg-success"
       onClick={() => loginWithRedirect()}
     >
-      {" "}
-      Login{" "}
+      Login
     </NavLink>
   );
 };

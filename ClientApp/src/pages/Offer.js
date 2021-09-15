@@ -63,7 +63,7 @@ const Offer = ({ offer }) => {
     fetchData().then(res => {
       setBusy(false);
     });
-  }, []);
+  }, [author]);
 
   const handleClickOpenPropose = () => {
     setOpenPropose(!openPropose);
@@ -89,6 +89,7 @@ const Offer = ({ offer }) => {
           <div> </div>
         ) : (
           <Card className={classes.root}>
+           
             <CardHeader
               avatar={
                 <img
@@ -114,9 +115,7 @@ const Offer = ({ offer }) => {
                 Profil
               </Link>
             </div>
-
             {/*service proposé */}
-
             <CardActions disableSpacing>
               <Typography variant="h6" color="dark">
                 je propose
@@ -132,7 +131,6 @@ const Offer = ({ offer }) => {
                 <ExpandMoreIcon />
               </IconButton>
             </CardActions>
-
             <Collapse in={expandedPropose} timeout="auto" unmountOnExit>
               <CardContent>
                 {offered.map(item => (
@@ -144,9 +142,7 @@ const Offer = ({ offer }) => {
                 ))}
               </CardContent>
             </Collapse>
-
             {/*service recherché */}
-
             <CardActions disableSpacing>
               <Typography
                 variant="h6"

@@ -522,6 +522,47 @@ namespace barterserv.Migrations
                         });
                 });
 
+            modelBuilder.Entity("backend.Models.Prestation", b =>
+                {
+                    b.Property<int>("PrestationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Etat")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdServiceProvided")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUserClient")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUserProvider")
+                        .HasColumnType("int");
+
+                    b.HasKey("PrestationId");
+
+                    b.ToTable("Prestations");
+
+                    b.HasData(
+                        new
+                        {
+                            PrestationId = 1,
+                            Etat = 0,
+                            IdServiceProvided = 1,
+                            IdUserClient = 7,
+                            IdUserProvider = 8
+                        },
+                        new
+                        {
+                            PrestationId = 2,
+                            Etat = 0,
+                            IdServiceProvided = 10,
+                            IdUserClient = 4,
+                            IdUserProvider = 2
+                        });
+                });
+
             modelBuilder.Entity("backend.Models.Service", b =>
                 {
                     b.Property<int>("ServiceId")
@@ -883,15 +924,10 @@ namespace barterserv.Migrations
                     b.Property<int>("TimeCredit")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId");
 
                     b.HasIndex("Email")
                         .IsUnique();
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Users");
 
@@ -1051,7 +1087,7 @@ namespace barterserv.Migrations
                         .IsRequired();
 
                     b.HasOne("backend.Models.User", "Sender")
-                        .WithMany()
+                        .WithMany("MessagesSended")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1079,13 +1115,6 @@ namespace barterserv.Migrations
                         .HasForeignKey("OfferLinkedtoServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("backend.Models.User", b =>
-                {
-                    b.HasOne("backend.Models.User", null)
-                        .WithMany("MessagesSended")
-                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

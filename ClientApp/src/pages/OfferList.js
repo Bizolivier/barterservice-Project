@@ -13,53 +13,55 @@ import Grid from "@material-ui/core/Grid";
 import "./OfferList.css";
 
 const OfferList = () => {
-  const [selected, onOfferSelected] = useState([]);
-  const [offerz, setOfferz] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [busy, setBusy] = useState(false);
   const [searchList, setSearchList] = useState([]);
+  const [provinceOL, setProvinceOL] = useState(-1);
+  const [categorieOL, setCategorieOL] = useState(0);
 
   useEffect(() => {
-    categoryService.getAllCategories().then(response => {
-      setCategories(response);
+    offerService.GetOffersBySearch(provinceOL, categorieOL).then(response => {
+      setSearchList(response);
     });
-  }, []);
-
-  const rendedListOffers = (
-    <div>
-      <Grid container>
-        {searchList.map(offer => (
-          <Grid
-            container
-            item
-            xs={12}
-            sm={6}
-            md={6}
-            lg={4}
-            spacing={5}
-            style={{ margin: "10px 0px 10px 0px" }}
-          >
-            <Offer key={offer.id} offer={offer} />
-          </Grid>
-        ))}
-      </Grid>
-    </div>
-  );
+  }, [provinceOL, categorieOL]);
 
   return (
     <div>
-      {busy ? (
-        <div> </div>
-      ) : (
-        <div>
-          <h2 className="text-center text-white fw-bolder fst-italic my-2 shadow-lg">
-            Offres services disponibles
-          </h2>
-          <SearchBar setSearchList={setSearchList} />
-          <div style={{ "padding-top": "20px" }}>{rendedListOffers}</div>
-        </div>
-      )}
+      <h2 className="text-center text-white fw-bolder fst-italic my-2 shadow-lg">
+        Offres services disponibles
+      </h2>
+      <SearchBar
+        provinceOL={provinceOL}
+        categorieOL={categorieOL}
+        setProvinceOL={setProvinceOL}
+        setCategorieOL={setCategorieOL}
+      />
+
+      <GridOffer searchListOnGrid={searchList} />
     </div>
   );
 };
 export default OfferList;
+
+const GridOffer = ({ searchListOnGrid }) => {
+  return (
+    <div>
+      <Grid container style={{ "padding-top": "20px" }}>
+        {searchListOnGrid.map(offer => {
+          return (
+            <Grid
+              container
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={4}
+              spacing={5}
+              style={{ margin: "10px 0px 10px 0px" }}
+            >
+              <Offer offer={offer} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </div>
+  );
+};

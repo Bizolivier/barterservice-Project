@@ -30,7 +30,7 @@ export default ({ interlocutor, locutor }) => {
       fetchData().then(res => {
         setBusy(false);
       });
-    }, 500);
+    }, 2000);
     return () => clearInterval(interval);
   }, [interlocutor, locutor]);
 

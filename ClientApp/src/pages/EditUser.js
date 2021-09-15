@@ -4,6 +4,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Avatar from "../components/avatar/Avatar.js";
 import ProvinceSelection from "../components/selection/ProvinceSelection.js";
 import SexeSelection from "../components/selection/SexeSelection.js";
+import Snackbar from "@material-ui/core/Snackbar";
+import { makeStyles } from "@material-ui/core/styles";
+
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 export default () => {
   const { user, isAuthenticated } = useAuth0();
@@ -15,8 +19,8 @@ export default () => {
   const [isBusy, setBusy] = useState(true);
   const [selectedProvinceValue, setSelectedProvinceValue] = useState(0);
   const [selectedSexeValue, setSelectedSexeValue] = useState(0);
+  const [open, setOpen] = useState(false);
 
-  
   useEffect(() => {
     userService.GetOneByEmail(user.email).then(loggedUser => {
       setUserNickname(loggedUser.nickname);
@@ -43,12 +47,21 @@ export default () => {
       nickname: userNickname,
       fullname: userFullname,
       email: user.email,
-      picture:user.picture,
+      picture: user.picture,
       province: selectedProvinceValue,
       sexe: selectedSexeValue
     };
 
     userService.PutUser(user.email, newUpdatedUser);
+    setOpen(true);
+  }
+
+  function handleCloseAlert(event, reason) {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   }
 
   return (
@@ -138,6 +151,15 @@ export default () => {
               </form>
             </div>
           </div>
+          <Snackbar
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleCloseAlert}
+          >
+            <Alert onClose={handleCloseAlert} severity="success">
+              Le profil a été modifié avec succes
+            </Alert>
+          </Snackbar>
         </div>
       )}
     </div>

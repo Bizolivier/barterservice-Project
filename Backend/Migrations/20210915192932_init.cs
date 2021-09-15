@@ -22,6 +22,22 @@ namespace barterserv.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Prestations",
+                columns: table => new
+                {
+                    PrestationId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    IdServiceProvided = table.Column<int>(nullable: false),
+                    IdUserClient = table.Column<int>(nullable: false),
+                    IdUserProvider = table.Column<int>(nullable: false),
+                    Etat = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prestations", x => x.PrestationId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -34,18 +50,11 @@ namespace barterserv.Migrations
                     TimeCredit = table.Column<int>(nullable: false),
                     Province = table.Column<int>(nullable: false),
                     Sexe = table.Column<int>(nullable: false),
-                    Role = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<int>(nullable: true)
+                    Role = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
-                    table.ForeignKey(
-                        name: "FK_Users_Users_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -191,31 +200,40 @@ namespace barterserv.Migrations
                 values: new object[,]
                 {
                     { 1, "Aide à la personne" },
-                    { 9, "Vacances" },
-                    { 8, "Travail" },
-                    { 7, "Mode" },
-                    { 6, "Maison" },
-                    { 10, "Vehicule" },
-                    { 4, "Cours" },
-                    { 3, "Bricolage" },
                     { 2, "Beauté bien être" },
-                    { 5, "Loisirs" }
+                    { 3, "Bricolage" },
+                    { 4, "Cours" },
+                    { 5, "Loisirs" },
+                    { 6, "Maison" },
+                    { 7, "Mode" },
+                    { 8, "Travail" },
+                    { 9, "Vacances" },
+                    { 10, "Vehicule" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Prestations",
+                columns: new[] { "PrestationId", "Etat", "IdServiceProvided", "IdUserClient", "IdUserProvider" },
+                values: new object[,]
+                {
+                    { 2, 0, 10, 4, 2 },
+                    { 1, 0, 1, 7, 8 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Picture", "Province", "Role", "Sexe", "TimeCredit", "UserId1" },
+                columns: new[] { "UserId", "Email", "Fullname", "Nickname", "Picture", "Province", "Role", "Sexe", "TimeCredit" },
                 values: new object[,]
                 {
-                    { 8, "bizidu@gmail.com", "Olivier Bizimungu", "L'Olive", "vautour.jpg", 8, 0, 1, 50, null },
-                    { 1, "ben@gmail.com", "Penelle", "Ben", "mufassa.jpg", 3, 0, 1, 5, null },
-                    { 2, "bruno@gmail.com", "Lacroix", "Bru", "pumba.jpg", 0, 0, 1, 5, null },
-                    { 3, "aela@gmail.com", "Izere", "Aela", "nala.jpg", 8, 0, 0, 5, null },
-                    { 4, "luis@gmail.com", "Save Lara", "Luis", "scar.jpg", 0, 0, 1, 5, null },
-                    { 5, "amin@gmail.com", "Gandouz", "Amin", "simba.jpg", 0, 0, 1, 5, null },
-                    { 6, "nico@gmail.com", "Krstev", "Nico", "rafiki.jpg", 1, 0, 1, 5, null },
-                    { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", "zazu.jpg", 0, 0, 1, 5, null },
-                    { 9, "Ombi@gmail.com", "Bizi Ombi", "Ombeline", "timon.png", 0, 0, 1, 5, null }
+                    { 1, "ben@gmail.com", "Penelle", "Ben", "mufassa.jpg", 3, 0, 1, 5 },
+                    { 2, "bruno@gmail.com", "Lacroix", "Bru", "pumba.jpg", 0, 0, 1, 5 },
+                    { 3, "aela@gmail.com", "Izere", "Aela", "nala.jpg", 8, 0, 0, 5 },
+                    { 4, "luis@gmail.com", "Save Lara", "Luis", "scar.jpg", 0, 0, 1, 5 },
+                    { 5, "amin@gmail.com", "Gandouz", "Amin", "simba.jpg", 0, 0, 1, 5 },
+                    { 6, "nico@gmail.com", "Krstev", "Nico", "rafiki.jpg", 1, 0, 1, 5 },
+                    { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", "zazu.jpg", 0, 0, 1, 5 },
+                    { 8, "bizidu@gmail.com", "Olivier Bizimungu", "L'Olive", "vautour.jpg", 8, 0, 1, 50 },
+                    { 9, "Ombi@gmail.com", "Bizi Ombi", "Ombeline", "timon.png", 0, 0, 1, 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -381,11 +399,6 @@ namespace barterserv.Migrations
                 table: "Users",
                 column: "Email",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_UserId1",
-                table: "Users",
-                column: "UserId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -395,6 +408,9 @@ namespace barterserv.Migrations
 
             migrationBuilder.DropTable(
                 name: "Messages");
+
+            migrationBuilder.DropTable(
+                name: "Prestations");
 
             migrationBuilder.DropTable(
                 name: "Services");

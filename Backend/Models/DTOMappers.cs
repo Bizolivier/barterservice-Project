@@ -110,6 +110,21 @@ namespace backend.Models {
             return comments.Select(o => o.ToDTO()).ToList();
         }
 
+         public static PrestationDTO ToDTO(this Prestation prestation){
+            return new PrestationDTO {
+                PrestationId  = prestation.PrestationId,
+                IdServiceProvided = prestation.IdServiceProvided,
+                IdUserClient = prestation.IdUserClient,
+                IdUserProvider =prestation.IdUserProvider,
+                Etat = prestation.Etat
+               
+            };
+
+        }
+         public static List<PrestationDTO> ToDTO(this IEnumerable<Prestation> prestations) {
+            return prestations.Select(p => p.ToDTO()).ToList();
+        }
+
         
     }
 }

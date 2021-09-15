@@ -58,7 +58,7 @@ namespace backend.Models {
 
         public  virtual IList <Chat> ChatLinkedToUser2 {get;set;} = new List<Chat>();
 
-        public  virtual IList <User> MessagesSended {get;set;} = new List<User>();
+        public  virtual IList <Message> MessagesSended {get;set;} = new List<Message>();
 
         public virtual IList <Comment> CommentsOwned {get;set;}= new List<Comment>();
 

@@ -14,6 +14,7 @@ namespace backend.Models {
         public DbSet <Offer> Offers {get;set;}
         public DbSet <Chat> Chats {get;set;}
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Prestation> Prestations {get;set;}
         
       
 
@@ -28,6 +29,7 @@ namespace backend.Models {
            addChats(modelBuilder);
            addMessages(modelBuilder);
            addComments(modelBuilder);
+           addPrestations(modelBuilder);
            
            }
          private void structuralConfiguration(ModelBuilder modelBuilder) {
@@ -240,6 +242,16 @@ namespace backend.Models {
                new Comment (){ CmntId = 25, Description="Service minimum", AuthorId = 9, ServiceLinkedToId= 23,ReceiverId = 6,Rating=2  },
                new Comment (){ CmntId = 26, Description="Passable", AuthorId = 5,ServiceLinkedToId= 24 , ReceiverId = 6,Rating=3  }
            );
+        }
+
+
+
+          private void addPrestations(ModelBuilder modelBuilder){
+            modelBuilder.Entity<Prestation>().HasData(
+               new Prestation() { PrestationId =1, IdServiceProvided  =1, IdUserClient  =7, IdUserProvider=8},
+               new Prestation() { PrestationId =2, IdServiceProvided = 10, IdUserClient = 4 ,IdUserProvider=2}
+             
+            );
         }
     }
 
