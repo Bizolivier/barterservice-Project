@@ -20,7 +20,13 @@ namespace backend.Controllers {
 
         [HttpGet]
        public async Task<ActionResult<IEnumerable<PrestationDTO>>> GetAll() {
-              return (await _context.Prestations.ToListAsync()).ToDTO();
+              List<PrestationDTO> listPrestation = (await _context.Prestations.ToListAsync()).ToDTO();
+              for (int i=0 ; i<listPrestation.Count;i++){
+                Service s =  _context.Services.Find(listPrestation[i].IdServiceProvided);
+
+                listPrestation[i].nomService=s.Title;
+              }
+              return listPrestation;
         }
 
 
@@ -37,6 +43,7 @@ namespace backend.Controllers {
                 IdServiceProvided = data.IdServiceProvided,
                 IdUserClient = data.IdUserClient,
                 IdUserProvider = data.IdUserProvider,
+                Date = data.Date,
                 Etat = data.Etat
                
               };
@@ -78,8 +85,70 @@ namespace backend.Controllers {
         }
 
 
-        //***********************************UPDATE******************************************/
-        //***********************************UPDATE******************************************/
-        //***********************************UPDATE******************************************/
+        //***********************************GETORDERED by Client******************************************/
+        //***********************************GETORDERED by Client******************************************/
+        //***********************************GETORDERED by Client******************************************/
+
+        [HttpGet("getProvided/{userId}")]
+        public async Task<ActionResult<IEnumerable<PrestationDTO>>> getProvided(int userId) {
+           
+             return( await _context.Prestations.Where(p => p.IdUserProvider== userId && p.Etat == Etat.Orded).ToListAsync()).ToDTO();
+       }
+
+        //***********************************GETPROVIDED by Client******************************************/
+        //***********************************GETPROVIDED by Client******************************************/
+        //***********************************GETPROVIDED by Client******************************************/
+
+           [HttpGet("getOrdered/{userId}")]
+        public async Task<ActionResult<IEnumerable<PrestationDTO>>> getOrdered(int userId) {
+           
+             return( await _context.Prestations.Where(p => p.IdUserClient == userId && p.Etat == Etat.Provided).ToListAsync()).ToDTO();
+       }
+
+
+       
+        //***********************************GETORDERED by the provider******************************************/
+        //***********************************GETORDERED by the provider******************************************/
+        //***********************************GETORDERED by the provider******************************************/
+
+          [HttpGet("getOrderedServByProvider/{idUserProvider}")]
+        public async Task<ActionResult<IEnumerable<PrestationDTO>>> getOrderedServByProvider(int idUserProvider) {
+           
+             return( await _context.Prestations.Where(p => p.IdUserClient == idUserProvider && p.Etat ==Etat.Orded).ToListAsync()).ToDTO();
+       }
+
+
+       //***********************************GEtProvided by the provider******************************************/
+        //***********************************GEtProvided by the provider******************************************/
+        //***********************************GEtProvided by the provider******************************************/
+         
+             [HttpGet("getProvidedServByProvider/{idUserProvider}")]
+        public async Task<ActionResult<IEnumerable<PrestationDTO>>> getProvidedServByProvider(int idUserProvider) {
+           
+             return( await _context.Prestations.Where(p => p.IdUserProvider == idUserProvider && p.Etat == Etat.Provided).ToListAsync()).ToDTO();
+       }
+
+
+
+       
+
+        //***********************************GEtProvided by the provider******************************************/
+        //***********************************GEtProvided by the provider******************************************/
+        //***********************************GEtProvided by the provider******************************************/
+         
+         [HttpGet("getNbNotifications/{userId}")]
+         public async Task<ActionResult<int>> getNbNotifications(int userId) {
+           
+              int nbCommandesRecuesAPrester = (await _context.Prestations.Where(p =>
+                  p.IdUserProvider== userId && p.Etat == Etat.Orded
+               ).ToListAsync()).Count;
+
+              int nbCommanderRecuesApayer =  (await _context.Prestations.Where(p => 
+                p.IdUserClient == userId && p.Etat == Etat.Provided
+               ).ToListAsync()).Count;
+
+              return(nbCommandesRecuesAPrester+nbCommanderRecuesApayer);
+        }
+        
     }
 }    

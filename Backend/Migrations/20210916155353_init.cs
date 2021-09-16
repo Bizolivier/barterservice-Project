@@ -25,16 +25,17 @@ namespace barterserv.Migrations
                 name: "Prestations",
                 columns: table => new
                 {
-                    PrestationId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IdServiceProvided = table.Column<int>(nullable: false),
                     IdUserClient = table.Column<int>(nullable: false),
                     IdUserProvider = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     Etat = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Prestations", x => x.PrestationId);
+                    table.PrimaryKey("PK_Prestations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -213,11 +214,11 @@ namespace barterserv.Migrations
 
             migrationBuilder.InsertData(
                 table: "Prestations",
-                columns: new[] { "PrestationId", "Etat", "IdServiceProvided", "IdUserClient", "IdUserProvider" },
+                columns: new[] { "Id", "Date", "Etat", "IdServiceProvided", "IdUserClient", "IdUserProvider" },
                 values: new object[,]
                 {
-                    { 2, 0, 10, 4, 2 },
-                    { 1, 0, 1, 7, 8 }
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 10, 4, 2 },
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 1, 7, 8 }
                 });
 
             migrationBuilder.InsertData(

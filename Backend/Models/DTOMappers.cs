@@ -111,11 +111,13 @@ namespace backend.Models {
         }
 
          public static PrestationDTO ToDTO(this Prestation prestation){
+
             return new PrestationDTO {
-                PrestationId  = prestation.PrestationId,
+                Id  = prestation.Id,
                 IdServiceProvided = prestation.IdServiceProvided,
                 IdUserClient = prestation.IdUserClient,
-                IdUserProvider =prestation.IdUserProvider,
+                IdUserProvider =prestation.IdUserProvider,                
+                Date = prestation.Date,
                 Etat = prestation.Etat
                
             };

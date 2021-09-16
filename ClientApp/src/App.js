@@ -11,6 +11,8 @@ import EditUser from "./pages/EditUser";
 import Chatbox from "./pages/Chatbox";
 import Avis from "./pages/Avis";
 import ProtectedRoute from "./auth/protected-route";
+import GestionPrestation from "./pages/GestionPrestation";
+import NavMenu from "./components/navbar/NavMenu";
 
 import "./custom.css";
 
@@ -29,6 +31,11 @@ export default class App extends Component {
           <ProtectedRoute exact path="/MyServices" component={MyServices} />
           <Route path="/profilUser/:email" component={UserProfil} />
           <ProtectedRoute exact path="/EditUser" component={EditUser} />
+          <ProtectedRoute
+            exact
+            path="/GestionPrestation"
+            component={GestionPrestation}
+          />
           <ProtectedRoute exact path="/Chatbox" component={Chatbox} />
         </Layout>
       </React.Fragment>

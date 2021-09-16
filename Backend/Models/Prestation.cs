@@ -10,13 +10,13 @@ using Microsoft.EntityFrameworkCore;
 namespace backend.Models{
 
      public enum Etat {
-         Orded = 0, provided = 1, rated=2
+         Orded = 0, Provided = 1, Rated=2
        }
 
     public class Prestation {
           [Key,
         DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PrestationId { get; set; }
+        public int Id { get; set; }
 
         [ ForeignKey("Service")]
         public int IdServiceProvided {get;set;}
@@ -26,6 +26,8 @@ namespace backend.Models{
 
          [ ForeignKey("User")]
         public int IdUserProvider {get;set;}
+
+        public DateTime Date {get;set;}
 
         public Etat Etat {get;set;} = Etat.Orded;
 

@@ -5,13 +5,17 @@ import * as offerService from "../services/Offer.Service.js";
 import * as userService from "../services/User.service.js";
 import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
 import * as serviceService from "../services/Services.Service.js";
-import { useAuth0, User } from "@auth0/auth0-react";
+import * as prestationService from "../services/PrestationService.js";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Container, Button, ButtonGroup, Grid } from "@material-ui/core";
 import * as framework from "../Framework";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import { IconButton } from "@material-ui/core";
+import GestionPrestation from "./GestionPrestation";
 
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
-  const { user, isAuthenticated } = useAuth0();
+
   const [isBusy, setBusy] = useState(true);
   const [authorEmail, setAuthorEmail] = useState();
   const [userNickname, setUserNickname] = useState("");
@@ -19,6 +23,8 @@ const UserProfil = () => {
   const [userProvince, setUserProvince] = useState(0);
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
+  const [userCoId, setUserCoId] = useState(0);
+  const { user, isAuthenticated } = useAuth0();
 
   let { email } = useParams();
 
@@ -33,6 +39,11 @@ const UserProfil = () => {
       setAuthorEmail(res.email);
       setUserPicture(res.picture);
 
+      if (isAuthenticated) {
+        const userConnected = await userService.GetOneByEmail(user.email);
+        setUserCoId(userConnected.userId);
+      }
+
       const listServicesRequest = await serviceService.getRequestedSevices(
         email
       );
@@ -46,6 +57,19 @@ const UserProfil = () => {
       setBusy(false);
     });
   }, [isBusy]);
+
+  const handleClickAddPrestation = (serviceId, authorId, userCoId) => {
+    const newPrestation = {
+      IdServiceProvided: serviceId,
+      IdUserClient: userCoId,
+      IdUserProvider: authorId,
+      Date: new Date(),
+      Etat: 0
+    };
+    prestationService.addPrestation(newPrestation);
+
+    console.log(serviceId, authorId, userCoId);
+  };
 
   return (
     <Container>
@@ -104,6 +128,21 @@ const UserProfil = () => {
                           key={item.serviceId}
                         >
                           {item.title}
+                          {isAuthenticated ? (
+                            <IconButton
+                              onClick={() => {
+                                handleClickAddPrestation(
+                                  item.serviceId,
+                                  offer.authorId,
+                                  userCoId
+                                );
+                              }}
+                            >
+                              <AddShoppingCartIcon />
+                            </IconButton>
+                          ) : (
+                            <div />
+                          )}
                         </li>
                       ))}
                     </ul>

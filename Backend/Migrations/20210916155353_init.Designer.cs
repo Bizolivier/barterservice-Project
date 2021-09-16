@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210915192932_init")]
+    [Migration("20210916155353_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -526,9 +526,12 @@ namespace barterserv.Migrations
 
             modelBuilder.Entity("backend.Models.Prestation", b =>
                 {
-                    b.Property<int>("PrestationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Etat")
                         .HasColumnType("int");
@@ -542,14 +545,15 @@ namespace barterserv.Migrations
                     b.Property<int>("IdUserProvider")
                         .HasColumnType("int");
 
-                    b.HasKey("PrestationId");
+                    b.HasKey("Id");
 
                     b.ToTable("Prestations");
 
                     b.HasData(
                         new
                         {
-                            PrestationId = 1,
+                            Id = 1,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Etat = 0,
                             IdServiceProvided = 1,
                             IdUserClient = 7,
@@ -557,7 +561,8 @@ namespace barterserv.Migrations
                         },
                         new
                         {
-                            PrestationId = 2,
+                            Id = 2,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Etat = 0,
                             IdServiceProvided = 10,
                             IdUserClient = 4,

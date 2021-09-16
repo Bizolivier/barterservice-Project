@@ -248,8 +248,8 @@ namespace backend.Models {
 
           private void addPrestations(ModelBuilder modelBuilder){
             modelBuilder.Entity<Prestation>().HasData(
-               new Prestation() { PrestationId =1, IdServiceProvided  =1, IdUserClient  =7, IdUserProvider=8},
-               new Prestation() { PrestationId =2, IdServiceProvided = 10, IdUserClient = 4 ,IdUserProvider=2}
+               new Prestation() { Id =1, IdServiceProvided  =1, IdUserClient  =7, IdUserProvider=8},
+               new Prestation() { Id =2, IdServiceProvided = 10, IdUserClient = 4 ,IdUserProvider=2}
              
             );
         }
