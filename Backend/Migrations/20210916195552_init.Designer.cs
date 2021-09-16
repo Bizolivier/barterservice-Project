@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210916155353_init")]
+    [Migration("20210916195552_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

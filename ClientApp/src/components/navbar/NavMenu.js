@@ -15,6 +15,7 @@ import "./NavMenu.css";
 export default () => {
   const { user, isAuthenticated } = useAuth0();
   const [nbNotif, setNbNotif] = useState(0);
+  const [userCoId,setUserCoId] = useState();
 
   const StyledBadge = withStyles(theme => ({
     badge: {
@@ -32,6 +33,7 @@ export default () => {
         const notif = await GestionPrestationService.getNbNotifications(
           userConnected.userId
         );
+        setUserCoId( userConnected.userId);
         setNbNotif(notif);
       }
     }

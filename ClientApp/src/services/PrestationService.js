@@ -11,6 +11,12 @@ export async function addPrestation(prestationDTO) {
     Etat: prestationDTO.Etat
   });
 }
+
 export async function getNbNotifications(userId) {
   return (await axios.get(`${httpBase}/getNbNotifications/${userId}`)).data;
 }
+
+export async function getOrdered(userId) {
+  return (await axios.get(`${httpBase}/getOrdered/${userId}`)).data;
+}
+
