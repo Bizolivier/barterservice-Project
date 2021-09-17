@@ -96,7 +96,22 @@ namespace backend.Controllers {
         [HttpGet("getProvided/{userId}")]
         public async Task<ActionResult<IEnumerable<PrestationDTO>>> getProvided(int userId) {
            
-             return( await _context.Prestations.Where(p => p.IdUserProvider== userId && p.Etat == Etat.Orded).ToListAsync()).ToDTO();
+            List<PrestationDTO> listPrestation =  ( await _context.Prestations.Where(p => p.IdUserProvider== userId && p.Etat == Etat.Orded || p.IdUserProvider== userId && p.Etat == Etat.Provided).ToListAsync()).ToDTO();
+             for (int i=0 ; i<listPrestation.Count;i++){
+                Service s =  _context.Services.Find(listPrestation[i].IdServiceProvided);
+                User client = _context.Users.Find(listPrestation[i].IdUserClient);
+                 User provider = _context.Users.Find(listPrestation[i].IdUserProvider);
+
+                listPrestation[i].nomService=s.Title;
+              
+
+                listPrestation[i].nomClient=client.Nickname;
+               
+
+                listPrestation[i].nomProvider=provider.Nickname;
+           
+              }
+              return listPrestation;
        }
 
         //***********************************GETPROVIDED by Client******************************************/
@@ -106,7 +121,21 @@ namespace backend.Controllers {
            [HttpGet("getOrdered/{userId}")]
         public async Task<ActionResult<IEnumerable<PrestationDTO>>> getOrdered(int userId) {
            
-             return( await _context.Prestations.Where(p => p.IdUserClient == userId && p.Etat == Etat.Orded).ToListAsync()).ToDTO();
+           
+              List<PrestationDTO> listPrestation = ( await _context.Prestations.Where
+              (p => p.IdUserClient == userId && p.Etat == Etat.Orded || p.IdUserClient == userId && p.Etat == Etat.Provided).ToListAsync()).ToDTO();
+
+             for (int i=0 ; i<listPrestation.Count;i++){
+                Service s =  _context.Services.Find(listPrestation[i].IdServiceProvided);
+                User client = _context.Users.Find(listPrestation[i].IdUserClient);
+                 User provider = _context.Users.Find(listPrestation[i].IdUserProvider);
+
+                listPrestation[i].nomService=s.Title;
+                listPrestation[i].nomClient=client.Nickname;
+                listPrestation[i].nomProvider=provider.Nickname;
+               
+              }
+              return listPrestation;
        }
 
 

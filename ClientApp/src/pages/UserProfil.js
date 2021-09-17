@@ -11,6 +11,7 @@ import { Container, Button, ButtonGroup, Grid } from "@material-ui/core";
 import * as framework from "../Framework";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { IconButton } from "@material-ui/core";
+import OrderTheService from "../components/Dialogs/OrderTheService";
 import GestionPrestation from "./GestionPrestation";
 
 const UserProfil = () => {
@@ -139,10 +140,12 @@ const UserProfil = () => {
                               }}
                             >
                               <AddShoppingCartIcon />
+                              <OrderTheService userName={userNickname} serviceName={item.title} servId={item.serviceId} offerAuthorId={offer.authorId} userConnectedId={userCoId} />
                             </IconButton>
+
                           ) : (
-                            <div />
-                          )}
+                              <div />
+                            )}
                         </li>
                       ))}
                     </ul>

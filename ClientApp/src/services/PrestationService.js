@@ -20,3 +20,6 @@ export async function getOrdered(userId) {
   return (await axios.get(`${httpBase}/getOrdered/${userId}`)).data;
 }
 
+export async function getProvided(userId) {
+  return (await axios.get(`${httpBase}/getProvided/${userId}`)).data;
+}

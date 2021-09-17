@@ -116,7 +116,7 @@ namespace backend.Models {
                 Id  = prestation.Id,
                 IdServiceProvided = prestation.IdServiceProvided,
                 IdUserClient = prestation.IdUserClient,
-                IdUserProvider =prestation.IdUserProvider,                
+                IdUserProvider =prestation.IdUserProvider, 
                 Date = prestation.Date,
                 Etat = prestation.Etat
                
