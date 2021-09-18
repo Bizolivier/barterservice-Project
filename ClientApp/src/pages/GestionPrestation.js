@@ -19,6 +19,7 @@ export default () => {
   const [aPrester, setAPrester] = useState([]);
   const [isBusy, setBusy] = useState(true);
   const { user, isAuthenticated } = useAuth0();
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -36,7 +37,11 @@ export default () => {
     fetchData().then(res => {
       setBusy(false);
     });
-  }, [user]);
+  }, [user, refresh]);
+
+  const refreshComponent = () => {
+    setRefresh(!refresh);
+  };
 
   return (
     <div className="mx-5">
@@ -52,13 +57,13 @@ export default () => {
               <h5> Mes prestations commander</h5>
             </div>
 
-            <GridClient mesPresCommander={myPrest} />
+            <GridClient mesPresCommander={myPrest} refreshComponent={refreshComponent} />
 
             <div className="fst-italic mx-5 text-dark ">
               <h5> Mes prestations à prester </h5>
             </div>
 
-           <GridProvider mesPresAPrester={aPrester}/>
+            <GridProvider mesPresAPrester={aPrester} />
           </div>
 
 

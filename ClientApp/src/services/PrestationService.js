@@ -23,3 +23,10 @@ export async function getOrdered(userId) {
 export async function getProvided(userId) {
   return (await axios.get(`${httpBase}/getProvided/${userId}`)).data;
 }
+export async function getEtatChanged(id) {
+  await axios.put(`${httpBase}/getEtatChanged/${id}`);
+}
+
+export async function getPrestDeleted(id) {
+  await axios.delete(`${httpBase}/getPrestDeleted/${id}`);
+}

@@ -130,16 +130,8 @@ const UserProfil = () => {
                         >
                           {item.title}
                           {isAuthenticated ? (
-                            <IconButton
-                              onClick={() => {
-                                handleClickAddPrestation(
-                                  item.serviceId,
-                                  offer.authorId,
-                                  userCoId
-                                );
-                              }}
-                            >
-                              <AddShoppingCartIcon />
+                            <IconButton>
+
                               <OrderTheService userName={userNickname} serviceName={item.title} servId={item.serviceId} offerAuthorId={offer.authorId} userConnectedId={userCoId} />
                             </IconButton>
 

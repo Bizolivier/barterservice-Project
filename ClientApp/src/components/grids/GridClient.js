@@ -5,72 +5,144 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import PayementServiceDialog from "../Dialogs/PayementServiceDialog";
 import * as frameworks from "../../Framework";
-
-const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-        field: "nomService",
-        headerName: "Nom du Service",
-        width: 200,
-        editable: true
-    },
-    {
-        field: "date",
-        headerName: "Date ",
-        type: "date",
-        width: 200,
-        renderCell: params => {
-            return <div>{frameworks.formatDate(params.value)
-            }<div>{console.log(params)}</div>
-            </div>;
-        }
-    },
-    {
-        field: "nomProvider",
-        headerName: "Prestataire",
-        type: "number",
-        width: 200,
-        editable: true
-    },
-    {
-        field: "etat",
-        headerName: "Action",
-
-        flex: 1,
-        renderCell: params => {
-            return (
-                (
-
-                    <div>
-
-                        {params.value == 0 ? (
-                            <div>
-                                <IconButton>
-                                    <HourglassEmptyIcon />
-                                    <p>Preter</p>
-                                </IconButton>
-
-                            </div>)
-                            :
-                            (<div>
-                                <IconButton>
-                                    <CheckCircleIcon />
-                                    <p>En attente de payement</p>
-                                </IconButton>
-                            </div>)
-                        }
+import * as prestationServ from "../../services/PrestationService";
 
 
 
-                    </div>
-                )
 
-            )
-        }
+
+
+
+export default ({ mesPresCommander, refreshComponent }) => {
+
+    const handleState = (id) => {
+        prestationServ.getEtatChanged(id);
+        refreshComponent();
+
     }
-];
+    const handleDelete=(id) => {
+        prestationServ.getPrestDeleted(id);
+        refreshComponent();
 
-export default ({ mesPresCommander }) => {
+    }
+
+
+
+    const columns = [
+        { field: "id", headerName: "ID", width: 90 },
+        {
+            field: "nomService",
+            headerName: "Service",
+            width: 150,
+            editable: true
+        },
+        {
+            field: "date",
+            headerName: "Date ",
+            type: "date",
+            width: 250,
+            renderCell: params => {
+                return <div>{frameworks.formatDateTime(params.value)
+                }<div>{console.log(params.row)}</div>
+                </div>;
+            }
+        },
+        {
+            field: "nomProvider",
+            headerName: "Prestataire",
+            type: "number",
+            width: 150,
+            editable: true
+        },
+        {
+            field: "etat",
+            headerName: "Action",
+            width: 150,
+            renderCell: params => {
+                return (
+                    (
+
+                        <div>
+
+                            {params.value == 0 ? (
+                                <div>
+                                    <Button variant="outlined" color="primary" onClick={() => { handleState(params.row.id) }}>
+                                        A prester
+                                </Button>
+
+
+                                </div>)
+                                :
+                                (<div>
+                                    <Button variant="outlined" color="secondary" onClick={handleState}>
+                                        A Payer
+                                </Button>
+                                </div>)
+                            }
+
+
+
+                        </div>
+                    )
+
+                )
+            }
+        },
+        {
+            field: "",
+            headerName: "Editer",
+
+            width: 150,
+            renderCell: params => {
+                return (
+                    (
+
+                        <div>
+
+                            (
+                                <div>
+                                    <Button variant="outlined" color="primary" onClick={() => { handleState(params.row.id) }}>
+                                       Update
+                                </Button>
+
+
+                                </div>)
+                               
+                        </div>
+                    )
+
+                )
+            }
+        },
+        {
+            field: "x",
+            headerName: "Effacer",
+
+            width: 150,
+            renderCell: params => {
+                return (
+                    (
+
+                        <div>
+
+                            (
+                                <div>
+                                    <Button variant="outlined" color="primary" onClick={() => { handleDelete(params.row.id) }}>
+                                       Delete
+                                </Button>
+
+
+                                </div>)
+                               
+                        </div>
+                    )
+
+                )
+            }
+        }
+    ];
+
+
 
 
 

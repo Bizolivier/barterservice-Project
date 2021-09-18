@@ -69,11 +69,11 @@ namespace backend.Controllers {
 
 
 
-         [HttpPut("PutPrestation/{prestationId}")]
-         public async Task<IActionResult> PutUser(int prestationId) {
+         [HttpPut("getEtatChanged/{id}")]
+         public async Task<IActionResult> getEtatChanged(int id) {
         
 
-            var prestation = await _context.Prestations.FindAsync(prestationId);
+            var prestation = await _context.Prestations.FindAsync(id);
 
            if (prestation == null)
               return NotFound();
@@ -182,6 +182,26 @@ namespace backend.Controllers {
 
               return(nbCommandesRecuesAPrester+nbCommanderRecuesApayer);
         }
+       
+          [HttpDelete("getPrestDeleted/{id}")]
+        public async Task<IActionResult> getPrestDeleted(int id) {
+          var prestation = await _context.Prestations.FindAsync(id);
+           if (prestation == null)
+              return NotFound(); 
+
+          _context.Prestations.Remove(prestation);
+          
+          
+                var res = await _context.SaveChangesAsyncWithValidation();
+                if (!res.IsEmpty)
+                    return BadRequest(res);
+
+                return NoContent();    
+            
+
+      }
+
+        
         
     }
 }    

@@ -6,6 +6,8 @@ import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import PayementServiceDialog from "../Dialogs/PayementServiceDialog";
 import * as frameworks from "../../Framework";
 
+export default ({ mesPresAPrester }) => {
+
 const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
@@ -18,9 +20,9 @@ const columns = [
         field: "date",
         headerName: "Date ",
         type: "date",
-        width: 200,
+        width: 250,
         renderCell: params => {
-            return <div>{frameworks.formatDate(params.value)
+            return <div>{frameworks.formatDateTime(params.value)
             }<div>{console.log(params)}</div>
             </div>;
         }
@@ -70,7 +72,7 @@ const columns = [
     }
 ];
 
-export default ({ mesPresAPrester }) => {
+
 
 
 

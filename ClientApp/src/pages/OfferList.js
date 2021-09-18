@@ -44,7 +44,7 @@ export default OfferList;
 const GridOffer = ({ searchListOnGrid }) => {
   return (
     <div>
-      <Grid container style={{ "padding-top": "20px" }}>
+      <Grid container style={{ "paddingTop": "20px" }}>
         {searchListOnGrid.map(offer => {
           return (
             <Grid
