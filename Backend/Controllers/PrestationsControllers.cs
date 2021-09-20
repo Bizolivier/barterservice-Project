@@ -96,7 +96,8 @@ namespace backend.Controllers {
         [HttpGet("getProvided/{userId}")]
         public async Task<ActionResult<IEnumerable<PrestationDTO>>> getProvided(int userId) {
            
-            List<PrestationDTO> listPrestation =  ( await _context.Prestations.Where(p => p.IdUserProvider== userId && p.Etat == Etat.Orded || p.IdUserProvider== userId && p.Etat == Etat.Provided).ToListAsync()).ToDTO();
+            List<PrestationDTO> listPrestation =  ( await _context.Prestations.Where(p => p.IdUserProvider== userId ).OrderByDescending(ob=>ob.Id).ToListAsync()).ToDTO();
+
              for (int i=0 ; i<listPrestation.Count;i++){
                 Service s =  _context.Services.Find(listPrestation[i].IdServiceProvided);
                 User client = _context.Users.Find(listPrestation[i].IdUserClient);
@@ -123,7 +124,7 @@ namespace backend.Controllers {
            
            
               List<PrestationDTO> listPrestation = ( await _context.Prestations.Where
-              (p => p.IdUserClient == userId && p.Etat == Etat.Orded || p.IdUserClient == userId && p.Etat == Etat.Provided).ToListAsync()).ToDTO();
+              (p => p.IdUserClient == userId ).OrderByDescending(ob=>ob.Id).ToListAsync()).ToDTO();
 
              for (int i=0 ; i<listPrestation.Count;i++){
                 Service s =  _context.Services.Find(listPrestation[i].IdServiceProvided);
@@ -200,6 +201,33 @@ namespace backend.Controllers {
             
 
       }
+   
+       [HttpPut("PutDate/{id}")]
+        public async Task<IActionResult> PutDate(int id, PrestationDTO prestationDTO)
+        {
+             Console.WriteLine("nous sommes dans le put ");
+            var prestation = await _context.Prestations.FindAsync(id);
+
+              if (prestation == null)
+              return NotFound(); 
+                
+                prestation.Date = prestationDTO.Date;
+                Console.WriteLine(prestation.Date);
+            
+         var res = await _context.SaveChangesAsyncWithValidation();
+           if (!res.IsEmpty)
+           return BadRequest(res);
+
+         return NoContent();
+        }
+
+        
+
+
+         
+
+
+     
 
         
         

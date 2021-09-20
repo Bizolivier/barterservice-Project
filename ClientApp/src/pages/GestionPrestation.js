@@ -19,12 +19,14 @@ export default () => {
   const [aPrester, setAPrester] = useState([]);
   const [isBusy, setBusy] = useState(true);
   const { user, isAuthenticated } = useAuth0();
+  const [nicknameCo, setNicknameCo] = useState("");
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       if (isAuthenticated) {
         const userConnected = await userService.GetOneByEmail(user.email);
+        setNicknameCo(userConnected.nickname);
         const prestCommande = await prestationServ.getOrdered(
           userConnected.userId
         );
@@ -32,6 +34,7 @@ export default () => {
         const prestAPrester = await prestationServ.getProvided(userConnected.userId);
         setAPrester(prestAPrester);
         console.log(myPrest);
+        console.log(nicknameCo);
       }
     }
     fetchData().then(res => {
@@ -57,13 +60,13 @@ export default () => {
               <h5> Mes prestations commander</h5>
             </div>
 
-            <GridClient mesPresCommander={myPrest} refreshComponent={refreshComponent} />
+            <GridClient mesPresCommander={myPrest} refreshComponent={refreshComponent} nomCo={nicknameCo}/>
 
             <div className="fst-italic mx-5 text-dark ">
-              <h5> Mes prestations à prester </h5>
+              <h5> Mes prestations à prester {nicknameCo} </h5>
             </div>
 
-            <GridProvider mesPresAPrester={aPrester} />
+            <GridProvider mesPresAPrester={aPrester} refreshComponent={refreshComponent} nomCo={nicknameCo}/>
           </div>
 
 

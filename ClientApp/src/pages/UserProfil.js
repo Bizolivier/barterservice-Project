@@ -13,6 +13,7 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { IconButton } from "@material-ui/core";
 import OrderTheService from "../components/Dialogs/OrderTheService";
 import GestionPrestation from "./GestionPrestation";
+import ChatMessageContainer from "../components/chat/ChatMessageContainer";
 
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
@@ -26,6 +27,8 @@ const UserProfil = () => {
   const [offered, setOffered] = useState([]);
   const [userCoId, setUserCoId] = useState(0);
   const { user, isAuthenticated } = useAuth0();
+  const [interlocut, SetInterlocuteur] = useState([]);
+  const [locut, Setlocuteur] = useState([])
 
   let { email } = useParams();
 
@@ -35,6 +38,7 @@ const UserProfil = () => {
       setOffer(offer);
 
       const res = await userService.GetOneByEmail(email);
+      SetInterlocuteur(res);
       setUserNickname(res.nickname);
       setUserProvince(res.province);
       setAuthorEmail(res.email);
@@ -42,6 +46,7 @@ const UserProfil = () => {
 
       if (isAuthenticated) {
         const userConnected = await userService.GetOneByEmail(user.email);
+        Setlocuteur(userConnected);
         setUserCoId(userConnected.userId);
       }
 
@@ -76,7 +81,7 @@ const UserProfil = () => {
     <Container>
       {!isBusy && (
         <div className=" ui cards  mb-3   ">
-          <div className=" bg-white card w-100    mt-5 px-5 py-3 ">
+          <div className="col-md-4 col-xl-3 chat bg-white card w-50    mt-5 px-5 py-3 ">
             <div className="user mx-5 ">
               {/*banière*/}
               <div className="content d-inline-flex">
@@ -103,9 +108,7 @@ const UserProfil = () => {
                     </span>
                   </div>
                   <div className="d-inline-flex">
-                    <Button color="primary">
-                      <Link to="/Chatbox">Me contacter</Link>
-                    </Button>
+
                     <Button color="primary">
                       <Link to={`/Avis/${authorEmail}`}>Voir les avis</Link>
                     </Button>
@@ -167,6 +170,13 @@ const UserProfil = () => {
               </Link>
             </div>
           </div>
+          <Button color="primary">
+            Contact
+              <div className=" col-md-8 col-xl-6 chat float-right mt-5 w-75" >
+              <ChatMessageContainer interlocutor={interlocut}
+                locutor={locut} />
+            </div>
+          </Button>
         </div>
       )}
     </Container>

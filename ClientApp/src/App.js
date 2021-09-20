@@ -36,7 +36,7 @@ export default class App extends Component {
             path="/GestionPrestation"
             component={GestionPrestation}
           />
-          <ProtectedRoute exact path="/Chatbox" component={Chatbox} />
+         <ProtectedRoute exact path="/Chatbox" component={Chatbox} />
         </Layout>
       </React.Fragment>
     );

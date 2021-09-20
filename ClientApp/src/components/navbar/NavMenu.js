@@ -15,8 +15,8 @@ import "./NavMenu.css";
 export default () => {
   const { user, isAuthenticated } = useAuth0();
   const [nbNotif, setNbNotif] = useState(0);
-  const [userCoId,setUserCoId] = useState();
-
+  const [userCoId, setUserCoId] = useState();
+  const [refresh, setRefresh] = useState(false);
   const StyledBadge = withStyles(theme => ({
     badge: {
       right: -3,
@@ -33,12 +33,12 @@ export default () => {
         const notif = await GestionPrestationService.getNbNotifications(
           userConnected.userId
         );
-        setUserCoId( userConnected.userId);
+        setUserCoId(userConnected.userId);
         setNbNotif(notif);
       }
     }
     fetchData();
-  }, [user]);
+  }, [user, refresh]);
 
   return (
     <header>
@@ -46,20 +46,12 @@ export default () => {
         <Container className="flex-row  d-inline-flex">
           <ul className="navbar-nav flex-row position-relative ">
             <NavItem className="justify-content-center">
-              <NavLink tag={Link} className="text-white px-3 vw-20" to="/">
+              <NavLink tag={Link} className="text-white px-3 vw-20" to="/" >
                 <img className="" src={logo} alt="name" />
               </NavLink>
             </NavItem>
 
-            <NavItem>
-              <NavLink
-                tag={Link}
-                className="text-dark px-4 my-3 fw-bolder "
-                to="/"
-              >
-                MainPage
-              </NavLink>
-            </NavItem>
+
 
             <NavItem>
               {isAuthenticated ? (
@@ -67,12 +59,13 @@ export default () => {
                   tag={Link}
                   className="text-dark px-4 my-3 fw-bolder"
                   to="/Dashboard"
+                  onClick={() => setRefresh(!refresh)}
                 >
                   Dashboard
                 </NavLink>
               ) : (
-                <div />
-              )}
+                  <div />
+                )}
             </NavItem>
             <NavItem>
               <NavLink
@@ -89,18 +82,20 @@ export default () => {
                   tag={Link}
                   className="text-dark px-4 my-3 fw-bolder"
                   to={`/Avis/${user.email}`}
+                  onClick={() => setRefresh(!refresh)}
                 >
                   Mes Services
                 </NavLink>
               ) : (
-                <div />
-              )}
+                  <div />
+                )}
             </NavItem>
             <NavItem>
               <NavLink
                 tag={Link}
                 className="text-dark px-4 my-3 fw-bolder"
                 to="/OfferList"
+                onClick={() => setRefresh(!refresh)}
               >
                 Offers
               </NavLink>
@@ -111,12 +106,13 @@ export default () => {
                   tag={Link}
                   className="text-dark px-4 my-3 fw-bolder"
                   to="/EditUser"
+                  onClick={() => setRefresh(!refresh)}
                 >
                   Profil
                 </NavLink>
               ) : (
-                <div />
-              )}
+                  <div />
+                )}
             </NavItem>
             <NavItem>
               {isAuthenticated ? (
@@ -128,8 +124,8 @@ export default () => {
                   Chatbox
                 </NavLink>
               ) : (
-                <div />
-              )}
+                  <div />
+                )}
             </NavItem>
 
             <div>
@@ -138,6 +134,7 @@ export default () => {
                   tag={Link}
                   className="text-dark px-4 my-3 fw-bolder"
                   to="/GestionPrestation"
+                  onClick={() => setRefresh(!refresh)}
                 >
                   <IconButton aria-label="cart">
                     <StyledBadge badgeContent={nbNotif} color="primary">
@@ -146,8 +143,8 @@ export default () => {
                   </IconButton>
                 </NavLink>
               ) : (
-                <div></div>
-              )}
+                  <div></div>
+                )}
             </div>
 
             <div>
@@ -161,8 +158,8 @@ export default () => {
                   />
                 </div>
               ) : (
-                <div />
-              )}
+                  <div />
+                )}
             </div>
             <NavItem className=" px-4 my-3">
               <AuthenticationButton />

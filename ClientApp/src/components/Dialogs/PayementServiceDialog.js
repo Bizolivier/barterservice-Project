@@ -8,6 +8,9 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import FormCommentPay from "../comments/FormCommentPay";
+import * as commentService from "../../services/CommentService";
+
 
 const styles = (theme) => ({
     root: {
@@ -49,8 +52,10 @@ const DialogActions = withStyles((theme) => ({
     },
 }))(MuiDialogActions);
 
-export default function PayementServiceDialog() {
+export default function PayementServiceDialog({ prestation, payer }) {
     const [open, setOpen] = React.useState(false);
+    const [comment, setComment] = React.useState("");
+    const [rating, setRating] = React.useState(3);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -58,35 +63,56 @@ export default function PayementServiceDialog() {
     const handleClose = () => {
         setOpen(false);
     };
+    const handlePayement = () => {
+        createComment();
+        payer();
+        setOpen(false);
+    };
+
+    const createComment = async () => {
+        async function ajoutComment() {
+            const newComment = {
+                Description: comment,
+                AuthorId: prestation.idUserClient,
+                ServiceLinkedToId: prestation.idServiceProvided,
+                ReceiverId: prestation.idUserProvider,
+                Date: new Date(),
+                Rating: rating
+            };
+            await commentService.addComment(newComment);
+        }
+        ajoutComment();
+    };
 
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                En attente de payement
+                A payer
       </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Modal title
-        </DialogTitle>
+                    <div> Vous allez payer la prestation:</div> <div className="text-primary fst-italic">{prestation.nomService}</div>
+                    <div>préster par</div> <div className="text-primary fst-italic"> {prestation.nomProvider}</div>
+                </DialogTitle>
                 <DialogContent dividers>
-                    <Typography gutterBottom>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                        in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-          </Typography>
-                    <Typography gutterBottom>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                        lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-                    <Typography gutterBottom>
-                        Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                        scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                        auctor fringilla.
-          </Typography>
+                    <div>Souhaitez vous commenter et noter la prestation</div>
+                    <FormCommentPay
+                        serviceIdToComment={prestation.idServiceProvided}
+                        authorServId={prestation.idUserProvider}
+                        comment={comment}
+                        setComment={setComment}
+                        rating={rating}
+                        setRating={setRating}
+                    />
+
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose} color="primary">
-                        Save changes
-          </Button>
+                    <Button autoFocus onClick={handlePayement} color="primary">
+                        Payer et Commenter
+                    </Button>
+                    <Button autoFocus onClick={handleClose} color="secondary">
+                        Annuler
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>

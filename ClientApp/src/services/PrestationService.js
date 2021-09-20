@@ -30,3 +30,14 @@ export async function getEtatChanged(id) {
 export async function getPrestDeleted(id) {
   await axios.delete(`${httpBase}/getPrestDeleted/${id}`);
 }
+export async function PutDate(id, prestationDTO) {
+  await axios.put(`${httpBase}/PutDate/${id}`, {
+    IdServiceProvided: prestationDTO.IdServiceProvided,
+    IdUserClient: prestationDTO.IdUserClient,
+    IdUserProvider: prestationDTO.IdUserProvider,
+    Date: prestationDTO.Date,
+    Etat: prestationDTO.Etat
+
+  });
+}
+

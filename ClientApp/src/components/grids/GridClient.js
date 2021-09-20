@@ -6,6 +6,7 @@ import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import PayementServiceDialog from "../Dialogs/PayementServiceDialog";
 import * as frameworks from "../../Framework";
 import * as prestationServ from "../../services/PrestationService";
+import UpdatePrestation from "../Dialogs/UpdatePrestation";
 
 
 
@@ -13,20 +14,36 @@ import * as prestationServ from "../../services/PrestationService";
 
 
 
-export default ({ mesPresCommander, refreshComponent }) => {
+export default ({ mesPresCommander, refreshComponent, nomCo }) => {
 
     const handleState = (id) => {
         prestationServ.getEtatChanged(id);
         refreshComponent();
 
     }
-    const handleDelete=(id) => {
+    const handleDelete = (id) => {
         prestationServ.getPrestDeleted(id);
         refreshComponent();
 
     }
 
+    const switchEtat = (etat, prest) => {
+        switch (etat) {
 
+            case 0:
+                return (<div className="fw-bold">Attente de prestation</div>);
+            case 1:
+                return (
+                    <div>
+                        <PayementServiceDialog prestation={prest} payer={() => { handleState(prest.id) }} />
+                    </div>);
+            case 2:
+                return (<div className="text-success fw-bold ">Clos</div>);
+            default:
+                return (<div>default</div>);
+
+        }
+    }
 
     const columns = [
         { field: "id", headerName: "ID", width: 90 },
@@ -59,55 +76,24 @@ export default ({ mesPresCommander, refreshComponent }) => {
             headerName: "Action",
             width: 150,
             renderCell: params => {
-                return (
-                    (
-
-                        <div>
-
-                            {params.value == 0 ? (
-                                <div>
-                                    <Button variant="outlined" color="primary" onClick={() => { handleState(params.row.id) }}>
-                                        A prester
-                                </Button>
-
-
-                                </div>)
-                                :
-                                (<div>
-                                    <Button variant="outlined" color="secondary" onClick={handleState}>
-                                        A Payer
-                                </Button>
-                                </div>)
-                            }
-
-
-
-                        </div>
-                    )
-
-                )
+                return (<>{switchEtat(params.value, params.row)}</>)
             }
         },
         {
-            field: "",
+            field: "y",
             headerName: "Editer",
 
             width: 150,
             renderCell: params => {
                 return (
                     (
-
                         <div>
+                            {params.row.etat == 0 ?
+                                <Button variant="outlined" color="primary" >
+                                    <UpdatePrestation prestToUpdate={params.row} refreshComponent={refreshComponent} nom={nomCo} />
+                                </Button> : <div></div>
+                            }
 
-                            (
-                                <div>
-                                    <Button variant="outlined" color="primary" onClick={() => { handleState(params.row.id) }}>
-                                       Update
-                                </Button>
-
-
-                                </div>)
-                               
                         </div>
                     )
 
@@ -127,13 +113,13 @@ export default ({ mesPresCommander, refreshComponent }) => {
 
                             (
                                 <div>
-                                    <Button variant="outlined" color="primary" onClick={() => { handleDelete(params.row.id) }}>
-                                       Delete
-                                </Button>
+                                <Button variant="outlined" color="primary" onClick={() => { handleDelete(params.row.id) }}>
+                                    Delete
+                                    </Button>
 
 
-                                </div>)
-                               
+                            </div>)
+
                         </div>
                     )
 
@@ -172,3 +158,6 @@ export default ({ mesPresCommander, refreshComponent }) => {
         </div>
     );
 };
+
+
+
