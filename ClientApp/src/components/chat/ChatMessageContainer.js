@@ -66,58 +66,58 @@ export default ({ interlocutor, locutor }) => {
       {isBusy ? (
         <div> </div>
       ) : (
-        <div className="card">
-          <div className="card-header msg_head">
-            <div className="d-flex bd-highlight">
-              <div className="img_cont">
-                <img
-                  src={framework.IMG(interlocutor.picture)}
-                  className="rounded-circle user_img"
-                />
-              </div>
-              <div className="user_info">
-                <span>{interlocutor.nickname}</span>
-              </div>
-            </div>
-          </div>
-          <div className="card-body msg_card_body ">
-            {messages.map(chatmessage => {
-              return (
-                <div key={chatmessage.msgId}>
-                  <Message
-                    interlocutor={interlocutor}
-                    locutor={locutor}
-                    msg={chatmessage}
+          <div className="card">
+            <div className="card-header msg_head">
+              <div className="d-flex bd-highlight">
+                <div className="img_cont">
+                  <img
+                    src={framework.IMG(interlocutor.picture)}
+                    className="rounded-circle user_img"
                   />
                 </div>
-              );
-            })}
-          </div>
-          <div className="card-footer">
-            <div className="input-group">
-              <textarea
-                value={msg}
-                className="form-control type_msg rounded-pill"
-                placeholder="Type your message..."
-                onChange={handleClickSendMessage}
-                onKeyUp={handleKeyUp}
-              ></textarea>
-              <div className="input-group-append ">
-                <span className="input-group-append my-4 ">
-                  <IconButton
-                    variant="rounded"
-                    color="default"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    <SendIcon />
-                  </IconButton>
-                </span>
+                <div className="user_info">
+                  <span>{interlocutor.nickname}</span>
+                </div>
+              </div>
+            </div>
+            <div className="card-body msg_card_body ">
+              {messages.map(chatmessage => {
+                return (
+                  <div key={chatmessage.msgId}>
+                    <Message
+                      interlocutor={interlocutor}
+                      locutor={locutor}
+                      msg={chatmessage}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <div className="card-footer">
+              <div className="input-group">
+                <textarea
+                  value={msg}
+                  className="form-control type_msg rounded-pill"
+                  placeholder="Type your message..."
+                  onChange={handleClickSendMessage}
+                  onKeyUp={handleKeyUp}
+                ></textarea>
+                <div className="input-group-append ">
+                  <span className="input-group-append my-4 ">
+                    <IconButton
+                      variant="rounded"
+                      color="default"
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
+                      <SendIcon />
+                    </IconButton>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };

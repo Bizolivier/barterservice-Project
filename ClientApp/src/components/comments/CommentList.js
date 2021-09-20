@@ -46,30 +46,8 @@ const CommentList = ({ serviceId, authorServId }) => {
           );
         })}
 
-        <div>
-          {visible && isAuthenticated ? (
-            <FormComment
-              serviceIdToComment={serviceId}
-              authorServId={authorServId}
-              refreshComponent={refreshComponent}
-            />
-          ) : (
-            <div />
-          )}
-        </div>
-        <div>
-          {isAuthenticated ? (
-            <button
-              type="button"
-              className="btn btn-dark"
-              onClick={handleClickCreateComment}
-            >
-              Add Comment
-            </button>
-          ) : (
-            <div />
-          )}
-        </div>
+
+
       </div>
     </div>
   );
