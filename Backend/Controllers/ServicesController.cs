@@ -75,6 +75,19 @@ namespace backend.Controllers {
         }
 
 
+        [HttpGet("getSingleOfferedSevices/{email}/{servId}")]
+         public async Task<ActionResult<ServiceDTO>> getSingleOfferedSevices(string email,int servId) {
+            User user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+              return NotFound(); 
+              Offer offer = await _context.Offers.SingleOrDefaultAsync(o => o.AuthorId == user.UserId); 
+            var offerList = await _context.Services.Where(s => s.IsRecherche == false && s.OfferLinkedtoServiceId == offer.OfferId).ToListAsync();
+
+          var service = offerList.Find(s=>s.ServiceId== servId).ToDTO();
+        return service;
+         }
+
+
 
 
          [HttpDelete("deleteService/{serviceId}")]

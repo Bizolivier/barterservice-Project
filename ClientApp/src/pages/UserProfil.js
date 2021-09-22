@@ -7,6 +7,7 @@ import ProvinceConversion from "../components/conversion/ProvinceConversion.js";
 import * as serviceService from "../services/Services.Service.js";
 import * as prestationService from "../services/PrestationService.js";
 import { useAuth0 } from "@auth0/auth0-react";
+import { NavLink } from "reactstrap";
 import { Container, Button, ButtonGroup, Grid } from "@material-ui/core";
 import * as framework from "../Framework";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
@@ -16,6 +17,7 @@ import GestionPrestation from "./GestionPrestation";
 import ChatMessageContainer from "../components/chat/ChatMessageContainer";
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import CommentIcon from '@material-ui/icons/Comment';
 
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
@@ -121,11 +123,9 @@ const UserProfil = () => {
                     </div>
                     <div className="d-inline-flex">
 
-                      <Button color="primary">
-                        <Link to={`/Avis/${authorEmail}`}>Voir les avis</Link>
-                      </Button>
+
                       {
-                        isAuthenticated ? <FormControlLabel control={<Switch checked={openChat} onChange={() => { setOpenChat(!openChat) }} />} label="chat" /> : <div></div>
+                        isAuthenticated ? <FormControlLabel control={<Switch checked={openChat} onChange={() => { setOpenChat(!openChat) }} />} label="Me contacter" /> : <div></div>
                       }
 
                     </div>
@@ -149,12 +149,37 @@ const UserProfil = () => {
                           >
 
                             {item.title}
-                            {isAuthenticated ? (
+                            {isAuthenticated ? (<div>
                               <IconButton>
 
                                 <OrderTheService userName={userNickname} serviceName={item.title} servId={item.serviceId} offerAuthorId={offer.authorId} userConnectedId={userCoId} />
                               </IconButton>
 
+                              <div>
+                                {isAuthenticated ? (
+                                  <Link
+                                    className="text-dark px-4 my-3 fw-bolder"
+                                    to={`/Avis/${authorEmail}/${item.serviceId}`}>
+                                    <IconButton>
+                                      <CommentIcon />
+                                    </IconButton>
+                                  </Link>
+                                ) : (
+                                    <div></div>
+                                  )}
+                              </div>
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
                             ) : (
                                 <div />
                               )}

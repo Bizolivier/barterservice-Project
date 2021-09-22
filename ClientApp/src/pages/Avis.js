@@ -4,17 +4,25 @@ import { Link } from "react-router-dom";
 import * as serviceService from "../services/Services.Service.js";
 import CommentList from "../components/comments/CommentList";
 import * as userService from "../services/User.service.js";
+import * as commentServ from "../services/CommentService";
+
 
 const Avis = () => {
-  let { email } = useParams();
+  let { email, idService } = useParams();
   const [offeredServ, setOfferedServ] = useState([]);
   const [isBusy, setBusy] = useState(true);
   const [userSer, setUserSer] = useState();
+  const [refresh, setRefresh] = useState(true);
+  const [comt, setComt] = useState([]);
+
 
   useEffect(() => {
     async function fetchData() {
-      const listServicesOffered = await serviceService.getOfferedSevices(email);
-      setOfferedServ(listServicesOffered);
+      const ServicesOffered = await serviceService.getSingleOfferedSevices(email, idService);
+      setOfferedServ(ServicesOffered);
+
+      const listComments = await commentServ.GetCommentsByServiceId(idService);
+      setComt(listComments);
 
       const userData = await userService.GetOneByEmail(email);
       setUserSer(userData);
@@ -23,35 +31,38 @@ const Avis = () => {
     fetchData().then(res => {
       setBusy(false);
     });
-  }, []);
+  }, [refresh]);
+
+  const refreshPage = () => {
+    setRefresh(!refresh);
+  }
 
   return (
-    <React.Fragment>
-      <div>
-        {isBusy ? (
-          <div> </div>
-        ) : (
-          <div className="border-0">
-            <div>
-              <h3 className="text-dark text-center my-5 ">
-                Avis sur prestations rendues par {userSer.nickname}
-              </h3>
-            </div>
-            <ul>
-              {offeredServ.map(item => (
-                <li
-                  className=" text-capitalize my-5 text-light fst-italic"
-                  key={item.serviceId}
-                >
-                  <h4>{item.title} </h4>
 
-                  <CommentList
-                    serviceId={item.serviceId}
-                    authorServId={userSer.userId}
-                  />
-                </li>
-              ))}
-            </ul>
+    <div>
+      {isBusy ? (
+        <div> </div>
+      ) : (
+          <div className="border-0">
+
+            <h3 className="text-dark text-center my-5 ">
+              Avis sur  la prestations rendues par {userSer.nickname}
+            </h3>
+
+            <div >
+              <h2 className="text-white fst-italic text-capitalize text-center">
+                {offeredServ.title}
+              </h2>
+              <CommentList
+                authorServId={userSer.userId}
+                userService={userSer}
+                refreshPage={refreshPage}
+                comt={comt}
+              />
+            </div>
+
+
+
 
             <div>
               <Link className="ui black basic button float-right" to="/">
@@ -60,8 +71,8 @@ const Avis = () => {
             </div>
           </div>
         )}
-      </div>
-    </React.Fragment>
+    </div>
+
   );
 };
 

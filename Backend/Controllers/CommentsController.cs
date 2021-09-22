@@ -26,10 +26,15 @@ namespace backend.Controllers {
 
              [HttpGet("GetCommentsByServiceId/{serviceId}")]
              public async Task<ActionResult<IEnumerable<CommentDTO>>> GetCommentsByServiceId(int serviceId) {
-                   var comments = (await _context.Comments.Where(c=>(c.ServiceLinkedToId == serviceId)).ToListAsync()).ToDTO();
+                   var comments = (await _context.Comments.Where(c=>(c.ServiceLinkedToId == serviceId)).ToListAsync());
+
+                    for (int i=0 ; i<comments.Count;i++){
+                        comments[i].Author= (await _context.Users.FindAsync(comments[i].AuthorId));
+                    }
+
                    if (comments == null)
                      return NotFound();
-                   return comments; 
+                   return comments.ToDTO(); 
            }
 
             [HttpPost("addComment")]        
@@ -88,5 +93,26 @@ namespace backend.Controllers {
 
                 return NoContent();    
             }
+     
+        [HttpPut("addAnswerToComment/{commentId}/{answer}")]
+        public async Task<IActionResult> addAnswerToComment(int commentId, string answer)
+        {
+             
+            var comment = await _context.Comments.FindAsync(commentId);
+
+              if (comment == null)
+              return NotFound(); 
+                
+                comment.Answer = answer;
+               
+            
+         var res = await _context.SaveChangesAsyncWithValidation();
+           if (!res.IsEmpty)
+           return BadRequest(res);
+
+         return NoContent();
+        }
+
+
       }
 }    

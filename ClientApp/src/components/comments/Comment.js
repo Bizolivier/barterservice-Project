@@ -7,6 +7,7 @@ import * as commentServ from "../../services/CommentService";
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import AddAnswerDialog from "../Dialogs/AddAnswerDialog";
 
 const Comment = ({
   authorId,
@@ -14,7 +15,8 @@ const Comment = ({
   date,
   commentId,
   refreshComponent,
-  ratingCmt
+  ratingCmt,
+  comment
 }) => {
   const [userNickname, setUserNickname] = useState("");
   const [userPicture, setUserPicture] = useState("");
@@ -40,46 +42,46 @@ const Comment = ({
       {isBusy ? (
         <div> </div>
       ) : (
-        <div className="card-body bg-white mx-5 my-4 rounded w-75 h-15">
-          <div className="d-flex flex-start align-items-center">
-            <img
-              className="rounded-circle shadow-1-strong me-3"
-              src={framework.IMG(userPicture)}
-              //src=""
-              alt="avatar"
-              width="60"
-              height="60"
-            />
-            <div>
-              <h6 className="fw-bold text-primary mb-1">{userNickname}</h6>
-              <p className="text-muted small mb-0">Shared publicly - {date}</p>
+          <div className="card-body bg-white mx-5 my-4 rounded w-50">
+            <div className="d-flex flex-start align-items-center">
+              <img
+                className="rounded-circle shadow-1-strong me-3"
+                src={framework.IMG(userPicture)}
+                alt="avatar"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h6 className="fw-bold text-primary mb-1">{userNickname}</h6>
+                <p className="text-muted small mb-0">Shared publicly - {date}</p>
+              </div>
+            </div>
+
+            <p className="mt-3 mb-4 pb-2 text-dark">{description}</p>
+
+            <div className="ui rating" data-max-rating="1"></div>
+            <div className="small d-flex justify-content-start">
+              <Rating
+                name="simple-controlled"
+                defaultValue={ratingCmt}
+                precision={0.5}
+                readOnly
+                emptyIcon={<StarBorderIcon fontSize="inherit" />}
+              />
+            </div>
+
+            <div className="small d-flex justify-content-end">
+              <AddAnswerDialog commentToAnswer={comment} />
+              <IconButton
+                variant="outlined"
+                color="primary"
+                onClick={handleDelete}
+              >
+                <DeleteForeverIcon />
+              </IconButton>
             </div>
           </div>
-
-          <p className="mt-3 mb-4 pb-2 text-dark">{description}</p>
-
-          <div className="ui rating" data-max-rating="1"></div>
-          <div className="small d-flex justify-content-start">
-            <Rating
-              name="simple-controlled"
-              defaultValue={ratingCmt}
-              precision={0.5}
-              readOnly
-              emptyIcon={<StarBorderIcon fontSize="inherit" />}
-            />
-          </div>
-
-          <div className="small d-flex justify-content-end">
-            <IconButton
-              variant="outlined"
-              color="primary"
-              onClick={handleDelete}
-            >
-              <DeleteForeverIcon />
-            </IconButton>
-          </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };

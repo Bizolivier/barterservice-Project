@@ -40,7 +40,7 @@ export default () => {
       <div className="container-fluid h-50">
         <div className="row justify-content-center h-100">
           <div className="col-md-4 col-xl-3 chat">
-            <div className="card mb-sm-3 mb-md-0 contacts_card">
+            <div className="card mb-sm-3 mb-md-0 contacts_card w-100">
               <div className="card-header">
                 <div className="input-group">
                   <input
@@ -51,7 +51,7 @@ export default () => {
                   />
                 </div>
               </div>
-              <div className="card-body contacts_body">
+              <div className="card-body contacts_body ">
                 <ul className="contacts">
                   {allUsers.map(user => (
                     <li key={user.userId} onClick={() => setInterlocutor(user)}>

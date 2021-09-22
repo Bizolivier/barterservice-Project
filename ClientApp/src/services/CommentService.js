@@ -26,3 +26,6 @@ export async function addComment(commentDTO) {
 export async function deleteComment(commentId){
   await axios.delete(`${httpBase}/deleteComment/${commentId}`)
 }
+export async function addAnswerToComment(commentId,answer){
+  await axios.put(`${httpBase}/addAnswerToComment/${commentId}/${answer}`)
+}

@@ -6,6 +6,9 @@ import ProvinceSelection from "../components/selection/ProvinceSelection.js";
 import SexeSelection from "../components/selection/SexeSelection.js";
 import Snackbar from "@material-ui/core/Snackbar";
 import { makeStyles } from "@material-ui/core/styles";
+import { FormControl, InputLabel, OutlinedInput, FormHelperText, Button, } from "@material-ui/core";
+import SaveIcon from '@material-ui/icons/Save';
+
 
 import { Alert, AlertTitle } from "@material-ui/lab";
 
@@ -20,6 +23,12 @@ export default () => {
   const [selectedProvinceValue, setSelectedProvinceValue] = useState(0);
   const [selectedSexeValue, setSelectedSexeValue] = useState(0);
   const [open, setOpen] = useState(false);
+
+  //gestion des erreurs
+  const [errorNickname, setErrorNickname] = useState(false);
+  const [errorFullname, setErrorFullname] = useState(false);
+  const [updateDisabled, setUpdateDisabled] = useState(false);
+
 
   useEffect(() => {
     userService.GetOneByEmail(user.email).then(loggedUser => {
@@ -39,6 +48,17 @@ export default () => {
   function changeSexeValue(newValue) {
     setSelectedSexeValue(newValue);
   }
+  const handleChangeNickname = (event) => {
+    setUserNickname(event.target.value);
+    setErrorNickname(event.target.value == "" ? true : false);
+    setUpdateDisabled(event.target.value == "" ? true : false || errorFullname);
+  };
+  const handleChangeFullname = (event) => {
+    setUserFullname(event.target.value);
+    setErrorFullname(event.target.value == "" ? true : false);
+    setUpdateDisabled(errorNickname || event.target.value == "" ? true : false);
+  };
+
 
   function updateUser(e) {
     e.preventDefault();
@@ -69,99 +89,90 @@ export default () => {
       {isBusy ? (
         <div> </div>
       ) : (
-        <div className="container">
-          <h1>Edit Profile</h1>
-          <hr />
-          <div className="row">
-            {/* left column  */}
+          <div className="container">
+            <h1>Edit Profile</h1>
+            <hr />
+            <div className="row">
+              {/* left column  */}
 
-            <Avatar pictureSrc={user.picture} />
+              <Avatar pictureSrc={user.picture} />
 
-            {/* edit form column */}
+              {/* edit form column */}
 
-            <div className="col-md-9 personal-info">
-              <h3>Personal info</h3>
+              <div className="col-md-9 personal-info">
+                <h3>Personal info</h3>
 
-              <form className="form-horizontal" role="form">
-                <div className="form-group">
-                  <label className="col-lg-3 control-label">Nickname:</label>
-                  <div className="col-lg-8">
-                    <input
-                      className="form-control"
-                      type="text"
-                      onChange={e => setUserNickname(e.target.value)}
-                      placeholder="Nickname"
-                      value={userNickname}
-                    />
+                <form className="form-horizontal" role="form">
+
+
+                  <FormControl error={errorNickname} variant="outlined" style={{ marginRight: "20px" }}>
+                    <InputLabel htmlFor="component-outlined">Nickname:</InputLabel>
+                    <OutlinedInput id="component-outlined" value={userNickname} onChange={handleChangeNickname} label="Nickname" />
+                    {errorNickname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
+                  </FormControl>
+
+
+                  <FormControl error={errorFullname} variant="outlined" >
+                    <InputLabel htmlFor="component-outlined">Fullname:</InputLabel>
+                    <OutlinedInput id="component-outlined" value={userFullname} onChange={handleChangeFullname} label="Fullname" />
+                    {errorFullname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
+                  </FormControl>
+
+
+                  <div className="form-group">
+                    <label className="col-lg-3 control-label">Province:</label>
+                    <div className="col-lg-8">
+                      <ProvinceSelection
+                        selectedOption={userProvince}
+                        selectedProvinceValue={selectedProvinceValue}
+                        changeProvinceValue={changeProvinceValue}
+                        allProvinces={false}
+                      />
+                    </div>
                   </div>
-                </div>
+                  <div className="form-group">
+                    <label className="col-lg-3 control-label">Sexe:</label>
+                    <div className="col-lg-8">
+                      <SexeSelection
+                        selectedOption={userSexe}
+                        selectedSexeValue={selectedSexeValue}
+                        changeSexeValue={changeSexeValue}
+                      />
+                    </div>
+                  </div>
 
-                <div className="form-group">
-                  <label className="col-lg-3 control-label">Fullname:</label>
-                  <div className="col-lg-8">
-                    <input
-                      className="form-control"
-                      type="text"
-                      onChange={e => setUserFullname(e.target.value)}
-                      placeholder="Fullname"
-                      value={userFullname}
-                    />
-                  </div>
-                </div>
+                  <div className="form-group">
+                    <label className="col-md-3 control-label"></label>
+                    <div className="col-md-8">
 
-                <div className="form-group">
-                  <label className="col-lg-3 control-label">Province:</label>
-                  <div className="col-lg-8">
-                    <ProvinceSelection
-                      selectedOption={userProvince}
-                      selectedProvinceValue={selectedProvinceValue}
-                      changeProvinceValue={changeProvinceValue}
-                      allProvinces={false}
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label className="col-lg-3 control-label">Sexe:</label>
-                  <div className="col-lg-8">
-                    <SexeSelection
-                      selectedOption={userSexe}
-                      selectedSexeValue={selectedSexeValue}
-                      changeSexeValue={changeSexeValue}
-                    />
-                  </div>
-                </div>
 
-                <div className="form-group">
-                  <label className="col-md-3 control-label"></label>
-                  <div className="col-md-8">
-                    <input
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={updateUser}
-                      value="Save Changes"
-                    />
-                    <span></span>
-                    <input
-                      type="reset"
-                      className="btn btn-default"
-                      value="Cancel"
-                    />
+                      <Button variant="contained" color="primary" size="large"
+                        onClick={updateUser}
+                        disabled={updateDisabled}>
+                        Modifier son profil
+                    </Button>
+                      <span></span>
+                      <input
+                        type="reset"
+                        className="btn btn-default"
+                        value="Cancel"
+                      />
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
-          <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            onClose={handleCloseAlert}
-          >
-            <Alert onClose={handleCloseAlert} severity="success">
-              Le profil a été modifié avec succes
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleCloseAlert}
+            >
+              <Alert onClose={handleCloseAlert} severity="success">
+                Le profil a été modifié avec succes
             </Alert>
-          </Snackbar>
-        </div>
-      )}
+            </Snackbar>
+          </div>
+        )}
     </div>
   );
 };

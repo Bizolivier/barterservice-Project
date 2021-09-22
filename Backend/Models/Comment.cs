@@ -36,6 +36,8 @@ namespace backend.Models {
 
         public float Rating {get;set;}
 
+        public string Answer {get;set;}
+
         
     }
 }

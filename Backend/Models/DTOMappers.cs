@@ -100,9 +100,11 @@ namespace backend.Models {
                 CmntId = comment.CmntId,
                 Description = comment.Description,
                 AuthorId = comment.AuthorId,
+                Author= comment.Author.ToDTO(),
                 ServiceLinkedToId =comment.ServiceLinkedToId,
                 Date = comment.Date,
-                Rating = comment.Rating
+                Rating = comment.Rating,
+                Answer =comment.Answer
             };
 
         }

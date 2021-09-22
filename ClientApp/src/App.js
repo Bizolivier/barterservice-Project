@@ -27,7 +27,7 @@ export default class App extends Component {
           <ProtectedRoute exact path="/Dashboard" component={Dashboard} />
           <Route exact path="/MyRequest" component={MyRequest} />
           <Route exact path="/OfferList" component={OfferList} />
-          <Route path="/Avis/:email" component={Avis} />
+          <Route path="/Avis/:email/:idService" component={Avis} />
           <ProtectedRoute exact path="/MyServices" component={MyServices} />
           <Route path="/profilUser/:email" component={UserProfil} />
           <ProtectedRoute exact path="/EditUser" component={EditUser} />

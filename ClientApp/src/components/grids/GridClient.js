@@ -74,7 +74,7 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
         {
             field: "etat",
             headerName: "Action",
-            width: 150,
+            width: 200,
             renderCell: params => {
                 return (<>{switchEtat(params.value, params.row)}</>)
             }
@@ -89,9 +89,9 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
                     (
                         <div>
                             {params.row.etat == 0 ?
-                                <Button variant="outlined" color="primary" >
+                                
                                     <UpdatePrestation prestToUpdate={params.row} refreshComponent={refreshComponent} nom={nomCo} />
-                                </Button> : <div></div>
+                                 : <div></div>
                             }
 
                         </div>

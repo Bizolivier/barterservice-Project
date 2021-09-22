@@ -170,7 +170,8 @@ namespace barterserv.Migrations
                     ServiceLinkedToId = table.Column<int>(nullable: false),
                     ReceiverId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    Rating = table.Column<float>(nullable: false)
+                    Rating = table.Column<float>(nullable: false),
+                    Answer = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -313,35 +314,35 @@ namespace barterserv.Migrations
 
             migrationBuilder.InsertData(
                 table: "Comments",
-                columns: new[] { "CmntId", "AuthorId", "Date", "Description", "Rating", "ReceiverId", "ServiceLinkedToId" },
+                columns: new[] { "CmntId", "Answer", "AuthorId", "Date", "Description", "Rating", "ReceiverId", "ServiceLinkedToId" },
                 values: new object[,]
                 {
-                    { 10, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vraiment au dessus de nos attentes", 5f, 1, 8 },
-                    { 7, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Recomandable", 4f, 8, 5 },
-                    { 6, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "peu mieux faire", 3f, 8, 4 },
-                    { 2, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation excellente ,vraiment au dessus de nos attentes.Je recommande à 100%", 5f, 8, 3 },
-                    { 1, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très satisfait du service rendu,je recommande", 4f, 8, 3 },
-                    { 5, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Reussit", 3f, 8, 2 },
-                    { 4, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "peu recommandable", 1f, 8, 1 },
-                    { 3, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Médiocre", 1f, 8, 1 },
-                    { 26, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Passable", 3f, 6, 24 },
-                    { 25, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Service minimum", 2f, 6, 23 },
-                    { 24, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rien de pas ordinnaire", 3f, 6, 22 },
-                    { 23, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), " Satisfait ", 3f, 5, 21 },
-                    { 22, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "probleme de retard à l heure convenue ,mais prestation super", 4f, 5, 20 },
-                    { 21, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prester apres 2 rdv ,mais bien executé", 3f, 5, 19 },
-                    { 20, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trés amateur hélas!!", 1f, 4, 18 },
-                    { 19, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très mitigé", 2f, 4, 17 },
-                    { 18, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation moyenne", 3f, 4, 16 },
-                    { 17, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A recommande", 4f, 3, 15 },
-                    { 16, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), " Nos attente non pas étaient déçues", 5f, 3, 14 },
-                    { 15, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très bien fait", 4f, 3, 13 },
-                    { 14, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation à recommande à 100%", 5f, 2, 12 },
-                    { 13, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "service rendu excellent", 4f, 2, 11 },
-                    { 12, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Je recommande à 100%", 5f, 2, 10 },
-                    { 11, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très satisfait", 5f, 1, 9 },
-                    { 8, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation excellente ", 5f, 8, 6 },
-                    { 9, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "je recommande", 4f, 8, 7 }
+                    { 10, null, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vraiment au dessus de nos attentes", 5f, 1, 8 },
+                    { 7, null, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Recomandable", 4f, 8, 5 },
+                    { 6, null, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "peu mieux faire", 3f, 8, 4 },
+                    { 2, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation excellente ,vraiment au dessus de nos attentes.Je recommande à 100%", 5f, 8, 3 },
+                    { 1, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très satisfait du service rendu,je recommande", 4f, 8, 3 },
+                    { 5, null, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Reussit", 3f, 8, 2 },
+                    { 4, null, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "peu recommandable", 1f, 8, 1 },
+                    { 3, null, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Médiocre", 1f, 8, 1 },
+                    { 26, null, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Passable", 3f, 6, 24 },
+                    { 25, null, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Service minimum", 2f, 6, 23 },
+                    { 24, null, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rien de pas ordinnaire", 3f, 6, 22 },
+                    { 23, null, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), " Satisfait ", 3f, 5, 21 },
+                    { 22, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "probleme de retard à l heure convenue ,mais prestation super", 4f, 5, 20 },
+                    { 21, null, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prester apres 2 rdv ,mais bien executé", 3f, 5, 19 },
+                    { 20, null, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trés amateur hélas!!", 1f, 4, 18 },
+                    { 19, null, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très mitigé", 2f, 4, 17 },
+                    { 18, null, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation moyenne", 3f, 4, 16 },
+                    { 17, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A recommande", 4f, 3, 15 },
+                    { 16, null, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), " Nos attente non pas étaient déçues", 5f, 3, 14 },
+                    { 15, null, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très bien fait", 4f, 3, 13 },
+                    { 14, null, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation à recommande à 100%", 5f, 2, 12 },
+                    { 13, null, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "service rendu excellent", 4f, 2, 11 },
+                    { 12, null, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Je recommande à 100%", 5f, 2, 10 },
+                    { 11, null, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Très satisfait", 5f, 1, 9 },
+                    { 8, null, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prestation excellente ", 5f, 8, 6 },
+                    { 9, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "je recommande", 4f, 8, 7 }
                 });
 
             migrationBuilder.CreateIndex(

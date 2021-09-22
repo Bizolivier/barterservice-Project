@@ -8,10 +8,12 @@ namespace backend.Models {
         public int CmntId { get; set; }
         public string Description { get; set; }
         public int AuthorId {get;set;}
+        public UserDTO Author {get;set;}
         public int ServiceLinkedToId {get;set;}
         public int ReceiverId {get;set;}
         public DateTime Date {get;set;}
         public float Rating {get;set;}
+        public string Answer {get;set;}
        
     }
 }

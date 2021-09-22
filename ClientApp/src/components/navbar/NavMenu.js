@@ -50,46 +50,6 @@ export default () => {
                 <img className="" src={logo} alt="name" />
               </NavLink>
             </NavItem>
-
-
-
-            <NavItem>
-              {isAuthenticated ? (
-                <NavLink
-                  tag={Link}
-                  className="text-dark px-4 my-3 fw-bolder"
-                  to="/Dashboard"
-                  onClick={() => setRefresh(!refresh)}
-                >
-                  Dashboard
-                </NavLink>
-              ) : (
-                  <div />
-                )}
-            </NavItem>
-            <NavItem>
-              <NavLink
-                tag={Link}
-                className="text-dark px-4 my-3 fw-bolder"
-                to="/MyRequest"
-              >
-                Mes recherches
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              {isAuthenticated ? (
-                <NavLink
-                  tag={Link}
-                  className="text-dark px-4 my-3 fw-bolder"
-                  to={`/Avis/${user.email}`}
-                  onClick={() => setRefresh(!refresh)}
-                >
-                  Mes Services
-                </NavLink>
-              ) : (
-                  <div />
-                )}
-            </NavItem>
             <NavItem>
               <NavLink
                 tag={Link}
@@ -97,39 +57,50 @@ export default () => {
                 to="/OfferList"
                 onClick={() => setRefresh(!refresh)}
               >
-                Offers
+                Toutes les offres
               </NavLink>
             </NavItem>
-            <NavItem>
-              {isAuthenticated ? (
-                <NavLink
-                  tag={Link}
-                  className="text-dark px-4 my-3 fw-bolder"
-                  to="/EditUser"
-                  onClick={() => setRefresh(!refresh)}
-                >
-                  Profil
+            {isAuthenticated ?
+              <div className="d-inline-flex">
+                <NavItem>
+                  <NavLink
+                    tag={Link}
+                    className="text-dark px-4 my-3 fw-bolder"
+                    to="/Dashboard"
+                    onClick={() => setRefresh(!refresh)}
+                  >
+                    Dashboard
                 </NavLink>
-              ) : (
-                  <div />
-                )}
-            </NavItem>
-            <NavItem>
-              {isAuthenticated ? (
-                <NavLink
-                  tag={Link}
-                  className="text-dark px-4 my-3 fw-bolder"
-                  to="/Chatbox"
-                >
-                  Chatbox
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    tag={Link}
+                    className="text-dark px-4 my-3 fw-bolder"
+                    to="/EditUser"
+                    onClick={() => setRefresh(!refresh)}
+                  >
+                    Mon offre
                 </NavLink>
-              ) : (
-                  <div />
-                )}
-            </NavItem>
-
-            <div>
-              {isAuthenticated ? (
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    tag={Link}
+                    className="text-dark px-4 my-3 fw-bolder"
+                    to={`/profilUser/${user.email}`}
+                    onClick={() => setRefresh(!refresh)}
+                  >
+                    Profil
+                </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    tag={Link}
+                    className="text-dark px-4 my-3 fw-bolder"
+                    to="/Chatbox"
+                  >
+                    Chatbox
+                </NavLink>
+                </NavItem>
                 <NavLink
                   tag={Link}
                   className="text-dark px-4 my-3 fw-bolder"
@@ -142,13 +113,6 @@ export default () => {
                     </StyledBadge>
                   </IconButton>
                 </NavLink>
-              ) : (
-                  <div></div>
-                )}
-            </div>
-
-            <div>
-              {isAuthenticated ? (
                 <div className="left floated  ui image my-3">
                   <img
                     src={user.picture}
@@ -157,10 +121,9 @@ export default () => {
                     className=" rounded-circle border border-primary"
                   />
                 </div>
-              ) : (
-                  <div />
-                )}
-            </div>
+              </div>
+              : <div></div>}
+
             <NavItem className=" px-4 my-3">
               <AuthenticationButton />
             </NavItem>

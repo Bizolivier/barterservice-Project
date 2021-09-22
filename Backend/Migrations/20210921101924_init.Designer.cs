@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210916195552_init")]
+    [Migration("20210921101924_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,6 +120,9 @@ namespace barterserv.Migrations
                     b.Property<int>("CmntId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");

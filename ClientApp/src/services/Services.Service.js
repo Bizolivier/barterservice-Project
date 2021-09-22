@@ -11,17 +11,21 @@ export async function getOfferedSevices(email) {
   const response = await axios.get(`${httpBase}/getOfferedSevices/${email}`);
   return response.data;
 }
+export async function getSingleOfferedSevices(email, servId) {
+  const res = await axios.get(`${httpBase}/getSingleOfferedSevices/${email}/${servId}`);
+  return res.data;
+}
 
 export async function addService(titleService, catsel, offerId, isRequest) {
   await axios.post(`${httpBase}`, {
-    
+
     Title: titleService,
-    OfferLinkedtoServiceId:offerId,
+    OfferLinkedtoServiceId: offerId,
     CategoryLinkToId: catsel,
     IsRecherche: isRequest
   });
 }
 
-export async function  deleteService(serviceId){
+export async function deleteService(serviceId) {
   await axios.delete(` ${httpBase}/deleteService/${serviceId}`)
 }
