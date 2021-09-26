@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as userService from "../services/User.service.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import brico from "../images/bricolage.jpg";
@@ -13,6 +13,25 @@ import { Button } from "@material-ui/core";
 export default () => {
   //permet de gerer la connection de l'utilisateur
   const { loginWithRedirect, user, isAuthenticated } = useAuth0();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const newUser = {
+        nickname: user.name,
+        fullname: user.name,
+        email: user.email,
+        picture: user.picture,
+        province: 0,
+        sexe: 0
+      };
+
+
+      userService.connect(newUser).then();
+    }
+
+
+  }, [])
+
 
   return (
     <div>

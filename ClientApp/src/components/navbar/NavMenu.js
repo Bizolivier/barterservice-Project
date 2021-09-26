@@ -29,6 +29,15 @@ export default () => {
   useEffect(() => {
     async function fetchData() {
       if (isAuthenticated) {
+        const newUser = {
+          nickname: user.name,
+          fullname: user.name,
+          email: user.email,
+          picture: user.picture,
+          province: 0,
+          sexe: 0
+        };
+        await userService.connect(newUser);
         const userConnected = await userService.GetOneByEmail(user.email);
         const notif = await GestionPrestationService.getNbNotifications(
           userConnected.userId
@@ -79,7 +88,7 @@ export default () => {
                     to="/EditUser"
                     onClick={() => setRefresh(!refresh)}
                   >
-                    Mon offre
+                    Profil
                 </NavLink>
                 </NavItem>
                 <NavItem>
@@ -89,7 +98,7 @@ export default () => {
                     to={`/profilUser/${user.email}`}
                     onClick={() => setRefresh(!refresh)}
                   >
-                    Profil
+                    Mon offre
                 </NavLink>
                 </NavItem>
                 <NavItem>
