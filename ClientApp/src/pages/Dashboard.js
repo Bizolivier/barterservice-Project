@@ -53,91 +53,51 @@ export default () => {
       {isBusy ? (
         <div> </div>
       ) : (
-        <div className="ui segment   ">
-          <div className="image-container text-left w-20 px-2 mt-5">
-            <img
-              className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
-              src={user.picture}
-              alt="name"
-            />
-          </div>
-          <div className="row d-inline-flex my-5 px-2 justify-content-start">
-            <div className="col-md-4 personal-info mx-2 ">
-              <h3 className="text-left px-2">{userNickname}</h3>
+          <div className="ui segment   ">
+            <div classname="">
+              <div className="image-container text-left w-20 px-2 mt-5 d-inline-flex">
+                <img
+                  className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
+                  src={user.picture}
+                  alt="name"
+                />
+                <div>
+                  <h3 className="text-left px-2 mt-2 mx-2">{userNickname}</h3>
 
-              <div className=" d-inline-flex">
-                <i className="map marker alternate icon text-primary"></i>
-                <ProvinceConversion numProvince={userDataProvince} />
-              </div>
-              <div className="score ui segment bg-dark py-5 text-center text-white  my-5">
-                <p className="fst-italic">Vous disposez de </p>
-                <h2 className="text-success fw-bolder">{timeC} </h2>
-                <p className="fst-italic">Time-credits </p>
-              </div>
-            </div>
-
-            <div className="w-25 h-100 shadow-lg">
-              <div className="card card-custom bg-white border-white border-0">
-                <div className="card-custom-img"></div>
-                <div className="card-custom-avatar">
-                  <img className="img-fluid" src={barter} alt="Avatar" />
-                </div>
-                <div className="card-body">
-                  <h4 className="card-title">Services recherchés</h4>
-                  <CreateServiceDialog
-                    isRequest={true}
-                    email={user.email}
-                    offerId={offer.offerId}
-                    setOffered={setOffered}
-                    setRequested={setRequested}
-                    refreshComponent={refreshComponent}
-                  />
-
-                  <ul>
-                    {resquested.map(item => (
-                      <li
-                        className="d-inline-flex text-capitalize"
-                        key={item.serviceId}
-                      >
-                        {item.title}
-                        <DeleteServiceDialog
-                          serviceId={item.serviceId}
-                          title={item.title}
-                          setOffered={setOffered}
-                          setRequested={setRequested}
-                          refreshComponent={refreshComponent}
-                        />
-                      </li>
-                    ))}
-                  </ul>
+                  <div className=" d-inline-flex mt-2 mx-2">
+                    <i className="map marker alternate icon text-primary"></i>
+                    <ProvinceConversion numProvince={userDataProvince} />
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="row d-inline-flex my-5 px-2 justify-content-start">
 
-            <div className="w-25 h-100 shadow-lg">
-              <div className="card card-custom bg-white border-white border-0">
-                <div className="card-custom-img"></div>
-                <div className="card-custom-avatar">
-                  <img className="img-fluid" src={recherche} alt="Avatar" />
-                </div>
-                <div className="card-body my-4">
-                  <h4 className="card-title">Services proposés</h4>
-                  <CreateServiceDialog
-                    isRequest={false}
-                    email={user.email}
-                    offerId={offer.offerId}
-                    setOffered={setOffered}
-                    setRequested={setRequested}
-                    refreshComponent={refreshComponent}
-                  />
-                  <ul>
-                    {offered.map(item => (
-                      <div className="d-inline-flex">
+
+              <div className="w-25 h-100 shadow-lg mx-5">
+                <div className="card card-custom bg-white border-white border-0 ">
+                  <div className="card-custom-img"></div>
+                  <div className="card-custom-avatar">
+                    <img className="img-fluid" src={barter} alt="Avatar" />
+                  </div>
+                  <div className="card-body">
+                    <h4 className="card-title">Services recherchés</h4>
+                    <CreateServiceDialog
+                      isRequest={true}
+                      email={user.email}
+                      offerId={offer.offerId}
+                      setOffered={setOffered}
+                      setRequested={setRequested}
+                      refreshComponent={refreshComponent}
+                    />
+
+                    <ul>
+                      {resquested.map(item => (
                         <li
                           className="d-inline-flex text-capitalize"
                           key={item.serviceId}
                         >
-                          {item.title}{" "}
+                          {item.title}
                           <DeleteServiceDialog
                             serviceId={item.serviceId}
                             title={item.title}
@@ -146,15 +106,53 @@ export default () => {
                             refreshComponent={refreshComponent}
                           />
                         </li>
-                      </div>
-                    ))}
-                  </ul>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="w-25 h-100 shadow-lg"mx-5>
+                <div className="card card-custom bg-white border-white border-0">
+                  <div className="card-custom-img"></div>
+                  <div className="card-custom-avatar">
+                    <img className="img-fluid" src={recherche} alt="Avatar" />
+                  </div>
+                  <div className="card-body my-4">
+                    <h4 className="card-title">Services proposés</h4>
+                    <CreateServiceDialog
+                      isRequest={false}
+                      email={user.email}
+                      offerId={offer.offerId}
+                      setOffered={setOffered}
+                      setRequested={setRequested}
+                      refreshComponent={refreshComponent}
+                    />
+                    <ul>
+                      {offered.map(item => (
+                        <div className="">
+                          <li
+                            className="d-inline-flex text-capitalize"
+                            key={item.serviceId}
+                          >
+                            {item.title}{" "}
+                            <DeleteServiceDialog
+                              serviceId={item.serviceId}
+                              title={item.title}
+                              setOffered={setOffered}
+                              setRequested={setRequested}
+                              refreshComponent={refreshComponent}
+                            />
+                          </li>
+                        </div>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };

@@ -60,13 +60,13 @@ export default () => {
               <h5> Mes prestations commander</h5>
             </div>
 
-            <GridClient mesPresCommander={myPrest} refreshComponent={refreshComponent} nomCo={nicknameCo}/>
+            <GridClient mesPresCommander={myPrest} refreshComponent={refreshComponent} nomCo={nicknameCo} />
 
             <div className="fst-italic mx-5 text-dark ">
-              <h5> Mes prestations à prester {nicknameCo} </h5>
+              <h5> Mes prestations à prester </h5>
             </div>
 
-            <GridProvider mesPresAPrester={aPrester} refreshComponent={refreshComponent} nomCo={nicknameCo}/>
+            <GridProvider mesPresAPrester={aPrester} refreshComponent={refreshComponent} nomCo={nicknameCo} />
           </div>
 
 

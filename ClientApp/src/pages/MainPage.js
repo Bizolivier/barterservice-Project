@@ -53,9 +53,9 @@ Plateforme qui met en relation des particuliers de votre region ou même de plus
       {
         isAuthenticated ?
           <div className="d-inline-flex text-center">
-            <h5 style={{ "margin-top": "30px", "padding-right": "5px" }}>Bienvenue sur BarterServ {user.name} </h5>
+            <h5 style={{ "margingTop": "30px", "paddingRight": "5px" }}>Bienvenue sur BarterServ {user.name} </h5>
             <img className=" rounded-circle" src={user.picture} alt={user.name} />
-            <h5 style={{ "margin-top": "30px", "padding-left": "5px" }}>essaye de voir les offres disponibles </h5>
+            <h5 style={{ "margingTop": "30px", "paddingLeft": "5px" }}>essaye de voir les offres disponibles </h5>
           </div> :
           <div >
             <Button variant="contained" color="primary" onClick={() => loginWithRedirect()}>

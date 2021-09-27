@@ -125,7 +125,7 @@ const UserProfil = () => {
 
 
                       {
-                        isAuthenticated ? <FormControlLabel control={<Switch checked={openChat} onChange={() => { setOpenChat(!openChat) }} />} label="Me contacter" /> : <div></div>
+                        isAuthenticated && interlocut.userId != locut.userId ? <FormControlLabel control={<Switch checked={openChat} onChange={() => { setOpenChat(!openChat) }} />} label="Me contacter" /> : <div></div>
                       }
 
                     </div>
@@ -149,25 +149,24 @@ const UserProfil = () => {
                           >
 
                             {item.title}
-                            {isAuthenticated ? (<div>
+                            <div>
+
+                              <Link
+                                className="text-dark px-4 my-3 fw-bolder"
+                                to={`/Avis/${authorEmail}/${item.serviceId}`}>
+                                <IconButton>
+                                  <CommentIcon />
+                                </IconButton>
+                              </Link>
+
+                            </div>
+                            {isAuthenticated && interlocut.userId != locut.userId ? (<div>
                               <IconButton>
 
                                 <OrderTheService userName={userNickname} serviceName={item.title} servId={item.serviceId} offerAuthorId={offer.authorId} userConnectedId={userCoId} />
                               </IconButton>
 
-                              <div>
-                                {isAuthenticated ? (
-                                  <Link
-                                    className="text-dark px-4 my-3 fw-bolder"
-                                    to={`/Avis/${authorEmail}/${item.serviceId}`}>
-                                    <IconButton>
-                                      <CommentIcon />
-                                    </IconButton>
-                                  </Link>
-                                ) : (
-                                    <div></div>
-                                  )}
-                              </div>
+
 
 
 
