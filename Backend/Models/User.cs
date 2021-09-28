@@ -6,6 +6,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Text;
+using System.Security.Claims;
 
 namespace backend.Models {
 
@@ -63,6 +70,9 @@ namespace backend.Models {
         public virtual IList <Comment> CommentsOwned {get;set;}= new List<Comment>();
 
         public virtual IList <Comment> CommentReceived {get;set;} = new List <Comment>();
+
+        [NotMapped]
+        public string Token { get; set; }
 
 
 

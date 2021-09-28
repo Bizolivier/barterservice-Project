@@ -17,8 +17,8 @@ namespace backend.Models {
                 Picture=user.Picture,
                 Sexe = user.Sexe,
                 Role = user.Role,
-                Province = user.Province
- 
+                Province = user.Province,
+                Token = user.Token
             
             };
         }

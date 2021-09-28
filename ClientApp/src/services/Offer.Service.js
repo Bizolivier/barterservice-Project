@@ -12,9 +12,10 @@ export async function GetOfferByEmail(email) {
   return response.data;
 }
 
-export async function GetOffersBySearch(provinceNum, categoryId) {
+export async function GetOffersBySearch(searchValue, provinceNum, categoryId) {
+  var search = searchValue == "" ? "-1" : searchValue;
   const response = await axios.get(
-    `${httpBase}/GetOffersBySearch/${provinceNum}/${categoryId}`
+    `${httpBase}/GetOffersBySearch/${search}/${provinceNum}/${categoryId}`
   );
   return response.data;
 }

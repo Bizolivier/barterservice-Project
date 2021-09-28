@@ -9,7 +9,7 @@ using backend.Models;
 namespace barterserv.Migrations
 {
     [DbContext(typeof(BarterContext))]
-    [Migration("20210926094017_init")]
+    [Migration("20210928103904_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1034,7 +1034,7 @@ namespace barterserv.Migrations
                             Nickname = "L'Olive",
                             Picture = "vautour.jpg",
                             Province = 8,
-                            Role = 0,
+                            Role = 1,
                             Sexe = 1,
                             TimeCredit = 50
                         },
@@ -1046,7 +1046,7 @@ namespace barterserv.Migrations
                             Nickname = "Ombeline",
                             Picture = "timon.png",
                             Province = 0,
-                            Role = 0,
+                            Role = 1,
                             Sexe = 1,
                             TimeCredit = 5
                         });

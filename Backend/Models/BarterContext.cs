@@ -93,8 +93,8 @@ namespace backend.Models {
                     new User() {  UserId =5, Nickname = "Amin",Fullname ="Gandouz",Email="amin@gmail.com", Picture="simba.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles  },
                     new User() {  UserId =6, Nickname = "Nico",Fullname ="Krstev",Email="nico@gmail.com", Picture="rafiki.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Hainaut },
                     new User() {  UserId =7, Nickname = "Momo",Fullname ="Mohammed Assbai",Email="momo@gmail.com", Picture="zazu.jpg", TimeCredit = 5 ,Sexe = Sexe.Male,Role =  Role.User,Province=Province.Bruxelles },
-                    new User() {  UserId =8, Nickname = "L'Olive",Fullname ="Olivier Bizimungu",Email="bizidu@gmail.com", Picture="vautour.jpg", TimeCredit = 50 ,Sexe = Sexe.Male,Role = Role.User,Province=Province.Flandre_orientale },
-                    new User() {  UserId =9, Nickname = "Ombeline",Fullname ="Bizi Ombi",Email="Ombi@gmail.com", Picture="timon.png", TimeCredit = 5 , Sexe = Sexe.Male, Role =  Role.User, Province=Province.Bruxelles }
+                    new User() {  UserId =8, Nickname = "L'Olive",Fullname ="Olivier Bizimungu",Email="bizidu@gmail.com", Picture="vautour.jpg", TimeCredit = 50 ,Sexe = Sexe.Male,Role = Role. Admin,Province=Province.Flandre_orientale },
+                    new User() {  UserId =9, Nickname = "Ombeline",Fullname ="Bizi Ombi",Email="Ombi@gmail.com", Picture="timon.png", TimeCredit = 5 , Sexe = Sexe.Male, Role =  Role. Admin, Province=Province.Bruxelles }
             );
         }
         private void addOffers(ModelBuilder modelBuilder){

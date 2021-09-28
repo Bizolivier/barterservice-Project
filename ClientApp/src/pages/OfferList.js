@@ -16,12 +16,13 @@ const OfferList = () => {
   const [searchList, setSearchList] = useState([]);
   const [provinceOL, setProvinceOL] = useState(-1);
   const [categorieOL, setCategorieOL] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    offerService.GetOffersBySearch(provinceOL, categorieOL).then(response => {
+    offerService.GetOffersBySearch(searchValue, provinceOL, categorieOL).then(response => {
       setSearchList(response);
     });
-  }, [provinceOL, categorieOL]);
+  }, [provinceOL, categorieOL, searchValue]);
 
   return (
     <div>
@@ -33,6 +34,8 @@ const OfferList = () => {
         categorieOL={categorieOL}
         setProvinceOL={setProvinceOL}
         setCategorieOL={setCategorieOL}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
 
       <GridOffer searchListOnGrid={searchList} />

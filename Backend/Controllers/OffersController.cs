@@ -50,16 +50,15 @@ namespace backend.Controllers {
 
             }
 
-            [HttpGet("GetOffersBySearch/{provinceNum}/{categoryId}")]
-            public async Task<ActionResult<IEnumerable<OfferDTO>>> GetOffersBySearch( int provinceNum,int categoryId) {
+            [HttpGet("GetOffersBySearch/{searchValue}/{provinceNum}/{categoryId}")]
+            public async Task<ActionResult<IEnumerable<OfferDTO>>> GetOffersBySearch(string searchValue, int provinceNum,int categoryId) {
 
                List<User> listUsers = await _context.Users.ToListAsync();
 
               if(provinceNum!=-1){
 
                 listUsers = await _context.Users.Where(u =>((int) u.Province) == provinceNum).ToListAsync();
-              }
-              
+              }            
              
 
               List<Offer> listOffers = await _context.Offers.Where(o=>(listUsers.Select(u=>u.UserId).ToList()).Contains(o.AuthorId)).ToListAsync();
@@ -75,8 +74,16 @@ namespace backend.Controllers {
 
                }
 
-              
-                return listOffers.ToDTO();
+              if(searchValue!="-1"){
+                 List<Service> listService = await _context.Services.Where(
+                   s=>(s.Title.Contains(searchValue) && (listOffers.Select(s=>(s.OfferId)).ToList()).Contains( s.OfferLinkedtoServiceId))
+                   ).ToListAsync();
+
+                listOffers = listOffers.Where(o=>((listService.Select(s=>(s.OfferLinkedtoServiceId )).ToList()).Contains(o.OfferId))).ToList();
+
+
+              }
+              return listOffers.ToDTO();
 
 
              }

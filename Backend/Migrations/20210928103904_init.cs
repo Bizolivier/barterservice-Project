@@ -234,8 +234,8 @@ namespace barterserv.Migrations
                     { 5, "amin@gmail.com", "Gandouz", "Amin", "simba.jpg", 0, 0, 1, 5 },
                     { 6, "nico@gmail.com", "Krstev", "Nico", "rafiki.jpg", 1, 0, 1, 5 },
                     { 7, "momo@gmail.com", "Mohammed Assbai", "Momo", "zazu.jpg", 0, 0, 1, 5 },
-                    { 8, "bizidu@gmail.com", "Olivier Bizimungu", "L'Olive", "vautour.jpg", 8, 0, 1, 50 },
-                    { 9, "Ombi@gmail.com", "Bizi Ombi", "Ombeline", "timon.png", 0, 0, 1, 5 }
+                    { 8, "bizidu@gmail.com", "Olivier Bizimungu", "L'Olive", "vautour.jpg", 8, 1, 1, 50 },
+                    { 9, "Ombi@gmail.com", "Bizi Ombi", "Ombeline", "timon.png", 0, 1, 1, 5 }
                 });
 
             migrationBuilder.InsertData(

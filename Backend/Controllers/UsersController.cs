@@ -6,8 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using BARTER_Framework;
+using backend.AuthorizeFile;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Text;
+using System.Security.Claims;
 
 namespace backend.Controllers {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase {
@@ -32,18 +41,50 @@ namespace backend.Controllers {
           return (await _context.Users.Where(u=>u.Email!= email).ToListAsync()).ToDTO();
         }
 
+        private async Task<UserDTO> Authenticate(UserDTO user) {
+          var member = await _context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
+
+              // return null if member not found
+              if (member == null){
+                 return null;
+              }
+                  
+
+              else {
+              // authentication successful so generate jwt token
+               var tokenHandler = new JwtSecurityTokenHandler();
+               var key = Encoding.ASCII.GetBytes("my-super-secret-key");
+               var tokenDescriptor = new SecurityTokenDescriptor {
+                     Subject = new ClaimsIdentity(new Claim[]{
+                              new Claim(ClaimTypes.Name, member.Nickname),
+                              new Claim(ClaimTypes.Role, member.Role.ToString())
+                    }),
+                          IssuedAt = DateTime.UtcNow,
+                          Expires = DateTime.UtcNow.AddMinutes(10),
+                       SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                     };
+                     var token = tokenHandler.CreateToken(tokenDescriptor);
+                   member.Token = tokenHandler.WriteToken(token);
+                     }
+
+
+                   return member.ToDTO();
+}
 
 
 
+         [AllowAnonymous]
          [HttpPut("connect")]
         public async Task<ActionResult<UserDTO>> connect(UserDTO user)
         {
             
             var user2 = await _context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
 
-              if(user2 != null)
-                   return  user2.ToDTO();
-              else{
+              if(user2 != null){
+                    Console.WriteLine("dans connect user null");
+                   return await Authenticate(user2.ToDTO());
+
+              }else{
                 var userToConnect =  new User() {
                 Nickname = user.Nickname,
                 Fullname = user.Fullname,
@@ -71,7 +112,7 @@ namespace backend.Controllers {
 
 
 
-
+          [AllowAnonymous]
           [HttpGet("GetOne/{userId}")]
           public async Task<ActionResult<UserDTO>> GetOne(int userId) {
               var user = await _context.Users.FindAsync(userId);
@@ -80,7 +121,7 @@ namespace backend.Controllers {
            return user.ToDTO();
         }
         
-
+          [AllowAnonymous]
          [HttpGet("GetOneByEmail/{email}")]
         public async Task<ActionResult<UserDTO>> GetOneByEmail(string email) {
         var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);

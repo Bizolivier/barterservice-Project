@@ -1032,7 +1032,7 @@ namespace barterserv.Migrations
                             Nickname = "L'Olive",
                             Picture = "vautour.jpg",
                             Province = 8,
-                            Role = 0,
+                            Role = 1,
                             Sexe = 1,
                             TimeCredit = 50
                         },
@@ -1044,7 +1044,7 @@ namespace barterserv.Migrations
                             Nickname = "Ombeline",
                             Picture = "timon.png",
                             Province = 0,
-                            Role = 0,
+                            Role = 1,
                             Sexe = 1,
                             TimeCredit = 5
                         });

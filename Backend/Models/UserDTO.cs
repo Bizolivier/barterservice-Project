@@ -13,5 +13,6 @@ namespace backend.Models {
         public Sexe Sexe { get; set; } = Sexe.Female;
         public Role Role { get; set; }
         public Province Province {get;set;}
+        public string Token {get;set;}
     }
 }

@@ -3,13 +3,21 @@ import ProvinceSelection from "../selection/ProvinceSelection";
 import CategorySelection from "../selection/CategorySelection";
 import Offer from "../../pages/Offer.js";
 import * as offerService from "../../services/Offer.Service.js";
+import FormControl from "@material-ui/core/FormControl";
+
+import TextField from "@material-ui/core/TextField";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+
 
 const SearchBar = ({
   provinceOL,
   categorieOL,
+  searchValue,
   setProvinceOL,
-  setCategorieOL
+  setCategorieOL,
+  setSearchValue
 }) => {
+
   const [selectedProvinceValue, setSelectedProvinceValue] = useState(
     provinceOL
   );
@@ -22,9 +30,23 @@ const SearchBar = ({
     setCategorieOL(selectedCategoryValue);
   };
 
+  const handleSearchTexte = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+
   return (
     <React.Fragment>
       <div className=" d-inline-flex  text-center my-2 h-20 w-100 shadow-lg rounded ">
+        <div>
+          <TextField
+            id="TextField"
+            label="Search"
+            value={searchValue}
+            onChange={handleSearchTexte}
+          />
+        </div>
+
         <div className="w-25">
           <ProvinceSelection
             selectedOption={0}
