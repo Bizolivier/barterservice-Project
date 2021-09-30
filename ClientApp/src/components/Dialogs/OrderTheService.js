@@ -64,6 +64,7 @@ export default function OrderTheService({ userName, serviceName, servId, offerAu
     const [open, setOpen] = useState(false);
     const [valueDate, setValueDate] = useState(new Date());
     const [openS, setOpenS] = useState(false);
+    const [errorDateTime, setErrorDateTime] = useState(false);
 
     const handleClickAddPrestation = () => {
         const newPrestation = {
@@ -107,8 +108,10 @@ export default function OrderTheService({ userName, serviceName, servId, offerAu
                         <p>Veuillez choisir une date et une heure d'execution </p>
                         <div className="h-50">
                             <DateTimePicker
-                                onChange={(e) => { setValueDate(e) }}
+                                onChange={(e) => { setErrorDateTime(e.getTime() < valueDate.getTime); setValueDate(e) }}
                                 value={valueDate}
+                                minDate={new Date()}
+                                error={errorDateTime}
                             />
 
                         </div>
