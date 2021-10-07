@@ -56,13 +56,13 @@ export default () => {
               <h4>Mon gestionnaire de prestations</h4>
 
             </div>
-            <div className="fst-italic mx-5 text-dark ">
-              <h5> Mes prestations commander</h5>
+            <div className="fst-italic mx-5 text-success">
+              <h5> Mes prestations commandées</h5>
             </div>
 
             <GridClient mesPresCommander={myPrest} refreshComponent={refreshComponent} nomCo={nicknameCo} />
 
-            <div className="fst-italic mx-5 text-dark ">
+            <div className="fst-italic mx-5 text-success ">
               <h5> Mes prestations à prester </h5>
             </div>
 

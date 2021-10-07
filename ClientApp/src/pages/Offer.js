@@ -48,7 +48,7 @@ const Offer = ({ offer }) => {
     async function fetchData() {
       const authorRes = await userService.GetOneById(offer.authorId);
       setAuthor(authorRes);
-      console.log(authorRes);
+
 
       const listServicesRequest = await serviceService.getRequestedSevices(
         authorRes.email

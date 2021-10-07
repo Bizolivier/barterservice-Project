@@ -27,19 +27,30 @@ namespace backend.Controllers {
         }
 
 
-
+        [AllowAnonymous]
         [HttpGet]
     
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll() {
              return (await _context.Users.ToListAsync()).ToDTO();
         }
 
+      [AllowAnonymous]
+      [HttpGet("getUsersWithRoleUser")]
+    
+        public async Task<ActionResult<IEnumerable<UserDTO>>> getUsersWithRoleUser() {
+          return (await _context.Users.Where(u=>u.Role== 0).ToListAsync()).ToDTO();
+        }
 
+
+        [AllowAnonymous]
         [HttpGet("usersToChat/{email}")]
     
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllusersToChat(string email) {
           return (await _context.Users.Where(u=>u.Email!= email).ToListAsync()).ToDTO();
         }
+
+
+
 
         private async Task<UserDTO> Authenticate(UserDTO user) {
           var member = await _context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
@@ -47,10 +58,7 @@ namespace backend.Controllers {
               // return null if member not found
               if (member == null){
                  return null;
-              }
-                  
-
-              else {
+              }else {
               // authentication successful so generate jwt token
                var tokenHandler = new JwtSecurityTokenHandler();
                var key = Encoding.ASCII.GetBytes("my-super-secret-key");
@@ -130,7 +138,7 @@ namespace backend.Controllers {
            return user.ToDTO();
         }
 
-
+          [AllowAnonymous]
          [HttpPost]        
          public async Task<ActionResult<UserDTO>> PostUser(UserDTO data) {
               var user = await _context.Users.FindAsync(data.Nickname);
@@ -155,7 +163,7 @@ namespace backend.Controllers {
            return CreatedAtAction(nameof(GetOne), new { nickname = newUser.Nickname }, newUser.ToDTO());
         }
 
-
+         [AllowAnonymous]
          [HttpPut("PutUser/{email}")]
          public async Task<IActionResult> PutUser(string email , UserDTO userDTO) {
            if (email != userDTO.Email)
@@ -180,8 +188,45 @@ namespace backend.Controllers {
         }
 
 
+         [AllowAnonymous]
+         [HttpDelete("deleteUser/{userId}")]
+        public async Task<IActionResult> deleteUser(int userId) {
+          var user = await _context.Users.FindAsync(userId);
+           if (user == null)
+              return NotFound(); 
+
+          // var offer = await _context.Offers.FindAsync(user.AuthorId);
+          //  if (offer == null)
+          //     return NotFound();
+
+          // var serviceList = await _context.Services.Where(s => s.OfferLinkedtoServiceId == offer.OfferId ).ToListAsync() ; 
+          // var comntList = await _context.comment.where()
+
+          // var category =await _context.Categories.FindAsync(service.CategoryLinkToId); 
+          //  if (category == null)
+          //     return NotFound(); 
+
+          // category.CategorysServices.Remove(service);           
+
+          // offer.ServicesLinkedToOffer.Remove(service);
+
+          //  service.CommentLinkedToService.Clear();
+
+          _context.Users.Remove(user);
+          
+          
+                var res = await _context.SaveChangesAsyncWithValidation();
+                if (!res.IsEmpty)
+                    return BadRequest(res);
+
+                return NoContent();    
+            }
+
+      }
 
 
 
-    }
+
+
+    
 }

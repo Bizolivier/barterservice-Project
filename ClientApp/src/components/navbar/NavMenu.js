@@ -16,6 +16,7 @@ export default () => {
   const { user, isAuthenticated } = useAuth0();
   const [nbNotif, setNbNotif] = useState(0);
   const [userCoId, setUserCoId] = useState();
+  const [userCo, setUserCo] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const StyledBadge = withStyles(theme => ({
     badge: {
@@ -39,6 +40,7 @@ export default () => {
         };
         await userService.connect(newUser);
         const userConnected = await userService.GetOneByEmail(user.email);
+        setUserCo(userConnected);
         const notif = await GestionPrestationService.getNbNotifications(
           userConnected.userId
         );
@@ -101,6 +103,23 @@ export default () => {
                     Mon offre
                 </NavLink>
                 </NavItem>
+
+                {userCo.role == 1 ?
+                  <div className="">
+                    <NavItem>
+                      <NavLink
+                        tag={Link}
+                        className="text-dark px-4 my-3 fw-bolder"
+                        to={`/GestionUser`}
+                        onClick={() => setRefresh(!refresh)}
+                      >
+                        Gestion User
+                </NavLink>
+                    </NavItem>
+                  </div> : <div></div>
+                }
+
+
                 <NavItem>
                   <NavLink
                     tag={Link}

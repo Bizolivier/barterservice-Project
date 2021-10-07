@@ -104,13 +104,13 @@ export default () => {
 
                 <form className="form-horizontal" role="form">
 
-
-                  <FormControl error={errorNickname} variant="outlined" style={{ marginRight: "20px" }}>
-                    <InputLabel htmlFor="component-outlined">Nickname:</InputLabel>
-                    <OutlinedInput id="component-outlined" value={userNickname} onChange={handleChangeNickname} label="Nickname" />
-                    {errorNickname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
-                  </FormControl>
-
+                  <div className="my-2">
+                    <FormControl error={errorNickname} variant="outlined" style={{ marginRight: "20px" }}>
+                      <InputLabel htmlFor="component-outlined">Nickname:</InputLabel>
+                      <OutlinedInput id="component-outlined" value={userNickname} onChange={handleChangeNickname} label="Nickname" />
+                      {errorNickname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
+                    </FormControl>
+                  </div>
 
                   <FormControl error={errorFullname} variant="outlined" >
                     <InputLabel htmlFor="component-outlined">Fullname:</InputLabel>

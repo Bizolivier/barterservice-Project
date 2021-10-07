@@ -20,6 +20,7 @@ export default () => {
   const [offer, setOffer] = useState([]);
   const [timeC, setTimeC] = useState();
   const [refresh, setRefresh] = useState(false);
+  
   useEffect(() => {
     serviceService.getRequestedSevices(user.email).then(listServicesRequest => {
       setRequested(listServicesRequest);

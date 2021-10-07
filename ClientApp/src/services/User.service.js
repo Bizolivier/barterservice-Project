@@ -7,6 +7,14 @@ export async function getAll() {
   return response.data;
 }
 
+export async function getUsersWithRoleUser() {
+  const response = await axios.get(`${httpBase}/getUsersWithRoleUser`);
+  return response.data;
+}
+export async function deleteUser(userId) {
+  await axios.delete(` ${httpBase}/deleteUser/${userId}`)
+}
+
 export async function usersToChat(email) {
   const response = await axios.get(`${httpBase}/usersToChat/${email}`);
   return response.data;
