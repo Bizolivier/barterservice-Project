@@ -23,7 +23,7 @@ import Avatar from "../avatar/Avatar";
 import ProvinceSelection from "../selection/ProvinceSelection";
 import SexeSelection from "../selection/SexeSelection.js";
 import Snackbar from "@material-ui/core/Snackbar";
-
+import RoleSelection from "../selection/RoleSelection"
 import { OutlinedInput, FormHelperText, } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 
@@ -46,9 +46,11 @@ export default function EditUserByAdmin({ user
     const [open, setOpen] = useState(false);
     const [selectedProvinceValue, setSelectedProvinceValue] = useState(0);
     const [selectedSexeValue, setSelectedSexeValue] = useState(0);
+    const [selectedRoleValue, setSelectedRoleValue] = useState(0);
     const [userNickname, setUserNickname] = useState(user.nickname);
     const [userFullname, setUserFullname] = useState(user.fullname);
     const [userProvince, setUserProvince] = useState(user.province);
+    const [userRole, setUserRole] = useState(user.role);
     const [isBusy, setBusy] = useState(true);
     const [userSexe, setUserSexe] = useState(user.sexe);
     //gestion des erreurs
@@ -80,6 +82,11 @@ export default function EditUserByAdmin({ user
     function changeSexeValue(newValue) {
         setSelectedSexeValue(newValue);
     }
+    function changeRoleValue(newValue) {
+        setSelectedRoleValue(newValue);
+    }
+
+
     const handleChangeNickname = (event) => {
         setUserNickname(event.target.value);
         setErrorNickname(event.target.value == "" ? true : false);
@@ -101,7 +108,8 @@ export default function EditUserByAdmin({ user
             email: user.email,
             picture: user.picture,
             province: selectedProvinceValue,
-            sexe: selectedSexeValue
+            sexe: selectedSexeValue,
+            role: selectedRoleValue
         };
 
         userService.PutUser(user.email, newUpdatedUser);
@@ -152,7 +160,7 @@ export default function EditUserByAdmin({ user
                 <DialogContent>
 
 
-                    <h1>EDit User {user.nickname}</h1>
+                    <h1>Edit user {user.nickname}</h1>
                     <div className=" ui segment bg-primary.bg-gradient">
 
                         <div className="container">
@@ -167,22 +175,22 @@ export default function EditUserByAdmin({ user
                                 <div className="col-md-9 personal-info">
                                     <h3>Personal info</h3>
 
-                                    <form className="form-horizontal" role="form">
+                                    <form className="form-horizontal " role="form">
+
+                                        <div className="d-inline-flex">
+                                            <FormControl error={errorNickname} variant="outlined" style={{ marginRight: "20px", marginBottom: "20px" }}>
+                                                <InputLabel htmlFor="component-outlined">Nickname:</InputLabel>
+                                                <OutlinedInput id="component-outlined" value={userNickname} onChange={handleChangeNickname} label="Nickname" />
+                                                {errorNickname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
+                                            </FormControl>
 
 
-                                        <FormControl error={errorNickname} variant="outlined" style={{ marginRight: "20px", marginBottom: "20px" }}>
-                                            <InputLabel htmlFor="component-outlined">Nickname:</InputLabel>
-                                            <OutlinedInput id="component-outlined" value={userNickname} onChange={handleChangeNickname} label="Nickname" />
-                                            {errorNickname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
-                                        </FormControl>
-
-
-                                        <FormControl error={errorFullname} variant="outlined" >
-                                            <InputLabel htmlFor="component-outlined">Fullname:</InputLabel>
-                                            <OutlinedInput id="component-outlined" value={userFullname} onChange={handleChangeFullname} label="Fullname" />
-                                            {errorFullname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
-                                        </FormControl>
-
+                                            <FormControl error={errorFullname} variant="outlined" >
+                                                <InputLabel htmlFor="component-outlined">Fullname:</InputLabel>
+                                                <OutlinedInput id="component-outlined" value={userFullname} onChange={handleChangeFullname} label="Fullname" />
+                                                {errorFullname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
+                                            </FormControl>
+                                        </div>
 
                                         <div className="form-group">
                                             <label className="col-lg-3 control-label">Province:</label>
@@ -195,6 +203,18 @@ export default function EditUserByAdmin({ user
                                                 />
                                             </div>
                                         </div>
+                                        <div className="form-group">
+                                            <label className="col-lg-3 control-label">Role:</label>
+                                            <div className="col-lg-8">
+                                                <RoleSelection
+                                                    selectedOption={userRole}
+                                                    selectedRoleValue={selectedRoleValue}
+                                                    changeRoleValue={changeRoleValue}
+                                                    allProvinces={false}
+                                                />
+                                            </div>
+                                        </div>
+
                                         <div className="form-group">
                                             <label className="col-lg-3 control-label">Sexe:</label>
                                             <div className="col-lg-8">

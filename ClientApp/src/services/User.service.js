@@ -27,7 +27,8 @@ export async function connect(userDTO) {
     Email: userDTO.email,
     Province: userDTO.province,
     Picture: userDTO.picture,
-    Sexe: userDTO.sexe
+    Sexe: userDTO.sexe,
+
   });
   return response.data;
 }
@@ -38,7 +39,8 @@ export async function PutUser(email, userDTO) {
     FullName: userDTO.fullname,
     Email: userDTO.email,
     Province: userDTO.province,
-    Sexe: userDTO.sexe
+    Sexe: userDTO.sexe,
+    Role: userDTO.role
   });
 }
 

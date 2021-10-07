@@ -178,6 +178,7 @@ namespace backend.Controllers {
          user .Fullname = userDTO.Fullname;
          user .Province = userDTO.Province;
          user .Sexe = userDTO.Sexe;
+         user.Role = userDTO.Role;
          
 
          var res = await _context.SaveChangesAsyncWithValidation();

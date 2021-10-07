@@ -10,6 +10,9 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import { IconButton, TextField } from "@material-ui/core";
 import * as usersService from "../../services/User.service";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import Avatar from "../avatar/Avatar";
+import * as framework from "../../Framework"
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -49,10 +52,13 @@ export default function DeleteUserByAdmin({
                 aria-describedby="alert-dialog-slide-description"
             >
                 <DialogTitle id="alert-dialog-slide-title">
-                    {"Etes vous sûre de vouloir supprimer l'utilisateur' ?"}
+                    {"Etes vous sûre de vouloir supprimer l'utilisateur ?"}
                 </DialogTitle>
                 <DialogContent>
-                    <p className="text-center">{user.nickname}</p>
+                    <div className="d-inline-flex">
+                        <Avatar pictureSrc={framework.IMG(user.picture)} />
+                        <p className="text-center mx-5 my-5 text-primary text-capitalize ">{user.nickname}</p>
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
