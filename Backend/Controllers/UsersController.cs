@@ -27,14 +27,13 @@ namespace backend.Controllers {
         }
 
 
-        [AllowAnonymous]
-        [HttpGet]
-    
+        
+        [HttpGet]    
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll() {
              return (await _context.Users.ToListAsync()).ToDTO();
         }
 
-      [AllowAnonymous]
+      [Authorized(Role.Admin)]
       [HttpGet("getUsersWithRoleUser")]
     
         public async Task<ActionResult<IEnumerable<UserDTO>>> getUsersWithRoleUser() {
@@ -42,7 +41,7 @@ namespace backend.Controllers {
         }
 
 
-        [AllowAnonymous]
+       
         [HttpGet("usersToChat/{email}")]
     
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllusersToChat(string email) {
@@ -129,7 +128,7 @@ namespace backend.Controllers {
            return user.ToDTO();
         }
         
-          [AllowAnonymous]
+          [AllowAnonymous] 
          [HttpGet("GetOneByEmail/{email}")]
         public async Task<ActionResult<UserDTO>> GetOneByEmail(string email) {
         var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
@@ -138,7 +137,7 @@ namespace backend.Controllers {
            return user.ToDTO();
         }
 
-          [AllowAnonymous]
+         
          [HttpPost]        
          public async Task<ActionResult<UserDTO>> PostUser(UserDTO data) {
               var user = await _context.Users.FindAsync(data.Nickname);
@@ -163,7 +162,7 @@ namespace backend.Controllers {
            return CreatedAtAction(nameof(GetOne), new { nickname = newUser.Nickname }, newUser.ToDTO());
         }
 
-         [AllowAnonymous]
+        
          [HttpPut("PutUser/{email}")]
          public async Task<IActionResult> PutUser(string email , UserDTO userDTO) {
            if (email != userDTO.Email)
@@ -189,7 +188,7 @@ namespace backend.Controllers {
         }
 
 
-         [AllowAnonymous]
+        
          [HttpDelete("deleteUser/{userId}")]
         public async Task<IActionResult> deleteUser(int userId) {
           var user = await _context.Users.FindAsync(userId);

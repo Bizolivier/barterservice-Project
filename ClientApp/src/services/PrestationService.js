@@ -13,22 +13,22 @@ export async function addPrestation(prestationDTO) {
 }
 
 export async function getNbNotifications(userId) {
-  return (await axios.get(`${httpBase}/getNbNotifications/${userId}`)).data;
+  return (await axios.get(`${httpBase}/getNbNotifications/${userId}`, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } })).data;
 }
 
 export async function getOrdered(userId) {
-  return (await axios.get(`${httpBase}/getOrdered/${userId}`)).data;
+  return (await axios.get(`${httpBase}/getOrdered/${userId}`, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } })).data;
 }
 
 export async function getProvided(userId) {
-  return (await axios.get(`${httpBase}/getProvided/${userId}`)).data;
+  return (await axios.get(`${httpBase}/getProvided/${userId}`, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } })).data;
 }
 export async function getEtatChanged(id) {
-  await axios.put(`${httpBase}/getEtatChanged/${id}`);
+  await axios.put(`${httpBase}/getEtatChanged/${id}`, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } });
 }
 
 export async function getPrestDeleted(id) {
-  await axios.delete(`${httpBase}/getPrestDeleted/${id}`);
+  await axios.delete(`${httpBase}/getPrestDeleted/${id}`, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } });
 }
 export async function PutDate(id, prestationDTO) {
   await axios.put(`${httpBase}/PutDate/${id}`, {
@@ -38,6 +38,6 @@ export async function PutDate(id, prestationDTO) {
     Date: prestationDTO.Date,
     Etat: prestationDTO.Etat
 
-  });
+  }, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } });
 }
 

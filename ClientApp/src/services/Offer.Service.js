@@ -11,6 +11,10 @@ export async function GetOfferByEmail(email) {
   const response = await axios.get(`${httpBase}/GetOfferByEmail/${email}`);
   return response.data;
 }
+export async function GetOfferByAuthorId(userId) {
+  const response = await axios.get(`${httpBase}/GetOfferByAuthorId/${userId}`);
+  return response.data;
+}
 
 export async function GetOffersBySearch(searchValue, provinceNum, categoryId) {
   var search = searchValue == "" ? "-1" : searchValue;

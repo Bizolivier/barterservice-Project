@@ -52,7 +52,7 @@ export default function DeleteUserByAdmin({
                 aria-describedby="alert-dialog-slide-description"
             >
                 <DialogTitle id="alert-dialog-slide-title">
-                    {"Etes vous sûre de vouloir supprimer l'utilisateur ?"}
+                    {"Etes vous sûre de vouloir supprimer l'utilisateur?"}
                 </DialogTitle>
                 <DialogContent>
                     <div className="d-inline-flex">

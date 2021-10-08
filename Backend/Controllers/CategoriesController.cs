@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using BARTER_Framework;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase {
@@ -17,15 +19,15 @@ namespace backend.Controllers {
             _context = context;
         }
         
-
-        [HttpGet]
+       [AllowAnonymous]
+       [HttpGet]
        public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetAll() {
               return (await _context.Categories.ToListAsync()).ToDTO();
         } 
 
 
-
-           [HttpGet("{categoryId}")]
+        [AllowAnonymous]
+        [HttpGet("{categoryId}")]
         public async Task<ActionResult<CategoryDTO>> GetOne(string categoryId) {
         var category = await _context.Categories.FindAsync(categoryId);
            if (category == null)

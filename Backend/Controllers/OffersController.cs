@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using BARTER_Framework;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers {
-
+        [Authorize]
         [Route("api/[controller]")]
         [ApiController]
         public class OffersController : ControllerBase {
@@ -18,7 +19,7 @@ namespace backend.Controllers {
              public OffersController(BarterContext context) {
                  _context = context;
             }
-
+            [AllowAnonymous]
              [HttpGet]
              public async Task<ActionResult<IEnumerable<OfferDTO>>> GetAll() {
                  return (await _context.Offers.ToListAsync()).ToDTO();
@@ -33,7 +34,7 @@ namespace backend.Controllers {
                    return offer.ToDTO(); 
            } 
         
-
+            [AllowAnonymous]
             [HttpGet("GetOfferByEmail/{email}")]
             public async Task<ActionResult<OfferDTO>> GetOfferByEmail(string email) {
                   var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
@@ -50,6 +51,21 @@ namespace backend.Controllers {
 
             }
 
+            [AllowAnonymous]
+            [HttpGet("GetOfferByAuthorId/{userId}")]
+            public async Task<ActionResult<OfferDTO>> GetOfferByAuthorId(int userId) {
+                 Offer offer = await _context.Offers.SingleOrDefaultAsync(o => o.AuthorId == userId);
+
+                 if (offer == null)
+                    return NotFound();
+
+                   return offer.ToDTO();
+
+            }
+
+
+
+            [AllowAnonymous]
             [HttpGet("GetOffersBySearch/{searchValue}/{provinceNum}/{categoryId}")]
             public async Task<ActionResult<IEnumerable<OfferDTO>>> GetOffersBySearch(string searchValue, int provinceNum,int categoryId) {
 

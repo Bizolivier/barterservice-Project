@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using BARTER_Framework;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PrestationsController : ControllerBase {
@@ -17,7 +19,7 @@ namespace backend.Controllers {
             _context = context;
         }
         
-
+        
         [HttpGet]
        public async Task<ActionResult<IEnumerable<PrestationDTO>>> GetAll() {
               List<PrestationDTO> listPrestation = (await _context.Prestations.ToListAsync()).ToDTO();
@@ -37,7 +39,6 @@ namespace backend.Controllers {
         //***********************************POST******************************************/
         //***********************************POST******************************************/
         //***********************************POST******************************************/
-
 
        [HttpPost]        
       public async Task<ActionResult<PrestationDTO>> PostService(PrestationDTO data) {
@@ -68,7 +69,7 @@ namespace backend.Controllers {
         //***********************************UPDATE******************************************/
 
 
-
+         
          [HttpPut("getEtatChanged/{id}")]
          public async Task<IActionResult> getEtatChanged(int id) {
         
@@ -92,7 +93,7 @@ namespace backend.Controllers {
         //***********************************GETORDERED by Client******************************************/
         //***********************************GETORDERED by Client******************************************/
         //***********************************GETORDERED by Client******************************************/
-
+         
         [HttpGet("getProvided/{userId}")]
         public async Task<ActionResult<IEnumerable<PrestationDTO>>> getProvided(int userId) {
            
@@ -118,7 +119,7 @@ namespace backend.Controllers {
         //***********************************GETPROVIDED by Client******************************************/
         //***********************************GETPROVIDED by Client******************************************/
         //***********************************GETPROVIDED by Client******************************************/
-
+             
            [HttpGet("getOrdered/{userId}")]
         public async Task<ActionResult<IEnumerable<PrestationDTO>>> getOrdered(int userId) {
            
@@ -144,7 +145,7 @@ namespace backend.Controllers {
         //***********************************GETORDERED by the provider******************************************/
         //***********************************GETORDERED by the provider******************************************/
         //***********************************GETORDERED by the provider******************************************/
-
+             
           [HttpGet("getOrderedServByProvider/{idUserProvider}")]
         public async Task<ActionResult<IEnumerable<PrestationDTO>>> getOrderedServByProvider(int idUserProvider) {
            
@@ -155,7 +156,7 @@ namespace backend.Controllers {
        //***********************************GEtProvided by the provider******************************************/
         //***********************************GEtProvided by the provider******************************************/
         //***********************************GEtProvided by the provider******************************************/
-         
+               
              [HttpGet("getProvidedServByProvider/{idUserProvider}")]
         public async Task<ActionResult<IEnumerable<PrestationDTO>>> getProvidedServByProvider(int idUserProvider) {
            
@@ -169,7 +170,7 @@ namespace backend.Controllers {
         //***********************************GEtProvided by the provider******************************************/
         //***********************************GEtProvided by the provider******************************************/
         //***********************************GEtProvided by the provider******************************************/
-         
+           
          [HttpGet("getNbNotifications/{userId}")]
          public async Task<ActionResult<int>> getNbNotifications(int userId) {
            
@@ -183,7 +184,7 @@ namespace backend.Controllers {
 
               return(nbCommandesRecuesAPrester+nbCommanderRecuesApayer);
         }
-       
+            
           [HttpDelete("getPrestDeleted/{id}")]
         public async Task<IActionResult> getPrestDeleted(int id) {
           var prestation = await _context.Prestations.FindAsync(id);

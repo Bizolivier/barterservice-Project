@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using BARTER_Framework;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers {
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ServicesController : ControllerBase {
@@ -18,12 +21,13 @@ namespace backend.Controllers {
             _context = context;
         }
 
-
+          [AllowAnonymous]
          [HttpGet]
        public async Task<ActionResult<IEnumerable<ServiceDTO>>> GetAll() {
               return (await _context.Services.ToListAsync()).ToDTO();
         }
 
+          [AllowAnonymous]
           [HttpPost]        
       public async Task<ActionResult<ServiceDTO>> PostService(ServiceDTO data) {
        Offer offer = await _context.Offers.FindAsync(data.OfferLinkedtoServiceId);
@@ -51,7 +55,7 @@ namespace backend.Controllers {
 
 
 
-
+          [AllowAnonymous]
          [HttpGet("getRequestedSevices/{email}")]
         public async Task<ActionResult<IEnumerable<ServiceDTO>>> getRequestedSevices(string email) {
             User user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
@@ -62,7 +66,7 @@ namespace backend.Controllers {
 
        
         }
-        
+          [AllowAnonymous]
          [HttpGet("getOfferedSevices/{email}")]
         public async Task<ActionResult<IEnumerable<ServiceDTO>>> getOfferedSevices(string email) {
             User user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
@@ -74,7 +78,7 @@ namespace backend.Controllers {
             return ( offerList == null ) ?  NotFound() :  offerList.ToDTO();
         }
 
-
+         [AllowAnonymous]
         [HttpGet("getSingleOfferedSevices/{email}/{servId}")]
          public async Task<ActionResult<ServiceDTO>> getSingleOfferedSevices(string email,int servId) {
             User user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
@@ -89,7 +93,7 @@ namespace backend.Controllers {
 
 
 
-
+           [AllowAnonymous]
          [HttpDelete("deleteService/{serviceId}")]
         public async Task<IActionResult> deleteService(int serviceId) {
           var service = await _context.Services.FindAsync(serviceId);

@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using BARTER_Framework;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers {
-
+        [Authorize]
         [Route("api/[controller]")]
         [ApiController]
         public class ChatsController : ControllerBase {

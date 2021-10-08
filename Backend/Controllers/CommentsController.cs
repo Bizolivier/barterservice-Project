@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using BARTER_Framework;
-
+using Microsoft.AspNetCore.Authorization;
 namespace backend.Controllers {
-
+        [Authorize]
         [Route("api/[controller]")]
         [ApiController]
         public class CommentsController : ControllerBase {
@@ -23,7 +23,7 @@ namespace backend.Controllers {
              public async Task<ActionResult<IEnumerable<CommentDTO>>> GetAll() {
                  return (await _context.Comments.ToListAsync()).ToDTO();
             }
-
+              [AllowAnonymous]
              [HttpGet("GetCommentsByServiceId/{serviceId}")]
              public async Task<ActionResult<IEnumerable<CommentDTO>>> GetCommentsByServiceId(int serviceId) {
                    var comments = (await _context.Comments.Where(c=>(c.ServiceLinkedToId == serviceId)).ToListAsync());

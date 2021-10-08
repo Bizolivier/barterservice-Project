@@ -9,17 +9,20 @@ const AuthenticationButton = () => {
   return isAuthenticated ? (
     <NavLink
       className="logout px-2 bg-danger"
-      onClick={() => logout({ returnTo: window.location.origin })}
+      onClick={() => {
+        localStorage.removeItem("userToken");
+        logout({ returnTo: window.location.origin })
+      }}
     >
       Log Out
     </NavLink>
   ) : (
-    <NavLink
-      className="login px-2 bg-success"
-      onClick={() => loginWithRedirect()}
-    >
-      Login
+      <NavLink
+        className="login px-2 bg-success"
+        onClick={() => loginWithRedirect()}
+      >
+        Login
     </NavLink>
-  );
+    );
 };
 export default AuthenticationButton;
