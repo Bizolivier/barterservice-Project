@@ -20,18 +20,12 @@ export default () => {
   const [offer, setOffer] = useState([]);
   const [timeC, setTimeC] = useState();
   const [refresh, setRefresh] = useState(false);
-  
-  useEffect(() => {
-    serviceService.getRequestedSevices(user.email).then(listServicesRequest => {
-      setRequested(listServicesRequest);
-    });
-    serviceService.getOfferedSevices(user.email).then(listServicesOffered => {
-      setOffered(listServicesOffered);
-    });
 
-    offerService.GetOfferByEmail(user.email).then(offer => {
-      setOffer(offer);
-    });
+  useEffect(() => {
+
+    (async () => { setRequested(await serviceService.getRequestedSevices(user.email)); })();
+    (async () => { setOffered(await serviceService.getOfferedSevices(user.email)); })();
+    (async () => { setOffer(await offerService.GetOfferByEmail(user.email)); })();
 
     setBusy(false);
   }, [refresh]);
@@ -50,13 +44,13 @@ export default () => {
   };
 
   return (
-    <div className=" bloc  w-75 h-75  position-relative border-rounded mt-5 ">
+    <div className=" bloc position-relative border-rounded mt-5 ">
       {isBusy ? (
         <div> </div>
       ) : (
-          <div className="ui segment   ">
-            <div classname="">
-              <div className="image-container text-left w-20 px-2 mt-5 d-inline-flex">
+          <div className="ui segment">
+            <div className="">
+              <div className="image-container justify-content-center w-20 px-2 mt-5 d-inline-flex">
                 <img
                   className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
                   src={user.picture}
@@ -72,11 +66,14 @@ export default () => {
                 </div>
               </div>
             </div>
-            <div className="row d-inline-flex my-5 px-2 justify-content-start">
+            <div className="row d-inline-flex my-5 px-2">
+              <div className="text-center my-4" >
+                <h1> Mes Services </h1>
+              </div>
+              <br />
 
-
-              <div className="w-25 h-100 shadow-lg mx-5">
-                <div className="card card-custom bg-white border-white border-0 ">
+              <div className="shadow-lg mx-5 w-auto  justify-content-start">
+                <div className="card card-custom bg-white border-white border-0 h-auto ">
                   <div className="card-custom-img"></div>
                   <div className="card-custom-avatar">
                     <img className="img-fluid" src={barter} alt="Avatar" />
@@ -89,23 +86,24 @@ export default () => {
                       offerId={offer.offerId}
                       setOffered={setOffered}
                       setRequested={setRequested}
-                      refreshComponent={refreshComponent}
+                      refreshComponent={() => refreshComponent}
                     />
 
-                    <ul>
+                    <ul class="list-unstyled">
                       {resquested.map(item => (
                         <li
-                          className="d-inline-flex text-capitalize"
                           key={item.serviceId}
                         >
-                          {item.title}
-                          <DeleteServiceDialog
-                            serviceId={item.serviceId}
-                            title={item.title}
-                            setOffered={setOffered}
-                            setRequested={setRequested}
-                            refreshComponent={refreshComponent}
-                          />
+                          <div className="d-inline-flex text-capitalize">
+                            {item.title}
+                            <DeleteServiceDialog
+                              serviceId={item.serviceId}
+                              title={item.title}
+                              setOffered={setOffered}
+                              setRequested={setRequested}
+                              refreshComponent={refreshComponent}
+                            />
+                          </div>
                         </li>
                       ))}
                     </ul>
@@ -113,8 +111,8 @@ export default () => {
                 </div>
               </div>
 
-              <div className="w-25 h-100 shadow-lg"mx-5>
-                <div className="card card-custom bg-white border-white border-0">
+              <div className="shadow-lg mx-5 w-auto ">
+                <div className="card card-custom bg-white border-white border-0 h-auto">
                   <div className="card-custom-img"></div>
                   <div className="card-custom-avatar">
                     <img className="img-fluid" src={recherche} alt="Avatar" />
@@ -129,21 +127,22 @@ export default () => {
                       setRequested={setRequested}
                       refreshComponent={refreshComponent}
                     />
-                    <ul>
+                    <ul class="list-unstyled">
                       {offered.map(item => (
                         <div className="">
                           <li
-                            className="d-inline-flex text-capitalize"
                             key={item.serviceId}
                           >
-                            {item.title}{" "}
-                            <DeleteServiceDialog
-                              serviceId={item.serviceId}
-                              title={item.title}
-                              setOffered={setOffered}
-                              setRequested={setRequested}
-                              refreshComponent={refreshComponent}
-                            />
+                            <div className="d-inline-flex text-capitalize">
+                              {item.title}{" "}
+                              <DeleteServiceDialog
+                                serviceId={item.serviceId}
+                                title={item.title}
+                                setOffered={setOffered}
+                                setRequested={setRequested}
+                                refreshComponent={refreshComponent}
+                              />
+                            </div>
                           </li>
                         </div>
                       ))}

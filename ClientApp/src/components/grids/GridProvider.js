@@ -12,8 +12,16 @@ export default ({ mesPresAPrester,refreshComponent,nomCo }) => {
 
 
 
-    const handleState = (id) => {
-        prestationServ.getEtatChanged(id);
+    const handleState = (prestation) => {
+
+        const newPrestation = {
+            IdServiceProvided: prestation.idServiceProvided,
+            IdUserClient: prestation.idUserClient,
+            IdUserProvider: prestation.idUserProvider,
+            Date: prestation.date,
+            Etat: prestation.etat
+        }
+        prestationServ.getEtatChanged(prestation.id, prestation);
         refreshComponent();
 
     }
@@ -22,12 +30,12 @@ export default ({ mesPresAPrester,refreshComponent,nomCo }) => {
         refreshComponent();
 
     }
-    const switchEtat = (etat,id) => {
+    const switchEtat = (etat,prestation) => {
         switch (etat) {
 
             case 0:
                 return (
-                        <Button variant="outlined" color="secondary" onClick={() => { handleState(id) }}>
+                        <Button variant="outlined" color="secondary" onClick={() => { handleState(prestation) }}>
                             A Prester
                         </Button>
                         );
@@ -74,7 +82,7 @@ export default ({ mesPresAPrester,refreshComponent,nomCo }) => {
             renderCell: params => {
                 return (    
                         <>
-                        {switchEtat(params.value,params.row.id)}
+                        {switchEtat(params.value,params.row)}
                         </>              
 
                 )

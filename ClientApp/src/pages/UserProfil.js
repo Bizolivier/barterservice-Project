@@ -96,7 +96,7 @@ const UserProfil = () => {
             spacing={5}
           >
             <div className="  chat bg-white card     mt-5  py-3 ">
-              <div className="user " style={{ "margin-left": "13px" }}>
+              <div className="user h-auto " style={{ "margin-left": "13px" }}>
                 {/*banière*/}
                 <div className="content d-inline-flex">
                   {/* image */}
@@ -125,7 +125,9 @@ const UserProfil = () => {
 
 
                       {
-                        isAuthenticated && interlocut.userId != locut.userId ? <FormControlLabel control={<Switch checked={openChat} onChange={() => { setOpenChat(!openChat) }} />} label="Me contacter" /> : <div></div>
+                        isAuthenticated && interlocut.userId != locut.userId ?
+                          <FormControlLabel control={<Switch checked={openChat}
+                            onChange={() => { setOpenChat(!openChat) }} />} label="Contacter" /> : <div></div>
                       }
 
                     </div>
@@ -139,58 +141,52 @@ const UserProfil = () => {
                 <Grid container spacing={1}>
                   <Grid container item xs={6} sm={6} md={6} spacing={3}>
                     {/*Array service proposés*/}
-                    <div className="serviceP mx-5">
+                    <div className="serviceP mx-2">
                       <h6 className="fst-italic text-primary">Je propose : </h6>
                       <ul>
                         {offered.map(item => (
                           <li
-                            className="fs-6 text-capitalize d-inline-flex"
+                            className="fs-6 text-capitalize"
                             key={item.serviceId}
                           >
 
                             {item.title}
-                            <div>
 
-                              <Link
-                                className="text-dark px-4 my-3 fw-bolder"
-                                to={`/Avis/${authorEmail}/${item.serviceId}`}>
-                                <IconButton>
-                                  <CommentIcon />
+                            <div className="d-inline-flex">
+                              <div>
+
+                                <Link
+                                  className="text-dark my-4 "
+                                  to={`/Avis/${authorEmail}/${item.serviceId}`}>
+                                  <IconButton color="primary" size="small" style={{ "margin-left": "10px", "marginTop": "20px" }} >
+                                    <CommentIcon />
+                                  </IconButton>
+                                </Link>
+
+                              </div>
+                              {isAuthenticated && interlocut.userId != locut.userId ? (<div>
+                                <IconButton  >
+
+                                  <OrderTheService userName={userNickname} serviceName={item.title} servId={item.serviceId} offerAuthorId={offer.authorId} userConnectedId={userCoId} />
                                 </IconButton>
-                              </Link>
 
+
+                              </div>
+
+                              ) : (
+                                  <div />
+                                )}
                             </div>
-                            {isAuthenticated && interlocut.userId != locut.userId ? (<div>
-                              <IconButton>
-
-                                <OrderTheService userName={userNickname} serviceName={item.title} servId={item.serviceId} offerAuthorId={offer.authorId} userConnectedId={userCoId} />
-                              </IconButton>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            </div>
-                            ) : (
-                                <div />
-                              )}
                           </li>
                         ))}
                       </ul>
                     </div>
                   </Grid>
+                  <div className="ui vertical divider text-dark " style={{ "margin-top": "150px" }} ></div>
                   <Grid container item xs={6} sm={6} md={6} spacing={3}>
                     {/*Array service recherchés*/}
-                    <div className="serviceR ">
-                      <h6 className="fst-italic text-primary">Je recherche : </h6>
+                    <div className="serviceR mx-5" style={{ "margin-left": "20px" }} >
+                      <h6 className="fst-italic text-primary">Je recherche: </h6>
                       <ul>
                         {resquested.map(item => (
                           <li
@@ -206,7 +202,7 @@ const UserProfil = () => {
                 </Grid>
               </div>
               <div className="extra content px-3">
-                <Link className="ui black basic button" to="/">
+                <Link className="ui black basic button" to="/OfferList">
                   back
               </Link>
               </div>

@@ -6,7 +6,7 @@ import ProvinceSelection from "../components/selection/ProvinceSelection.js";
 import SexeSelection from "../components/selection/SexeSelection.js";
 import Snackbar from "@material-ui/core/Snackbar";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormControl, InputLabel, OutlinedInput, FormHelperText, Button, } from "@material-ui/core";
+import { FormControl, InputLabel, OutlinedInput, FormHelperText, Button } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 
 

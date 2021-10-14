@@ -16,8 +16,8 @@ import UpdatePrestation from "../Dialogs/UpdatePrestation";
 
 export default ({ mesPresCommander, refreshComponent, nomCo }) => {
 
-    const handleState = (id) => {
-        prestationServ.getEtatChanged(id);
+    const handleState = (id, prest) => {
+        prestationServ.getEtatChanged(id, prest);
         refreshComponent();
 
     }
@@ -35,7 +35,7 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
             case 1:
                 return (
                     <div>
-                        <PayementServiceDialog prestation={prest} payer={() => { handleState(prest.id) }} />
+                        <PayementServiceDialog prestation={prest} payer={() => { handleState(prest.id, prest) }} />
                     </div>);
             case 2:
                 return (<div className="text-success fw-bold ">Clos</div>);
@@ -89,9 +89,9 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
                     (
                         <div>
                             {params.row.etat == 0 ?
-                                
-                                    <UpdatePrestation prestToUpdate={params.row} refreshComponent={refreshComponent} nom={nomCo} />
-                                 : <div></div>
+
+                                <UpdatePrestation prestToUpdate={params.row} refreshComponent={refreshComponent} nom={nomCo} />
+                                : <div></div>
                             }
 
                         </div>

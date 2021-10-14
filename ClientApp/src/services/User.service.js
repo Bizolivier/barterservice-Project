@@ -32,7 +32,7 @@ export async function connect(userDTO) {
 
   });
   if (response.data && response.data.token) {
-    //on sauvegarde le token dans le local storage
+    //Je sauvegarde le token dans le local storage
     localStorage.setItem("userToken", response.data.token);
   }
 

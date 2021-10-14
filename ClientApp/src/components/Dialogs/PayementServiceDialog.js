@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import FormCommentPay from "../comments/FormCommentPay";
 import * as commentService from "../../services/CommentService";
-
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const styles = (theme) => ({
     root: {
@@ -56,6 +56,7 @@ export default function PayementServiceDialog({ prestation, payer }) {
     const [open, setOpen] = React.useState(false);
     const [comment, setComment] = React.useState("");
     const [rating, setRating] = React.useState(3);
+    const [empty, SetEmpty] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -64,9 +65,14 @@ export default function PayementServiceDialog({ prestation, payer }) {
         setOpen(false);
     };
     const handlePayement = () => {
-        createComment();
-        payer();
-        setOpen(false);
+        if (comment == "") {
+            SetEmpty(true);
+        } else {
+            createComment();
+            payer();
+            setOpen(false);
+        }
+
     };
 
     const createComment = async () => {
@@ -79,7 +85,9 @@ export default function PayementServiceDialog({ prestation, payer }) {
                 Date: new Date(),
                 Rating: rating
             };
+
             await commentService.addComment(newComment);
+
         }
         ajoutComment();
     };
@@ -104,6 +112,14 @@ export default function PayementServiceDialog({ prestation, payer }) {
                         rating={rating}
                         setRating={setRating}
                     />
+                    {empty ? <div>
+                        <Alert variant="standard" color="error">
+                            To make a comment is required!
+                   </Alert>
+
+                    </div> : <div></div>}
+
+
 
                 </DialogContent>
                 <DialogActions>

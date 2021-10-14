@@ -124,6 +124,7 @@ export default function UpdatePrestation({ prestToUpdate, refreshComponent, nom 
                             <DateTimePicker
                                 onChange={(e) => { setValueDate(e) }}
                                 value={valueDate}
+                                minDate={new Date()}
 
                             />
 

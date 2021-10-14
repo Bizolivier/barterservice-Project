@@ -36,7 +36,7 @@ const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h6">{children}</Typography>
+            <Typography variant="h1">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
                     <CloseIcon />
@@ -94,13 +94,14 @@ export default function OrderTheService({ userName, serviceName, servId, offerAu
 
     return (
         <div>
-            <IconButton variant="outlined" onClick={handleClickOpen}>
+            <IconButton color="success" onClick={handleClickOpen}>
                 <AddShoppingCartIcon />
             </IconButton>
 
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     <h4 className="fst-italic">Vous désirez commander auprès de {userName} le service :</h4>
+
                     <h1 className="text-success text-capitalize"> {serviceName}</h1>
                 </DialogTitle>
                 <DialogContent>
@@ -112,6 +113,7 @@ export default function OrderTheService({ userName, serviceName, servId, offerAu
                                 value={valueDate}
                                 minDate={new Date()}
                                 error={errorDateTime}
+                                
                             />
 
                         </div>

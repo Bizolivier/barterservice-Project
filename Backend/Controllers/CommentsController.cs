@@ -94,16 +94,16 @@ namespace backend.Controllers {
                 return NoContent();    
             }
      
-        [HttpPut("addAnswerToComment/{commentId}/{answer}")]
-        public async Task<IActionResult> addAnswerToComment(int commentId, string answer)
+        [HttpPut("addAnswerToComment")]
+        public async Task<IActionResult> addAnswerToComment(CommentDTO comt)
         {
              
-            var comment = await _context.Comments.FindAsync(commentId);
+            var comment = await _context.Comments.FindAsync(comt.CmntId);
 
               if (comment == null)
               return NotFound(); 
                 
-                comment.Answer = answer;
+                comment.Answer = comt.Answer;
                
             
          var res = await _context.SaveChangesAsyncWithValidation();

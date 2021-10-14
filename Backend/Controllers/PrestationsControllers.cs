@@ -71,7 +71,7 @@ namespace backend.Controllers {
 
          
          [HttpPut("getEtatChanged/{id}")]
-         public async Task<IActionResult> getEtatChanged(int id) {
+         public async Task<IActionResult> getEtatChanged(int id ,PrestationDTO prestationDto) {
         
 
             var prestation = await _context.Prestations.FindAsync(id);
@@ -79,7 +79,7 @@ namespace backend.Controllers {
            if (prestation == null)
               return NotFound();
 
-         prestation.Etat = prestation.Etat + 1;
+         prestation.Etat = prestationDto.Etat + 1;
          
 
          var res = await _context.SaveChangesAsyncWithValidation();

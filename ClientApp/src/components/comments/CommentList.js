@@ -75,9 +75,24 @@ export default ({ authorServId, userService, refreshPage, comt }) => {
     setOpen(false);
   };
 
-  const handleAjouter = (commentId, answer) => {
+  const handleAjouter = (comment, answer) => {
     async function ajoutAnswer() {
-      await commentServ.addAnswerToComment(commentId, answer);
+      const newComnt = {
+        CmntId: comment.cmntId,
+        AuthorId: comment.authorId,
+        CmntId: comment.cmntId,
+        Date: comment.date,
+        Description: comment.description,
+        Rating: comment.rating,
+        ReceiverId: comment.receiverId,
+        ServiceLinkedToId: comment.serviceLinkedToId,
+        Answer: answer
+      }
+
+
+
+
+      await commentServ.addAnswerToComment(newComnt);
     }
     ajoutAnswer();
     setOpen(false);
@@ -114,6 +129,7 @@ export default ({ authorServId, userService, refreshPage, comt }) => {
                       readOnly
                       emptyIcon={<StarBorderIcon fontSize="inherit" />}
                     />
+                    {console.log(comment)}
                   </div>
                 </div>
 
@@ -140,7 +156,7 @@ export default ({ authorServId, userService, refreshPage, comt }) => {
                     </DialogContent>
                     <DialogActions>
                       <Button color="secondary" onClick={handleClose}>Annuler</Button>
-                      <Button color="primary" onClick={() => handleAjouter(comment.cmntId, response)}>Ajouter</Button>
+                      <Button color="primary" onClick={() => handleAjouter(comment, response)}>Ajouter</Button>
                     </DialogActions>
                   </Dialog>
 

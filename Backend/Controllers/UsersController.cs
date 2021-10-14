@@ -50,12 +50,12 @@ namespace backend.Controllers {
 
 
 
-
+        [AllowAnonymous]
         private async Task<UserDTO> Authenticate(UserDTO user) {
-          var member = await _context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
+          var visitor = await _context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
 
               // return null if member not found
-              if (member == null){
+              if (visitor  == null){
                  return null;
               }else {
               // authentication successful so generate jwt token
@@ -63,20 +63,20 @@ namespace backend.Controllers {
                var key = Encoding.ASCII.GetBytes("my-super-secret-key");
                var tokenDescriptor = new SecurityTokenDescriptor {
                      Subject = new ClaimsIdentity(new Claim[]{
-                              new Claim(ClaimTypes.Name, member.Nickname),
-                              new Claim(ClaimTypes.Role, member.Role.ToString())
+                              new Claim(ClaimTypes.Name, visitor.Nickname),
+                              new Claim(ClaimTypes.Role, visitor.Role.ToString())
                     }),
                           IssuedAt = DateTime.UtcNow,
                           Expires = DateTime.UtcNow.AddMinutes(10),
                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                      };
                      var token = tokenHandler.CreateToken(tokenDescriptor);
-                   member.Token = tokenHandler.WriteToken(token);
+                   visitor.Token = tokenHandler.WriteToken(token);
                      }
 
 
-                   return member.ToDTO();
-}
+                   return visitor.ToDTO();
+        }
 
 
 
@@ -88,8 +88,8 @@ namespace backend.Controllers {
             var user2 = await _context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
 
               if(user2 != null){
-                    Console.WriteLine("dans connect user null");
-                   return await Authenticate(user2.ToDTO());
+                    
+                  return await Authenticate(user2.ToDTO());
 
               }else{
                 var userToConnect =  new User() {

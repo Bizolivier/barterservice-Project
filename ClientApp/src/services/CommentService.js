@@ -26,6 +26,15 @@ export async function addComment(commentDTO) {
 export async function deleteComment(commentId) {
   await axios.delete(`${httpBase}/deleteComment/${commentId}`, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } })
 }
-export async function addAnswerToComment(commentId, answer) {
-  await axios.put(`${httpBase}/addAnswerToComment/${commentId}/${answer}`, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } })
+export async function addAnswerToComment(newComnt) {
+  await axios.put(`${httpBase}/addAnswerToComment`, {
+    CmntId: newComnt.CmntId,
+    Description: newComnt.Description,
+    AuthorId: newComnt.AuthorId,
+    ServiceLinkedToId: newComnt.ServiceLinkedToId,
+    ReceiverId: newComnt.ReceiverId,
+    Date: newComnt.Date,
+    Rating: newComnt.Rating,
+    Answer: newComnt.Answer
+  }, { headers: { "Authorization": `Bearer ${localStorage.getItem("userToken")}` } })
 }
