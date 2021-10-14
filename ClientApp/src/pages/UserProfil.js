@@ -126,7 +126,8 @@ const UserProfil = () => {
 
                       {
                         isAuthenticated && interlocut.userId != locut.userId ?
-                          <FormControlLabel control={<Switch checked={openChat}
+                          <FormControlLabel control={
+                          <Switch checked={openChat}
                             onChange={() => { setOpenChat(!openChat) }} />} label="Contacter" /> : <div></div>
                       }
 

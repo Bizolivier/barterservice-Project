@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Offer = ({ offer }) => {
+const Offer = ({ offer, openService, setOpenService }) => {
   const [author, setAuthor] = useState();
   const [resquested, setRequested] = useState([]);
   const [offered, setOffered] = useState([]);
@@ -59,11 +59,42 @@ const Offer = ({ offer }) => {
         authorRes.email
       );
       setOffered(listServicesOffered);
+     
     }
     fetchData().then(res => {
       setBusy(false);
     });
   }, []);
+
+ useEffect(()=>{
+  if(openService){
+    setExpandedPropose(expandedPropose);
+  setExpandedRecherche(expandedRecherche);
+
+  }else{
+    setExpandedPropose(!expandedPropose);
+  setExpandedRecherche(!expandedRecherche);
+  }
+  }, [openService]);
+
+
+
+
+
+
+  const handleExpandService = () => {
+    if (!openService) {
+      setExpandedPropose(!expandedPropose);
+      setExpandedRecherche(!expandedRecherche);
+      setOpenService(!openService);
+    } else {
+      setExpandedPropose(expandedPropose);
+      setExpandedRecherche(expandedRecherche);
+      setOpenService(openService);
+
+    }
+
+  }
 
   const handleClickOpenPropose = () => {
     setOpenPropose(!openPropose);

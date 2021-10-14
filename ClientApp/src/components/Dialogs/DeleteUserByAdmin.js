@@ -20,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function DeleteUserByAdmin({
     user,
-    refreshComponent
+    refreshPageAdmin
 }) {
     const [open, setOpen] = React.useState(false);
 
@@ -31,7 +31,7 @@ export default function DeleteUserByAdmin({
     const handleDelete = async () => {
         await usersService.deleteUser(user.userId);
         setOpen(false);
-        refreshComponent();
+        refreshPageAdmin();
     };
 
     const handleClose = () => {

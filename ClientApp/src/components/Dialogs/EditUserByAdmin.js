@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function EditUserByAdmin({ user
+export default function EditUserByAdmin({ user, refreshPageAdmin
 
 }) {
     const classes = useStyles();
@@ -114,6 +114,7 @@ export default function EditUserByAdmin({ user
 
         userService.PutUser(user.email, newUpdatedUser);
         setOpen(true);
+        refreshPageAdmin();
     }
 
     function handleCloseAlert(event, reason) {

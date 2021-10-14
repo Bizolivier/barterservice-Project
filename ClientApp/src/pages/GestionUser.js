@@ -216,15 +216,6 @@ export default () => {
 
 
 
-    //   const handleClickDelete = async (allSelected) => {
-    //     setSelected([]);
-    //     const deleteMember = async (allSelected) => {
-    //       allSelected.forEach(async idToDelete => {
-    //         await MemberService.deleteMember(idToDelete);
-    //       });
-    //     }
-    //     deleteMember(allSelected).then(() => refreshPageAdmin());
-    //   };
 
     const refreshPageAdmin = () => { setRefresh(!refresh) };
 
@@ -395,8 +386,8 @@ export default () => {
                                             <TableCell align="left">{turnNumberInProvnce(row.province)}</TableCell>
                                             <TableCell align="left">{turnNumberInRole(row.role)}</TableCell>
                                             <TableCell align="left">{turnNumberInSexe(row.sexe)}</TableCell>
-                                            <TableCell align="left"><EditUserByAdmin user={row} /></TableCell>
-                                            <TableCell align="left"><DeleteUserByAdmin user={row} /></TableCell>
+                                            <TableCell align="left"><EditUserByAdmin user={row} refreshPageAdmin={ refreshPageAdmin} /></TableCell>
+                                            <TableCell align="left"><DeleteUserByAdmin user={row}  refreshPageAdmin={ refreshPageAdmin} /></TableCell>
                                             <TableCell align="left">
                                                 {/* <EditUserAdmin user={row} refresh={refreshPageAdmin} /> */}
                                             </TableCell>
