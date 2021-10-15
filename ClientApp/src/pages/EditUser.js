@@ -152,11 +152,7 @@ export default () => {
                         Modifier son profil
                     </Button>
                       <span></span>
-                      <input
-                        type="reset"
-                        className="btn btn-default"
-                        value="Cancel"
-                      />
+                     
                     </div>
                   </div>
                 </form>

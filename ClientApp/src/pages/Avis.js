@@ -46,7 +46,7 @@ const Avis = () => {
           <div className="border-0">
 
             <h3 className="text-dark text-center my-5 ">
-              Avis sur  la prestations rendues par {userSer.nickname}
+              Avis sur  la prestations {offeredServ.title} rendues par {userSer.nickname}
             </h3>
 
             <div >
@@ -64,13 +64,14 @@ const Avis = () => {
 
 
 
-            <div>
-              <Link className="ui black basic button float-right" to="/">
-                back
-              </Link>
-            </div>
+
           </div>
         )}
+      <div className="align-bottom">
+        <Link className="ui black basic button align-bottom" to={`/profilUser/${email}`}>
+          back
+              </Link>
+      </div>
     </div>
 
   );

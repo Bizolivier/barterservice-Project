@@ -45,7 +45,7 @@ export default function EditUserByAdmin({ user, refreshPageAdmin
 
     const [open, setOpen] = useState(false);
     const [selectedProvinceValue, setSelectedProvinceValue] = useState(0);
-    const [selectedSexeValue, setSelectedSexeValue] = useState(0);
+    const [selectedSexeValue, setSelectedSexeValue] = useState(user.sexe);
     const [selectedRoleValue, setSelectedRoleValue] = useState(0);
     const [userNickname, setUserNickname] = useState(user.nickname);
     const [userFullname, setUserFullname] = useState(user.fullname);
@@ -111,10 +111,12 @@ export default function EditUserByAdmin({ user, refreshPageAdmin
             sexe: selectedSexeValue,
             role: selectedRoleValue
         };
+        (async () => {
+            await userService.PutUser(user.email, newUpdatedUser);
+            refreshPageAdmin();
+        })();
 
-        userService.PutUser(user.email, newUpdatedUser);
-        setOpen(true);
-        refreshPageAdmin();
+        setOpen(false);
     }
 
     function handleCloseAlert(event, reason) {
@@ -126,22 +128,6 @@ export default function EditUserByAdmin({ user, refreshPageAdmin
     }
 
 
-    //   const handleAdd = async () => {
-    //     servicesService.addService(titleService, catsel, offerId, isRequest);
-    //     setOpen(false);
-    //     if (isRequest) {
-    //       const listServicesRequest = await servicesService.getRequestedSevices(
-    //         email
-    //       );
-    //       setRequested(listServicesRequest);
-    //     } else {
-    //       const listServicesOffered = await servicesService.getOfferedSevices(
-    //         email
-    //       );
-    //       setOffered(listServicesOffered);
-    //     }
-    //     refreshComponent();
-    //   };
 
     return (
         <div>
@@ -229,20 +215,21 @@ export default function EditUserByAdmin({ user, refreshPageAdmin
 
                                         <div className="form-group">
                                             <label className="col-md-3 control-label"></label>
-                                            <div className="col-md-8">
+                                            <div className="col-md-8 d-inline-flex">
 
-
-                                                <Button variant="contained" color="primary" size="large"
-                                                    onClick={updateUser}
-                                                    disabled={updateDisabled}>
-                                                    Modifier son profil
+                                                <div className="justify-content-start mx-5 my-3">
+                                                    <Button variant="contained" color="primary" size="medium"
+                                                        onClick={updateUser}
+                                                        disabled={updateDisabled}>
+                                                        Modifier
                                                 </Button>
-                                                <span></span>
-                                                <input
-                                                    type="reset"
-                                                    className="btn btn-default"
-                                                    value="Cancel"
-                                                />
+                                                </div>
+                                                <div className="justify-content-center mx-4 my-4">
+                                                    <Button variant="contained" color="secondary" size="small"
+                                                        onClick={() => handleClose()}>
+                                                        Fermer
+                                                </Button>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

@@ -95,8 +95,8 @@ const UserProfil = () => {
             lg={7}
             spacing={5}
           >
-            <div className="  chat bg-white card     mt-5  py-3 ">
-              <div className="user h-auto " style={{ "margin-left": "13px" }}>
+            <div className={isAuthenticated && email == user.email || !isAuthenticated ? " justify-content-center chat bg-white card h-auto w-auto mt-5  py-3 " : "  chat bg-white card h-auto mt-5 py-3 "} >
+              <div className="user h-auto w-auto" style={{ "margin-left": "13px" }}>
                 {/*banière*/}
                 <div className="content d-inline-flex">
                   {/* image */}
@@ -127,8 +127,8 @@ const UserProfil = () => {
                       {
                         isAuthenticated && interlocut.userId != locut.userId ?
                           <FormControlLabel control={
-                          <Switch checked={openChat}
-                            onChange={() => { setOpenChat(!openChat) }} />} label="Contacter" /> : <div></div>
+                            <Switch checked={openChat}
+                              onChange={() => { setOpenChat(!openChat) }} />} label="Contacter" /> : <div></div>
                       }
 
                     </div>
@@ -143,7 +143,7 @@ const UserProfil = () => {
                   <Grid container item xs={6} sm={6} md={6} spacing={3}>
                     {/*Array service proposés*/}
                     <div className="serviceP mx-2">
-                      <h6 className="fst-italic text-primary">Je propose : </h6>
+                      <h6 className="fst-italic text-primary mx-4">Je propose : </h6>
                       <ul>
                         {offered.map(item => (
                           <li
@@ -187,7 +187,7 @@ const UserProfil = () => {
                   <Grid container item xs={6} sm={6} md={6} spacing={3}>
                     {/*Array service recherchés*/}
                     <div className="serviceR mx-5" style={{ "margin-left": "20px" }} >
-                      <h6 className="fst-italic text-primary">Je recherche: </h6>
+                      <h6 className="fst-italic text-primary mx-3">Je recherche: </h6>
                       <ul>
                         {resquested.map(item => (
                           <li

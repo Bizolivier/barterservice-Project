@@ -109,11 +109,12 @@ export default function OrderTheService({ userName, serviceName, servId, offerAu
                         <p>Veuillez choisir une date et une heure d'execution </p>
                         <div className="h-50">
                             <DateTimePicker
-                                onChange={(e) => { setErrorDateTime(e.getTime() < valueDate.getTime); setValueDate(e) }}
                                 value={valueDate}
-                                minDate={new Date()}
+                                placeholderText={valueDate}
+                                minDate={
+                                    new Date(new Date().getTime() + 86400000)}
                                 error={errorDateTime}
-                                
+
                             />
 
                         </div>

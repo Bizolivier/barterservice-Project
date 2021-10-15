@@ -12,7 +12,7 @@ import *as prestationService from "../../services/PrestationService";
 import DateTimePicker from 'react-datetime-picker';
 import Snackbar from "@material-ui/core/Snackbar";
 import { Alert, AlertTitle } from "@material-ui/lab";
-
+import * as frameworks from "../../Framework";
 
 
 
@@ -71,11 +71,10 @@ export default function UpdatePrestation({ prestToUpdate, refreshComponent, nom 
             IdServiceProvided: prestToUpdate.idServiceProvided,
             IdUserClient: prestToUpdate.idUserClient,
             IdUserProvider: prestToUpdate.idUserProvider,
-            Date: valueDate,
+            Date: new Date(valueDate.getTime() + 7200000),
             Etat: prestToUpdate.etat
         };
 
-        console.log(newPrestation);
         prestationService.PutDate(prestToUpdate.id, newPrestation);
         setOpenS(true);
         refreshComponent();
@@ -124,7 +123,10 @@ export default function UpdatePrestation({ prestToUpdate, refreshComponent, nom 
                             <DateTimePicker
                                 onChange={(e) => { setValueDate(e) }}
                                 value={valueDate}
-                                minDate={new Date()}
+                                placeholderText={valueDate}
+                                minDate={
+                                    new Date(new Date().getTime() + 86400000)}
+
 
                             />
 

@@ -92,7 +92,7 @@ namespace backend.Controllers {
 
               if(searchValue!="-1"){
                  List<Service> listService = await _context.Services.Where(
-                   s=>(s.Title.Contains(searchValue) && (listOffers.Select(s=>(s.OfferId)).ToList()).Contains( s.OfferLinkedtoServiceId))
+                   s=>(s.Title.ToLower().Contains(searchValue.ToLower()) && (listOffers.Select(s=>(s.OfferId)).ToList()).Contains( s.OfferLinkedtoServiceId))
                    ).ToListAsync();
 
                 listOffers = listOffers.Where(o=>((listService.Select(s=>(s.OfferLinkedtoServiceId )).ToList()).Contains(o.OfferId))).ToList();

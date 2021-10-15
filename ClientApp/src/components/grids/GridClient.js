@@ -46,7 +46,7 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
     }
 
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
+        { field: "id", headerName: "ID", width: 60 },
         {
             field: "nomService",
             headerName: "Service",
@@ -68,7 +68,7 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
             field: "nomProvider",
             headerName: "Prestataire",
             type: "number",
-            width: 150,
+            width: 130,
             editable: true
         },
         {

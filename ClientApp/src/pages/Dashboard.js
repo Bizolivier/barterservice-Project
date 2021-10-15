@@ -48,7 +48,7 @@ export default () => {
       {isBusy ? (
         <div> </div>
       ) : (
-          <div className="ui segment">
+          <div className="ui segment w-auto">
             <div className="">
               <div className="image-container justify-content-center w-20 px-2 mt-5 d-inline-flex">
                 <img
@@ -79,22 +79,25 @@ export default () => {
                     <img className="img-fluid" src={barter} alt="Avatar" />
                   </div>
                   <div className="card-body">
-                    <h4 className="card-title">Services recherchés</h4>
-                    <CreateServiceDialog
-                      isRequest={true}
-                      email={user.email}
-                      offerId={offer.offerId}
-                      setOffered={setOffered}
-                      setRequested={setRequested}
-                      refreshComponent={() => refreshComponent}
-                    />
-
+                    <div className="d-inline-flex">
+                      <h4 className="card-title my-2">Services recherchés</h4>
+                      <div className="add">
+                        <CreateServiceDialog
+                          isRequest={true}
+                          email={user.email}
+                          offerId={offer.offerId}
+                          setOffered={setOffered}
+                          setRequested={setRequested}
+                          refreshComponent={() => refreshComponent}
+                        />
+                      </div>
+                    </div>
                     <ul class="list-unstyled">
                       {resquested.map(item => (
-                        <li
+                        <li className=""
                           key={item.serviceId}
                         >
-                          <div className="d-inline-flex text-capitalize">
+                          <div className="d-inline-flex text-capitalize my-2">
                             {item.title}
                             <DeleteServiceDialog
                               serviceId={item.serviceId}
@@ -118,22 +121,26 @@ export default () => {
                     <img className="img-fluid" src={recherche} alt="Avatar" />
                   </div>
                   <div className="card-body my-4">
-                    <h4 className="card-title">Services proposés</h4>
-                    <CreateServiceDialog
-                      isRequest={false}
-                      email={user.email}
-                      offerId={offer.offerId}
-                      setOffered={setOffered}
-                      setRequested={setRequested}
-                      refreshComponent={refreshComponent}
-                    />
+                    <div className="d-inline-flex">
+                      <h4 className="card-title my-2">Services proposés</h4>
+                      <div className="add">
+                        <CreateServiceDialog
+                          isRequest={false}
+                          email={user.email}
+                          offerId={offer.offerId}
+                          setOffered={setOffered}
+                          setRequested={setRequested}
+                          refreshComponent={refreshComponent}
+                        />
+                      </div>
+                    </div>
                     <ul class="list-unstyled">
                       {offered.map(item => (
                         <div className="">
-                          <li
+                          <li className=" "
                             key={item.serviceId}
                           >
-                            <div className="d-inline-flex text-capitalize">
+                            <div className="d-inline-flex text-capitalize my-2">
                               {item.title}{" "}
                               <DeleteServiceDialog
                                 serviceId={item.serviceId}

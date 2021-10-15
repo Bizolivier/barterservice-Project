@@ -53,7 +53,6 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { Id: 'userId', numeric: true, disablePadding: true, label: ' Id' },
     { Id: 'nickname', numeric: false, disablePadding: false, label: 'Nickname' },
     { Id: 'fullname', numeric: false, disablePadding: false, label: 'FullName' },
     { Id: 'email', numeric: false, disablePadding: false, label: 'Email' },
@@ -71,14 +70,6 @@ function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
-                <TableCell padding="checkbox">
-                    <Checkbox
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        inputProps={{ 'aria-label': 'select all users' }}
-                    />
-                </TableCell>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.Id}
@@ -150,19 +141,7 @@ const EnhancedTableToolbar = (props) => {
                         Gestion des utilisateurs
         </Typography>
                 )}
-            {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton aria-label="delete" onClick={() => onClickDelete(allSelected)}>
-                        <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
-            ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="filter list">
-                            <FilterListIcon />
-                        </IconButton>
-                    </Tooltip>
-                )}
+
         </Toolbar>
     );
 };
@@ -216,25 +195,12 @@ export default () => {
 
 
 
-
-    const refreshPageAdmin = () => { setRefresh(!refresh) };
-
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);
     };
 
-    //   const handleSelectAllClick = (event) => {
-    //     if (!isAllSelected) {
-    //       const newSelectedFiltered = rows.filter((row) => row.admin == 0);
-    //       const newSelecteds = newSelectedFiltered.map((n) => n.Id);
-    //       setSelected(newSelecteds);
-    //     }else{
-    //           setSelected([]);
-    //     }
-    //     setIsAllSelected(!isAllSelected);
-    //   };
 
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
@@ -367,27 +333,16 @@ export default () => {
                                             selected={isItemSelected}
                                         >
 
-                                            <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    onClick={(event) => handleClick(event, row.Id)}
-                                                    checked={isItemSelected}
-                                                    inputProps={{ 'aria-labelledby': labelId }}
-                                                    disabled={checkboxRole(row.role)}
-                                                />
-                                            </TableCell>
 
 
-                                            <TableCell component="th" id={labelId} scope="row" padding="none">
-                                                {row.id}
-                                            </TableCell>
                                             <TableCell align="left">{row.nickname}</TableCell>
                                             <TableCell align="left">{row.fullname}</TableCell>
                                             <TableCell align="left">{row.email}</TableCell>
                                             <TableCell align="left">{turnNumberInProvnce(row.province)}</TableCell>
                                             <TableCell align="left">{turnNumberInRole(row.role)}</TableCell>
                                             <TableCell align="left">{turnNumberInSexe(row.sexe)}</TableCell>
-                                            <TableCell align="left"><EditUserByAdmin user={row} refreshPageAdmin={ refreshPageAdmin} /></TableCell>
-                                            <TableCell align="left"><DeleteUserByAdmin user={row}  refreshPageAdmin={ refreshPageAdmin} /></TableCell>
+                                            <TableCell align="left"><EditUserByAdmin user={row} refreshPageAdmin={() => { setRefresh(!refresh) }} /></TableCell>
+                                            <TableCell align="left"><DeleteUserByAdmin user={row} refreshPageAdmin={() => { setRefresh(!refresh) }} /></TableCell>
                                             <TableCell align="left">
                                                 {/* <EditUserAdmin user={row} refresh={refreshPageAdmin} /> */}
                                             </TableCell>

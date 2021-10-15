@@ -50,11 +50,11 @@ export default ({ mesPresAPrester,refreshComponent,nomCo }) => {
     }
 
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
+        { field: "id", headerName: "ID", width: 60 },
         {
             field: "nomService",
-            headerName: "Nom du Service",
-            width: 200,
+            headerName: "Service",
+            width: 150,
             editable: true
         },
         {
@@ -72,7 +72,7 @@ export default ({ mesPresAPrester,refreshComponent,nomCo }) => {
             field: "nomClient",
             headerName: "Client",
             type: "number",
-            width: 200,
+            width: 150,
             editable: true
         },
         {
