@@ -43,23 +43,26 @@ export default () => {
     setRefresh(!refresh);
   };
 
+
+
   return (
-    <div className=" bloc position-relative border-rounded mt-5 ">
+    <div className="">
       {isBusy ? (
         <div> </div>
       ) : (
-          <div className="ui segment w-auto">
-            <div className="">
-              <div className="image-container justify-content-center w-20 px-2 mt-5 d-inline-flex">
+          <div className="">
+            <div className=" align-items-center w-auto">
+              <div className="image-container text-center w-20 px-2 mt-5 d-inline-flex">
+
                 <img
-                  className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
+                  className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm align-items-center"
                   src={user.picture}
                   alt="name"
                 />
                 <div>
-                  <h3 className="text-left px-2 mt-2 mx-2">{userNickname}</h3>
+                  <h3 className="text-left px-2 mt-2 mx-2 align-items-center">{userNickname}</h3>
 
-                  <div className=" d-inline-flex mt-2 mx-2">
+                  <div className=" d-inline-flex mt-2 mx-2 align-items-center">
                     <i className="map marker alternate icon text-primary"></i>
                     <ProvinceConversion numProvince={userDataProvince} />
                   </div>
@@ -72,15 +75,16 @@ export default () => {
               </div>
               <br />
 
-              <div className="shadow-lg mx-5 w-auto  justify-content-start">
-                <div className="card card-custom bg-white border-white border-0 h-auto ">
-                  <div className="card-custom-img"></div>
-                  <div className="card-custom-avatar">
+              <div className="justify-content-center d-inline-flex">
+                <div className="card card-custom bg-white border-white border-0 h-auto  shadow-lg mx-5 w-auto  justify-content-start ">
+
+                  <div className="card-custom-avatar w-40 px-2 py-1">
                     <img className="img-fluid" src={barter} alt="Avatar" />
                   </div>
                   <div className="card-body">
                     <div className="d-inline-flex">
-                      <h4 className="card-title my-2">Services recherchés</h4>
+                      <h4 className="card-title my-2 fst-italic text-success">Services recherchés</h4>
+
                       <div className="add">
                         <CreateServiceDialog
                           isRequest={true}
@@ -91,6 +95,7 @@ export default () => {
                           refreshComponent={() => refreshComponent}
                         />
                       </div>
+
                     </div>
                     <ul class="list-unstyled">
                       {resquested.map(item => (
@@ -112,17 +117,17 @@ export default () => {
                     </ul>
                   </div>
                 </div>
-              </div>
 
-              <div className="shadow-lg mx-5 w-auto ">
-                <div className="card card-custom bg-white border-white border-0 h-auto">
-                  <div className="card-custom-img"></div>
-                  <div className="card-custom-avatar">
+
+
+                <div className="card card-custom bg-white border-white border-0 h-auto mx-5 w-auto justify-content-end">
+
+                  <div className="card-custom-avatar py-2 mx-1 w-40">
                     <img className="img-fluid" src={recherche} alt="Avatar" />
                   </div>
                   <div className="card-body my-4">
                     <div className="d-inline-flex">
-                      <h4 className="card-title my-2">Services proposés</h4>
+                      <h4 className="card-title my-2 fst-italic text-success">Services proposés</h4>
                       <div className="add">
                         <CreateServiceDialog
                           isRequest={false}
@@ -156,6 +161,7 @@ export default () => {
                     </ul>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>

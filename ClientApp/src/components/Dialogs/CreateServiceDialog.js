@@ -97,7 +97,7 @@ export default function CreateServiceDialog({
 
   return (
     <div>
-      <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+      <IconButton variant="outlined" color="success" onClick={handleClickOpen}>
         <AddCircleIcon />
       </IconButton>
 

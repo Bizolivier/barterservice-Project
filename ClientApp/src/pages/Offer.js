@@ -59,22 +59,22 @@ const Offer = ({ offer, openService, setOpenService }) => {
         authorRes.email
       );
       setOffered(listServicesOffered);
-     
+
     }
     fetchData().then(res => {
       setBusy(false);
     });
   }, []);
 
- useEffect(()=>{
-  if(openService){
-    setExpandedPropose(expandedPropose);
-  setExpandedRecherche(expandedRecherche);
+  useEffect(() => {
+    if (openService) {
+      setExpandedPropose(expandedPropose);
+      setExpandedRecherche(expandedRecherche);
 
-  }else{
-    setExpandedPropose(!expandedPropose);
-  setExpandedRecherche(!expandedRecherche);
-  }
+    } else {
+      setExpandedPropose(!expandedPropose);
+      setExpandedRecherche(!expandedRecherche);
+    }
   }, [openService]);
 
 
@@ -110,7 +110,7 @@ const Offer = ({ offer, openService, setOpenService }) => {
   };
   return (
     <React.Fragment>
-      <div
+      <div className="border border-info shadow-lg"
         style={{
           "max-width": "300px",
           width: "300px"

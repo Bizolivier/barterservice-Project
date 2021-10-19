@@ -85,13 +85,13 @@ export default () => {
   }
 
   return (
-    <div className=" ui segment bg-primary.bg-gradient">
+    <div className=" justify-content-center bg-white my-4 w-50 py-2 h-auto shadow-lg rounded border border-info">
       {isBusy ? (
         <div> </div>
       ) : (
           <div className="container">
             <h1>Edit Profile</h1>
-            <hr />
+            <hr className="w-auto" />
             <div className="row">
               {/* left column  */}
 
@@ -152,7 +152,7 @@ export default () => {
                         Modifier son profil
                     </Button>
                       <span></span>
-                     
+
                     </div>
                   </div>
                 </form>

@@ -1,6 +1,6 @@
 .upper-container {
   height: 100px;
-  /* background: linear-gradient(to left, #696969, #d3d3d3); */
+  background: linear-gradient(to left, #696969, #d3d3d3);
 }
 
 .bloc {
@@ -12,5 +12,6 @@
 }
 .image-container {
   border-radius: 50%;
-  transform: translate(95px, 60px);
+  /* transform: translate(95px, 60px); */
+  /* justify-content: center; */
 }
