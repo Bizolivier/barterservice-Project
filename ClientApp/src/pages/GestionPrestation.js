@@ -10,6 +10,7 @@ import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import PayementServiceDialog from "../components/Dialogs/PayementServiceDialog.js";
 import GridClient from "../components/grids/GridClient";
 import GridProvider from "../components/grids/GridProvider";
+import NavMenu from "../components/navbar/NavMenu";
 
 
 
@@ -48,6 +49,7 @@ export default () => {
 
   return (
     <div className="mx-5">
+      <div><NavMenu key={refresh} /></div>
       {isBusy ? (
         <div> </div>
       ) : (

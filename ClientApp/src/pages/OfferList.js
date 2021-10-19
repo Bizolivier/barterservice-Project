@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import "./OfferList.css";
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import NavMenu from "../components/navbar/NavMenu";
 
 const OfferList = () => {
   const [searchList, setSearchList] = useState([]);
@@ -66,6 +67,7 @@ const OfferList = () => {
 
   return (
     <div>
+      <NavMenu />
       <h2 className="text-center text-white fw-bolder fst-italic my-2 shadow-lg">
         Offres services disponibles
       </h2>

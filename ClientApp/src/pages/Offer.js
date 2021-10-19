@@ -78,30 +78,6 @@ const Offer = ({ offer, openService, setOpenService }) => {
   }, [openService]);
 
 
-
-
-
-
-  const handleExpandService = () => {
-    if (!openService) {
-      setExpandedPropose(!expandedPropose);
-      setExpandedRecherche(!expandedRecherche);
-      setOpenService(!openService);
-    } else {
-      setExpandedPropose(expandedPropose);
-      setExpandedRecherche(expandedRecherche);
-      setOpenService(openService);
-
-    }
-
-  }
-
-  const handleClickOpenPropose = () => {
-    setOpenPropose(!openPropose);
-  };
-  const handleClickOpenRecherche = () => {
-    setOpenRecherche(!openRecherche);
-  };
   const handleExpandClickPropose = () => {
     setExpandedPropose(!expandedPropose);
   };
@@ -110,6 +86,7 @@ const Offer = ({ offer, openService, setOpenService }) => {
   };
   return (
     <React.Fragment>
+
       <div className="border border-info shadow-lg"
         style={{
           "max-width": "300px",

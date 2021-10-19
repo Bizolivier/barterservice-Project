@@ -18,6 +18,7 @@ import ChatMessageContainer from "../components/chat/ChatMessageContainer";
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CommentIcon from '@material-ui/icons/Comment';
+import NavMenu from "../components/navbar/NavMenu";
 
 const UserProfil = () => {
   const [offer, setOffer] = useState([]);
@@ -84,155 +85,159 @@ const UserProfil = () => {
     console.log(serviceId, authorId, userCoId);
   };
 
-  return (<>
-    {!isBusy && (
-      <Container>
-        <Grid container >
-          <Grid container item
-            xs={7}
-            sm={7}
-            md={7}
-            lg={7}
-            spacing={5}
-          >
-            <div className={isAuthenticated && email == user.email || !isAuthenticated ? " justify-content-center chat bg-white card h-auto w-auto mt-5  py-3 " : "  chat bg-white card h-auto mt-5 py-3 "} >
-              <div className="user h-auto w-auto" style={{ "margin-left": "13px" }}>
-                {/*banière*/}
-                <div className="content d-inline-flex">
-                  {/* image */}
-                  <div className="pull-left">
-                    <div className="left floated  ui image">
-                      <img
-                        style={{ width: "100px", height: "100px" }}
-                        src={framework.IMG(userPicture)}
-                        alt="{offer.author}"
-                        width="200"
-                        className=" rounded-circle border border-primary"
-                      />
+  return (
+    <div >
+      <NavMenu />
+
+      {!isBusy && (
+        <Container >
+          <Grid container >
+            <Grid container item
+              xs={7}
+              sm={7}
+              md={7}
+              lg={7}
+              spacing={5}
+            >
+              <div className={isAuthenticated && email == user.email || !isAuthenticated ? " justify-content-center chat bg-white card h-auto  w-auto mt-5  py-3 " : "  chat bg-white card h-auto mt-5 py-3 "} >
+                <div className="user h-auto w-auto" style={{ "margin-left": "13px" }}>
+                  {/*banière*/}
+                  <div className="content d-inline-flex">
+                    {/* image */}
+                    <div className="pull-left">
+                      <div className="left floated  ui image">
+                        <img
+                          style={{ width: "100px", height: "100px" }}
+                          src={framework.IMG(userPicture)}
+                          alt="{offer.author}"
+                          width="200"
+                          className=" rounded-circle border border-primary"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      {/*autor */}
+                      <h4 className="header flex-row ">{userNickname}</h4>
+                      {/* adress*/}
+                      <div className="meta flex-row">
+                        <span className="small text-uppercase text-muted d-inline-flex">
+                          <i className="map marker alternate icon"></i>
+                          <ProvinceConversion numProvince={userProvince} />
+                        </span>
+                      </div>
+                      <div className="d-inline-flex">
+
+
+                        {
+                          isAuthenticated && interlocut.userId != locut.userId ?
+                            <FormControlLabel control={
+                              <Switch checked={openChat}
+                                onChange={() => { setOpenChat(!openChat) }} />} label="Contacter" /> : <div></div>
+                        }
+
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    {/*autor */}
-                    <h4 className="header flex-row ">{userNickname}</h4>
-                    {/* adress*/}
-                    <div className="meta flex-row">
-                      <span className="small text-uppercase text-muted d-inline-flex">
-                        <i className="map marker alternate icon"></i>
-                        <ProvinceConversion numProvince={userProvince} />
-                      </span>
-                    </div>
-                    <div className="d-inline-flex">
 
-
-                      {
-                        isAuthenticated && interlocut.userId != locut.userId ?
-                          <FormControlLabel control={
-                            <Switch checked={openChat}
-                              onChange={() => { setOpenChat(!openChat) }} />} label="Contacter" /> : <div></div>
-                      }
-
-                    </div>
+                  {/* line divider */}
+                  <div className="mb-4 text-right">
+                    <hr className="solid" />
                   </div>
-                </div>
+                  <Grid container spacing={1}>
+                    <Grid container item xs={6} sm={6} md={6} spacing={3}>
+                      {/*Array service proposés*/}
+                      <div className="serviceP mx-2">
+                        <h6 className="fst-italic text-primary mx-4">Je propose : </h6>
+                        <ul>
+                          {offered.map(item => (
+                            <li
+                              className="fs-6 text-capitalize"
+                              key={item.serviceId}
+                            >
 
-                {/* line divider */}
-                <div className="mb-4 text-right">
-                  <hr className="solid" />
-                </div>
-                <Grid container spacing={1}>
-                  <Grid container item xs={6} sm={6} md={6} spacing={3}>
-                    {/*Array service proposés*/}
-                    <div className="serviceP mx-2">
-                      <h6 className="fst-italic text-primary mx-4">Je propose : </h6>
-                      <ul>
-                        {offered.map(item => (
-                          <li
-                            className="fs-6 text-capitalize"
-                            key={item.serviceId}
-                          >
+                              {item.title}
 
-                            {item.title}
+                              <div className="d-inline-flex">
+                                <div>
 
-                            <div className="d-inline-flex">
-                              <div>
+                                  <Link
+                                    className="text-dark my-4 "
+                                    to={`/Avis/${authorEmail}/${item.serviceId}`}>
+                                    <IconButton color="primary" size="small" style={{ "margin-left": "10px", "marginTop": "20px" }} >
+                                      <CommentIcon />
+                                    </IconButton>
+                                  </Link>
 
-                                <Link
-                                  className="text-dark my-4 "
-                                  to={`/Avis/${authorEmail}/${item.serviceId}`}>
-                                  <IconButton color="primary" size="small" style={{ "margin-left": "10px", "marginTop": "20px" }} >
-                                    <CommentIcon />
+                                </div>
+                                {isAuthenticated && interlocut.userId != locut.userId ? (<div>
+                                  <IconButton  >
+
+                                    <OrderTheService userName={userNickname} serviceName={item.title} servId={item.serviceId} offerAuthorId={offer.authorId} userConnectedId={userCoId} />
                                   </IconButton>
-                                </Link>
 
+
+                                </div>
+
+                                ) : (
+                                    <div />
+                                  )}
                               </div>
-                              {isAuthenticated && interlocut.userId != locut.userId ? (<div>
-                                <IconButton  >
-
-                                  <OrderTheService userName={userNickname} serviceName={item.title} servId={item.serviceId} offerAuthorId={offer.authorId} userConnectedId={userCoId} />
-                                </IconButton>
-
-
-                              </div>
-
-                              ) : (
-                                  <div />
-                                )}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </Grid>
+                    <div className="ui vertical divider text-dark " style={{ "margin-top": "150px" }} ></div>
+                    <Grid container item xs={6} sm={6} md={6} spacing={3}>
+                      {/*Array service recherchés*/}
+                      <div className="serviceR mx-5" style={{ "margin-left": "20px" }} >
+                        <h6 className="fst-italic text-primary mx-3">Je recherche: </h6>
+                        <ul>
+                          {resquested.map(item => (
+                            <li
+                              className="fs-6 text-capitalize"
+                              key={item.serviceId}
+                            >
+                              {item.title}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </Grid>
                   </Grid>
-                  <div className="ui vertical divider text-dark " style={{ "margin-top": "150px" }} ></div>
-                  <Grid container item xs={6} sm={6} md={6} spacing={3}>
-                    {/*Array service recherchés*/}
-                    <div className="serviceR mx-5" style={{ "margin-left": "20px" }} >
-                      <h6 className="fst-italic text-primary mx-3">Je recherche: </h6>
-                      <ul>
-                        {resquested.map(item => (
-                          <li
-                            className="fs-6 text-capitalize"
-                            key={item.serviceId}
-                          >
-                            {item.title}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div>
-              <div className="extra content px-3">
-                <Link className="ui black basic button" to="/OfferList">
-                  back
+                </div>
+                <div className="extra content px-3">
+                  <Link className="ui black basic button" to="/OfferList">
+                    back
               </Link>
+                </div>
               </div>
-            </div>
 
+            </Grid>
+
+            <Grid container item justify="flex-end"
+              xs={5}
+              sm={5}
+              md={5}
+              lg={5}
+              spacing={5}
+            >
+              {openChat ?
+                <div className="  chat mt-5 " >
+                  <ChatMessageContainer
+
+                    interlocutor={interlocut}
+                    locutor={locut}
+                  />
+                </div>
+                : <div></div>
+              }
+            </Grid>
           </Grid>
+        </Container>
 
-          <Grid container item justify="flex-end"
-            xs={5}
-            sm={5}
-            md={5}
-            lg={5}
-            spacing={5}
-          >
-            {openChat ?
-              <div className="  chat mt-5 " >
-                <ChatMessageContainer
-
-                  interlocutor={interlocut}
-                  locutor={locut}
-                />
-              </div>
-              : <div></div>
-            }
-          </Grid>
-        </Grid>
-      </Container>
-    )}</>
-
+      )}
+    </div>
   );
 };
 export default UserProfil;

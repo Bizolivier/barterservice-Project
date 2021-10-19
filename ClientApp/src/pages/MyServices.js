@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as serviceService from "../services/Services.Service.js";
 import { useAuth0, User } from "@auth0/auth0-react";
 import CommentList from "../components/comments/CommentList";
+import NavMenu from "../components/navbar/NavMenu";
 
 const CreateOffer = () => {
   const [offeredServ, setOfferedServ] = useState([]);

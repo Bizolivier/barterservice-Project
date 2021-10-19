@@ -3,7 +3,7 @@ import { Route } from "react-router";
 import { Layout } from "./Layout";
 import Dashboard from "./pages/Dashboard.js";
 import MainPage from "./pages/MainPage.js";
-import MyRequest from "./pages/MyRequest.js";
+// import MyRequest from "./pages/MyRequest.js";
 import OfferList from "./pages/OfferList.js";
 import MyServices from "./pages/MyServices.js";
 import UserProfil from "./pages/UserProfil";
@@ -12,7 +12,7 @@ import Chatbox from "./pages/Chatbox";
 import Avis from "./pages/Avis";
 import ProtectedRoute from "./auth/protected-route";
 import GestionPrestation from "./pages/GestionPrestation";
-import NavMenu from "./components/navbar/NavMenu";
+
 import GestionUser from "./pages/GestionUser";
 
 import "./custom.css";
@@ -26,7 +26,7 @@ export default class App extends Component {
         <Layout>
           <Route exact path="/" component={MainPage} />
           <ProtectedRoute exact path="/Dashboard" component={Dashboard} />
-          <Route exact path="/MyRequest" component={MyRequest} />
+          {/* <Route exact path="/MyRequest" component={MyRequest} /> */}
           <Route exact path="/OfferList" component={OfferList} />
           <Route path="/Avis/:email/:idService" component={Avis} />
           <ProtectedRoute exact path="/MyServices" component={MyServices} />

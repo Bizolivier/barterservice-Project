@@ -44,6 +44,7 @@ export default function EditUserByAdmin({ user, refreshPageAdmin
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
+    const [openS, setOpenS] = useState(false);
     const [selectedProvinceValue, setSelectedProvinceValue] = useState(0);
     const [selectedSexeValue, setSelectedSexeValue] = useState(user.sexe);
     const [selectedRoleValue, setSelectedRoleValue] = useState(0);
@@ -115,8 +116,11 @@ export default function EditUserByAdmin({ user, refreshPageAdmin
             await userService.PutUser(user.email, newUpdatedUser);
             refreshPageAdmin();
         })();
-
-        setOpen(false);
+        setOpenS(true);
+        setTimeout(
+            () => setOpen(false),
+            3000
+        );
     }
 
     function handleCloseAlert(event, reason) {
@@ -235,15 +239,15 @@ export default function EditUserByAdmin({ user, refreshPageAdmin
                                     </form>
                                 </div>
                             </div>
-                            {/* <Snackbar
-                                open={open}
+                            <Snackbar
+                                open={openS}
                                 autoHideDuration={6000}
                                 onClose={handleCloseAlert}
                             >
                                 <Alert onClose={handleCloseAlert} severity="success">
                                     Le profil a été modifié avec succes
                               </Alert>
-                            </Snackbar> */}
+                            </Snackbar>
                         </div>
 
                     </div>

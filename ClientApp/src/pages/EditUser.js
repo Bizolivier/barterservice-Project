@@ -8,6 +8,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControl, InputLabel, OutlinedInput, FormHelperText, Button } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
+import NavMenu from "../components/navbar/NavMenu";
 
 
 import { Alert, AlertTitle } from "@material-ui/lab";
@@ -85,90 +86,97 @@ export default () => {
   }
 
   return (
-    <div className=" justify-content-center bg-white my-4 w-50 py-2 h-auto shadow-lg rounded border border-info">
-      {isBusy ? (
-        <div> </div>
-      ) : (
-          <div className="container">
-            <h1>Edit Profile</h1>
-            <hr className="w-auto" />
-            <div className="row">
-              {/* left column  */}
 
-              <Avatar pictureSrc={user.picture} />
+    <div>
+      <NavMenu />
+      <div className=" justify-content-center bg-white my-4 w-50 py-2 h-auto shadow-lg rounded border border-info">
 
-              {/* edit form column */}
+        {isBusy ? (
+          <div> </div>
+        ) : (
+            <div className="container">
+              <h1>Edit Profile</h1>
+              <hr className="w-auto" />
+              <div className="row">
+                {/* left column  */}
 
-              <div className="col-md-9 personal-info">
-                <h3>Personal info</h3>
+                <Avatar pictureSrc={user.picture} />
 
-                <form className="form-horizontal" role="form">
+                {/* edit form column */}
 
-                  <div className="my-2">
-                    <FormControl error={errorNickname} variant="outlined" style={{ marginRight: "20px" }}>
-                      <InputLabel htmlFor="component-outlined">Nickname:</InputLabel>
-                      <OutlinedInput id="component-outlined" value={userNickname} onChange={handleChangeNickname} label="Nickname" />
-                      {errorNickname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
+                <div className="col-md-9 personal-info">
+                  <h3>Personal info</h3>
+
+                  <form className="form-horizontal" role="form">
+
+                    <div className="my-2">
+                      <FormControl error={errorNickname} variant="outlined" style={{ marginRight: "20px" }}>
+                        <InputLabel htmlFor="component-outlined">Nickname:</InputLabel>
+                        <OutlinedInput id="component-outlined" value={userNickname} onChange={handleChangeNickname} label="Nickname" />
+                        {errorNickname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
+                      </FormControl>
+                    </div>
+
+                    <FormControl error={errorFullname} variant="outlined" >
+                      <InputLabel htmlFor="component-outlined">Fullname:</InputLabel>
+                      <OutlinedInput id="component-outlined" value={userFullname} onChange={handleChangeFullname} label="Fullname" />
+                      {errorFullname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
                     </FormControl>
-                  </div>
-
-                  <FormControl error={errorFullname} variant="outlined" >
-                    <InputLabel htmlFor="component-outlined">Fullname:</InputLabel>
-                    <OutlinedInput id="component-outlined" value={userFullname} onChange={handleChangeFullname} label="Fullname" />
-                    {errorFullname ? <FormHelperText id="component-error-text">requis</FormHelperText> : <></>}
-                  </FormControl>
 
 
-                  <div className="form-group">
-                    <label className="col-lg-3 control-label">Province:</label>
-                    <div className="col-lg-8">
-                      <ProvinceSelection
-                        selectedOption={userProvince}
-                        selectedProvinceValue={selectedProvinceValue}
-                        changeProvinceValue={changeProvinceValue}
-                        allProvinces={false}
-                      />
+                    <div className="form-group">
+                      <label className="col-lg-3 control-label">Province:</label>
+                      <div className="col-lg-8">
+                        <ProvinceSelection
+                          selectedOption={userProvince}
+                          selectedProvinceValue={selectedProvinceValue}
+                          changeProvinceValue={changeProvinceValue}
+                          allProvinces={false}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-lg-3 control-label">Sexe:</label>
-                    <div className="col-lg-8">
-                      <SexeSelection
-                        selectedOption={userSexe}
-                        selectedSexeValue={selectedSexeValue}
-                        changeSexeValue={changeSexeValue}
-                      />
+                    <div className="form-group">
+                      <label className="col-lg-3 control-label">Sexe:</label>
+                      <div className="col-lg-8">
+                        <SexeSelection
+                          selectedOption={userSexe}
+                          selectedSexeValue={selectedSexeValue}
+                          changeSexeValue={changeSexeValue}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="form-group">
-                    <label className="col-md-3 control-label"></label>
-                    <div className="col-md-8">
+                    <div className="form-group">
+                      <label className="col-md-3 control-label"></label>
+                      <div className="col-md-8">
 
 
-                      <Button variant="contained" color="primary" size="large"
-                        onClick={updateUser}
-                        disabled={updateDisabled}>
-                        Modifier son profil
+                        <Button variant="contained" color="primary" size="large"
+                          onClick={updateUser}
+                          disabled={updateDisabled}>
+                          Modifier son profil
                     </Button>
-                      <span></span>
+                        <span></span>
 
+                      </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
+              </div>
+              <div className="text-start">
+                <Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleCloseAlert}
+                >
+                  <Alert onClose={handleCloseAlert} severity="success">
+                    Le profil a été modifié avec succes
+            </Alert>
+                </Snackbar>
               </div>
             </div>
-            <Snackbar
-              open={open}
-              autoHideDuration={6000}
-              onClose={handleCloseAlert}
-            >
-              <Alert onClose={handleCloseAlert} severity="success">
-                Le profil a été modifié avec succes
-            </Alert>
-            </Snackbar>
-          </div>
-        )}
+          )}
+      </div>
     </div>
   );
 };

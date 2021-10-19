@@ -77,6 +77,11 @@ export default function OrderTheService({ userName, serviceName, servId, offerAu
         console.log(newPrestation);
         prestationService.addPrestation(newPrestation);
         setOpenS(true);
+        setTimeout(
+            () => setOpen(false),
+            3000
+        );
+
     }
     function handleCloseAlert(event, reason) {
         if (reason === "clickaway") {
@@ -93,18 +98,18 @@ export default function OrderTheService({ userName, serviceName, servId, offerAu
     };
 
     return (
-        <div>
+        <div >
             <IconButton color="success" onClick={handleClickOpen}>
                 <AddShoppingCartIcon />
             </IconButton>
 
-            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     <h4 className="fst-italic">Vous désirez commander auprès de {userName} le service :</h4>
 
                     <h1 className="text-success text-capitalize"> {serviceName}</h1>
                 </DialogTitle>
-                <DialogContent>
+                <DialogContent style={{ backgroundColor: "dark" }}>
                     <div>
                         <p>Veuillez choisir une date et une heure d'execution </p>
                         <div className="h-50">
@@ -136,12 +141,12 @@ export default function OrderTheService({ userName, serviceName, servId, offerAu
                 </DialogActions>
                 <Snackbar
                     open={openS}
-                    autoHideDuration={6000}
+                    autoHideDuration={2500}
                     onClose={handleCloseAlert}
                 >
-                    <Alert onClose={handleCloseAlert} severity="success">
-                        La prestation a été commandeé
-            </Alert>
+                <Alert onClose={handleCloseAlert} severity="success">
+                        La prestation a été commandée
+                </Alert>
                 </Snackbar>
             </Dialog>
         </div>

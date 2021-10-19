@@ -9,6 +9,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import barter from "../images/imageBarter.png";
 import recherche from "../images/recherche.jpg";
 import DeleteServiceDialog from "../components/Dialogs/DeleteServiceDialog.js";
+import NavMenu from "../components/navbar/NavMenu";
 
 export default () => {
   const { user, isAuthenticated } = useAuth0();
@@ -47,6 +48,7 @@ export default () => {
 
   return (
     <div className="">
+      <div><NavMenu /></div>
       {isBusy ? (
         <div> </div>
       ) : (

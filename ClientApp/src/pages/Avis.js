@@ -5,6 +5,7 @@ import * as serviceService from "../services/Services.Service.js";
 import CommentList from "../components/comments/CommentList";
 import * as userService from "../services/User.service.js";
 import * as commentServ from "../services/CommentService";
+import NavMenu from "../components/navbar/NavMenu";
 
 
 const Avis = () => {
@@ -38,8 +39,9 @@ const Avis = () => {
   }
 
   return (
-
+      
     <div>
+    <div><NavMenu /></div>
       {isBusy ? (
         <div> </div>
       ) : (

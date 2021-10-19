@@ -6,6 +6,7 @@ import aide from "../images/aide.jpg";
 import car from "../images/car.jpg";
 import { Link } from "react-router-dom";
 import Chat from "../components/chat/Chat.js";
+import NavMenu from "../components/navbar/NavMenu";
 
 import "./MainPage.css";
 import { Button } from "@material-ui/core";
@@ -35,6 +36,7 @@ export default () => {
 
   return (
     <div>
+      <NavMenu />
       <h3 className=" text-white display-5 text-center my-5 shadow-lg">
         Bienvenue sur BarterSerV, the place to be.
        </h3>

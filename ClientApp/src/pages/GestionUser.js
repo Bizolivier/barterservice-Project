@@ -24,7 +24,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import EditUserByAdmin from "../components/Dialogs/EditUserByAdmin";
 import * as serviceUser from "../services/User.service";
-import DeleteUserByAdmin from "../components/Dialogs/DeleteUserByAdmin"
+import DeleteUserByAdmin from "../components/Dialogs/DeleteUserByAdmin";
+import NavMenu from "../components/navbar/NavMenu";
 
 
 
@@ -68,7 +69,8 @@ function EnhancedTableHead(props) {
         onRequestSort(event, property);
     };
     return (
-        <TableHead>
+
+        <TableHead >
             <TableRow>
                 {headCells.map((headCell) => (
                     <TableCell
@@ -297,83 +299,85 @@ export default () => {
     const isSelected = (name) => selected.indexOf(name) !== -1;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, allUsers.length - page * rowsPerPage);
     return (
-        <div className={classes.root}>
-            <Paper className={classes.paper}>
-                <EnhancedTableToolbar numSelected={selected.length} allSelected={selected} />
-                {/* onClickDelete={handleClickDelete} */}
-                <TableContainer>
-                    <Table
-                        className={classes.table}
-                        aria-labelledby="tableTitle"
-                        size={dense ? 'small' : 'medium'}
-                        aria-label="enhanced table"
-                    >
-                        <EnhancedTableHead
-                            classes={classes}
-                            numSelected={selected.length}
-                            order={order}
-                            orderBy={orderBy}
-                            //   onSelectAllClick={handleSelectAllClick}
-                            onRequestSort={handleRequestSort}
-                            rowCount={allUsers.length}
-                        />
-                        <TableBody>
-                            {stableSort(allUsers, getComparator(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
-                                    const isItemSelected = isSelected(row.Id);
-                                    const labelId = `enhanced-table-checkbox-${index}`;
-                                    return (
-                                        <TableRow
+        <div> <NavMenu  />
+            <div className={classes.root}>
+                <Paper className={classes.paper}>
+                    <EnhancedTableToolbar numSelected={selected.length} allSelected={selected} />
+                    {/* onClickDelete={handleClickDelete} */}
+                    <TableContainer>
+                        <Table
+                            className={classes.table}
+                            aria-labelledby="tableTitle"
+                            size={dense ? 'small' : 'medium'}
+                            aria-label="enhanced table"
+                        >
+                            <EnhancedTableHead
+                                classes={classes}
+                                numSelected={selected.length}
+                                order={order}
+                                orderBy={orderBy}
+                                //   onSelectAllClick={handleSelectAllClick}
+                                onRequestSort={handleRequestSort}
+                                rowCount={allUsers.length}
+                            />
+                            <TableBody>
+                                {stableSort(allUsers, getComparator(order, orderBy))
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((row, index) => {
+                                        const isItemSelected = isSelected(row.userId);
+                                        const labelId = `enhanced-table-checkbox-${index}`;
+                                        return (
+                                            <TableRow
 
-                                            role="checkbox"
-                                            aria-checked={isItemSelected}
-                                            tabIndex={-1}
-                                            key={row.id}
-                                            selected={isItemSelected}
-                                        >
+                                                role="checkbox"
+                                                aria-checked={isItemSelected}
+                                                tabIndex={-1}
+                                                key={row.userId}
+                                                selected={isItemSelected}
+                                            >
 
 
 
-                                            <TableCell align="left">{row.nickname}</TableCell>
-                                            <TableCell align="left">{row.fullname}</TableCell>
-                                            <TableCell align="left">{row.email}</TableCell>
-                                            <TableCell align="left">{turnNumberInProvnce(row.province)}</TableCell>
-                                            <TableCell align="left">{turnNumberInRole(row.role)}</TableCell>
-                                            <TableCell align="left">{turnNumberInSexe(row.sexe)}</TableCell>
-                                            <TableCell align="left"><EditUserByAdmin user={row} refreshPageAdmin={() => { setRefresh(!refresh) }} /></TableCell>
-                                            <TableCell align="left"><DeleteUserByAdmin user={row} refreshPageAdmin={() => { setRefresh(!refresh) }} /></TableCell>
-                                            <TableCell align="left">
-                                                {/* <EditUserAdmin user={row} refresh={refreshPageAdmin} /> */}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {/* {<EditUserRoleAdmin user={row} refresh={refreshPageAdmin} />} */}
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={allUsers.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                                                <TableCell align="left">{row.nickname}</TableCell>
+                                                <TableCell align="left">{row.fullname}</TableCell>
+                                                <TableCell align="left">{row.email}</TableCell>
+                                                <TableCell align="left">{turnNumberInProvnce(row.province)}</TableCell>
+                                                <TableCell align="left">{turnNumberInRole(row.role)}</TableCell>
+                                                <TableCell align="left">{turnNumberInSexe(row.sexe)}</TableCell>
+                                                <TableCell align="left"><EditUserByAdmin user={row} refreshPageAdmin={() => { setRefresh(!refresh) }} /></TableCell>
+                                                <TableCell align="left"><DeleteUserByAdmin user={row} refreshPageAdmin={() => { setRefresh(!refresh) }} /></TableCell>
+                                                {/* <TableCell align="left">
+                                                     <EditUserAdmin user={row} refresh={refreshPageAdmin} /> 
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                     {<EditUserRoleAdmin user={row} refresh={refreshPageAdmin} />} 
+                                                </TableCell> */}
+                                            </TableRow>
+                                        );
+                                    })}
+                                {emptyRows > 0 && (
+                                    <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                                        <TableCell colSpan={6} />
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={allUsers.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onChangePage={handleChangePage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
+                </Paper>
+                <FormControlLabel
+                    control={<Switch checked={dense} onChange={handleChangeDense} />}
+                    label="Dense padding"
                 />
-            </Paper>
-            <FormControlLabel
-                control={<Switch checked={dense} onChange={handleChangeDense} />}
-                label="Dense padding"
-            />
+            </div>
         </div>
     );
 }

@@ -78,7 +78,10 @@ export default function UpdatePrestation({ prestToUpdate, refreshComponent, nom 
         prestationService.PutDate(prestToUpdate.id, newPrestation);
         setOpenS(true);
         refreshComponent();
-        setOpen(false);
+        setTimeout(
+            () => setOpen(false),
+            3000
+        );
 
     }
     function handleCloseAlert(event, reason) {
@@ -154,7 +157,7 @@ export default function UpdatePrestation({ prestToUpdate, refreshComponent, nom 
                 >
                     <Alert onClose={handleCloseAlert} severity="success">
                         La prestation a été éditée
-            </Alert>
+                   </Alert>
                 </Snackbar>
             </Dialog>
         </div>
