@@ -46,7 +46,7 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
     }
 
     const columns = [
-        { field: "id", headerName: "ID", width: 60 },
+        { field: "id", headerName: "ID", width: 100, editable: false },
         {
             field: "nomService",
             headerName: "Service",
@@ -139,7 +139,8 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
                     style={{
                         height: 400,
                         width: "100%",
-                        marginTop: 20
+                        marginTop: 20,
+                        "background-color": "white"
                     }}
                 >
                     <DataGrid
@@ -147,8 +148,9 @@ export default ({ mesPresCommander, refreshComponent, nomCo }) => {
                         columns={columns}
                         pageSize={5}
                         rowsPerPageOptions={[5]}
-                        checkboxSelection
+                        checkboxSelection={false}
                         disableSelectionOnClick
+
                     />
                 </div>
             </div>

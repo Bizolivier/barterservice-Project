@@ -175,9 +175,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default () => {
     const classes = useStyles();
-    //   const { user, isAuthenticated } = useAuth0();
-    //   const [isAllSelected, setIsAllSelected]=useState(false);
-    //   const [rows, setRows] = React.useState([]);
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
@@ -303,8 +300,8 @@ export default () => {
             <div className={classes.root}>
                 <Paper className={classes.paper}>
                     <EnhancedTableToolbar numSelected={selected.length} allSelected={selected} />
-                    {/* onClickDelete={handleClickDelete} */}
-                    <TableContainer>
+                    
+                <TableContainer>
                         <Table
                             className={classes.table}
                             aria-labelledby="tableTitle"
@@ -328,16 +325,12 @@ export default () => {
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
                                             <TableRow
-
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
                                                 key={row.userId}
                                                 selected={isItemSelected}
                                             >
-
-
-
                                                 <TableCell align="left">{row.nickname}</TableCell>
                                                 <TableCell align="left">{row.fullname}</TableCell>
                                                 <TableCell align="left">{row.email}</TableCell>
@@ -346,12 +339,7 @@ export default () => {
                                                 <TableCell align="left">{turnNumberInSexe(row.sexe)}</TableCell>
                                                 <TableCell align="left"><EditUserByAdmin user={row} refreshPageAdmin={() => { setRefresh(!refresh) }} /></TableCell>
                                                 <TableCell align="left"><DeleteUserByAdmin user={row} refreshPageAdmin={() => { setRefresh(!refresh) }} /></TableCell>
-                                                {/* <TableCell align="left">
-                                                     <EditUserAdmin user={row} refresh={refreshPageAdmin} /> 
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                     {<EditUserRoleAdmin user={row} refresh={refreshPageAdmin} />} 
-                                                </TableCell> */}
+                                              
                                             </TableRow>
                                         );
                                     })}

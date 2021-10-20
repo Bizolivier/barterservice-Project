@@ -6,6 +6,7 @@ import Badge from "@material-ui/core/Badge";
 import AuthenticationButton from "../login/AuthenticationButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import EmailIcon from '@material-ui/icons/Email';
 import { IconButton } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import * as GestionPrestationService from "../../services/PrestationService";
@@ -15,6 +16,7 @@ import "./NavMenu.css";
 export default () => {
   const { user, isAuthenticated } = useAuth0();
   const [nbNotif, setNbNotif] = useState(0);
+  const [nbMsg, setNbMsg] = useState(0);
   const [userCoId, setUserCoId] = useState();
   const [userCo, setUserCo] = useState([]);
   const [refresh, setRefresh] = useState(false);
@@ -64,11 +66,11 @@ export default () => {
             <NavItem>
               <NavLink
                 tag={Link}
-                className="text-dark px-4 my-3 fw-bolder"
+                className="text-dark px-4 my-4 fw-bolder"
                 to="/OfferList"
                 onClick={() => setRefresh(!refresh)}
               >
-                Toutes les offres
+                Offres
               </NavLink>
             </NavItem>
             {isAuthenticated ?
@@ -76,7 +78,7 @@ export default () => {
                 <NavItem>
                   <NavLink
                     tag={Link}
-                    className="text-dark px-4 my-3 fw-bolder"
+                    className="text-dark px-4 my-4  fw-bolder"
                     to="/Dashboard"
                     onClick={() => setRefresh(!refresh)}
                   >
@@ -86,30 +88,30 @@ export default () => {
                 <NavItem>
                   <NavLink
                     tag={Link}
-                    className="text-dark px-4 my-3 fw-bolder"
+                    className="text-dark px-4 my-4 fw-bolder"
                     to="/EditUser"
                     onClick={() => setRefresh(!refresh)}
                   >
                     Profil
                 </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                   <NavLink
                     tag={Link}
-                    className="text-dark px-4 my-3 fw-bolder"
+                    className="text-dark px-4 my-4 fw-bolder"
                     to={`/profilUser/${user.email}`}
                     onClick={() => setRefresh(!refresh)}
                   >
                     Mon offre
                 </NavLink>
-                </NavItem>
+                </NavItem> */}
 
                 {userCo.role == 1 ?
                   <div className="">
                     <NavItem>
                       <NavLink
                         tag={Link}
-                        className="text-dark px-4 my-3 fw-bolder"
+                        className="text-dark px-4 my-4 fw-bolder"
                         to={`/GestionUser`}
                         onClick={() => setRefresh(!refresh)}
                       >
@@ -123,7 +125,7 @@ export default () => {
                 <NavItem>
                   <NavLink
                     tag={Link}
-                    className="text-dark px-4 my-3 fw-bolder"
+                    className="text-dark px-4 my-4 fw-bolder"
                     to="/Chatbox"
                   >
                     Chatbox
@@ -131,7 +133,7 @@ export default () => {
                 </NavItem>
                 <NavLink
                   tag={Link}
-                  className="text-dark px-4 my-3 fw-bolder"
+                  className="text-dark px-4 my-4 fw-bolder"
                   to="/GestionPrestation"
                   onClick={() => setRefresh(!refresh)}
                 >
@@ -141,6 +143,8 @@ export default () => {
                     </StyledBadge>
                   </IconButton>
                 </NavLink>
+
+
                 <div className="left floated  ui image my-3">
                   <img
                     src={user.picture}

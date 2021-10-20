@@ -39,9 +39,9 @@ const Avis = () => {
   }
 
   return (
-      
+
     <div>
-    <div><NavMenu /></div>
+      <div><NavMenu /></div>
       {isBusy ? (
         <div> </div>
       ) : (
@@ -70,7 +70,7 @@ const Avis = () => {
           </div>
         )}
       <div className="align-bottom">
-        <Link className="ui black basic button align-bottom" to={`/profilUser/${email}`}>
+        <Link className="ui black basic button align-bottom" to={`/Dashboard`}>
           back
               </Link>
       </div>

@@ -24,7 +24,7 @@ const UserProfil = () => {
   const [offer, setOffer] = useState([]);
 
   const [isBusy, setBusy] = useState(true);
-  const [authorEmail, setAuthorEmail] = useState();
+  const [authorEmail, setAuthorEmail] = useState("");
   const [userNickname, setUserNickname] = useState("");
   const [userPicture, setUserPicture] = useState("");
   const [userProvince, setUserProvince] = useState(0);

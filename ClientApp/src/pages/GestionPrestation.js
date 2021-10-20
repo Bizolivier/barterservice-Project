@@ -34,8 +34,6 @@ export default () => {
         setMyPrest(prestCommande);
         const prestAPrester = await prestationServ.getProvided(userConnected.userId);
         setAPrester(prestAPrester);
-        console.log(myPrest);
-        console.log(nicknameCo);
       }
     }
     fetchData().then(res => {
@@ -54,21 +52,24 @@ export default () => {
         <div> </div>
       ) : (
           <div>
+            <br />
             <div className=" mx-5 text-dark text-center ">
               <h4>Mon gestionnaire de prestations</h4>
-
+              <br />
             </div>
             <div className="fst-italic mx-5 text-success">
               <h5> Mes prestations commandées</h5>
             </div>
 
             <GridClient mesPresCommander={myPrest} refreshComponent={refreshComponent} nomCo={nicknameCo} />
-
+            <br /><br />
             <div className="fst-italic mx-5 text-success ">
               <h5> Mes prestations à prester </h5>
             </div>
 
             <GridProvider mesPresAPrester={aPrester} refreshComponent={refreshComponent} nomCo={nicknameCo} />
+            <br />
+            <br />
           </div>
 
 
